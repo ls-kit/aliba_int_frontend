@@ -34,7 +34,7 @@ export const getProductKeyItem = (product, keyName, returnDefault = null) => {
 export const find_product_from_state = (detailsState, item_id) => {
    if (!_.isEmpty(detailsState) && _.isArray(detailsState)) {
       const findItem = detailsState.find(
-         (findItem) => parseInt(findItem.Id) === parseInt(item_id)
+         (findItem) => findItem.Id === item_id
       );
       if (!_.isEmpty(findItem) && _.isObject(findItem)) {
          return findItem;
