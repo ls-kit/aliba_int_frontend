@@ -68,8 +68,9 @@ export const loadLovingProducts = async () => {
 };
 
 export const loadSectionsProducts = async (section) => {
-   return await axiosInstance.post(`/get-section-products`, {section: section})
+   return await axiosInstance.get(`/get-section-products/` + section)
       .then((res) => {
+         console.log(res);
          const resData = res.data;
          if (!_.isEmpty(resData)) {
             return resData.data;
