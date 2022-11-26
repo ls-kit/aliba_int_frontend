@@ -1,94 +1,107 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import BrowseCategories from "./includes/BrowseCategories";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
-import {loadBanners} from "../../../../store/actions/InitAction"
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { loadBanners } from "../../../../store/actions/InitAction";
 import OwlCarousel from "react-owl-carousel";
-import {loadAsset} from "../../../../utils/Helpers";
+import { loadAsset } from "../../../../utils/Helpers";
 import BannerSkeleton from "../../../../skeleton/BannerSkeleton";
-
+import SSlider from "./slick/SSlider";
+import offers from "../../../../assets/images/offers.png";
 
 const Intro = (props) => {
-   const {banners} = props;
+  const { banners } = props;
 
-   const [loading, setLoading] = useState(false);
+  const imageArr = [
+    "https://wholesalecart.com/static/media/cashback_offer.6d82c6ee.jpg",
+    "https://wholesalecart.com/static/media/shipping_charge_banner_after.32f355fb.jpg",
+    "https://wholesalecart.com/static/media/process.56f6fb77.jpg",
+  ];
 
-   useEffect(() => {
-      if (!loading) {
-         props.loadBanners();
-      }
-   }, []);
+  const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (!loading) {
+      props.loadBanners();
+    }
+  }, []);
 
-   useEffect(() => {
-      setLoading(false);
-   }, [loading]);
+  useEffect(() => {
+    setLoading(false);
+  }, [loading]);
 
-   return (
-      <div className="intro-section">
-         <div className="container mt-0 mt-md-2">
-            <div className="row">
-               <div className="col-lg-3 cols d-none d-lg-block">
-                  <BrowseCategories/>
-               </div>
-               <div className="col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2">
-                  <div className="intro-slider-container">
-                     {
-                        banners.length > 0 && !loading ?
-                           <OwlCarousel
-                              className="intro-slider owl-carousel owl-theme owl-nav-inside row cols-1"
-                              loop={false}
-                              margin={0}
-                              dots={false}
-                              nav={false}
-                              autoplayTimeout={10000}
-                              responsive={{
-                                 0: {items: 1},
-                                 480: {items: 1},
-                                 576: {items: 1},
-                                 768: {items: 1},
-                                 992: {items: 1},
-                                 1200: {items: 1},
-                              }}
-                           >
-                              {
-                                 banners.map(banner =>
-                                    <div
-                                       key={banner.id}
-                                       className="intro-slide bg-image d-flex align-items-center"
-                                       style={{
-                                          backgroundColor: "#e9e9e9",
-                                          backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
-                                       }}
-                                    >
-                                    </div>
-                                 )
-                              }
-                           </OwlCarousel>
-                           :
-                           <BannerSkeleton/>
-                     }
-                  </div>
-               </div>
-
+  return (
+    <div className='intro-section'>
+      <div className='mt-0 mt-md-2'>
+        <div className='row'>
+          <div className='col-lg-3 cols d-none d-lg-block'>
+            <BrowseCategories />
+          </div>
+          <div className='col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2'>
+            <div className='bannerSection'>
+              <div className=''>
+                <img
+                  className='slImg'
+                  src='https://wholesalecart.com/static/media/cashback_offer.6d82c6ee.jpg'
+                  alt=''
+                />
+                {/* <SSlider imageArr={imageArr} /> */}
+              </div>
+              <div className='offer-box'>
+                <a aria-label='Offers' className='promotions' href='/offers'>
+                  <img src={offers} alt='offers' />
+                </a>
+              </div>
             </div>
-         </div>
+
+            {/* <div className='intro-slider-container'>
+              {banners.length > 0 && !loading ? (
+                <OwlCarousel
+                  className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
+                  loop={false}
+                  margin={0}
+                  dots={false}
+                  nav={false}
+                  autoplayTimeout={10000}
+                  responsive={{
+                    0: { items: 1 },
+                    480: { items: 1 },
+                    576: { items: 1 },
+                    768: { items: 1 },
+                    992: { items: 1 },
+                    1200: { items: 1 },
+                  }}
+                >
+                  {banners.map((banner) => (
+                    <div
+                      key={banner.id}
+                      className='intro-slide bg-image d-flex align-items-center'
+                      style={{
+                        backgroundColor: "#e9e9e9",
+                        backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
+                      }}
+                    ></div>
+                  ))}
+                </OwlCarousel>
+              ) : (
+                <BannerSkeleton />
+              )}
+            </div> */}
+          </div>
+        </div>
       </div>
-   );
+    </div>
+  );
 };
 
-
 Intro.propTypes = {
-   banners: PropTypes.array.isRequired,
-   loadBanners: PropTypes.func.isRequired,
+  banners: PropTypes.array.isRequired,
+  loadBanners: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-   banners: state.INIT.banners
+  banners: state.INIT.banners,
 });
 
-export default connect(mapStateToProps, {loadBanners})(
-   withRouter(Intro)
-);
-
+export default connect(mapStateToProps, { loadBanners })(withRouter(Intro));
