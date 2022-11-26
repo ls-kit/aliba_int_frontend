@@ -4,10 +4,10 @@ import axios from 'axios';
 export const axiosFileUpload = axios.create({
   // eslint-disable-next-line no-undef
   baseURL: process.env.REACT_APP_API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-    "content-type": "multipart/form-data"
-  }
+  // headers: {
+  //   'Content-Type': 'application/json',
+  //   'Content-Type': 'multipart/form-data',
+  // }
 });
 
 

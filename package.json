@@ -1,6 +1,7 @@
 {
-  "name": "aliba int",
+  "name": "alibainternational",
   "version": "0.1.0",
+  "homepage" : "https://alibainternational.com",
   "private": true,
   "dependencies": {
     "@react-oauth/google": "^0.5.0",
