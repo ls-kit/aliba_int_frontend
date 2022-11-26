@@ -1,19 +1,20 @@
-import React from 'react';
-import {getSetting} from "../../../utils/Helpers";
+import React from "react";
+import { getSetting } from "../../../utils/Helpers";
 // import _ from "lodash";
 // import {Link} from "react-router-dom";
 
 const CopyRight = (props) => {
-   const {general, width} = props;
-   const copyright_text = getSetting(general, "copyright_text");
+  const { general, width } = props;
+  const copyright_text = getSetting(general, "copyright_text");
 
-   return (
-      <div className="footer-bottom font-weight-normal" style={width <= 751 ? {marginBottom: "60px"} : {marginBottom: "0"}}>
-         <div className="container">
-            <p className="footer-copyright font-weight-normal ml-lg-2 second-primary-color">
-               Copyright © {copyright_text}
-            </p>
-            <div className="social-icons social-icons-color justify-content-center">
+  return (
+    <div
+      className='footer-bottom font-weight-normal'
+      style={width <= 751 ? { marginBottom: "60px" } : { marginBottom: "0" }}
+    >
+      <div className='container'>
+        <p className='footer-copyright font-weight-normal ml-lg-2'>Copyright © {copyright_text}</p>
+        {/* <div className="social-icons social-icons-color justify-content-center">
                <span className="social-label">Social Media</span>
                {
                   general.facebook &&
@@ -64,10 +65,10 @@ const CopyRight = (props) => {
                      <i className="icon-youtube"/>
                   </a>
                }
-            </div>
-         </div>
+            </div> */}
       </div>
-   );
+    </div>
+  );
 };
 
 export default CopyRight;

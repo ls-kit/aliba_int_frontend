@@ -99,7 +99,7 @@
 }
 
 .banner-subtitle {
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
 
 .intro-slider-container {
@@ -108,7 +108,7 @@
 
   &:before {
     display: block;
-    content: '';
+    content: "";
     width: 100%;
   }
 }
@@ -121,7 +121,7 @@
 
     &:before {
       display: block;
-      content: '';
+      content: "";
       width: 100%;
     }
   }
@@ -180,7 +180,7 @@
   color: #333;
 
   &::after {
-    content: '\f311';
+    content: "\f311";
     display: flex;
     align-items: center;
     justify-content: center;
@@ -224,7 +224,7 @@ button {
   .btn {
     font-size: 1.2rem;
     min-width: 90px;
-    padding: .65rem 1rem;
+    padding: 0.65rem 1rem;
   }
 }
 
@@ -232,8 +232,8 @@ button {
   color: #fff;
   font-weight: 300;
   font-size: 1.4rem;
-  letter-spacing: -.01em;
-  margin-bottom: .5rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
 }
 
 .intro-title {
@@ -241,9 +241,9 @@ button {
   font-weight: 700;
   font-size: 3rem;
   line-height: 1.2;
-  letter-spacing: -.03em;
+  letter-spacing: -0.03em;
   margin-bottom: 1.2rem;
-  text-indent: -.2rem;
+  text-indent: -0.2rem;
 }
 
 .brand {
@@ -263,7 +263,7 @@ button {
 }
 
 .title-lg {
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
 }
 
 .nav.nav-pills {
@@ -280,11 +280,11 @@ button {
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     left: 1rem;
     right: 1rem;
-    height: .1rem;
+    height: 0.1rem;
     top: 0;
     background-color: #ebebeb;
   }
@@ -316,7 +316,7 @@ button {
 
 .carousel-with-shadow.owl-simple {
   .owl-nav {
-    [class*='owl-'] {
+    [class*="owl-"] {
       margin-top: -31px;
     }
   }
@@ -327,7 +327,7 @@ button {
     color: #777;
     font-size: 1.5rem;
     line-height: 1.73;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 3rem;
   }
 
@@ -337,14 +337,14 @@ button {
 
   .entry-meta {
     color: #cccccc;
-    margin-bottom: .8rem;
+    margin-bottom: 0.8rem;
   }
 
   .entry-title {
     font-weight: 500;
     font-size: 1.8rem;
-    letter-spacing: -.01em;
-    margin-bottom: .5rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
   }
 
   .read-more {
@@ -367,7 +367,7 @@ button {
 }
 
 .entry.entry-display {
-  transition: box-shadow .35s ease;
+  transition: box-shadow 0.35s ease;
 
   .entry-body {
     padding: 0 2rem 2.5rem;
@@ -382,7 +382,7 @@ button {
   .cta-title {
     font-weight: 600;
     font-size: 2.6rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
   }
 
   .cta-desc {
@@ -420,7 +420,7 @@ button {
   align-items: center;
 
   &:before {
-    content: '';
+    content: "";
     -ms-flex: 1;
     flex: 1;
     height: 1px;
@@ -429,7 +429,7 @@ button {
   }
 
   &:after {
-    content: '';
+    content: "";
     -ms-flex: 1;
     flex: 1;
     height: 1px;
@@ -439,7 +439,7 @@ button {
 }
 
 .mfp-ready.mfp-bg {
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .quickView-content {
@@ -448,7 +448,7 @@ button {
 
   .owl-theme.owl-light {
     .owl-nav {
-      [class*='owl-'] {
+      [class*="owl-"] {
         border: none;
         font-size: 3rem;
         color: #fff;
@@ -489,7 +489,7 @@ button {
 
   .owl-theme {
     .owl-nav {
-      [class*='owl-'] {
+      [class*="owl-"] {
         top: 50%;
       }
     }
@@ -514,7 +514,7 @@ button {
     margin-top: 3rem;
     font-size: 2.4rem;
     font-weight: 400;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     color: #333;
     margin-bottom: 1rem;
   }
@@ -522,7 +522,7 @@ button {
   .product-price {
     font-size: 2.4rem;
     font-weight: 400;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     color: #333;
     margin-bottom: 1rem;
   }
@@ -582,7 +582,7 @@ button {
 
     span {
       font-size: 1.3rem;
-      letter-spacing: .01em;
+      letter-spacing: 0.01em;
       color: #777;
       text-transform: uppercase;
     }
@@ -609,7 +609,7 @@ button {
 
     span {
       font-size: 1.4rem;
-      letter-spacing: .1em;
+      letter-spacing: 0.1em;
     }
   }
 
@@ -626,12 +626,12 @@ button {
   .product-cat {
     font-size: 1.4rem;
     font-weight: 400;
-    letter-spacing: .01em;
+    letter-spacing: 0.01em;
     color: #777;
     margin-bottom: 4.5rem;
 
     span {
-      margin-right: .7rem;
+      margin-right: 0.7rem;
     }
 
     a {
@@ -640,8 +640,8 @@ button {
   }
 
   .product-left {
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     flex: 0 0 19.2%;
     max-width: 19.2%;
 
@@ -651,8 +651,8 @@ button {
   }
 
   .product-right {
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     flex: 0 0 80.8%;
     max-width: 80.8%;
   }
@@ -667,7 +667,7 @@ button {
 
   .btn-wishlist {
     &:before {
-      content: '\f234';
+      content: "\f234";
     }
 
     border: none;
@@ -693,7 +693,7 @@ button {
 
   .btn-compare {
     &:before {
-      content: '\f2d0';
+      content: "\f2d0";
     }
 
     border: none;
@@ -719,8 +719,8 @@ button {
 
   .carousel-dot {
     img {
-      transition: all .3s;
-      opacity: .6;
+      transition: all 0.3s;
+      opacity: 0.6;
     }
 
     &:hover {
@@ -760,7 +760,7 @@ button {
     line-height: 1;
     background-color: #fff;
     box-shadow: 2px 6px 16px rgba(51, 51, 51, 0.05);
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     &:hover {
       color: #fff;
@@ -786,8 +786,8 @@ button {
   }
 
   position: relative;
-  margin-left: -.8rem;
-  margin-right: -.8rem;
+  margin-left: -0.8rem;
+  margin-right: -0.8rem;
 
   button.mfp-close {
     color: #666;
@@ -807,8 +807,8 @@ button {
   }
 
   .carousel-dot {
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
 
   .quickView-content {
@@ -837,7 +837,7 @@ button {
 
 .mfp-newsletter.mfp-bg {
   background: #222;
-  opacity: .6;
+  opacity: 0.6;
 }
 
 .newsletter-popup-container {
@@ -868,7 +868,7 @@ button {
   .banner-title {
     font-size: 4.6rem;
     font-weight: 700;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     color: #222;
     margin-bottom: 1rem;
     text-transform: uppercase;
@@ -886,7 +886,7 @@ button {
 
   p {
     font-weight: 400;
-    letter-spacing: .01em;
+    letter-spacing: 0.01em;
     margin-bottom: 3.3rem;
     line-height: 1.75em;
   }
@@ -941,28 +941,28 @@ button {
     margin-left: auto;
     margin-right: auto;
     padding-left: 0;
-    flex: 0 0 calc((100% + 20px) * .5 + 20px);
-    max-width: calc((100% + 20px) * .5 + 20px);
+    flex: 0 0 calc((100% + 20px) * 0.5 + 20px);
+    max-width: calc((100% + 20px) * 0.5 + 20px);
   }
 
   .custom-control-label {
     font-size: 1.3rem;
     font-weight: 400;
-    letter-spacing: .01em;
+    letter-spacing: 0.01em;
     padding-left: 4.4rem;
 
     &:before {
-      left: -.5rem;
+      left: -0.5rem;
       width: 1.4rem;
       height: 1.4rem;
-      border-radius: .2rem;
+      border-radius: 0.2rem;
     }
 
     &:after {
-      left: -.5rem;
+      left: -0.5rem;
       width: 1.4rem;
       height: 1.4rem;
-      border-radius: .2rem;
+      border-radius: 0.2rem;
     }
   }
 
@@ -983,7 +983,7 @@ button {
 
 .mfp-wrap {
   .mfp-content {
-    transition: all .35s;
+    transition: all 0.35s;
     opacity: 0;
   }
 }
@@ -1009,14 +1009,14 @@ button {
   &::after {
     display: block;
     clear: both;
-    content: '';
+    content: "";
   }
 
   .select-custom {
     margin-bottom: 0;
 
     &::after {
-      right: .9rem;
+      right: 0.9rem;
       font-size: 1rem;
     }
 
@@ -1034,7 +1034,7 @@ button {
     font-weight: 400;
     color: #333333;
     font-size: 1.2rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin: 0;
   }
 
@@ -1042,7 +1042,7 @@ button {
     color: #999999;
     font-weight: 300;
     font-size: 1.2rem;
-    padding: .45rem 1rem;
+    padding: 0.45rem 1rem;
     height: 30px;
     margin-bottom: 0;
 
@@ -1086,8 +1086,8 @@ button {
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.15;
-  letter-spacing: -.01em;
-  margin-bottom: .8rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
   padding: 8px 0;
 
   span {
@@ -1110,11 +1110,11 @@ button {
 
 .btn-layout {
   display: inline-flex;
-  padding: .5rem;
+  padding: 0.5rem;
 
   + {
     .btn-layout {
-      margin-left: .5rem;
+      margin-left: 0.5rem;
     }
   }
 
@@ -1144,7 +1144,7 @@ button {
 
 .products {
   > .row {
-    > [class*=col-] {
+    > [class*="col-"] {
       display: flex;
       align-items: stretch;
       align-content: stretch;
@@ -1203,7 +1203,7 @@ button {
   .widget {
     color: #333333;
     margin: 0 0 2rem;
-    border-bottom: .1rem solid #ebebeb;
+    border-bottom: 0.1rem solid #ebebeb;
 
     &:last-child {
       border-bottom: none;
@@ -1215,8 +1215,8 @@ button {
     font-weight: 400;
     font-size: 1.6rem;
     line-height: 1.15;
-    letter-spacing: -.01em;
-    margin-bottom: .8rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
     padding: 8px 0;
   }
 
@@ -1239,14 +1239,14 @@ button {
 .widget-clean {
   display: flex;
   align-items: center;
-  padding-top: .6rem;
+  padding-top: 0.6rem;
   padding-bottom: 2.1rem;
 
   label {
     color: inherit;
     font-weight: 400;
     font-size: 1.4rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin: 0;
   }
 
@@ -1269,15 +1269,15 @@ button {
 
       &:after {
         color: #333333;
-        content: '\f110';
+        content: "\f110";
         display: block;
-        font-family: 'molla', sans-serif;
+        font-family: "molla", sans-serif;
         font-size: 1.4rem;
         line-height: 1;
         position: absolute;
         top: 50%;
         right: 1.6rem;
-        margin-top: -.7rem;
+        margin-top: -0.7rem;
       }
 
       &:focus {
@@ -1287,7 +1287,7 @@ button {
 
     a.collapsed {
       &:after {
-        content: '\e802';
+        content: "\e802";
       }
     }
   }
@@ -1300,7 +1300,7 @@ button {
 
 .filter-item {
   position: relative;
-  margin-bottom: .3rem;
+  margin-bottom: 0.3rem;
 }
 
 .filter-items-count {
@@ -1321,7 +1321,7 @@ button {
     font-weight: 300;
     font-size: 1.3rem;
     line-height: 1;
-    border-radius: .6rem;
+    border-radius: 0.6rem;
     color: #777;
     background-color: #f8f8f8;
   }
@@ -1334,13 +1334,13 @@ button {
   font-weight: 400;
   font-size: 1.4rem;
   line-height: 1;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   text-transform: uppercase;
   margin-right: 3rem;
 
   i {
     font-size: 1.6rem;
-    margin-right: .9rem;
+    margin-right: 0.9rem;
   }
 
   &:hover {
@@ -1360,8 +1360,8 @@ button {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  padding-top: .7rem;
-  padding-bottom: .5rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.5rem;
 
   a {
     position: relative;
@@ -1369,14 +1369,14 @@ button {
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 50%;
-    border: .2rem solid #fff;
-    margin: 0 .3rem .3rem;
-    transition: box-shadow .35s ease;
+    border: 0.2rem solid #fff;
+    margin: 0 0.3rem 0.3rem;
+    transition: box-shadow 0.35s ease;
 
     &:after {
       color: #fff;
-      font-family: 'molla', sans-serif;
-      content: '\ec2d';
+      font-family: "molla", sans-serif;
+      content: "\ec2d";
       font-size: 1rem;
       line-height: 1;
       position: absolute;
@@ -1384,22 +1384,22 @@ button {
       top: 50%;
       opacity: 0;
       visibility: hidden;
-      transition: opacity .01s;
-      margin-top: -.4rem;
-      margin-left: -.5rem;
+      transition: opacity 0.01s;
+      margin-top: -0.4rem;
+      margin-left: -0.5rem;
     }
 
     &:hover {
-      box-shadow: 0 0 0 .1rem #cccccc;
+      box-shadow: 0 0 0 0.1rem #cccccc;
     }
 
     &:focus {
-      box-shadow: 0 0 0 .1rem #cccccc;
+      box-shadow: 0 0 0 0.1rem #cccccc;
     }
   }
 
   a.selected {
-    box-shadow: 0 0 0 .1rem #cccccc;
+    box-shadow: 0 0 0 0.1rem #cccccc;
 
     &:after {
       visibility: visible;
@@ -1409,13 +1409,13 @@ button {
 }
 
 .filter-price {
-  padding-top: .2rem;
+  padding-top: 0.2rem;
   padding-bottom: 3rem;
 }
 
 .filter-price-text {
   margin-bottom: 2rem;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
 }
 
 #filter-price-range {
@@ -1459,7 +1459,7 @@ button {
   line-height: 1;
   background-color: #fff;
   box-shadow: 2px 6px 16px rgba(51, 51, 51, 0.05);
-  transition: all .35s ease;
+  transition: all 0.35s ease;
 
   &:hover {
     color: #fff;
@@ -1475,14 +1475,13 @@ button {
 .product-image-gallery {
   display: flex;
   //flex-flow: row wrap;
-  margin-left: -.5rem;
-  margin-right: -.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
   overflow-x: auto;
 
   &::-webkit-scrollbar {
     display: none;
   }
-
 }
 
 .product-gallery-item {
@@ -1490,8 +1489,8 @@ button {
   display: block;
   flex: 0 0 25%;
   max-width: 25%;
-  padding-left: .5rem;
-  padding-right: .5rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   margin-bottom: 1rem;
 
   img {
@@ -1500,28 +1499,28 @@ button {
   }
 
   &:before {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
-    left: .5rem;
-    right: .5rem;
+    left: 0.5rem;
+    right: 0.5rem;
     top: 0;
     bottom: 0;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
     opacity: 0;
     visibility: hidden;
     border: 0.1rem solid var(--theme-hover-color);
   }
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
-    left: .5rem;
-    right: .5rem;
+    left: 0.5rem;
+    right: 0.5rem;
     top: 0;
     bottom: 0;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
     visibility: visible;
     opacity: 1;
     background-color: rgba(255, 255, 255, 0.4);
@@ -1612,12 +1611,12 @@ button {
     color: #666;
     font-size: 2rem;
     line-height: 1;
-    transition: color .3s;
+    transition: color 0.3s;
   }
 
   span {
     display: inline-block;
-    transition: box-shadow .3s ease;
+    transition: box-shadow 0.3s ease;
   }
 
   &:hover {
@@ -1653,13 +1652,13 @@ button {
 
 .product-pager-prev {
   i {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }
 
 .product-pager-next {
   i {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 }
 
@@ -1669,9 +1668,9 @@ button {
   .product-title {
     font-weight: 400;
     font-size: 2.4rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     margin-bottom: 1.2rem;
-    margin-top: -.5rem;
+    margin-top: -0.5rem;
     padding-right: 1rem;
   }
 
@@ -1731,13 +1730,13 @@ button {
     font-size: 1.4rem;
 
     span {
-      margin-right: .7rem;
+      margin-right: 0.7rem;
     }
 
     a {
       color: #666;
       box-shadow: none;
-      transition: all .35s ease;
+      transition: all 0.35s ease;
 
       &:hover {
         color: var(--theme-hover-color);
@@ -1762,8 +1761,8 @@ button {
       height: 4rem;
       font-weight: 400;
       font-size: 1.4rem;
-      letter-spacing: -.01em;
-      border: .1rem solid #d7d7d7;
+      letter-spacing: -0.01em;
+      border: 0.1rem solid #d7d7d7;
       background-color: transparent;
       border-radius: 0;
       margin-right: 1rem;
@@ -1811,7 +1810,7 @@ button {
 
     &::after {
       font-size: 1rem;
-      right: .9rem;
+      right: 0.9rem;
     }
   }
 
@@ -1839,7 +1838,7 @@ button {
 
   i {
     font-size: 1.8rem;
-    margin-right: .7rem;
+    margin-right: 0.7rem;
   }
 
   &:hover {
@@ -1868,7 +1867,8 @@ button {
   flex-flow: row wrap;
   margin-bottom: 3rem;
 
-  .btn-cart,.btn-wishlist {
+  .btn-cart,
+  .btn-wishlist {
     padding: 1rem 1.5rem;
     max-width: 100%;
     color: $baseFontColor;
@@ -1876,19 +1876,22 @@ button {
     border: none;
     background: #fc4a1a; /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+    background: linear-gradient(
+      to right,
+      #f7b733,
+      #fc4a1a
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
     span {
       font-size: 1.4rem;
       color: inherit;
       text-transform: uppercase;
       box-shadow: none;
-      transition: box-shadow .35s ease, color 0s ease;
+      transition: box-shadow 0.35s ease, color 0s ease;
     }
 
     &:before {
-      margin-right: .4rem;
+      margin-right: 0.4rem;
     }
 
     &:hover {
@@ -1901,8 +1904,7 @@ button {
       border-color: $baseHoverColor;
     }
   }
-  .btn-wishlist{
-
+  .btn-wishlist {
   }
 }
 
@@ -1936,7 +1938,7 @@ button {
 
   .btn-product.btn-wishlist {
     &:before {
-      margin-top: -.2rem;
+      margin-top: -0.2rem;
     }
   }
 }
@@ -1948,7 +1950,7 @@ button {
   align-items: center;
   flex-wrap: wrap;
   padding-top: 1.7rem;
-  border-top: .1rem solid #ebebeb;
+  border-top: 0.1rem solid #ebebeb;
   padding-bottom: 1.7rem;
 
   .social-icons {
@@ -1969,8 +1971,8 @@ button {
     .nav-link {
       color: #333333;
       font-size: 1.6rem;
-      padding: .55rem 3rem;
-      border-bottom-width: .2rem;
+      padding: 0.55rem 3rem;
+      border-bottom-width: 0.2rem;
       text-transform: capitalize;
 
       &:hover {
@@ -1994,9 +1996,9 @@ button {
   }
 
   .tab-content {
-    border: .1rem solid #dadada;
-    margin-top: -.1rem;
-    border-radius: .3rem;
+    border: 0.1rem solid #dadada;
+    margin-top: -0.1rem;
+    border-radius: 0.3rem;
 
     .tab-pane {
       padding: 2.7rem 3rem;
@@ -2008,14 +2010,14 @@ button {
   h2 {
     font-weight: 400;
     font-size: 2.4rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 1.8rem;
   }
 
   h3 {
     font-weight: 400;
     font-size: 1.6rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 1.8rem;
   }
 
@@ -2027,19 +2029,19 @@ button {
       padding-left: 1.3rem;
 
       &:before {
-        content: '•';
+        content: "•";
         position: absolute;
         display: block;
         top: 0;
-        left: .2rem;
+        left: 0.2rem;
       }
     }
   }
 
   a {
     color: #333;
-    border-bottom: .1rem solid #b8b8b8;
-    transition: all .35s ease;
+    border-bottom: 0.1rem solid #b8b8b8;
+    transition: all 0.35s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -2058,7 +2060,7 @@ button {
     font-weight: 400;
     font-size: 2.4rem;
     line-height: 1.25;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 1.6rem;
 
     p {
@@ -2076,7 +2078,7 @@ button {
 .reviews {
   h3 {
     font-size: 1.6rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 2.3rem;
   }
 }
@@ -2084,7 +2086,7 @@ button {
 .review {
   padding-bottom: 1.3rem;
   margin-bottom: 2rem;
-  border-bottom: .1rem solid #ebebeb;
+  border-bottom: 0.1rem solid #ebebeb;
 
   &:last-child {
     margin-bottom: 0;
@@ -2100,8 +2102,8 @@ button {
     font-weight: 400;
     font-size: 1.6rem;
     line-height: 1.25;
-    letter-spacing: -.01em;
-    margin-bottom: .8rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.8rem;
 
     a {
       color: inherit;
@@ -2117,8 +2119,8 @@ button {
   }
 
   .ratings-container {
-    padding-top: .7rem;
-    margin-bottom: .5rem;
+    padding-top: 0.7rem;
+    margin-bottom: 0.5rem;
   }
 
   .review-date {
@@ -2127,7 +2129,7 @@ button {
 }
 
 .review-content {
-  margin-bottom: .8rem;
+  margin-bottom: 0.8rem;
 }
 
 .review-action {
@@ -2135,7 +2137,7 @@ button {
 
   a {
     color: #777;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -2156,7 +2158,7 @@ button {
 
   i {
     font-size: 1.4rem;
-    margin-right: .6rem;
+    margin-right: 0.6rem;
   }
 }
 
@@ -2246,14 +2248,14 @@ button {
 
 .product-details-extended {
   .nav.nav-pills {
-    border-top: .1rem solid #ebebeb;
+    border-top: 0.1rem solid #ebebeb;
 
     .nav-link {
       padding-top: 1.2rem;
       padding-bottom: 1.2rem;
-      border-top: .2rem solid transparent;
+      border-top: 0.2rem solid transparent;
       border-bottom: none;
-      margin-top: -.1rem;
+      margin-top: -0.1rem;
 
       &:hover {
         border-color: var(--theme-color);
@@ -2332,7 +2334,7 @@ button {
 
 .product-details-accordion {
   .card {
-    border: .1rem solid #ebebeb;
+    border: 0.1rem solid #ebebeb;
 
     .card-title {
       font-weight: 400;
@@ -2351,7 +2353,7 @@ button {
 
       p {
         &:last-child {
-          margin-bottom: .2rem;
+          margin-bottom: 0.2rem;
         }
       }
     }
@@ -2398,7 +2400,7 @@ button {
 
   .widget-title {
     font-size: 2.4rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     margin-bottom: 2.4rem;
   }
 
@@ -2446,7 +2448,7 @@ button {
 .entry-video {
   a {
     &:after {
-      content: '\ec2c';
+      content: "\ec2c";
       font-family: "molla", sans-serif;
       display: -ms-inline-flexbox;
       display: inline-flex;
@@ -2464,9 +2466,9 @@ button {
       color: #fff;
       background-color: transparent;
       border-radius: 50%;
-      border: .2rem solid #fff;
-      -webkit-transition: all .35s ease;
-      transition: all .35s ease;
+      border: 0.2rem solid #fff;
+      -webkit-transition: all 0.35s ease;
+      transition: all 0.35s ease;
     }
 
     &:hover {
@@ -2494,11 +2496,11 @@ button {
   color: #777;
   font-size: 1.4rem;
   line-height: 1.5;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 
   a {
     color: inherit;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -2528,8 +2530,8 @@ button {
   font-weight: 600;
   font-size: 2.2rem;
   line-height: 1.25;
-  letter-spacing: -.025em;
-  margin-bottom: .6rem;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.6rem;
 
   a {
     color: inherit;
@@ -2552,7 +2554,7 @@ button {
 
   a {
     color: inherit;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -2576,22 +2578,22 @@ button {
   display: inline-block;
   position: relative;
   font-weight: 400;
-  letter-spacing: -.01em;
-  padding-bottom: .1rem;
-  transition: all .3s ease;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.1rem;
+  transition: all 0.3s ease;
 
   &:after {
-    font-family: 'molla', serif;
-    content: '\f274';
+    font-family: "molla", serif;
+    content: "\f274";
     font-size: 1.5rem;
     line-height: 1;
     display: block;
     position: absolute;
     right: 0;
     top: 50%;
-    margin-top: -.75rem;
+    margin-top: -0.75rem;
     opacity: 0;
-    transition: all .25s ease;
+    transition: all 0.25s ease;
     transform: translateX(-6px);
   }
 
@@ -2637,13 +2639,13 @@ button {
     font-weight: 300;
     font-size: 1.4rem;
     line-height: 1.5;
-    padding-top: .4rem;
-    padding-bottom: .4rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
 
     span {
       color: #cccccc;
       font-weight: 400;
-      margin-left: .8rem;
+      margin-left: 0.8rem;
     }
 
     &:hover {
@@ -2684,19 +2686,19 @@ button {
   }
 
   .entry-cats {
-    margin-bottom: .9rem;
+    margin-bottom: 0.9rem;
   }
 }
 
 .entry-container {
   position: relative;
-  margin: 0 -1rem .5rem;
-  transition: height .4s;
+  margin: 0 -1rem 0.5rem;
+  transition: height 0.4s;
 
   &::after {
     display: block;
     clear: both;
-    content: '';
+    content: "";
   }
 }
 
@@ -2717,7 +2719,7 @@ button {
 
 .entry-mask {
   &:before {
-    content: '';
+    content: "";
     display: block;
     height: 50%;
     position: absolute;
@@ -2728,7 +2730,7 @@ button {
     background: -moz-linear-gradient(top, rgba(125, 185, 232, 0) 0%, black 100%);
     background: -webkit-linear-gradient(top, rgba(125, 185, 232, 0) 0%, black 100%);
     background: linear-gradient(to bottom, rgba(125, 185, 232, 0) 0%, black 100%);
-    opacity: .75;
+    opacity: 0.75;
     transition: all 0.3s;
     pointer-events: none;
   }
@@ -2782,7 +2784,7 @@ button {
         border: none;
         color: #fff;
         position: absolute;
-        content: '\f24d';
+        content: "\f24d";
         font-family: "molla", sans-serif;
         top: 2.6rem;
       }
@@ -2829,7 +2831,7 @@ button {
 
   &:hover {
     &:before {
-      opacity: .9;
+      opacity: 0.9;
     }
   }
 }
@@ -2855,7 +2857,7 @@ button {
   font-weight: 400;
   font-size: 1.8rem;
   line-height: 1.1;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
   margin-bottom: 1.7rem;
 }
 
@@ -2870,7 +2872,7 @@ button {
 
   .form-control {
     height: 40px;
-    padding: .95rem 5rem .95rem 1.4rem;
+    padding: 0.95rem 5rem 0.95rem 1.4rem;
     font-weight: 300;
     font-size: 1.3rem;
     background-color: transparent;
@@ -2879,7 +2881,7 @@ button {
 
   .btn {
     position: absolute;
-    right: .8rem;
+    right: 0.8rem;
     top: 50%;
     min-width: 0;
     font-weight: normal;
@@ -2948,14 +2950,14 @@ button {
   font-weight: 300;
   font-size: 1.3rem;
   line-height: 1;
-  letter-spacing: -.01em;
-  margin-bottom: .8rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
   text-transform: uppercase;
 }
 
 .posts-list {
   list-style: none;
-  padding: .4rem 0 .2rem;
+  padding: 0.4rem 0 0.2rem;
   margin: 0;
 
   li {
@@ -2964,7 +2966,7 @@ button {
     &::after {
       display: block;
       clear: both;
-      content: '';
+      content: "";
     }
 
     &:last-child {
@@ -2984,7 +2986,7 @@ button {
   }
 
   div {
-    padding-top: .6rem;
+    padding-top: 0.6rem;
   }
 
   span {
@@ -2993,8 +2995,8 @@ button {
     font-weight: 300;
     font-size: 1.4rem;
     line-height: 1.25;
-    letter-spacing: -.01em;
-    margin-bottom: .5rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
   }
 
   h4 {
@@ -3032,7 +3034,7 @@ button {
   display: flex;
   align-items: center;
   flex-flow: wrap;
-  padding-top: .3rem;
+  padding-top: 0.3rem;
   margin-right: -1rem;
   margin-bottom: -1rem;
 
@@ -3042,13 +3044,13 @@ button {
     font-weight: 300;
     font-size: 1.4rem;
     line-height: 1.4;
-    border-radius: .3rem;
-    padding: .65rem .9rem;
+    border-radius: 0.3rem;
+    padding: 0.65rem 0.9rem;
     background-color: #fafafa;
-    border: .1rem solid #ebebeb;
+    border: 0.1rem solid #ebebeb;
     margin-right: 1rem;
     margin-bottom: 1rem;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -3113,7 +3115,7 @@ button {
   &::after {
     display: block;
     clear: both;
-    content: '';
+    content: "";
   }
 
   .float-left {
@@ -3143,7 +3145,7 @@ button {
   a {
     color: #333;
     box-shadow: 0 1px 0 #333;
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -3177,7 +3179,7 @@ button {
 
     &:before {
       color: #ebebeb;
-      content: '\f10e';
+      content: "\f10e";
       font-weight: normal;
       font-size: 3rem;
       line-height: 1;
@@ -3196,7 +3198,7 @@ button {
 
       &:before {
         display: inline-block;
-        content: '•';
+        content: "•";
         font-size: 1.8rem;
         line-height: 1;
         margin-right: 1rem;
@@ -3221,7 +3223,7 @@ button {
   display: flex;
   align-items: center;
   flex-flow: wrap;
-  padding-top: .2rem;
+  padding-top: 0.2rem;
 
   span {
     margin-right: 1rem;
@@ -3233,13 +3235,13 @@ button {
     font-weight: 300;
     font-size: 1.4rem;
     line-height: 1.4;
-    border-radius: .3rem;
-    padding: .45rem .9rem;
+    border-radius: 0.3rem;
+    padding: 0.45rem 0.9rem;
     background-color: #fafafa;
-    border: .1rem solid #ebebeb;
-    margin-right: .5rem;
+    border: 0.1rem solid #ebebeb;
+    margin-right: 0.5rem;
     margin-bottom: 0;
-    transition: all .3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -3264,7 +3266,7 @@ button {
     font-weight: 400;
     font-size: 1.5rem;
     line-height: 1;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 0;
 
     a {
@@ -3329,8 +3331,8 @@ button {
 
 .author-link {
   color: #777;
-  letter-spacing: -.01em;
-  transition: all .35s ease;
+  letter-spacing: -0.01em;
+  transition: all 0.35s ease;
 
   &:hover {
     color: var(--theme-color);
@@ -3362,28 +3364,28 @@ button {
   max-width: 100%;
   width: 100%;
   font-weight: 400;
-  padding-top: .95rem;
-  padding-bottom: .95rem;
+  padding-top: 0.95rem;
+  padding-bottom: 0.95rem;
   font-size: 1.4rem;
   line-height: 1.5;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
 
   + {
     .pager-link {
-      border-top: .1rem solid #ebebeb;
+      border-top: 0.1rem solid #ebebeb;
     }
   }
 
   &:after {
     color: #333;
     display: block;
-    font-family: 'molla', sans-serif;
+    font-family: "molla", sans-serif;
     font-size: 1.5rem;
     line-height: 1;
     position: absolute;
     top: 50%;
-    transition: all .35s ease .05s;
-    margin-top: -.8rem;
+    transition: all 0.35s ease 0.05s;
+    margin-top: -0.8rem;
   }
 
   &:hover {
@@ -3394,7 +3396,7 @@ button {
     }
 
     .pager-link-title {
-      box-shadow: 0 .1rem 0 #333;
+      box-shadow: 0 0.1rem 0 #333;
     }
   }
 
@@ -3406,7 +3408,7 @@ button {
     }
 
     .pager-link-title {
-      box-shadow: 0 .1rem 0 #333;
+      box-shadow: 0 0.1rem 0 #333;
     }
   }
 
@@ -3448,7 +3450,7 @@ button {
   padding-right: 1rem;
 
   &:after {
-    content: '\f273';
+    content: "\f273";
     left: 3rem;
   }
 }
@@ -3460,18 +3462,18 @@ button {
   text-align: right;
 
   &:after {
-    content: '\f274';
+    content: "\f274";
     right: 3rem;
   }
 }
 
 .pager-link-title {
   display: inline-block;
-  margin-top: .6rem;
+  margin-top: 0.6rem;
   flex: 0 0 auto;
   color: #333;
   font-size: 1.5rem;
-  transition: all .35s ease;
+  transition: all 0.35s ease;
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
@@ -3481,12 +3483,12 @@ button {
 .related-posts {
   padding-bottom: 4.5rem;
   margin-bottom: 4.5rem;
-  border-bottom: .1rem solid #ebebeb;
+  border-bottom: 0.1rem solid #ebebeb;
 
   .title {
     font-weight: 600;
     font-size: 1.8rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     margin-bottom: 3rem;
   }
 
@@ -3507,7 +3509,7 @@ button {
   .title {
     font-weight: 600;
     font-size: 1.8rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     margin-bottom: 4.5rem;
   }
 
@@ -3520,12 +3522,12 @@ button {
       margin-top: 4rem;
       margin-left: 8rem;
       padding-top: 4.5rem;
-      border-top: .1rem solid #ebebeb;
+      border-top: 0.1rem solid #ebebeb;
     }
   }
 
   li {
-    border-bottom: .1rem solid #ebebeb;
+    border-bottom: 0.1rem solid #ebebeb;
     padding-bottom: 4rem;
     margin-bottom: 5rem;
 
@@ -3559,15 +3561,15 @@ button {
   font-weight: 300;
   font-size: 1.4rem;
   line-height: 1;
-  letter-spacing: -.01em;
-  padding-bottom: .4rem;
-  transition: all .35s ease;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.4rem;
+  transition: all 0.35s ease;
 
   &:after {
-    font-family: 'molla', sans-serif;
-    content: '\f279';
+    font-family: "molla", sans-serif;
+    content: "\f279";
     font-size: 1.5rem;
-    margin-left: .7rem;
+    margin-left: 0.7rem;
   }
 
   &:hover {
@@ -3589,7 +3591,7 @@ button {
     font-weight: 400;
     font-size: 1.5rem;
     line-height: 1;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     margin-bottom: 0;
 
     a {
@@ -3629,14 +3631,14 @@ button {
   .title {
     font-weight: 600;
     font-size: 1.8rem;
-    letter-spacing: -.025em;
-    margin-bottom: .9rem;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.9rem;
   }
 
   .title-desc {
     color: #ccc;
     font-size: 1.3rem;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
   }
 
   .form-control {
@@ -3669,13 +3671,13 @@ button {
   a {
     display: inline-block;
     color: #777;
-    padding: .4rem 1rem;
+    padding: 0.4rem 1rem;
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 1.5;
-    letter-spacing: -.01em;
+    letter-spacing: -0.01em;
     text-transform: uppercase;
-    border-bottom: .1rem solid transparent;
+    border-bottom: 0.1rem solid transparent;
 
     &:hover {
       color: var(--theme-color);
@@ -3697,12 +3699,12 @@ button {
 .portfolio-container {
   position: relative;
   margin: 0 -1rem 4rem;
-  transition: height .4s;
+  transition: height 0.4s;
 
   &::after {
     display: block;
     clear: both;
-    content: '';
+    content: "";
   }
 }
 
@@ -3716,7 +3718,7 @@ button {
     padding-right: 0;
   }
 
-  [class*=col-] {
+  [class*="col-"] {
     padding-left: 0;
     padding-right: 0;
   }
@@ -3735,7 +3737,7 @@ button {
       > a {
         &:after {
           visibility: visible;
-          opacity: .4;
+          opacity: 0.4;
         }
       }
     }
@@ -3761,7 +3763,7 @@ button {
     outline: none !important;
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       left: 0;
@@ -3794,8 +3796,8 @@ button {
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.3;
-  letter-spacing: -.01em;
-  margin-bottom: .1rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.1rem;
 
   a {
     color: inherit;
@@ -3813,11 +3815,11 @@ button {
 .portfolio-tags {
   font-weight: 300;
   font-size: 1.3rem;
-  letter-spacing: -.01em;
+  letter-spacing: -0.01em;
 
   a {
     color: var(--theme-color);
-    transition: all .35s ease;
+    transition: all 0.35s ease;
 
     &:hover {
       color: var(--theme-color);
@@ -3914,7 +3916,7 @@ button {
 
 .brands-text {
   max-width: 430px;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   margin-bottom: 3rem;
 
   .title {
@@ -3923,7 +3925,7 @@ button {
 }
 
 .brands-display {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 
   .brand {
     min-height: 0;
@@ -3976,29 +3978,29 @@ button {
     .member-overlay {
       .member-title {
         animation-name: fadeInUpShort;
-        animation-duration: .65s;
+        animation-duration: 0.65s;
         animation-fill-mode: both;
       }
 
       p {
         animation-name: fadeInUpShort;
-        animation-duration: .65s;
+        animation-duration: 0.65s;
         animation-fill-mode: both;
-        animation-delay: .1s;
+        animation-delay: 0.1s;
       }
 
       .social-icons {
         animation-name: fadeInUpShort;
-        animation-duration: .65s;
+        animation-duration: 0.65s;
         animation-fill-mode: both;
-        animation-delay: .2s;
+        animation-delay: 0.2s;
       }
     }
 
     .member-content {
       .member-title {
         animation-name: fadeOutUpShort;
-        animation-duration: .65s;
+        animation-duration: 0.65s;
         animation-fill-mode: both;
       }
     }
@@ -4039,7 +4041,7 @@ button {
     color: #999999;
     font-weight: 300;
     font-size: 1.4rem;
-    margin-top: .3rem;
+    margin-top: 0.3rem;
   }
 }
 
@@ -4120,7 +4122,7 @@ button {
     font-style: normal;
     font-weight: 400;
     font-size: 1.4rem;
-    padding: .5rem .75rem .2rem .75rem;
+    padding: 0.5rem 0.75rem 0.2rem 0.75rem;
     line-height: 1.5;
     margin: 0;
   }
@@ -4142,10 +4144,10 @@ button {
   margin-bottom: 3rem;
 
   h3 {
-    margin-top: .5rem;
+    margin-top: 0.5rem;
     font-weight: 400;
     font-size: 1.8rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     margin-bottom: 1.5rem;
   }
 }
@@ -4157,7 +4159,6 @@ button {
 
   li {
     position: relative;
-    padding-left: 3rem;
     margin-bottom: 1.4rem;
   }
 
@@ -4175,9 +4176,7 @@ button {
 
   i {
     display: inline-block;
-    position: absolute;
-    left: 0;
-    top: .3rem;
+    margin-right: 4px;
     font-size: 2rem;
     line-height: 1;
     color: var(--footer-icon-color);
@@ -4229,15 +4228,15 @@ button {
   font-weight: 400;
   font-size: 1.6rem;
   letter-spacing: 0;
-  margin-bottom: .8rem;
-  margin-top: -.2rem;
+  margin-bottom: 0.8rem;
+  margin-top: -0.2rem;
 }
 
 .store-subtitle {
   font-weight: 400;
   font-size: 1.4rem;
   letter-spacing: 0;
-  margin-bottom: .4rem;
+  margin-bottom: 0.4rem;
   margin-top: 3.2rem;
 }
 
@@ -4247,7 +4246,7 @@ button {
   h3 {
     font-weight: 400;
     font-size: 1.6rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
     margin-bottom: 1.6rem;
   }
 
@@ -4306,10 +4305,10 @@ button {
 .form-tab {
   .nav.nav-pills {
     color: #333333;
-    border-bottom: .1rem solid #ebebeb;
+    border-bottom: 0.1rem solid #ebebeb;
 
     .nav-item {
-      margin-bottom: -.1rem;
+      margin-bottom: -0.1rem;
 
       + {
         .nav-item {
@@ -4322,10 +4321,10 @@ button {
       text-transform: capitalize;
       font-weight: 400;
       font-size: 2rem;
-      letter-spacing: -.025em;
+      letter-spacing: -0.025em;
       color: inherit;
-      border-bottom-width: .2rem;
-      padding: .9rem 1rem;
+      border-bottom-width: 0.2rem;
+      padding: 0.9rem 1rem;
     }
 
     .nav-link.active {
@@ -4350,9 +4349,9 @@ button {
   }
 
   .form-footer {
-    padding-top: .6rem;
+    padding-top: 0.6rem;
     padding-bottom: 2rem;
-    border-bottom: .1rem solid #ebebeb;
+    border-bottom: 0.1rem solid #ebebeb;
     margin-bottom: 2rem;
 
     .btn {
@@ -4385,7 +4384,7 @@ button {
     .forgot-link {
       order: -1;
       width: 100%;
-      margin-bottom: .6rem;
+      margin-bottom: 0.6rem;
     }
   }
 }
@@ -4395,7 +4394,7 @@ button {
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 1.5;
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
 
   p {
     margin-bottom: 2.7rem;
@@ -4403,7 +4402,7 @@ button {
 
   .col-sm-6 {
     &:not(:last-child) {
-      margin-bottom: .6rem;
+      margin-bottom: 0.6rem;
     }
   }
 }
@@ -4417,8 +4416,8 @@ button {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: .85rem 1rem;
-  border: .1rem solid #ebebeb;
+  padding: 0.85rem 1rem;
+  border: 0.1rem solid #ebebeb;
   min-width: 0;
 
   i {
@@ -4458,13 +4457,13 @@ button {
     > a {
       &:not(.banner-link) {
         &:after {
-          content: '';
+          content: "";
           position: absolute;
           left: 0;
           right: 0;
           top: 0;
           bottom: 0;
-          transition: all .35s ease;
+          transition: all 0.35s ease;
           background-color: rgba(25, 25, 25, 0.3);
           z-index: 1;
           visibility: hidden;
@@ -4496,7 +4495,7 @@ button {
 
     .banner-title {
       font-size: 1.6rem;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
     .banner-subtitle {
@@ -4561,8 +4560,8 @@ button {
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 1.5;
-    letter-spacing: -.01em;
-    border-bottom: .1rem solid #ebebeb;
+    letter-spacing: -0.01em;
+    border-bottom: 0.1rem solid #ebebeb;
     padding: 0 1rem 2.4rem;
     margin-bottom: 2rem;
 
@@ -4603,7 +4602,7 @@ button {
 
 .checkout {
   label {
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
   }
 
   .form-control {
@@ -4655,7 +4654,7 @@ button {
 .checkout-discount {
   position: relative;
   max-width: 340px;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 
   label {
     position: absolute;
@@ -4668,7 +4667,7 @@ button {
     transform: translateY(-50%);
     -ms-transform: translateY(-50%);
     opacity: 1;
-    transition: all .3s;
+    transition: all 0.3s;
 
     span {
       color: var(--theme-color);
@@ -4676,7 +4675,7 @@ button {
   }
 
   .form-control {
-    padding: .55rem 1.5rem;
+    padding: 0.55rem 1.5rem;
     height: 40px;
     border-color: #dadada;
     background-color: #fff;
@@ -4691,9 +4690,9 @@ button {
 
 .summary {
   padding: 2.5rem 3rem 3rem;
-  border: .1rem dashed #d7d7d7;
+  border: 0.1rem dashed #d7d7d7;
   background-color: #f9f9f9;
-  border-radius: .3rem;
+  border-radius: 0.3rem;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
@@ -4703,7 +4702,7 @@ button {
   font-size: 1.6rem;
   letter-spacing: 0;
   padding-bottom: 1.7rem;
-  border-bottom: .1rem solid #cccccc;
+  border-bottom: 0.1rem solid #cccccc;
   margin-bottom: 2.1rem;
 }
 
@@ -4731,7 +4730,7 @@ button {
       font-weight: 400;
       font-size: 1.6rem;
       border-bottom: none;
-      padding: 0 0 .3rem;
+      padding: 0 0 0.3rem;
       vertical-align: middle;
       border-top: none;
 
@@ -4754,7 +4753,7 @@ button {
     td {
       padding: 0;
       height: 40px;
-      border-bottom: .1rem solid #ebebeb;
+      border-bottom: 0.1rem solid #ebebeb;
       vertical-align: middle;
       border-top: none;
 
@@ -4795,8 +4794,8 @@ button {
 
     td {
       height: auto;
-      padding-top: .5rem;
-      padding-bottom: .5rem;
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
       border-bottom: none;
     }
   }
@@ -4817,7 +4816,7 @@ button {
     }
 
     a {
-      margin-top: .6rem;
+      margin-top: 0.6rem;
       display: inline-block;
       font-weight: 300;
       color: #999999;
@@ -4857,7 +4856,7 @@ button {
 
     a {
       color: inherit;
-      padding: .7rem 0 .7rem 3rem;
+      padding: 0.7rem 0 0.7rem 3rem;
 
       img {
         margin-top: 1rem;
@@ -4877,31 +4876,31 @@ button {
       }
 
       &:before {
-        content: '';
+        content: "";
         width: 1.6rem;
         height: 1.6rem;
         border-radius: 50%;
         border: 0.1rem solid var(--theme-color);
         right: auto;
         left: 0;
-        top: .7rem;
+        top: 0.7rem;
         transform: translateY(0);
         -ms-transform: translateY(0);
       }
 
       &:after {
-        content: '';
+        content: "";
         display: block;
-        width: .6rem;
-        height: .6rem;
+        width: 0.6rem;
+        height: 0.6rem;
         position: absolute;
-        left: .5rem;
+        left: 0.5rem;
         top: 1.2rem;
         border-radius: 50%;
         background-color: var(--theme-color);
         visibility: visible;
         opacity: 1;
-        transition: all .3s;
+        transition: all 0.3s;
       }
     }
 
@@ -4918,10 +4917,9 @@ button {
   }
 
   .card-body {
-    padding: .4rem 0 .8rem 3rem;
+    padding: 0.4rem 0 0.8rem 3rem;
   }
 }
-
 
 .in-stock {
   color: #a6c76c;
@@ -4943,7 +4941,7 @@ button {
   line-height: 1;
   border: none;
   outline: none;
-  transition: all .35s;
+  transition: all 0.35s;
 
   &:hover {
     color: #333333;
@@ -4960,13 +4958,13 @@ button {
     border-radius: 0;
     width: 100%;
     font-size: 1.3rem;
-    padding-top: .5rem;
-    padding-bottom: .5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
   }
 
   .dropdown-item {
-    padding: .5rem 1.5rem;
-    transition: background .35s ease, color .1s ease;
+    padding: 0.5rem 1.5rem;
+    transition: background 0.35s ease, color 0.1s ease;
 
     &:active {
       color: #fff;
@@ -4990,7 +4988,6 @@ button {
   }
 }
 
-
 .cart-product-quantity {
   max-width: 160px;
 }
@@ -5011,7 +5008,7 @@ button {
   }
 
   .form-control {
-    padding: .85rem 2.6rem;
+    padding: 0.85rem 2.6rem;
     height: auto;
     border-color: #dadada;
     background-color: #fff;
@@ -5026,7 +5023,7 @@ button {
 .btn.btn-spinner {
   min-width: 0;
   color: #333333;
-  padding: 1.25rem .4rem;
+  padding: 1.25rem 0.4rem;
   font-size: 1rem;
   border: none;
   background: none;
@@ -5100,7 +5097,7 @@ button {
 
 .dashboard {
   label {
-    margin-bottom: .2rem;
+    margin-bottom: 0.2rem;
   }
 
   .form-control {
@@ -5144,11 +5141,11 @@ button {
     line-height: 1.5;
     padding: 1.4rem 0;
     color: #333333;
-    border-bottom: .1rem solid #ebebeb;
+    border-bottom: 0.1rem solid #ebebeb;
 
     &:before {
       font-family: "molla", sans-serif;
-      content: '\f274';
+      content: "\f274";
       display: block;
       font-size: 1.5rem;
       line-height: 1;
@@ -5156,7 +5153,7 @@ button {
       top: 50%;
       left: -15px;
       margin-top: -7.5px;
-      transition: all .3s;
+      transition: all 0.3s;
       opacity: 0;
     }
 
@@ -5183,11 +5180,11 @@ button {
 .card-dashboard {
   margin-bottom: 3rem;
   background-color: #f9f9f9;
-  border: .1rem solid #ebebeb;
+  border: 0.1rem solid #ebebeb;
 
   .card-title {
     letter-spacing: 0;
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 
   .card-body {
@@ -5200,7 +5197,7 @@ button {
   font-weight: 400;
   font-size: 1.8rem;
   line-height: 1.5;
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
   padding-top: 8.5rem;
   background-size: cover;
   background-position: center center;
@@ -5214,7 +5211,7 @@ button {
 }
 
 .error-title {
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
   margin-bottom: 1.4rem;
 }
 
@@ -5240,7 +5237,7 @@ button {
 
   form {
     max-width: 496px;
-    padding-top: .5rem;
+    padding-top: 0.5rem;
   }
 
   hr {
@@ -5306,14 +5303,14 @@ button {
 
 .soon-title {
   font-weight: 400;
-  letter-spacing: -.025em;
+  letter-spacing: -0.025em;
   margin-bottom: 4.2rem;
 }
 
 .coming-countdown {
   max-width: 476px;
   min-height: 53px;
-  padding-bottom: .7rem;
+  padding-bottom: 0.7rem;
 
   .countdown-section {
     font-weight: 300;
@@ -5326,7 +5323,7 @@ button {
     color: var(--theme-color);
     font-weight: 400;
     font-size: 2.4rem;
-    letter-spacing: -.025em;
+    letter-spacing: -0.025em;
   }
 }
 
@@ -5402,8 +5399,8 @@ button {
     .btn {
       font-size: 1.2rem;
       min-width: 110px;
-      padding-top: .75rem;
-      padding-bottom: .75rem;
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
     }
   }
   .intro-subtitle {
@@ -5418,24 +5415,24 @@ button {
   }
   .toolbox-layout {
     margin-top: 0;
-    margin-right: -.5rem;
+    margin-right: -0.5rem;
     margin-left: 1rem;
   }
   .pager-nav {
     flex-direction: row;
     padding-bottom: 3.5rem;
-    border-bottom: .1rem solid #ebebeb;
+    border-bottom: 0.1rem solid #ebebeb;
   }
   .pager-link {
     flex: 0 0 50%;
     max-width: 50%;
-    padding-top: .55rem;
-    padding-bottom: .55rem;
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
 
     + {
       .pager-link {
         border-top: none;
-        border-left: .1rem solid #ebebeb;
+        border-left: 0.1rem solid #ebebeb;
       }
     }
   }
@@ -5481,7 +5478,7 @@ button {
     .btn {
       font-size: 1.3rem;
       min-width: 130px;
-      padding: .95rem 1.5rem;
+      padding: 0.95rem 1.5rem;
     }
   }
   .intro-subtitle {
@@ -5513,8 +5510,8 @@ button {
       + {
         [class*="col-"] {
           &:before {
-            content: '';
-            width: .1rem;
+            content: "";
+            width: 0.1rem;
             display: block;
             height: 100%;
             position: absolute;
@@ -5561,7 +5558,7 @@ button {
     &::after {
       display: block;
       clear: both;
-      content: '';
+      content: "";
     }
 
     .float-left {
@@ -5594,7 +5591,6 @@ button {
     padding: 3.7rem 6rem 6.4rem;
   }
   .form-tab {
-
     .form-footer {
       .btn {
         margin-left: 0;
@@ -5653,8 +5649,8 @@ button {
   }
   .product-gallery-vertical {
     .row {
-      margin-left: -.5rem;
-      margin-right: -.5rem;
+      margin-left: -0.5rem;
+      margin-right: -0.5rem;
       flex-direction: row-reverse;
     }
 
@@ -5663,8 +5659,8 @@ button {
     }
 
     .product-image-gallery {
-      padding-left: .5rem;
-      padding-right: .5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
       width: auto;
       flex: 0 0 100%;
       max-width: 100%;
@@ -5673,8 +5669,8 @@ button {
     }
 
     .product-main-image {
-      padding-left: .5rem;
-      padding-right: .5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
       flex: 0 0 100%;
       max-width: 100%;
       border: 1px solid #eee;
@@ -5732,7 +5728,7 @@ button {
 
     .product-title {
       margin-bottom: 0;
-      letter-spacing: -.025em;
+      letter-spacing: -0.025em;
     }
 
     .product-price {
@@ -5923,8 +5919,8 @@ button {
     }
 
     .btn {
-      padding-top: .85rem;
-      padding-bottom: .85rem;
+      padding-top: 0.85rem;
+      padding-bottom: 0.85rem;
     }
   }
   .breadcrumb-nav {
@@ -5993,8 +5989,8 @@ button {
 
 @media screen and (max-width: 900px) {
   .fullscreen-container {
-    margin-left: -.6rem;
-    margin-right: -.6rem;
+    margin-left: -0.6rem;
+    margin-right: -0.6rem;
   }
 }
 
@@ -6102,13 +6098,11 @@ button {
 }
 
 @media screen and (max-width: 580px) {
-
   .details-action-wrapper {
     margin-left: 0;
     margin-top: 1.5rem;
   }
   .product-details-footer {
-
     .social-icons {
       margin-left: 0;
       margin-top: 1rem;
