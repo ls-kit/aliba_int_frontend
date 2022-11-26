@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductSectionSkeleton from "../../../../../skeleton/productSkeleton/ProductSectionSkeleton";
 import RecentItems from "../recentProduct/includes/RecentItems";
 import _ from "lodash";
-import {loadLovingProducts} from "../../../../../utils/Services";
+import { loadLovingProducts } from "../../../../../utils/Services";
 
 const ProductsLoving = (props) => {
    const [loading, setLoading] = useState(true);
@@ -12,8 +12,9 @@ const ProductsLoving = (props) => {
       if (_.isEmpty(products)) {
          loadLovingProducts()
             .then(response => {
-               const lovingProducts = JSON.parse(response.lovingProducts);
+               let lovingProducts = response?.lovingProducts;
                if (!_.isEmpty(lovingProducts)) {
+                  lovingProducts = JSON.parse(response?.lovingProducts);
                   setProducts(lovingProducts);
                }
                setLoading(false);
@@ -30,7 +31,7 @@ const ProductsLoving = (props) => {
                   <div className="row">
                      <div className="col-2">
                         <div className="love-left">
-                           <i className="icon-heart-o"/>
+                           <i className="icon-heart-o" />
                         </div>
                      </div>
                      <div className="col-8">
@@ -38,7 +39,7 @@ const ProductsLoving = (props) => {
                      </div>
                      <div className="col-2">
                         <div className="love-right">
-                           <i className="icon-heart-o"/>
+                           <i className="icon-heart-o" />
                         </div>
                      </div>
                   </div>
@@ -46,10 +47,10 @@ const ProductsLoving = (props) => {
             </div>
          </div>
 
-         {loading && <ProductSectionSkeleton/>}
-         {!loading && products.length > 0 && <RecentItems sectionCart={true} products={products}/>}
+         {loading && <ProductSectionSkeleton />}
+         {!loading && products.length > 0 && <RecentItems sectionCart={true} products={products} />}
 
-         <h3 className="title mt-5"/>
+         <h3 className="title mt-5" />
 
       </div>
    )

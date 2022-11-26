@@ -1,12 +1,14 @@
 import React from 'react';
-import {loadAsset} from "../../utils/Helpers";
-import {Link} from "react-router-dom";
+import { loadAsset } from "../../utils/Helpers";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Header from "./Header";
 import MobileSearchForm from "./includes/MobileSearchForm";
+import { FaRegUserCircle, FaShoppingCart } from 'react-icons/fa';
+import { FiHeart } from 'react-icons/fi';
 
 const MobileHeader = (props) => {
-   const {auth, total_wishlist, user, site_name, frontend_logo_menu} = props;
+   const { auth, total_wishlist, user, site_name, frontend_logo_menu } = props;
 
    return (
       <header className="header mobile_header sticky-top header-intro-clearance header-26">
@@ -26,7 +28,7 @@ const MobileHeader = (props) => {
                      <div className="wishlist">
                         <Link to="/wishlist" title="Wishlist">
                            <div className="icon">
-                              <i className="icon-heart-o"/>
+                              <FiHeart />
                               <span className="wishlist-count badge">{total_wishlist}</span>
                            </div>
                         </Link>
@@ -37,8 +39,18 @@ const MobileHeader = (props) => {
                            to="/checkout"
                         >
                            <div className="icon">
-                              <i className="icon-shopping-cart"/>
+                              <FaShoppingCart />
                               <span className="wishlist-count badge">{props.cartCount()}</span>
+                           </div>
+                        </Link>
+                     </div>
+                     <div className="wishlist">
+                        <Link
+                           to="/dashboard"
+                        >
+                           <div className="icon">
+                              <FaRegUserCircle />
+
                            </div>
                         </Link>
                      </div>
@@ -49,7 +61,7 @@ const MobileHeader = (props) => {
             {/* End .container */}
          </div>
 
-         <MobileSearchForm/>
+         <MobileSearchForm />
 
       </header>
    );

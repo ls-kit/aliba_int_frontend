@@ -5,6 +5,7 @@ import {prepareSearching} from "../../../store/actions/ProductAction"
 import _ from "lodash";
 import {loadPictureSearchProducts} from "../../../utils/Services";
 import {in_loading, out_loading} from "../../../utils/LoadingState";
+import { BsSearch,BsCamera } from "react-icons/bs";
 
 const SearchForm = (props) => {
    const {match, history} = props;
@@ -39,7 +40,7 @@ const SearchForm = (props) => {
 
 
    return (
-      <div className="header-search header-search-visible header-search-no-radius">
+      <div className="header-search header-search-visible">
 
          <input
             type="file"
@@ -53,23 +54,21 @@ const SearchForm = (props) => {
                <label htmlFor="search" className="sr-only">
                   Search
                </label>
+               <label className="btn" htmlFor="lg_picture_search">
+                  <BsCamera/>
+               </label>
                <input
                   type="search"
                   className="form-control"
                   id="search"
                   value={search || searchKey}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Search million products by keyword or image"
+                  placeholder="Search By Keyword"
                   autoComplete="off"
                   required
                />
-
-               <label className="btn btn-search label_btn" htmlFor="lg_picture_search">
-                  <i className="fa-camera fas"/>
-               </label>
-
-               <button className="btn btn-primary" type="submit">
-                  <i className="icon-search"/>
+               <button className="btn btn-hsearch" type="submit">
+                  <BsSearch />
                </button>
             </div>
          </form>

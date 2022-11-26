@@ -45,8 +45,8 @@
     }
     .header-center {
       flex: 0 1 auto;
-      max-width: calc((61%) - 22px);
-      width: calc((61%) - 22px);
+      max-width: calc((45%) - 25px);
+      width: calc((45%) - 25px);
     }
     .header-right {
       flex: 1 1 0;
@@ -60,17 +60,16 @@
   .header-search {
     width: 100%;
     .header-search-wrapper {
-      border-color: #fe6f03;
-      border-radius: 3px;
+      border-radius: 7px;
     }
     .search-wrapper-wide {
       width: 100%;
     }
     select {
-      height: 4.4rem;
+      height: 4rem;
     }
     .form-control {
-      height: 4.4rem;
+      height: 4rem;
       padding: 0.9rem 0.5rem 0.9rem 2rem;
     }
     .select-custom {
@@ -80,10 +79,10 @@
       }
     }
     .btn {
-      height: 4.6rem;
+      height: 4.2rem;
       max-width: 70px;
       flex: 0 0 70px;
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
 
     .label_btn {
@@ -98,7 +97,8 @@
       padding: 0.2rem 0.8rem;
       font-size: 1.9rem;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background-color: $baseHoverColor;
         color: $baseHoverFontColor;
       }
@@ -109,7 +109,7 @@
     display: flex;
   }
   .cart-dropdown {
-    padding-left: 3.6rem;
+    padding-left: 1.6rem;
     padding-right: 0.4rem;
   }
   .wishlist {

@@ -1,18 +1,19 @@
 @charset "UTF-8";
 
 @import url("https://fonts.googleapis.com/css?family=Poppins:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800");
+// @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
 
-@import './_variables';
+@import "./_variables";
 
-@import './preloader';
+@import "./preloader";
 
-@import './includes/general';
-@import './includes/headers';
-@import './includes/menu';
-@import './includes/verticalMenu';
-@import './includes/StickyHeader';
-@import './includes/mobileMenu';
-@import './includes/footer';
+@import "./includes/general";
+@import "./includes/headers";
+@import "./includes/menu";
+@import "./includes/verticalMenu";
+@import "./includes/StickyHeader";
+@import "./includes/mobileMenu";
+@import "./includes/footer";
 
 // @import './headerSchedule/header2';
 // @import './headerSchedule/header3';
@@ -23,22 +24,20 @@
 // @import './headerSchedule/header8';
 // @import './headerSchedule/header9';
 // @import './headerSchedule/header10';
-@import './headerSchedule/header26';
+@import "./headerSchedule/header26";
 
-@import './includes/skinStructure';
-@import './includes/elements';
-@import './includes/pages';
-@import './includes/plugins';
+@import "./includes/skinStructure";
+@import "./includes/elements";
+@import "./includes/pages";
+@import "./includes/plugins";
 
-@import './elements/elements';
-@import './pages/pages';
-@import './includes/spacingAndHelpers';
+@import "./elements/elements";
+@import "./pages/pages";
+@import "./includes/spacingAndHelpers";
 
-@import './custom';
-@import './paymentStatus';
+@import "./custom";
+@import "./paymentStatus";
 
-@import './swalCustomization';
+@import "./swalCustomization";
 
-@import './responsive';
-
-
+@import "./responsive";

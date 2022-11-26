@@ -1,18 +1,20 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import SearchForm from "./includes/SearchForm";
-import {loadAsset} from "../../utils/Helpers";
+import { loadAsset } from "../../utils/Helpers";
+import { FaShoppingCart, FaRegUserCircle } from "react-icons/fa";
+import { FiHeart } from "react-icons/fi";
 
 const Header = (props) => {
-   const {auth, total_wishlist, user, site_name, frontend_logo_menu} = props;
+   const { auth, total_wishlist, user, site_name, frontend_logo_menu } = props;
 
 
    return (
       <header className="header header-intro-clearance header-26">
 
          <div className="header-middle">
-            <div className="container">
+            <div className="container-fluid">
                <div className="header-left">
                   <a href="/" className="logo">
                      <img
@@ -23,29 +25,30 @@ const Header = (props) => {
                </div>
 
                <div className="header-center">
-                  <SearchForm/>
+                  <SearchForm />
                </div>
 
                <div className="header-right">
                   <div className="header-dropdown-link">
                      <div className="wishlist">
-                        <Link to="/wishlist" title="Wishlist">
-                           <div className="icon">
-                              <i className="icon-heart-o"/>
-                              <span className="wishlist-count badge">{total_wishlist}</span>
-                           </div>
-                        </Link>
-                     </div>
-                     <div className="wishlist">
                         <Link
                            to="/checkout"
                         >
                            <div className="icon">
-                              <i className="icon-shopping-cart"/>
+                              <FaShoppingCart />
                               <span className="wishlist-count badge">{props.cartCount()}</span>
                            </div>
                         </Link>
                      </div>
+                     <div className="wishlist">
+                        <Link to="/wishlist" title="Wishlist">
+                           <div className="icon">
+                              <FiHeart />
+                              <span className="wishlist-count badge">{total_wishlist}</span>
+                           </div>
+                        </Link>
+                     </div>
+
                      {
                         auth.isAuthenticated ?
                            <div className="dropdown cart-dropdown">
@@ -57,10 +60,11 @@ const Header = (props) => {
                                  aria-haspopup="true"
                                  aria-expanded="false"
                                  data-display="static"
+                                 id="cd1"
                               >
                                  <div className="icon">
-                                    <i className="icon-user"/>
-                                    <span className="d-md-inline d-none nav-item-text">{user.name || "Customer"}</span>
+                                    <FaRegUserCircle />
+                                    <span className="ml-2 fw-bold d-md-inline d-none nav-item-text">{user.name || "Customer"}</span>
                                  </div>
                               </Link>
                               <div className="dropdown-menu dropdown-menu-right nav_customer_menus">
@@ -77,10 +81,11 @@ const Header = (props) => {
                                  to="/Login"
                                  className="dropdown-toggle"
                                  role="button"
+                                 id="cd"
                               >
                                  <div className="icon">
-                                    <i className="icon-user"/>
-                                    <span className="d-md-inline d-none nav-item-text">Login</span>
+                                    <FaRegUserCircle />
+                                    <span className="ml-2 fw-bold d-md-inline d-none nav-item-text">Login</span>
                                  </div>
                               </Link>
                            </div>
