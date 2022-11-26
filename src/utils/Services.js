@@ -189,9 +189,12 @@ export const loadTextSearchProducts = async (searchKey, offset, limit) => {
 
 
 export const loadPictureSearchProducts = async (data) => {
+   // data = Object.fromEntries(data);
+   console.log(data);
    return await axiosFileUpload
       .post(`/search-picture`, data)
       .then((response) => {
+         console.log(response);
          const responseData = response.data;
          if (!_.isEmpty(responseData)) {
             return responseData.data;
@@ -205,6 +208,7 @@ export const loadPictureSearchProducts = async (data) => {
 
 
 export const loadPictureSearchProductsData = async (search_id, offset, limit) => {
+   console.log(search_id);
    return await axiosInstance
       .post(`/get-picture-result/${search_id}`, {offset: offset, limit: limit})
       .then((response) => {
