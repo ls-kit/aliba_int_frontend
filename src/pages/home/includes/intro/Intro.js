@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import BrowseCategories from "./includes/BrowseCategories";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { loadBanners } from "../../../../store/actions/InitAction";
 import OwlCarousel from "react-owl-carousel";
 import { loadAsset } from "../../../../utils/Helpers";
 import BannerSkeleton from "../../../../skeleton/BannerSkeleton";
 import SSlider from "./slick/SSlider";
 import offers from "../../../../assets/images/offers.png";
+import review from "../../../../assets/images/review.png";
+import arr1 from "../../../../assets/images/arr1.png";
+import arr2 from "../../../../assets/images/arr2.png";
 
 const Intro = (props) => {
   const { banners } = props;
@@ -32,14 +35,14 @@ const Intro = (props) => {
   }, [loading]);
 
   return (
-    <div className='intro-section'>
+    <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
       <div className='mt-0 mt-md-2'>
         <div className='row'>
           <div className='col-lg-2 cols d-none d-lg-block'>
             <BrowseCategories />
           </div>
           <div className='col-lg-10 cols col-md-12 col-12 mb-md-0 mb-2'>
-            <div className='bannerSection'>
+            <div className='bannerSection my-2'>
               <div className=''>
                 <img
                   className='slImg'
@@ -52,6 +55,38 @@ const Intro = (props) => {
                 <a aria-label='Offers' className='promotions' href='/offers'>
                   <img src={offers} alt='offers' />
                 </a>
+              </div>
+            </div>
+            <div className='homeBoxContainer my-2'>
+              <Link className='homeComp' to='/'>
+                <img src={review} alt='' />
+                <h3>হ্যাপি কাস্টমার রিভিউ</h3>
+                <button className='bt'>সেমিনার দেখুন</button>
+              </Link>
+              <Link className='homeComp' to='/'>
+                <img src={review} alt='' />
+                <h3>হ্যাপি কাস্টমার রিভিউ</h3>
+                <button className='bt'>সেমিনার দেখুন</button>
+              </Link>
+              <Link className='homeComp' to='/'>
+                <img src={review} alt='' />
+                <h3>হ্যাপি কাস্টমার রিভিউ</h3>
+                <button className='bt'>সেমিনার দেখুন</button>
+              </Link>
+              <Link className='homeComp' to='/'>
+                <img src={review} alt='' />
+                <h3>হ্যাপি কাস্টমার রিভিউ</h3>
+                <button className='bt'>সেমিনার দেখুন</button>
+              </Link>
+            </div>
+
+            <div className='m-card mt05'>
+              <div className='topCatContainer  flex flexRow flexBetween'>
+                <h4 className='bold topTitle'>TOP CATEGORIES</h4>
+                <div className='flex'>
+                  <img className='topAr1' src={arr1} alt='' />
+                  <img className='topAr2' src={arr2} alt='' />
+                </div>
               </div>
             </div>
 

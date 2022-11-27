@@ -405,6 +405,36 @@ a:focus {
   position: relative;
 }
 
+// my styles
+.m-card {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 4px;
+}
+.mt05 {
+  margin-top: 0.5rem !important;
+}
+.flex {
+  display: flex;
+}
+.flexRow {
+  flex-direction: row;
+}
+.flexCol {
+  flex-direction: column;
+}
+.flexBetween {
+  display: flex;
+  justify-content: space-between;
+}
+.flexCenter {
+  display: flex;
+  justify-content: center;
+}
+.bold {
+  font-weight: 700;
+}
+
 // banner
 .bannerSection {
   display: grid;
@@ -424,6 +454,79 @@ a:focus {
 .slImg,
 .promotions img {
   height: 470px;
+}
+
+// home box
+.homeBoxContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin-top: 0.75rem;
+  grid-gap: 0.65rem;
+  gap: 0.65rem;
+  width: 100%;
+  border-radius: 4px;
+}
+.homeComp {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #fff;
+  padding: 2rem 1rem;
+  border-radius: 4px;
+  align-items: center;
+  img {
+    flex: 1 1;
+    width: 128px;
+    margin-bottom: 0.5rem;
+  }
+  h3 {
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+  button {
+    margin-top: 1rem;
+  }
+}
+
+.bt {
+  height: 36px;
+  border: none;
+  padding: 0 1rem;
+  border-radius: 4px;
+  background-image: linear-gradient(90deg, #ecd38e 50%, #ffda72);
+  color: #000;
+  cursor: pointer;
+}
+
+// category
+.topCatContainer {
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid rgb(238, 238, 238);
+}
+.topAr1 {
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  border-radius: 16px;
+  justify-content: center;
+  cursor: pointer;
+}
+.topAr2 {
+  width: 28px;
+  height: 28px;
+  padding: 6px;
+  align-items: center;
+  background-color: rgb(0, 0, 0);
+  border-radius: 16px;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.topTitle {
+  font-size: 15px;
+  margin: 0.75rem 0 0.475rem;
 }
 
 @media only screen and (max-width: 1700px) {
@@ -455,5 +558,29 @@ a:focus {
   }
   .slImg {
     height: auto;
+  }
+  .homeComp h3 {
+    font-size: 18px;
+    text-align: center;
+  }
+  .homeBoxContainer button {
+    font-size: 12px;
+    width: 140px;
+    height: 32px;
+    padding: 0 0.5rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .c-card {
+    border-radius: 0 !important;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .homeBoxContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 0.75rem;
+    grid-gap: 0.5rem;
+    gap: 0.5rem;
   }
 }
