@@ -528,6 +528,44 @@ a:focus {
   font-size: 15px;
   margin: 0.75rem 0 0.475rem;
 }
+.responsiveOverflow {
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  width: 100%;
+  display: flex;
+  overflow: auto;
+}
+.sellerCategoryContainer {
+  display: inline-flex;
+  .category {
+    color: #000;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    border-right: 1px solid rgb(238, 238, 238);
+    padding: 0.5rem 1rem;
+    width: 156px;
+    .cat-img {
+      width: 40px;
+      height: 80px;
+      object-fit: contain;
+    }
+    span {
+      height: 48px;
+      text-align: center;
+      font-size: 13px;
+      text-transform: capitalize;
+      font-weight: 600;
+      word-break: keep-all;
+    }
+  }
+}
+
+// responsiveness
 
 @media only screen and (max-width: 1700px) {
   .bannerSection {

@@ -17,10 +17,10 @@ const BrowseCategories = (props) => {
 
   return (
     <nav className='side-nav'>
-      <div className='sidenav-title letter-spacing-normal font-size-normal d-flex justify-content-xl-between align-items-center bg-primary justify-content-center text-truncate'>
+      {/* <div className='sidenav-title letter-spacing-normal font-size-normal d-flex justify-content-xl-between align-items-center bg-primary justify-content-center text-truncate'>
         Categories
         <i className='icon-bars float-right h5 text-white m-0 d-none d-xl-block' />
-      </div>
+      </div> */}
       <ul className='menu-vertical sf-arrows sf-js-enabled' style={{ touchAction: "pan-y" }}>
         {parents.length > 0 &&
           parents.map((parent, index) => {
