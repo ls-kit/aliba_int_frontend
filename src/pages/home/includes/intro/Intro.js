@@ -35,10 +35,10 @@ const Intro = (props) => {
     <div className='intro-section'>
       <div className='mt-0 mt-md-2'>
         <div className='row'>
-          <div className='col-lg-3 cols d-none d-lg-block'>
+          <div className='col-lg-2 cols d-none d-lg-block'>
             <BrowseCategories />
           </div>
-          <div className='col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2'>
+          <div className='col-lg-10 cols col-md-12 col-12 mb-md-0 mb-2'>
             <div className='bannerSection'>
               <div className=''>
                 <img
