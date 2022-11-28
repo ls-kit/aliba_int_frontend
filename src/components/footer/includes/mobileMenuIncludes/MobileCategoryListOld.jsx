@@ -14,13 +14,29 @@ export const ParentListItem = (props) => {
 
    if (allChildren.length > 0) {
       return <li key={parent.id}>
-          {
+         <div className="menuBlock">
+            <NavLink to={`/shop/${parent.slug}`}>
+               {
+                  parent.icon ?
+                     <img src={loadAsset(parent.icon)}
+                          style={{width: "22px", display: "inline", marginRight: "1rem"}}
+                          alt={parent.name}/>
+                     :
+                     <i className="icon-laptop" style={{marginRight: "1rem"}}/>
+               }
+               <span className="btn_menu_close">{parent.name}</span>
+            </NavLink>
+            <span className="mmenu-btn"/>
+         </div>
+         <ul>
+            {
                allChildren.map((child1, index) =>
                   <li key={'m_' + index}>
                      {child1.children_count ?
                         <>
                            <div className="menuBlock">
                               <NavLink to={`/shop/${child1.slug}`}>
+                                    
                                  <span className="btn_menu_close"> {child1.name} </span>
                               </NavLink>
                               <span className="mmenu-btn"/>
@@ -44,6 +60,7 @@ export const ParentListItem = (props) => {
                   </li>
                )
             }
+         </ul>
       </li>
    }
 

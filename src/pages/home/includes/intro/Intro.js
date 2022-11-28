@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { loadBanners } from "../../../../store/actions/InitAction";
 import OwlCarousel from "react-owl-carousel";
-import { loadAsset } from "../../../../utils/Helpers";
+import { filter_parent_cats, loadAsset } from "../../../../utils/Helpers";
 import BannerSkeleton from "../../../../skeleton/BannerSkeleton";
 import SSlider from "./slick/SSlider";
 import offers from "../../../../assets/images/offers.png";
@@ -16,14 +16,16 @@ import order from "../../../../assets/images/order.png";
 import arr1 from "../../../../assets/images/arr1.png";
 import arr2 from "../../../../assets/images/arr2.png";
 import cateImg from "../../../../assets/images/TopCat/shose.png";
+import TopCategory from "./topCategory/TopCategory";
 
 const Intro = (props) => {
-  const { banners } = props;
+  const { banners, categories, category_loading } = props;
+
   const ref = useRef(null);
   const scroll = (scrollOffset) => {
     ref.current.scrollLeft += scrollOffset;
   };
-
+  const parents = filter_parent_cats(categories);
   const imageArr = [
     "https://wholesalecart.com/static/media/cashback_offer.6d82c6ee.jpg",
     "https://wholesalecart.com/static/media/shipping_charge_banner_after.32f355fb.jpg",
@@ -106,12 +108,7 @@ const Intro = (props) => {
           </div>
           <div ref={ref} className='responsiveOverflow'>
             <div className='sellerCategoryContainer'>
-              {catArr.map((cat, index) => (
-                <Link key={index} className='category' to='/'>
-                  <img className='cat-img' src={cateImg} alt='' />
-                  <span>Shoes</span>
-                </Link>
-              ))}
+              <TopCategory categories={categories} category_loading={category_loading} parents={parents} />
             </div>
           </div>
         </div>
@@ -161,6 +158,8 @@ Intro.propTypes = {
 
 const mapStateToProps = (state) => ({
   banners: state.INIT.banners,
+  categories: state.INIT.categories,
+  category_loading: state.LOADING.category_loading,
 });
 
 export default connect(mapStateToProps, { loadBanners })(withRouter(Intro));

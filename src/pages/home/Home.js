@@ -2,7 +2,7 @@ import React from "react";
 import Intro from "./includes/intro/Intro";
 import ProductsLoving from "./includes/Products/productsLoving/ProductsLoving";
 // import IconBoxes from './includes/iconBoxes/IconBoxes'
-// import PopularCategory from './includes/popularCategory/PopularCategory'
+import PopularCategory from "./includes/popularCategory/PopularCategory";
 // import BrandProduct from './includes/brand/brandProduct/BrandProduct'
 // import Blog from './includes/blog/Blog'
 // import LandingPopup from './includes/Products/TodayProducts/TodayProducts'
@@ -18,6 +18,7 @@ import SectionsTwo from "./sections/SectionsTwo";
 import SectionsThree from "./sections/SectionsThree";
 import SectionsFour from "./sections/SectionsFour";
 import SectionsFive from "./sections/SectionsFive";
+import { useState } from "react";
 
 const Home = (props) => {
   const { general } = props;
@@ -26,18 +27,24 @@ const Home = (props) => {
   const section_three_active = getSetting(general, "section_three_active");
   const section_four_active = getSetting(general, "section_four_active");
   const section_five_active = getSetting(general, "section_five_active");
+  const [style, setStyle] = useState("none");
 
   return (
     <main className='main' style={{ backgroundColor: "#fafafa" }}>
       <Intro />
       {/*<IconBoxes/>*/}
-      {/*<PopularCategory/>*/}
+      {/* <PopularCategory /> */}
 
       {section_one_active === "enable" && <SectionsOne general={general} />}
       {section_two_active === "enable" && <SectionsTwo general={general} />}
       {section_three_active === "enable" && <SectionsThree general={general} />}
       {section_four_active === "enable" && <SectionsFour general={general} />}
-      {section_five_active === "enable" && <SectionsFive general={general} />}
+      {section_five_active === "enable" && <SectionsFive style={style} general={general} />}
+      <div className='text-center'>
+        <button className='btn-default' onClick={() => setStyle("block")}>
+          Load More
+        </button>
+      </div>
 
       <ProductsLoving />
       {/*<RecentProduct/>*/}
