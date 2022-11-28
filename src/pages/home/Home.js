@@ -21,7 +21,6 @@ import SectionsFive from "./sections/SectionsFive";
 
 const Home = (props) => {
   const { general } = props;
-  console.log("general", general);
   const section_one_active = getSetting(general, "section_one_active");
   const section_two_active = getSetting(general, "section_two_active");
   const section_three_active = getSetting(general, "section_three_active");
@@ -40,7 +39,7 @@ const Home = (props) => {
       {section_four_active === "enable" && <SectionsFour general={general} />}
       {section_five_active === "enable" && <SectionsFive general={general} />}
 
-      {/* <ProductsLoving /> */}
+      <ProductsLoving />
       {/*<RecentProduct/>*/}
       {/*<BrandProduct/>*/}
       {/*<Blog/>*/}

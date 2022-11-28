@@ -69,7 +69,7 @@ const Intro = (props) => {
   }, [loading]);
 
   return (
-    <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
+    <div className='intro-section'>
       <div className='mb-md-0 mb-2 mt-0 mt-md-2'>
         <div className='bannerSection my-2'>
           <div className=''>
@@ -86,7 +86,7 @@ const Intro = (props) => {
             </a>
           </div>
         </div>
-        <div className='homeBoxContainer my-2'>
+        <div className='homeBoxContainer my-3'>
           {topCardArr.map((cart) => (
             <Link className='homeComp' to={cart.redirect} key={cart.id}>
               <img className='mb-4' src={cart.imgUrl} alt='' />

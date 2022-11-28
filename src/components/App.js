@@ -16,10 +16,13 @@ const App = () => {
       <ErrorHandling />
       <div className='page-wrapper'>
         <div className='row'>
-          <div className='col-lg-2 cols d-none d-lg-block'>
+          <div className='col-lg-2 cols d-none d-lg-block' style={{ backgroundColor: "#fff" }}>
             <BrowseCategories />
           </div>
-          <div className='col-lg-10 cols col-md-12 col-12 mb-md-0 mb-2'>
+          <div
+            className='col-lg-10 cols col-md-12 col-12 mb-md-0 mb-2'
+            style={{ backgroundColor: "#eaeaea" }}
+          >
             <Routing />
             <Footer />
           </div>
