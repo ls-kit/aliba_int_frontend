@@ -58,6 +58,8 @@
     }
   }
   .header-search {
+    border: 1px solid $baseColor;
+    border-radius: 7px;
     width: 100%;
     .header-search-wrapper {
       border-radius: 7px;
@@ -89,6 +91,12 @@
       margin-bottom: 0;
       cursor: pointer;
       border-right: 2px solid #fff;
+
+      &:hover,
+      &:focus {
+        background-color: $baseHoverColor;
+        color: $baseHoverFontColor;
+      }
     }
 
     .btn-search {

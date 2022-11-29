@@ -48,16 +48,20 @@ const MegaMenuItem = (props) => {
             className='sf-with-ul text-dark'
             key={index}
           >
-            {child.icon ? (
-              <img
-                src={loadAsset(child.icon)}
-                style={{ width: "22px", display: "inline" }}
-                alt={child.name}
-              />
-            ) : (
-              <i className='icon-laptop' />
-            )}
-            {child.name}
+            <div className='d-flex align-items-center'>
+              <div>
+                {child.icon ? (
+                  <img
+                    src={loadAsset(child.icon)}
+                    style={{ width: "22px", display: "inline" }}
+                    alt={child.name}
+                  />
+                ) : (
+                  <i className='icon-laptop' />
+                )}
+              </div>
+              <div>{child.name}</div>
+            </div>
           </Link>
         ))}
       {/* <div className='megamenu'>

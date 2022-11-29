@@ -71,9 +71,9 @@ const Intro = (props) => {
   }, [loading]);
 
   return (
-    <div className='intro-section'>
+    <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
       <div className='mb-md-0 mb-2 mt-0 mt-md-2'>
-        <div className='bannerSection my-2'>
+        <div className='bannerSection mb-2'>
           <div className=''>
             <img
               className='slImg'
@@ -88,7 +88,7 @@ const Intro = (props) => {
             </a>
           </div>
         </div>
-        <div className='homeBoxContainer my-3'>
+        <div className='homeBoxContainer my-2'>
           {topCardArr.map((cart) => (
             <Link className='homeComp' to={cart.redirect} key={cart.id}>
               <img className='mb-4' src={cart.imgUrl} alt='' />
@@ -98,7 +98,7 @@ const Intro = (props) => {
           ))}
         </div>
 
-        <div className='m-card mt05'>
+        <div className='m-card my-2'>
           <div className='topCatContainer  flex flexRow flexBetween'>
             <h4 className='bold topTitle'>TOP CATEGORIES</h4>
             <div className='flex'>

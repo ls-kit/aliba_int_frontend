@@ -1,20 +1,21 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import ProductBody from "./productBody/ProductBody";
 import ProductDetailsTab from "./includes/ProductDetailsTab";
 import RelatedProduct from "../reletedProduct/RelatedProduct";
 import Breadcrumb from "../../breadcrumb/Breadcrumb";
-import {loadProductDetails} from "../../../store/actions/ProductAction";
+import { loadProductDetails } from "../../../store/actions/ProductAction";
 import My404Component from "../../404/My404Component";
-import {characterLimiter, goPageTop} from "../../../utils/Helpers";
+import { characterLimiter, goPageTop } from "../../../utils/Helpers";
 import ProductDetailsSkeleton from "../../../skeleton/productSkeleton/ProductDetailsSkeleton";
-import {ConfiguredItems, find_product_from_state} from "../../../utils/CartHelpers";
+import { ConfiguredItems, find_product_from_state } from "../../../utils/CartHelpers";
+import SameSellerProducts from "./includes/SameSellerProducts";
 
 const ProductSingle = (props) => {
-  const {match, general, details_loading, details, cartConfigured} = props;
+  const { match, general, details_loading, details, cartConfigured } = props;
   const params = !_.isEmpty(match) ? match.params : {};
   const item_id = !_.isEmpty(params) ? params.item_id : "";
 
@@ -39,39 +40,40 @@ const ProductSingle = (props) => {
   }, [item_id]);
 
   if (details_loading) {
-    return <ProductDetailsSkeleton/>;
+    return <ProductDetailsSkeleton />;
   }
 
   if (_.isEmpty(product) && !details_loading) {
-    return '';
+    return "";
     // return <My404Component/>;
   }
 
   return (
-      <div className="bg-gray main">
-        <div className="container">
-          <Breadcrumb
-              current={characterLimiter(product.Title, 20)}
-              collections={[{name: "Product"}]}
-          />
+    <div className='bg-gray main'>
+      <div className='container'>
+        <Breadcrumb current={characterLimiter(product.Title, 20)} collections={[{ name: "Product" }]} />
 
-          <div className="row">
-            <div className="col-md-9">
-              <ProductBody product={product} ConfiguredItems={ConfigItems} general={general} cartConfigured={cartConfigured}/>
-            </div>
-            <div className="col-md-3 d-none d-lg-block">
-              <RelatedProduct item_id={item_id}/>
-            </div>
+        <div className='row'>
+          <div className='col-md-9'>
+            <ProductBody
+              product={product}
+              ConfiguredItems={ConfigItems}
+              general={general}
+              cartConfigured={cartConfigured}
+            />
           </div>
-
-          <ProductDetailsTab product={product}/>
-
-          <div className="col-md-12 d-block d-lg-none">
-            <RelatedProduct item_id={item_id}/>
+          <div className='col-md-3 d-none d-lg-block'>
+            <RelatedProduct item_id={item_id} />
           </div>
+        </div>
+        <SameSellerProducts />
+        <ProductDetailsTab product={product} />
 
+        <div className='col-md-12 d-block d-lg-none'>
+          <RelatedProduct item_id={item_id} />
         </div>
       </div>
+    </div>
   );
 };
 
@@ -85,9 +87,7 @@ ProductSingle.propTypes = {
 const mapStateToProps = (state) => ({
   general: JSON.parse(state.INIT.general),
   details_loading: state.LOADING.product_details_loading,
-  details: state.PRODUCTS.product_details
+  details: state.PRODUCTS.product_details,
 });
 
-export default connect(mapStateToProps, {loadProductDetails})(
-    withRouter(ProductSingle)
-);
+export default connect(mapStateToProps, { loadProductDetails })(withRouter(ProductSingle));
