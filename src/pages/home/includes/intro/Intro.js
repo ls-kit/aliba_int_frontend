@@ -20,6 +20,7 @@ import TopCategory from "./topCategory/TopCategory";
 
 const Intro = (props) => {
   const { banners, categories, category_loading } = props;
+  console.log("banners", banners);
 
   const ref = useRef(null);
   const scroll = (scrollOffset) => {
@@ -73,20 +74,53 @@ const Intro = (props) => {
   return (
     <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
       <div className='mb-md-0 mb-2 mt-0 mt-md-2'>
-        <div className='bannerSection mb-2'>
+        {/* <div className='bannerSection mb-2'>
           <div className=''>
             <img
               className='slImg'
               src='https://wholesalecart.com/static/media/cashback_offer.6d82c6ee.jpg'
               alt=''
             />
-            {/* <SSlider imageArr={imageArr} /> */}
+            <SSlider imageArr={imageArr} />
           </div>
           <div className='offer-box'>
             <a aria-label='Offers' className='promotions' href='/offers'>
               <img src={offers} alt='offers' />
             </a>
           </div>
+        </div> */}
+        <div className='intro-slider-container'>
+          {banners.length > 0 && !loading ? (
+            <OwlCarousel
+              className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
+              loop={false}
+              margin={0}
+              dots={false}
+              nav={false}
+              autoplayTimeout={10000}
+              responsive={{
+                0: { items: 1 },
+                480: { items: 1 },
+                576: { items: 1 },
+                768: { items: 1 },
+                992: { items: 1 },
+                1200: { items: 1 },
+              }}
+            >
+              {banners.map((banner) => (
+                <div
+                  key={banner.id}
+                  className='intro-slide bg-image d-flex align-items-center'
+                  style={{
+                    backgroundColor: "#e9e9e9",
+                    backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
+                  }}
+                ></div>
+              ))}
+            </OwlCarousel>
+          ) : (
+            <BannerSkeleton />
+          )}
         </div>
         <div className='homeBoxContainer my-2'>
           {topCardArr.map((cart) => (
@@ -112,40 +146,6 @@ const Intro = (props) => {
             </div>
           </div>
         </div>
-
-        {/* <div className='intro-slider-container'>
-              {banners.length > 0 && !loading ? (
-                <OwlCarousel
-                  className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
-                  loop={false}
-                  margin={0}
-                  dots={false}
-                  nav={false}
-                  autoplayTimeout={10000}
-                  responsive={{
-                    0: { items: 1 },
-                    480: { items: 1 },
-                    576: { items: 1 },
-                    768: { items: 1 },
-                    992: { items: 1 },
-                    1200: { items: 1 },
-                  }}
-                >
-                  {banners.map((banner) => (
-                    <div
-                      key={banner.id}
-                      className='intro-slide bg-image d-flex align-items-center'
-                      style={{
-                        backgroundColor: "#e9e9e9",
-                        backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
-                      }}
-                    ></div>
-                  ))}
-                </OwlCarousel>
-              ) : (
-                <BannerSkeleton />
-              )}
-            </div> */}
       </div>
     </div>
   );

@@ -1,6 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import _ from "lodash";
+import { getProductPageCard } from "../../../../../utils/Services";
+import parse from "html-react-parser";
+import ProductSkeleton from "../../../../../skeleton/productSkeleton/ProductSkeleton";
+import CardSkelton from "../../../../../skeleton/productSkeleton/CardSkelton";
 
 const AppOffer = () => {
+  const [loading, setLoading] = useState(true);
+  const [cardRespose, setCardRespose] = useState([]);
+  useEffect(() => {
+    cardContent();
+  }, []);
+
+  const cardContent = async () => {
+    const response = await getProductPageCard("card_one");
+    if (!_.isEmpty(response)) {
+      setCardRespose(response);
+    }
+    setLoading(false);
+  };
+  // console.log("cardRespose", cardRespose);
+
+  const content = `${cardRespose?.content}`;
+
+  if (loading) return <CardSkelton />;
+
   return (
     <div
       className='cardHighlight saleChinaOff mb05'
@@ -9,11 +33,12 @@ const AppOffer = () => {
         padding: "0.75rem 1rem",
       }}
     >
-      <div className='app-in '>
-        <h3 style={{ fontWeight: "bold", margin: "0.5rem 0px 0.375rem" }}>3% Cashback Offer</h3>
+      <div className='app-in'>
+        {parse(content)}
+        {/* <h3 style={{ fontWeight: "bold", margin: "0.5rem 0px 0.375rem" }}>3% Cashback Offer</h3>
         <p class='mbMobile mb05' style={{ fontSize: "14px", marginRight: "1rem" }}>
           বিকাশ অথবা ব্যাংকে পেমেন্ট করলেই পাচ্ছেন ৩% ইনস্ট্যান্ট ক্যাশব্যাক, যত খুশি ততবার।
-        </p>
+        </p> */}
         <a
           href='https://play.google.com/store/apps/details?id=com.wholesalecartbd.mobileapp'
           target='_blank'

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LoadAttributes from "./includes/LoadAttributes";
 import ProductSummary from "./includes/ProductSummary";
 import MediaPart from "./includes/MediaPart";
@@ -23,11 +23,14 @@ import SingleAttributeGroup from "./includes/SingleAttributeGroup";
 import AppOffer from "./includes/AppOffer";
 import AirFilter from "./includes/AirFilter";
 import { FaRegCopy } from "react-icons/fa";
+import PriceRange from "./includes/PriceRange";
+import { loadBulkProductsPrice } from "../../../../utils/Services";
+import CardSkelton from "../../../../skeleton/productSkeleton/CardSkelton";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems } = props;
   const product_id = !_.isEmpty(product) ? product.Id : 0;
-
+  const totalQty = cartConfigured[0] ? cartConfigured[0]?.totalQty : 0;
   const firstConfigurators = findFirstConfigurators(ConfiguredItems);
 
   const ConfigAttributes = ConfiguratorAttributes(product);
@@ -36,6 +39,18 @@ const ProductBody = (props) => {
   let activeProduct = findProductCartFromState(cartConfigured, product_id);
 
   const [activeImg, setActiveImg] = useState("");
+  const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    bulkPriceQuantityRange(product_id);
+  }, [product_id]);
+
+  const bulkPriceQuantityRange = async (product_id) => {
+    const response = await loadBulkProductsPrice(product_id);
+    setBulkPriceQuantity(response.bulkPrices.Configuration.QuantityRanges);
+    setLoading(false);
+  };
 
   const alertForQuantity = (e) => {
     e.preventDefault();
@@ -51,6 +66,14 @@ const ProductBody = (props) => {
     props.productAddToWishlist(product);
   };
 
+  // decide what is render for bulk product
+  let bulkProductContent = null;
+  if (loading) {
+    bulkProductContent = <CardSkelton />;
+  }
+  if (!loading && bulkPriceQuantity.length > 0) {
+    bulkProductContent = <PriceRange totalQty={totalQty} bulkPriceQuantity={bulkPriceQuantity} />;
+  }
   return (
     <div className='product-details-top'>
       <h1
@@ -74,6 +97,7 @@ const ProductBody = (props) => {
         <div className='col-md-6'>
           <div className='product-details'>
             <AppOffer />
+            {bulkProductContent}
             {_.isArray(firstConfigurators) &&
               firstConfigurators.map((singleConfig, index) => (
                 <SingleAttributeGroup
@@ -82,7 +106,6 @@ const ProductBody = (props) => {
                   ConfigAttributes={ConfigAttributes}
                 />
               ))}
-
             <LoadAttributes
               setActiveImg={setActiveImg}
               product={product}

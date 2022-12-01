@@ -13,6 +13,7 @@ import { characterLimiter, goPageTop } from "../../../utils/Helpers";
 import ProductDetailsSkeleton from "../../../skeleton/productSkeleton/ProductDetailsSkeleton";
 import { ConfiguredItems, find_product_from_state } from "../../../utils/CartHelpers";
 import SameSellerProducts from "./includes/SameSellerProducts";
+import { loadBulkProductsPrice } from "../../../utils/Services";
 
 const ProductSingle = (props) => {
   const { match, general, details_loading, details, cartConfigured } = props;
@@ -66,9 +67,8 @@ const ProductSingle = (props) => {
             <RelatedProduct item_id={item_id} />
           </div>
         </div>
-        <SameSellerProducts />
+        <SameSellerProducts vendorId={product.VendorId} />
         <ProductDetailsTab product={product} />
-
         <div className='col-md-12 d-block d-lg-none'>
           <RelatedProduct item_id={item_id} />
         </div>

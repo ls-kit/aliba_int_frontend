@@ -8,6 +8,7 @@ import RecentItems from "../includes/Products/recentProduct/includes/RecentItems
 
 const SectionsOne = (props) => {
   const { general } = props;
+
   const section_one_title = getSetting(general, "section_one_title");
   const section_one_title_image = getSetting(general, "section_one_title_image");
   const section_one_visible_title = getSetting(general, "section_one_visible_title");
@@ -33,6 +34,8 @@ const SectionsOne = (props) => {
       });
     }
   }, []);
+
+  console.log("products from section one", products);
 
   return (
     <div className='container deal-section'>
