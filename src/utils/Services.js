@@ -269,7 +269,7 @@ export const getFooterBrand = async () => {
   });
 };
 export const getHomePageCards = async () => {
-  return await axiosInstance.get(`/get-homepage-cards`).then((res) => {
+  return await axiosInstance.get(`/get-homepage-cards`, { offset: 1, limit: 16 }).then((res) => {
     const resData = res.data;
     if (!_.isEmpty(resData)) {
       return resData.data;

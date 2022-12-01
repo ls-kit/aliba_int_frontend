@@ -13,7 +13,7 @@ const PriceRange = (props) => {
           Price: { Base },
         } = pqR;
         return (
-          <div className={`range ${MinQuantity <= totalQty && "rangeActive"}`} key={index}>
+          <div className={`range`} key={index}>
             <span className='amount'>৳ {Base}</span>
             <div className='piece'>{MinQuantity} or more</div>
           </div>

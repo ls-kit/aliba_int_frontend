@@ -320,12 +320,7 @@ const ProductBody = (props) => {
 
             <div className='product-details-footer'>
               <div className='social-icons social-icons-sm'>
-                <a
-                  href={`https://www.facebook.com/share.php?u=https://aliba-int.com/product/${product.Id}&title=${product.Title}`}
-                  className='social-icon'
-                  title='Facebook'
-                  target='_blank'
-                >
+                <a href={general.facebook} className='social-icon' title='Facebook' target='_blank'>
                   <svg viewBox='0 0 64 64' width='32' height='32'>
                     <circle cx='32' cy='32' r='31' fill='#3b5998'></circle>
                     <path
@@ -376,7 +371,7 @@ const ProductBody = (props) => {
                     ></path>
                   </svg>
                 </a>
-                <div
+                {/* <div
                   class='bt'
                   style={{
                     borderRadius: "64px",
@@ -390,7 +385,7 @@ const ProductBody = (props) => {
                 >
                   <FaRegCopy />
                   <span style={{ fontSize: "14px", marginLeft: "0.5rem" }}>Copy</span>
-                </div>
+                </div> */}
               </div>
             </div>
             {/* End .product-details-footer */}

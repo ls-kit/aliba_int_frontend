@@ -11,11 +11,11 @@ const SameSellerProducts = ({ vendorId }) => {
     getSameSellerProduct();
   }, [vendorId]);
 
-  // console.log("products", products);
   const getSameSellerProduct = async () => {
     const response = await loadSameSellerProducts(vendorId);
+
     if (!_.isEmpty(response)) {
-      const products = response.VendorProducts;
+      const products = JSON.parse(response.VendorProducts);
       if (!_.isEmpty(products)) {
         const Content = products.Content;
         if (!_.isEmpty(Content)) {
@@ -31,18 +31,12 @@ const SameSellerProducts = ({ vendorId }) => {
     <div className='container deal-section'>
       <div className='row mt-2 mb-0 mb-md-2 mb-md-3'>
         <div className='col-6'>
-          <h3 className='title '>Same Seller Products</h3>
+          <h3 className='title '>From The Same Seller</h3>
         </div>
         <div className='col-6 text-right'>
-          {/* {query_type === "search_query" ? (
-          <a href={`/search${query_url}`} className='btn btn-default px-4 py-2 py-md-3 rounded'>
+          <a href={`/`} className='btn btn-default px-4 py-2 py-md-3 rounded'>
             View All
           </a>
-        ) : (
-          <a href={`/shop${query_url}`} className='btn btn-default px-4 py-2 py-md-3 rounded'>
-            View All
-          </a>
-        )} */}
         </div>
       </div>
 
