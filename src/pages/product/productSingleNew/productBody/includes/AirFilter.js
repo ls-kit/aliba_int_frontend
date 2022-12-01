@@ -31,8 +31,6 @@ const AirFilter = () => {
     }
     setLoading(false);
   };
-  console.log("cardResponseSea", cardResponseAir);
-  console.log("cardResponseSea", cardResponseSea);
   return (
     <>
       {loading && <CardSkelton />}
@@ -137,14 +135,7 @@ const AirFilter = () => {
             }}
           >
             <div className='shippingBoxContainer'>
-              {parse(`${cardResponseSea.content}`, {
-                replace: (domNode) => {
-                  console.log("domNode", domNode);
-                  // if (domNode.attribs && domNode.attribs.id === "replace") {
-                  //   return <span>replaced</span>;
-                  // }
-                },
-              })}
+              {parse(`${cardResponseSea.content}`)}
               {/* <div>
                 <span style={{ fontSize: "14px" }}>
                   সম্মানিত গ্রাহক, সি-শিপমেন্ট করার জন্য সর্বনিম্ন ৫০০ কেজি পণ্য অর্ডার করতে হবে। এক্ষেত্রে

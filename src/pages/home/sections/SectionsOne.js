@@ -35,8 +35,6 @@ const SectionsOne = (props) => {
     }
   }, []);
 
-  console.log("products from section one", products);
-
   return (
     <div className='container deal-section'>
       <div className='row mt-2 mb-0 mb-md-2 mb-md-3'>

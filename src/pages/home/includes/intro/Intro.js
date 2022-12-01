@@ -17,10 +17,12 @@ import arr1 from "../../../../assets/images/arr1.png";
 import arr2 from "../../../../assets/images/arr2.png";
 import cateImg from "../../../../assets/images/TopCat/shose.png";
 import TopCategory from "./topCategory/TopCategory";
+import { getHomePageCards } from "../../../../utils/Services";
+import _ from "lodash";
+import LargeCardSkelton from "../../../../skeleton/productSkeleton/LargeCardSkelton";
 
 const Intro = (props) => {
   const { banners, categories, category_loading } = props;
-  console.log("banners", banners);
 
   const ref = useRef(null);
   const scroll = (scrollOffset) => {
@@ -39,14 +41,14 @@ const Intro = (props) => {
       imgUrl: `${review}`,
       btnText: "রিভিউ পড়ুন",
       titleText: "হ্যাপি কাস্টমার রিভিউ",
-      redirect: "/",
+      redirect: "/review",
     },
     {
       id: 2,
       imgUrl: `${seminar}`,
       btnText: "সেমিনার দেখুন",
       titleText: "নিজেই গড়ি নিজ ব্যবসা",
-      redirect: "/",
+      redirect: "/seminar",
     },
     { id: 3, imgUrl: `${offers}`, btnText: "আপনার অফার", titleText: "দারুন অফার", redirect: "/" },
     {
@@ -58,7 +60,6 @@ const Intro = (props) => {
     },
   ];
 
-  const catArr = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 11, 1, 1, 1, 1, 1, 1, 1];
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -71,6 +72,38 @@ const Intro = (props) => {
     setLoading(false);
   }, [loading]);
 
+  const [cardLoading, setHomeCardLoading] = useState(true);
+  const [homePageCards, setHomePageCards] = useState({});
+
+  useEffect(() => {
+    homePageCard();
+  }, []);
+
+  const homePageCard = async () => {
+    const response = await getHomePageCards();
+
+    if (!_.isEmpty(response)) {
+      setHomePageCards(response);
+    }
+    setHomeCardLoading(false);
+  };
+
+  // decide what is render for home page card
+  let homePageContent = null;
+  if (cardLoading) {
+    homePageContent = <LargeCardSkelton />;
+  }
+  if (!cardLoading) {
+    homePageContent = homePageCards.map((cart, index) => (
+      <Link className='homeComp' to={`/${cart.btn_url}`} key={index}>
+        <img className='mb-4' src={loadAsset(cart.image)} alt='' />
+        <h3>{cart.titleText}</h3>
+        <button className='bt'>{cart.btn_name}</button>
+      </Link>
+    ));
+  }
+
+  console.log("homePageCards", homePageCards);
   return (
     <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
       <div className='mb-md-0 mb-2 mt-0 mt-md-2'>
@@ -122,15 +155,7 @@ const Intro = (props) => {
             <BannerSkeleton />
           )}
         </div>
-        <div className='homeBoxContainer my-2'>
-          {topCardArr.map((cart) => (
-            <Link className='homeComp' to={cart.redirect} key={cart.id}>
-              <img className='mb-4' src={cart.imgUrl} alt='' />
-              <h3>{cart.titleText}</h3>
-              <button className='bt'>{cart.btnText}</button>
-            </Link>
-          ))}
-        </div>
+        <div className='homeBoxContainer my-2'>{homePageContent}</div>
 
         <div className='m-card my-2'>
           <div className='topCatContainer  flex flexRow flexBetween'>

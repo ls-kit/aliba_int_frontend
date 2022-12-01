@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadCategories } from "../../store/actions/InitAction";
@@ -19,9 +19,25 @@ import fim1 from "../../assets/images/fim1.png";
 import fim2 from "../../assets/images/fim2.png";
 import fim3 from "../../assets/images/fim3.png";
 import fim4 from "../../assets/images/fim4.png";
+import _ from "lodash";
+import { getFooterBrand } from "../../utils/Services";
 
 const Footer = (props) => {
   const { general } = props;
+  const [loading, setLoading] = useState(true);
+  const [footerBrandImage, setFooterBrandImage] = useState({});
+
+  useEffect(() => {
+    foterBrand();
+  }, []);
+
+  const foterBrand = async () => {
+    const response = await getFooterBrand("card_two");
+    if (!_.isEmpty(response)) {
+      setFooterBrandImage(response);
+    }
+    setLoading(false);
+  };
 
   return (
     <footer className='footer footer-2' style={{ backgroundColor: "#fff" }}>
@@ -200,22 +216,22 @@ const Footer = (props) => {
           </div>
           {/* End .row */}
           <div className='d-flex justify-content-center'>
-            <img src={fatolg} alt='' />
+            <img src={loadAsset(footerBrandImage.brand_one)} alt='' />
           </div>
           <div className='d-flex justify-content-center'>
             <div className='sisters'>
               <a href='/'>
-                <img src={fim1} alt='' />
+                <img src={loadAsset(footerBrandImage.brand_two)} alt='' />
               </a>
               <a href='/'>
-                <img src={fim3} alt='' />
+                <img src={loadAsset(footerBrandImage.brand_three)} alt='' />
               </a>
               <a href='/'>
-                <img src={fim2} alt='' />
+                <img src={loadAsset(footerBrandImage.brand_four)} alt='' />
               </a>
 
               <a href='/'>
-                <img src={fim4} alt='' />
+                <img src={loadAsset(footerBrandImage.brand_five)} alt='' />
               </a>
             </div>
           </div>
