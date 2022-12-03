@@ -584,7 +584,6 @@ a:focus {
 .homeBoxContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  margin-top: 0.75rem;
   grid-gap: 0.65rem;
   gap: 0.65rem;
   width: 100%;
@@ -855,4 +854,44 @@ a:focus {
     grid-gap: 0.5rem;
     gap: 0.5rem;
   }
+}
+
+.header-26 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  .header-search {
+    .header-search-wrapper {
+      border-right: 0;
+    }
+    .img-icon {
+      max-width: 40px;
+    }
+    .form-control {
+      padding-left: 10px;
+    }
+  }
+}
+
+.fixed-sidebar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  z-index: 999;
+  padding: 0;
+  height: 100%;
+  .side-nav {
+    position: absolute;
+    width: 225px;
+    top: 0;
+    left: 0;
+    height: 100%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+}
+.main-area {
+  margin-left: 225px;
+  margin-top: 64px;
+  padding: 10px;
 }

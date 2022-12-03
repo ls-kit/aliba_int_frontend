@@ -21,7 +21,7 @@ const BrowseCategories = (props) => {
         Categories
         <i className='icon-bars float-right h5 text-white m-0 d-none d-xl-block' />
       </div> */}
-      <ul className='menu-vertical sf-arrows sf-js-enabled' style={{ touchAction: "pan-y" }}>
+      <ul className='menu-vertical sf-arrows sf-js-enabled p-0' style={{ touchAction: "pan-y" }}>
         {parents.length > 0 &&
           parents.map((parent, index) => {
             if (parent.children_count) {

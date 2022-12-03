@@ -105,7 +105,7 @@ const Intro = (props) => {
 
   return (
     <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
-      <div className='mb-md-0 mb-2 mt-0 mt-md-2'>
+      <div>
         {/* <div className='bannerSection mb-2'>
           <div className=''>
             <img
@@ -154,9 +154,9 @@ const Intro = (props) => {
             <BannerSkeleton />
           )}
         </div>
-        <div className='homeBoxContainer my-2'>{homePageContent}</div>
+        <div className='homeBoxContainer mb-1'>{homePageContent}</div>
 
-        <div className='m-card my-2'>
+        <div className='m-card mb-1'>
           <div className='topCatContainer  flex flexRow flexBetween'>
             <h4 className='bold topTitle'>TOP CATEGORIES</h4>
             <div className='flex'>
