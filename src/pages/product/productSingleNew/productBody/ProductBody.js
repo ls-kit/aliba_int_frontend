@@ -95,7 +95,7 @@ const ProductBody = (props) => {
         </div>
         {/* End .col-md-6 */}
         <div className='col-md-6'>
-          <div className='product-details'>
+          <div className='product-details' id="hello">
             <AppOffer />
             {bulkProductContent}
             {_.isArray(firstConfigurators) &&

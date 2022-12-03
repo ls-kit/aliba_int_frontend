@@ -47,7 +47,7 @@ const Footer = (props) => {
       <div className='footer-middle border-0'>
         <div className='container'>
           <div className='row'>
-            <div className='col-6 col-lg-2-5cols'>
+            <div className='col-12 col-lg-3'>
               <div className='widget widget-about mb-4'>
                 <Link to='/'>
                   <img
@@ -57,8 +57,6 @@ const Footer = (props) => {
                   />
                 </Link>
                 <div>
-                  <br />
-                  <br />
                   <ul className='contact-list'>
                     <li>
                       <i className='icon-map-marker' />
@@ -85,7 +83,7 @@ const Footer = (props) => {
               {/* End .widget about-widget */}
             </div>
             {/* End .col-sm-4 col-lg-3 */}
-            <div className='col-6 col-lg-5cols'>
+            <div className='col-12 col-lg-3'>
               <div className='widget mb-4'>
                 <h4 className='widget-title uppercase'>Customer</h4>
                 {/* End .widget-title */}
@@ -112,7 +110,7 @@ const Footer = (props) => {
             </div>
             {/* End .col-sm-64 col-lg-3 */}
             {/* End .col-sm-12 col-lg-3 */}
-            <div className='col-6 col-lg-5cols'>
+            <div className='col-12 col-lg-3'>
               <div className='widget mb-4'>
                 <h4 className='widget-title uppercase'>Information</h4>
                 {/* End .widget-title */}
@@ -144,7 +142,7 @@ const Footer = (props) => {
               {/* End .widget */}
             </div>
             {/* End .col-sm-4 col-lg-3 */}
-            <div className='col-6 col-lg-5cols'>
+            <div className='col-12 col-lg-3'>
               <div className='widget mb-4'>
                 <h4 className='widget-title uppercase'>Mobile Apps</h4>
                 <ul className='widget-list'>
@@ -215,11 +213,11 @@ const Footer = (props) => {
             </div>
           </div>
           {/* End .row */}
-          <div className='d-flex justify-content-center'>
+          {/* <div className='d-flex justify-content-center'>
             <img src={loadAsset(footerBrandImage.brand_one)} alt='' />
-          </div>
+          </div> */}
           <div className='d-flex justify-content-center'>
-            <div className='sisters'>
+            <div className='d-flex align-items-center'>
               <a href='/'>
                 <img src={loadAsset(footerBrandImage.brand_two)} alt='' />
               </a>
