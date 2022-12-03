@@ -121,7 +121,7 @@ const Intro = (props) => {
             </a>
           </div>
         </div> */}
-        <div className='intro-slider-container'>
+        <div className='intro-slider-container mb-1'>
           {banners.length > 0 && !loading ? (
             <OwlCarousel
               className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
@@ -129,6 +129,7 @@ const Intro = (props) => {
               margin={0}
               dots={false}
               nav={false}
+              autoplay={true}
               autoplayTimeout={10000}
               responsive={{
                 0: { items: 1 },

@@ -245,8 +245,9 @@ export const loadBulkProductsPrice = async (itemId) => {
 
 export const loadSameSellerProducts = async (vendorId, loadOffset, perPage) => {
   return await axiosInstance
-    .get(`/vendor-products/${vendorId}`, { offset: loadOffset, limit: perPage })
+    .get(`/vendor-products/${vendorId}`, {params : { offset: loadOffset, limit: perPage }})
     .then((res) => {
+      console.log(res);
       const resData = res.data;
       if (!_.isEmpty(resData)) {
         return resData.data;

@@ -227,6 +227,10 @@ a:focus {
   max-height: 92rem;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: none;
+}
+.product-sidebar::-webkit-scrollbar {
+  width: 0;
 }
 
 .ProductConfiguredItems {
@@ -890,8 +894,18 @@ a:focus {
     scrollbar-width: none;
   }
 }
+.side-nav::-webkit-scrollbar {
+  width: 0;
+}
 .main-area {
   margin-left: 225px;
   margin-top: 64px;
   padding: 10px;
+}
+.quantify-bdr {
+  height: 36px !important;
+  background: #fff;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-color: $baseColor;;
 }
