@@ -248,15 +248,18 @@ export const loadBulkProductsPrice = async (itemId) => {
   });
 };
 
-export const loadSameSellerProducts = async (vendorId) => {
-  return await axiosInstance.get(`/vendor-products/${vendorId}`).then((res) => {
-    const resData = res.data;
-    console.log("resData", resData);
-    if (!_.isEmpty(resData)) {
-      return resData.data;
-    }
-    return {};
-  });
+export const loadSameSellerProducts = async (vendorId, loadOffset, perPage) => {
+  console.log(loadOffset, perPage);
+  return await axiosInstance
+    .get(`/vendor-products/${vendorId}`, { offset: loadOffset, limit: perPage })
+    .then((res) => {
+      const resData = res.data;
+      console.log("resData", resData);
+      if (!_.isEmpty(resData)) {
+        return resData.data;
+      }
+      return {};
+    });
 };
 
 export const getFooterBrand = async () => {
@@ -269,7 +272,7 @@ export const getFooterBrand = async () => {
   });
 };
 export const getHomePageCards = async () => {
-  return await axiosInstance.get(`/get-homepage-cards`, { offset: 1, limit: 16 }).then((res) => {
+  return await axiosInstance.get(`/get-homepage-cards`).then((res) => {
     const resData = res.data;
     if (!_.isEmpty(resData)) {
       return resData.data;

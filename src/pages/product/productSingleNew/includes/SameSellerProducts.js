@@ -3,6 +3,7 @@ import _ from "lodash";
 import ProductSectionSkeleton from "../../../../skeleton/productSkeleton/ProductSectionSkeleton";
 import { loadSameSellerProducts } from "../../../../utils/Services";
 import RecentItems from "../../../home/includes/Products/recentProduct/includes/RecentItems";
+import { Link } from "react-router-dom";
 
 const SameSellerProducts = ({ vendorId }) => {
   const [loading, setLoading] = useState(true);
@@ -13,7 +14,6 @@ const SameSellerProducts = ({ vendorId }) => {
 
   const getSameSellerProduct = async () => {
     const response = await loadSameSellerProducts(vendorId);
-
     if (!_.isEmpty(response)) {
       const products = JSON.parse(response.VendorProducts);
       if (!_.isEmpty(products)) {
@@ -34,7 +34,7 @@ const SameSellerProducts = ({ vendorId }) => {
           <h3 className='title '>From The Same Seller</h3>
         </div>
         <div className='col-6 text-right'>
-          <a href={`/`} className='btn btn-default px-4 py-2 py-md-3 rounded'>
+          <a href={`/seller/${vendorId}?page=2`} className='btn btn-default px-4 py-2 py-md-3 rounded'>
             View All
           </a>
         </div>
