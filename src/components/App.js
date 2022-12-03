@@ -15,12 +15,12 @@ const App = () => {
       <HeaderManage />
       <ErrorHandling />
       <div className='page-wrapper'>
-        <div className='row'>
-          <div className='col-lg-2 cols d-none d-lg-block' style={{ backgroundColor: "#fff" }}>
+        <div className=''>
+          <div className='cols d-none d-lg-block fixed-sidebar' style={{ backgroundColor: "#fff" }}>
             <BrowseCategories />
           </div>
           <div
-            className='col-lg-10 cols col-md-12 col-12 mb-md-0 mb-2'
+            className='cols mb-md-0 mb-2 main-area'
             style={{ backgroundColor: "#eaeaea" }}
           >
             <Routing />

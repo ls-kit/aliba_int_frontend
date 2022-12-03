@@ -24,7 +24,7 @@ const BrowseSubCategories = (props) => {
           <i className="icon-bars float-right h5 text-white m-0 d-none d-xl-block"/>
         </div>
         <ul
-            className="menu-vertical sf-arrows sf-js-enabled"
+            className="menu-vertical sf-arrows sf-js-enabled p-0"
             style={{touchAction: "pan-y"}}
         >
           {

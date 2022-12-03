@@ -54,7 +54,7 @@ const SearchForm = (props) => {
                <label htmlFor="search" className="sr-only">
                   Search
                </label>
-               <label className="btn" htmlFor="lg_picture_search">
+               <label className="btn img-icon" htmlFor="lg_picture_search">
                   <BsCamera/>
                </label>
                <input
