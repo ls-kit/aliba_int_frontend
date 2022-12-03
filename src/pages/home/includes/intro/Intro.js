@@ -66,7 +66,7 @@ const Intro = (props) => {
     if (!loading) {
       props.loadBanners();
     }
-  }, [loading, props]);
+  }, []);
 
   useEffect(() => {
     setLoading(false);
@@ -103,7 +103,6 @@ const Intro = (props) => {
     ));
   }
 
-  console.log("homePageCards", homePageCards);
   return (
     <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
       <div className='mb-md-0 mb-2 mt-0 mt-md-2'>
