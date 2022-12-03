@@ -40,7 +40,7 @@ const AppOffer = () => {
           বিকাশ অথবা ব্যাংকে পেমেন্ট করলেই পাচ্ছেন ৩% ইনস্ট্যান্ট ক্যাশব্যাক, যত খুশি ততবার।
         </p> */}
         <a
-          href='https://play.google.com/store/apps/details?id=com.wholesalecartbd.mobileapp'
+          href='#'
           target='_blank'
           rel='noreferrer'
         >
