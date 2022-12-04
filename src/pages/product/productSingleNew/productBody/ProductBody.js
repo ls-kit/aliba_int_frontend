@@ -74,6 +74,7 @@ const ProductBody = (props) => {
   if (!loading && bulkPriceQuantity.length > 0) {
     bulkProductContent = <PriceRange totalQty={totalQty} bulkPriceQuantity={bulkPriceQuantity} />;
   }
+
   return (
     <div className='product-details-top'>
       <h1

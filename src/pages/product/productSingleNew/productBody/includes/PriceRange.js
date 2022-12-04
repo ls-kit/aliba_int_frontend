@@ -4,9 +4,9 @@ const PriceRange = (props) => {
   console.log("props from pricerange", props);
   const { totalQty, bulkPriceQuantity } = props;
 
-  let first = bulkPriceQuantity[0].MinQuantity;
-  let second = bulkPriceQuantity[1].MinQuantity;
-  let third = bulkPriceQuantity[2].MinQuantity;
+  let first = bulkPriceQuantity[0]?.MinQuantity;
+  let second = bulkPriceQuantity[1]?.MinQuantity;
+  let third = bulkPriceQuantity[2]?.MinQuantity;
 
   // quantity box active deactive
   const addActiveClass = (MinQuantity, MaxQuantity) => {
@@ -30,7 +30,7 @@ const PriceRange = (props) => {
       }
     }
   };
-
+  console.log("bulkPriceQuantity", bulkPriceQuantity);
   // console.log("first", first);
   // console.log("first", second);
   // console.log("first", third);
