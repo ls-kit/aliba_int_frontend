@@ -7,7 +7,7 @@ const Breadcrumb = (props) => {
   const {current, collections} = props;
 
   return (
-      <nav aria-label="breadcrumb" className="breadcrumb-nav bg-white mb-2">
+      <nav aria-label="breadcrumb" className="breadcrumb-nav bg-white mb-1">
         <div className="container d-flex align-items-center">
           <ol className="breadcrumb">
             <li className="breadcrumb-item">

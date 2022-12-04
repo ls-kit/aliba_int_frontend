@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;700&family=Quicksand:wght@300;400;500;600;700&display=swap');
 a:hover,
 a:focus {
   color: $baseColor;
@@ -237,6 +238,10 @@ a:focus {
   max-height: 220px;
   overflow-y: auto;
   margin-bottom: 3rem !important;
+  scrollbar-width: none;
+}
+::-webkit-scrollbar {
+  width: 0;
 }
 
 .maxQuantityText {
@@ -908,4 +913,7 @@ a:focus {
   border-top: 2px solid;
   border-bottom: 2px solid;
   border-color: $baseColor;
+}
+.footer.footer-2 .footer-copyright {
+  font-weight: 600 !important;
 }
