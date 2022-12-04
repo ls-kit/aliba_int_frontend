@@ -30,14 +30,13 @@ import CardSkelton from "../../../../skeleton/productSkeleton/CardSkelton";
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems } = props;
   const product_id = !_.isEmpty(product) ? product.Id : 0;
-  const totalQty = cartConfigured[0] ? cartConfigured[0]?.totalQty : 0;
   const firstConfigurators = findFirstConfigurators(ConfiguredItems);
-
   const ConfigAttributes = ConfiguratorAttributes(product);
   const colorAttributes = getColorAttributes(ConfigAttributes);
 
   let activeProduct = findProductCartFromState(cartConfigured, product_id);
-
+  // const totalQty = cartConfigured[0] ? cartConfigured[0]?.totalQty : 0;
+  const totalQty = activeProduct.totalQty;
   const [activeImg, setActiveImg] = useState("");
   const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
   const [loading, setLoading] = useState(true);
