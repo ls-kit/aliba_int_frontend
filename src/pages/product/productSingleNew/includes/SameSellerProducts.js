@@ -12,8 +12,10 @@ const SameSellerProducts = ({ vendorId }) => {
     getSameSellerProduct();
   }, [vendorId]);
 
+  const limit = 16;
+  const offset = 1;
   const getSameSellerProduct = async () => {
-    const response = await loadSameSellerProducts(vendorId);
+    const response = await loadSameSellerProducts(vendorId, offset, limit);
     if (!_.isEmpty(response)) {
       const products = JSON.parse(response.VendorProducts);
       if (!_.isEmpty(products)) {
