@@ -64,7 +64,7 @@ const MegaMenuItem = (props) => {
             </div>
           </Link>
         ))}
-      {/* <div className='megamenu'>
+      <div className='megamenu'>
         <div className='row '>
           <div className='col-md-12'>
             <div className='menu-col'>
@@ -84,9 +84,8 @@ const MegaMenuItem = (props) => {
               </div>
             </div>
           </div>
-          
         </div>
-      </div> */}
+      </div>
     </li>
   );
 };
