@@ -40,6 +40,7 @@ const ProductBody = (props) => {
   const [activeImg, setActiveImg] = useState("");
   const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
   const [loading, setLoading] = useState(true);
+  console.log("product from single product", product);
 
   useEffect(() => {
     bulkPriceQuantityRange(product_id);
@@ -95,7 +96,7 @@ const ProductBody = (props) => {
         </div>
         {/* End .col-md-6 */}
         <div className='col-md-6'>
-          <div className='product-details' id="hello">
+          <div className='product-details' id='hello'>
             <AppOffer />
             {bulkProductContent}
             {_.isArray(firstConfigurators) &&
@@ -246,7 +247,7 @@ const ProductBody = (props) => {
             <div className='mt2 groupData'>
               <div>
                 <b>Product Code: </b>
-                <span>abb-589157047512</span>
+                <span>{product_id}</span>
               </div>
               <div>
                 <b>Category: </b>
@@ -254,7 +255,7 @@ const ProductBody = (props) => {
               </div>
               <div>
                 <b>Total Sold: </b>
-                <span>6090656</span>
+                <span>{product.total_sold}</span>
               </div>
               <div>
                 <b>Seller Score: </b>
