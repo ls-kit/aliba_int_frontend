@@ -13,6 +13,7 @@ import SocialButton from "./SocialButton";
 import axios from "axios";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
+import { goPageTop } from "../../utils/Helpers";
 
 const Login = (props) => {
   const { OTPResponse, isAuthenticated } = props;
@@ -25,6 +26,7 @@ const Login = (props) => {
     if (isAuthenticated) {
       props.history.push("/dashboard");
     }
+    goPageTop();
   }, []);
 
   const loginWithGoogle = useGoogleLogin({
