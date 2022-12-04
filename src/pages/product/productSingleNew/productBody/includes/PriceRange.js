@@ -30,14 +30,11 @@ const PriceRange = (props) => {
       }
     }
   };
-<<<<<<< HEAD
-=======
   console.log("bulkPriceQuantity", bulkPriceQuantity);
   // console.log("first", first);
   // console.log("first", second);
   // console.log("first", third);
   // console.log("quantity", totalQty);
->>>>>>> 5c21ff8c140f509a8eae1717eb77dbe46737a210
 
   return (
     <div className='ranges'>
