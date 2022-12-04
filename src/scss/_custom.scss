@@ -883,7 +883,7 @@ a:focus {
 }
 
 .fixed-sidebar {
-  position: fixed;
+  position: absolute;
   top: 64px;
   left: 0;
   z-index: 999;
@@ -895,7 +895,7 @@ a:focus {
     top: 0;
     left: 0;
     height: 100%;
-    overflow-y: scroll;
+    // overflow-y: scroll;
     scrollbar-width: none;
   }
 }
@@ -905,7 +905,7 @@ a:focus {
 .main-area {
   margin-left: 225px;
   margin-top: 64px;
-  padding: 10px;
+  padding: 10px;  
 }
 .quantify-bdr {
   height: 36px !important;
@@ -917,7 +917,21 @@ a:focus {
 .footer.footer-2 .footer-copyright {
   font-weight: 600 !important;
 }
+.megamenu {
+  width: 100% !important;
+}
 
-.menu-vertical .megamenu {
-  left: 35%;
+// .menu-vertical .megamenu {
+//   left: 35%;
+// }
+
+@media (max-width: 991px) {
+  .main-area {
+    margin-left: 0;
+  }
+}
+@media (max-width: 751px) {
+  .main-area {
+    margin-top: 124px;
+  }
 }
