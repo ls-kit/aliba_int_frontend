@@ -61,9 +61,9 @@ const LoadCategory = (props) => {
               </div>
             </div>
             {/* End .col-lg-9 */}
-            {/* <aside className='col-lg-3 d-none d-lg-block order-lg-first'>
+            <aside className='col-lg-3 d-none d-lg-block order-lg-first'>
               <CategorySidebar />
-            </aside> */}
+            </aside>
             {/* End .col-lg-3 */}
           </div>
           {/* End .row */}
