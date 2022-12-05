@@ -15,19 +15,9 @@ const App = () => {
       <HeaderManage />
       <ErrorHandling />
       <div className='page-wrapper'>
-        <div className=''>
-          <div className='cols d-none d-lg-block fixed-sidebar' style={{ backgroundColor: "#fff" }}>
-            <BrowseCategories />
-          </div>
-          <div
-            className='cols mb-md-0 mb-2 main-area'
-            style={{ backgroundColor: "#eaeaea" }}
-          >
-            <Routing />
-            <Footer />
-          </div>
-        </div>
+        <Routing />
       </div>
+      <Footer />
     </BrowserRouter>
   );
 };

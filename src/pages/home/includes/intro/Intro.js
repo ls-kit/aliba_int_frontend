@@ -105,8 +105,13 @@ const Intro = (props) => {
 
   return (
     <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
-      <div>
-        {/* <div className='bannerSection mb-2'>
+      <div className='container mt-0 mt-md-2'>
+        <div className='row'>
+          <div className='col-lg-3 cols d-none d-lg-block'>
+            <BrowseCategories />
+          </div>
+          <div className='col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2'>
+            {/* <div className='bannerSection mb-2'>
           <div className=''>
             <img
               className='slImg'
@@ -121,53 +126,59 @@ const Intro = (props) => {
             </a>
           </div>
         </div> */}
-        <div className='intro-slider-container mb-1'>
-          {banners.length > 0 && !loading ? (
-            <OwlCarousel
-              className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
-              loop={false}
-              margin={0}
-              dots={false}
-              nav={false}
-              autoplay={true}
-              autoplayTimeout={10000}
-              responsive={{
-                0: { items: 1 },
-                480: { items: 1 },
-                576: { items: 1 },
-                768: { items: 1 },
-                992: { items: 1 },
-                1200: { items: 1 },
-              }}
-            >
-              {banners.map((banner) => (
-                <div
-                  key={banner.id}
-                  className='intro-slide bg-image d-flex align-items-center'
-                  style={{
-                    backgroundColor: "#e9e9e9",
-                    backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
+            <div className='intro-slider-container mb-1'>
+              {banners.length > 0 && !loading ? (
+                <OwlCarousel
+                  className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
+                  loop={false}
+                  margin={0}
+                  dots={false}
+                  nav={false}
+                  autoplay={true}
+                  autoplayTimeout={10000}
+                  responsive={{
+                    0: { items: 1 },
+                    480: { items: 1 },
+                    576: { items: 1 },
+                    768: { items: 1 },
+                    992: { items: 1 },
+                    1200: { items: 1 },
                   }}
-                ></div>
-              ))}
-            </OwlCarousel>
-          ) : (
-            <BannerSkeleton />
-          )}
-        </div>
-        <div className='homeBoxContainer mb-1'>{homePageContent}</div>
-
-        <div className='m-card mb-1'>
-          <div className='topCatContainer  flex flexRow flexBetween'>
-            <h4 className='bold topTitle'>TOP CATEGORIES</h4>
-            <div className='flex'>
-              <img onClick={() => scroll(-700)} className='topAr1' src={arr1} alt='' />
-              <img onClick={() => scroll(700)} className='topAr2' src={arr2} alt='' />
+                >
+                  {banners.map((banner) => (
+                    <div
+                      key={banner.id}
+                      className='intro-slide bg-image d-flex align-items-center'
+                      style={{
+                        backgroundColor: "#e9e9e9",
+                        backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
+                      }}
+                    ></div>
+                  ))}
+                </OwlCarousel>
+              ) : (
+                <BannerSkeleton />
+              )}
             </div>
-          </div>
-          <div ref={ref} className='responsiveOverflow'>
-            <div className='sellerCategoryContainer'>
-              <TopCategory categories={categories} category_loading={category_loading} parents={parents} />
+            <div className='homeBoxContainer mb-1'>{homePageContent}</div>
+
+            <div className='m-card mb-1'>
+              <div className='topCatContainer  flex flexRow flexBetween'>
+                <h4 className='bold topTitle'>TOP CATEGORIES</h4>
+                <div className='flex'>
+                  <img onClick={() => scroll(-700)} className='topAr1' src={arr1} alt='' />
+                  <img onClick={() => scroll(700)} className='topAr2' src={arr2} alt='' />
+                </div>
+              </div>
+              <div ref={ref} className='responsiveOverflow'>
+                <div className='sellerCategoryContainer'>
+                  <TopCategory
+                    categories={categories}
+                    category_loading={category_loading}
+                    parents={parents}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>

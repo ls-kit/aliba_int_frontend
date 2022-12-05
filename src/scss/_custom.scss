@@ -890,18 +890,18 @@ a:focus {
 }
 
 .fixed-sidebar {
-  position: absolute;
-  top: 64px;
-  left: 0;
-  z-index: 999;
-  padding: 0;
-  height: 100%;
+  // position: absolute;
+  // top: 64px;
+  // left: 0;
+  // z-index: 999;
+  // padding: 0;
+  // height: 100%;
   .side-nav {
-    position: absolute;
-    width: 225px;
-    top: 0;
-    left: 0;
-    height: 100%;
+    // position: absolute;
+    // width: 225px;
+    // top: 0;
+    // left: 0;
+    // height: 100%;
     // overflow-y: scroll;
     scrollbar-width: none;
   }
