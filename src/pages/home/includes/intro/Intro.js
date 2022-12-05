@@ -51,7 +51,7 @@ const Intro = (props) => {
   if (!cardLoading) {
     homePageContent = homePageCards.map((cart, index) => (
       <Link className='homeComp' to={`/${cart.btn_url}`} key={index}>
-        <img className='mb-4' src={loadAsset(cart.image)} alt='' />
+        <img className='mb-2' src={loadAsset(cart.image)} alt='' />
         <h3>{cart.titleText}</h3>
         <button className='bt'>{cart.btn_name}</button>
       </Link>
@@ -59,28 +59,13 @@ const Intro = (props) => {
   }
 
   return (
-    <div className='intro-section' style={{ backgroundColor: "#eaeaea" }}>
-      <div className='container mt-0 mt-md-2'>
+    <div className='intro-section'>
+      <div className='container mt-0 mt-md-2' style={{ backgroundColor: "#eaeaea" }}>
         <div className='row'>
-          <div className='col-lg-3 cols d-none d-lg-block'>
+          <div className='col-lg-3 cols d-none d-lg-block pt-4'>
             <BrowseCategories />
           </div>
           <div className='col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2'>
-            {/* <div className='bannerSection mb-2'>
-          <div className=''>
-            <img
-              className='slImg'
-              src='https://wholesalecart.com/static/media/cashback_offer.6d82c6ee.jpg'
-              alt=''
-            />
-            <SSlider imageArr={imageArr} />
-          </div>
-          <div className='offer-box'>
-            <a aria-label='Offers' className='promotions' href='/offers'>
-              <img src={offers} alt='offers' />
-            </a>
-          </div>
-        </div> */}
             <div className='intro-slider-container mb-1'>
               {banners.length > 0 && !loading ? (
                 <OwlCarousel

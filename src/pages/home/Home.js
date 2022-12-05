@@ -29,6 +29,9 @@ const Home = (props) => {
   const section_four_active = getSetting(general, "section_four_active");
   const section_five_active = getSetting(general, "section_five_active");
   const [style, setStyle] = useState("none");
+  const [btnstyle, setBtnStyle] = useState("block");
+
+  const handleTogle = () => {};
 
   return (
     <main className='main' style={{ backgroundColor: "#fafafa" }}>

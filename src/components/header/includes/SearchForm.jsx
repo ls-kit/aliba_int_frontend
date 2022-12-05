@@ -28,6 +28,7 @@ const SearchForm = (props) => {
          formData.append("picture", selectedFile);
          loadPictureSearchProducts(formData)
             .then(response => {
+               console.log("res from photo serch",response);
                let picture = response.picture;
                let search_id = response.search_id;
                if (search_id && picture) {
@@ -44,6 +45,7 @@ const SearchForm = (props) => {
 
          <input
             type="file"
+            accept="image/jpg,image/jpeg"
             onChange={e => submitPictureSearch(e)}
             name="picture"
             className="d-none"

@@ -12,7 +12,7 @@ const Header = (props) => {
   return (
     <header className='header header-intro-clearance header-26'>
       <div className='header-middle'>
-        <div className='container-fluid'>
+        <div className='container'>
           <div className='header-left'>
             <a href='/' className='logo'>
               <img src={loadAsset(frontend_logo_menu)} alt={site_name} />

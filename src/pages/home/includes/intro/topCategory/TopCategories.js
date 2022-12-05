@@ -16,17 +16,19 @@ const TopCategories = (props) => {
   };
 
   return (
-    <div className='m-card mb-1'>
-      <div className='topCatContainer  flex flexRow flexBetween'>
-        <h4 className='bold topTitle'>TOP CATEGORIES</h4>
-        <div className='flex'>
-          <img onClick={() => scroll(-700)} className='topAr1' src={arr1} alt='' />
-          <img onClick={() => scroll(700)} className='topAr2' src={arr2} alt='' />
+    <div className='container'>
+      <div className='m-card mb-1'>
+        <div className='topCatContainer  flex flexRow flexBetween'>
+          <h4 className='bold topTitle'>TOP CATEGORIES</h4>
+          <div className='flex'>
+            <img onClick={() => scroll(-700)} className='topAr1' src={arr1} alt='' />
+            <img onClick={() => scroll(700)} className='topAr2' src={arr2} alt='' />
+          </div>
         </div>
-      </div>
-      <div ref={ref} className='responsiveOverflow'>
-        <div className='sellerCategoryContainer'>
-          <TopCategory categories={categories} category_loading={category_loading} parents={parents} />
+        <div ref={ref} className='responsiveOverflow'>
+          <div className='sellerCategoryContainer'>
+            <TopCategory categories={categories} category_loading={category_loading} parents={parents} />
+          </div>
         </div>
       </div>
     </div>
