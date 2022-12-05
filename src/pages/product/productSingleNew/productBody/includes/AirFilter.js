@@ -41,7 +41,11 @@ const AirFilter = () => {
               <div
                 class='shippingBox mr05'
                 style={{
-                  background: `${deliveryMethod == "air" ? "#f7b733" : "rgb(238, 238, 238)"}`,
+                  background: `${
+                    deliveryMethod == "air"
+                      ? "linear-gradient(to right, #f7b733, #fc4a1a)"
+                      : "rgb(238, 238, 238)"
+                  }`,
                   display: "flex",
                   alignItems: "center",
                   cursor: "pointer",
@@ -67,7 +71,11 @@ const AirFilter = () => {
               <div
                 class='shippingBox mr05'
                 style={{
-                  background: `${deliveryMethod == "sea" ? "#f7b733" : "rgb(238, 238, 238)"}`,
+                  background: `${
+                    deliveryMethod == "sea"
+                      ? "linear-gradient(to right, #f7b733, #fc4a1a)"
+                      : "rgb(238, 238, 238)"
+                  }`,
                   display: "flex",
                   alignItems: "center",
                   cursor: "pointer",

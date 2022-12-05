@@ -130,7 +130,7 @@ const ProductBody = (props) => {
 
             <div className='product-details-action'>
               <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
-                <div>
+                <div className='pd-btn'>
                   <a href={"/add-to-wishlist"} onClick={(e) => addToWishlist(e, product)}>
                     <div
                       className='imageBt bt ripple disabled mobilefont'
@@ -148,7 +148,7 @@ const ProductBody = (props) => {
                     </div>
                   </a>
                 </div>
-                <div style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
+                <div className='pd-btn' style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
                   <a href={"/add-to-wishlist"} onClick={(e) => addToWishlist(e, product)}>
                     <div
                       className='imageBt bt ripple disabled mobilefont'
@@ -168,7 +168,7 @@ const ProductBody = (props) => {
                 </div>
 
                 {Number(activeProduct.totalQty) > 0 ? (
-                  <div>
+                  <div className='pd-btn'>
                     <Link to='/checkout'>
                       <div
                         className='imageBt bt ripple disabled mobilefont'
@@ -186,7 +186,7 @@ const ProductBody = (props) => {
                     </Link>
                   </div>
                 ) : (
-                  <div>
+                  <div className='pd-btn'>
                     <a href={"/buy-now"} onClick={(e) => alertForQuantity(e)}>
                       <div
                         className='imageBt bt ripple disabled mobilefont'
@@ -263,7 +263,7 @@ const ProductBody = (props) => {
               </div>
               <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
                 <div>
-                  <Link to='/'>
+                  <Link to={`/seller/${product.VendorId}?page=1`}>
                     <div
                       className='imageBt bt ripple disabled mobilefont'
                       style={{
@@ -294,7 +294,7 @@ const ProductBody = (props) => {
                       }}
                     >
                       <RiGroupLine style={{ fontSize: "16px" }} />
-                      <span className='ml01'>Add to cart</span>
+                      <span className='ml01'>View Sellers</span>
                     </div>
                   </Link>
                 </div>

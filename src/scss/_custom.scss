@@ -451,16 +451,20 @@ a:focus {
   align-items: flex-start;
   h3 {
     font-weight: bold;
-    margin: 0.5rem 0px 0.375rem;
+    margin: 0.5rem 0px 1rem;
+    color: $white;
+    font-size: 18px;
   }
-  span {
+  p {
     font-size: 14px;
     margin-right: "1rem";
     margin-bottom: 0.5rem;
+    color: $white;
   }
 }
 .cardHighlight {
-  background-image: linear-gradient(90deg, #f7b733 50%, #ffda72);
+  // background-image: linear-gradient(90deg, #f7b733 50%, #ffda72);
+  background-image: linear-gradient(to right, #f7b733, #fc4a1a);
 }
 
 .mb05 {
@@ -484,7 +488,9 @@ a:focus {
 .mt2 {
   margin-top: 2rem;
 }
-
+.pd-btn {
+  margin: 0.5rem 0;
+}
 .bt {
   height: 36px;
   border: none;
@@ -791,7 +797,8 @@ a:focus {
   }
 }
 .rangeActive {
-  background-image: linear-gradient(90deg, var(--primary-color-dark) 50%, var(--primary-color-light));
+  background-image: linear-gradient(to right, #f7b733, #fc4a1a);
+  color: $white;
 }
 
 // responsiveness
@@ -905,7 +912,7 @@ a:focus {
 .main-area {
   margin-left: 225px;
   margin-top: 64px;
-  padding: 10px;  
+  padding: 10px;
 }
 .quantify-bdr {
   height: 36px !important;
