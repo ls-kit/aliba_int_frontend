@@ -129,7 +129,7 @@ const ProductBody = (props) => {
             {/* End .details-filter-row */}
 
             <div className='product-details-action'>
-              <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
+              {/* <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
                 <div className='pd-btn'>
                   <a href={"/add-to-wishlist"} onClick={(e) => addToWishlist(e, product)}>
                     <div
@@ -204,23 +204,16 @@ const ProductBody = (props) => {
                     </a>
                   </div>
                 )}
-              </div>
+              </div> */}
 
-              {/* <a
+              <a
                 href={"/add-to-wishlist"}
                 onClick={(e) => addToWishlist(e, product)}
                 className='btn-product btn-wishlist'
               >
                 <span>Save</span>
               </a>
-              <a
-                href={"/add-to-wishlist"}
-                onClick={(e) => addToWishlist(e, product)}
-                className='btn-product btn-cart'
-                style={{ marginLeft: "10px" }}
-              >
-                <span>Add To Cart</span>
-              </a>
+
               {Number(activeProduct.totalQty) > 0 ? (
                 <Link
                   to='/checkout'
@@ -238,7 +231,7 @@ const ProductBody = (props) => {
                 >
                   <span>Buy Now</span>
                 </a>
-              )} */}
+              )}
             </div>
 
             {/* End .product-details-action */}
@@ -249,18 +242,18 @@ const ProductBody = (props) => {
                 <b>Product Code: </b>
                 <span>{product_id}</span>
               </div>
-              <div>
+              {/* <div>
                 <b>Category: </b>
                 <span>Printed circuit boards</span>
-              </div>
-              <div>
+              </div> */}
+              {/* <div>
                 <b>Total Sold: </b>
                 <span>{product.total_sold}</span>
               </div>
               <div>
                 <b>Seller Score: </b>
                 <span>10/10</span>
-              </div>
+              </div> */}
               <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
                 <div>
                   <Link to={`/seller/${product.VendorId}?page=1`}>
@@ -280,7 +273,7 @@ const ProductBody = (props) => {
                     </div>
                   </Link>
                 </div>
-                <div style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
+                {/* <div style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
                   <Link to='/'>
                     <div
                       className='imageBt bt ripple disabled mobilefont'
@@ -315,7 +308,7 @@ const ProductBody = (props) => {
                       <span className='ml01'>Image Search</span>
                     </div>
                   </Link>
-                </div>
+                </div> */}
               </div>
             </div>
 
