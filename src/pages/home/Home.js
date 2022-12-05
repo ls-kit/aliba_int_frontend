@@ -19,6 +19,7 @@ import SectionsThree from "./sections/SectionsThree";
 import SectionsFour from "./sections/SectionsFour";
 import SectionsFive from "./sections/SectionsFive";
 import { useState } from "react";
+import TopCategories from "./includes/intro/topCategory/TopCategories";
 
 const Home = (props) => {
   const { general } = props;
@@ -34,6 +35,7 @@ const Home = (props) => {
       <Intro />
       {/*<IconBoxes/>*/}
       {/* <PopularCategory /> */}
+      <TopCategories />
 
       {section_one_active === "enable" && <SectionsOne general={general} />}
       {section_two_active === "enable" && <SectionsTwo general={general} />}
