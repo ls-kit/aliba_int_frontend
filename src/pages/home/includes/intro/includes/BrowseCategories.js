@@ -4,7 +4,7 @@ import _ from "lodash";
 import { Link, withRouter } from "react-router-dom";
 import MegaMenuItem from "./MegaMenuItem";
 import BrowseCategorySkeleton from "../../../../../skeleton/sectionSkeleton/BrowseCategorySkeleton";
-import { filter_parent_cats, loadAsset } from "../../../../../utils/Helpers";
+import { filter_children_cats, filter_parent_cats, loadAsset } from "../../../../../utils/Helpers";
 
 const BrowseCategories = (props) => {
   const { categories, category_loading } = props;
@@ -13,7 +13,11 @@ const BrowseCategories = (props) => {
     return <BrowseCategorySkeleton />;
   }
 
-  const parents = filter_parent_cats(categories);
+  const mainParent = filter_parent_cats(categories);
+  // console.log("mainParent from BC", mainParent[0].otc_id);
+
+  const parents = filter_children_cats(categories, mainParent[0]?.otc_id);
+  // console.log("parents from BC", parents);
 
   return (
     <nav className='side-nav'>
@@ -24,6 +28,7 @@ const BrowseCategories = (props) => {
       <ul className='menu-vertical sf-arrows sf-js-enabled p-0' style={{ touchAction: "pan-y" }}>
         {parents.length > 0 &&
           parents.map((parent, index) => {
+            console.log("parent from bc", parent);
             if (parent.children_count) {
               return <MegaMenuItem key={index} parent={parent} categories={categories} />;
             } else {

@@ -1,10 +1,11 @@
 import React from "react";
 const PriceRange = (props) => {
-  console.log("props from pricerange", props);
   const { totalQty, bulkPriceQuantity } = props;
+
   let first = bulkPriceQuantity[0]?.MinQuantity;
   let second = bulkPriceQuantity[1]?.MinQuantity;
   let third = bulkPriceQuantity[2]?.MinQuantity;
+
   // quantity box active deactive
   const addActiveClass = (MinQuantity, MaxQuantity) => {
     let a = totalQty;
@@ -42,7 +43,8 @@ const PriceRange = (props) => {
           Price: { Base },
         } = pqR;
         // console.log("MinQuantity", MinQuantity);
-        addActiveClass(MinQuantity, MaxQuantity);
+        if (bulkPriceQuantity.length > 0) addActiveClass(MinQuantity, MaxQuantity);
+
         return (
           <div className='range' key={index}>
             <span className='amount'>৳ {Base}</span>
