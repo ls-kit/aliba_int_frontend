@@ -40,7 +40,7 @@ const ProductBody = (props) => {
   const [activeImg, setActiveImg] = useState("");
   const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
   const [loading, setLoading] = useState(true);
-  console.log("product from single product", product);
+  // console.log("product from single product", product);
 
   useEffect(() => {
     bulkPriceQuantityRange(product_id);
@@ -71,8 +71,15 @@ const ProductBody = (props) => {
   if (loading) {
     bulkProductContent = <CardSkelton />;
   }
-  if (!loading && bulkPriceQuantity.length > 0) {
-    bulkProductContent = <PriceRange totalQty={totalQty} bulkPriceQuantity={bulkPriceQuantity} />;
+  if (!loading && bulkPriceQuantity.length > 1) {
+    bulkProductContent = (
+      <PriceRange
+        product={product}
+        general={general}
+        totalQty={totalQty}
+        bulkPriceQuantity={bulkPriceQuantity}
+      />
+    );
   }
 
   return (
@@ -120,6 +127,8 @@ const ProductBody = (props) => {
               general={general}
               colorAttributes={colorAttributes}
               ConfiguredItems={ConfiguredItems}
+              totalQty={totalQty}
+              bulkPriceQuantity={bulkPriceQuantity}
             />
             <AirFilter />
             <div className='details-filter-row'>

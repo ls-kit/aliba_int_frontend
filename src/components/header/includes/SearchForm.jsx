@@ -45,7 +45,7 @@ const SearchForm = (props) => {
 
          <input
             type="file"
-            accept="image/jpg,image/jpeg"
+            // accept="image/jpg,image/jpeg"
             onChange={e => submitPictureSearch(e)}
             name="picture"
             className="d-none"

@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { GetOriginalPriceFromPrice } from "../../../../../utils/CartHelpers";
+import { getSetting } from "../../../../../utils/Helpers";
 const PriceRange = (props) => {
-  const { totalQty, bulkPriceQuantity } = props;
+  const { totalQty, bulkPriceQuantity, general } = props;
+  const rate = getSetting(general, "increase_rate", 15);
+  const currency = getSetting(general, "currency_icon");
 
   let first = bulkPriceQuantity[0]?.MinQuantity;
   let second = bulkPriceQuantity[1]?.MinQuantity;
@@ -36,7 +40,7 @@ const PriceRange = (props) => {
   return (
     <div className='ranges'>
       {bulkPriceQuantity.map((pqR, index) => {
-        // console.log(pqR);
+        // console.log("pqR", pqR);
         const {
           MaxQuantity,
           MinQuantity,
@@ -47,7 +51,11 @@ const PriceRange = (props) => {
 
         return (
           <div className='range' key={index}>
-            <span className='amount'>৳ {Base}</span>
+            <span className='amount'>
+              {" "}
+              {`${currency} ${GetOriginalPriceFromPrice({ OriginalPrice: Base }, rate)}`}
+            </span>
+            {/* <span className='amount'> {`${currency} ${Base}`}</span> */}
             <div className='piece'>{MinQuantity} or more</div>
           </div>
         );
