@@ -40,14 +40,23 @@ const ManageQuantity = (props) => {
 
   const existsConfig = checkExistConfiguredItem(activeCartProduct, product_id, selectConfigId);
 
+  const newPrice = getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate);
   const activeConfiguredQtyChanges = (type = "increment") => {
     let newQty = parseInt(existsConfig.Quantity) + 1;
     if (type === "decrement") {
       newQty = parseInt(existsConfig.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(newQty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(
+        newQty,
+        cartConfigured,
+        product_id,
+        existsConfig.Id,
+        ShippingCharges,
+        newPrice
+      );
     }
+    console.log("Qty change", newQty);
   };
 
   const inputQtyChanges = (qty) => {
@@ -91,7 +100,7 @@ const ManageQuantity = (props) => {
         MaxQuantity: ConfiguredItem.Quantity,
         SalesCount: ConfiguredItem.SalesCount,
         // new
-        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate, ConfiguredItem),
         /*
          ****previous
          */

@@ -93,6 +93,7 @@ export const getProductGroupedAttributes = (Attributes) => {
 
 export const GetOriginalPriceFromPrice = (Price, rate) => {
   let sellPrice = 0;
+
   if (!_.isEmpty(Price)) {
     if (_.isObject(Price)) {
       sellPrice = Number(Price.OriginalPrice) * Number(rate);
@@ -118,13 +119,9 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate =
   } else {
     if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
       return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
-    } else if (totalQtyInCart <= second?.MaxQuantity && totalQtyInCart > first?.MaxQuantity) {
+    } else if (totalQtyInCart < second?.MaxQuantity && totalQtyInCart > second?.MinQuantity) {
       return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
-    } else if (
-      totalQtyInCart > first?.MaxQuantity &&
-      totalQtyInCart > second?.MaxQuantity &&
-      totalQtyInCart >= third?.MinQuantity
-    ) {
+    } else if (totalQtyInCart < third?.MaxQuantity && totalQtyInCart > third?.MinQuantity) {
       return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
     }
   }
@@ -551,7 +548,8 @@ export const cartProductQuantityUpdate = (
   cartConfigured,
   product_id,
   existsConfigId,
-  ShippingCharges
+  ShippingCharges,
+  newPrice
 ) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
@@ -561,7 +559,7 @@ export const cartProductQuantityUpdate = (
       } else {
         ConfiguredItems = mapItem.ConfiguredItems.map((config) => {
           if (config.Id === existsConfigId) {
-            return { ...config, Quantity: qty };
+            return { ...config, Price: newPrice, Quantity: qty };
           }
           return config;
         });

@@ -102,7 +102,6 @@ const ProductConfiguredItems = (props) => {
         </thead>
         <tbody>
           {ProductConfiguredItems.map((config, index) => {
-            console.log("config", config);
             return (
               <tr key={index}>
                 <td className='align-middle'>{getConfigAttributes(config.Configurators).Value || "N/A"}</td>
