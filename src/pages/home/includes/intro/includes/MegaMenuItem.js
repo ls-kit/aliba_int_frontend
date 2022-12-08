@@ -7,8 +7,6 @@ export const SubChildrenItem = (props) => {
   const { categories, children } = props;
 
   const subChildren = filter_children_cats(categories, children.otc_id);
-  //   console.log("subChildren from mm", props);
-  //   console.log("subChildren from mm", subChildren);
 
   if (!_.isEmpty(subChildren) && _.isArray(subChildren)) {
     return (
@@ -43,53 +41,23 @@ const MegaMenuItem = (props) => {
         )}
         {parent.name}
       </Link>
-      {/* {children_cats.length > 0 &&
-        children_cats.slice(0, 20).map((child, index) => {
-          const { otc_id } = child;
-
-          return (
-            <Link
-              to={child.children_count ? `/${parent.slug}/${child.slug}` : `/shop/${child.slug}`}
-              className='sf-with-ul text-dark'
-              key={index}
-            >
-              <div className='d-flex align-items-center'>
-                <div>
-                  {child.icon ? (
-                    <img
-                      src={loadAsset(child.icon)}
-                      style={{ width: "22px", display: "inline" }}
-                      alt={child.name}
-                    />
-                  ) : (
-                    <i className='icon-laptop' />
-                  )}
-                </div>
-                <div>{child.name}</div>
-              </div>
-            </Link>
-          );
-        })} */}
       <div className='megamenu'>
         <div className='row '>
           <div className='col-md-12'>
             <div className='menu-col'>
               <div className='row'>
                 {children_cats.length > 0 &&
-                  children_cats.map((child, index) => {
-                    console.log("child from mi", child);
-                    return (
-                      <div className='col-md-4' key={index}>
-                        <Link
-                          to={child.children_count ? `/${parent.slug}/${child.slug}` : `/shop/${child.slug}`}
-                          className='menu-title'
-                        >
-                          {child.name}
-                        </Link>
-                        <SubChildrenItem categories={categories} children={child} />
-                      </div>
-                    );
-                  })}
+                  children_cats.map((child, index) => (
+                    <div className='col-md-4' key={index}>
+                      <Link
+                        to={child.children_count ? `/${parent.slug}/${child.slug}` : `/shop/${child.slug}`}
+                        className='menu-title'
+                      >
+                        {child.name}
+                      </Link>
+                      <SubChildrenItem categories={categories} children={child} />
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

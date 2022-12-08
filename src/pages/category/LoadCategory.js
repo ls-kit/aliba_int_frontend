@@ -30,9 +30,9 @@ const LoadCategory = (props) => {
 
       {/* End .breadcrumb-nav */}
       <div className='page-content'>
-        <div>
+        <div className='container'>
           <div className='row'>
-            <div className='col'>
+            <div className='col-lg-9 col-xl-4-5 col'>
               <div className='product_list_container'>
                 <div className='toolbox'>
                   <div className='toolbox-left'>

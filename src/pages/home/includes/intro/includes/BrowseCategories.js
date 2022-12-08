@@ -4,7 +4,7 @@ import _ from "lodash";
 import { Link, withRouter } from "react-router-dom";
 import MegaMenuItem from "./MegaMenuItem";
 import BrowseCategorySkeleton from "../../../../../skeleton/sectionSkeleton/BrowseCategorySkeleton";
-import { filter_children_cats, filter_parent_cats, loadAsset } from "../../../../../utils/Helpers";
+import { filter_parent_cats, loadAsset } from "../../../../../utils/Helpers";
 
 const BrowseCategories = (props) => {
   const { categories, category_loading } = props;
@@ -13,22 +13,17 @@ const BrowseCategories = (props) => {
     return <BrowseCategorySkeleton />;
   }
 
-  const mainParent = filter_parent_cats(categories);
-  // console.log("mainParent from BC", mainParent[0].otc_id);
-
-  const parents = filter_children_cats(categories, mainParent[0]?.otc_id);
-  // console.log("parents from BC", parents);
+  const parents = filter_parent_cats(categories);
 
   return (
     <nav className='side-nav'>
-      {/* <div className='sidenav-title letter-spacing-normal font-size-normal d-flex justify-content-xl-between align-items-center bg-primary justify-content-center text-truncate'>
-        Categories
+      <div className='sidenav-title letter-spacing-normal font-size-normal d-flex justify-content-xl-between align-items-center bg-primary justify-content-center text-truncate'>
+        Browse Categories
         <i className='icon-bars float-right h5 text-white m-0 d-none d-xl-block' />
-      </div> */}
-      <ul className='menu-vertical sf-arrows sf-js-enabled p-0' style={{ touchAction: "pan-y" }}>
+      </div>
+      <ul className='menu-vertical sf-arrows sf-js-enabled' style={{ touchAction: "pan-y" }}>
         {parents.length > 0 &&
           parents.map((parent, index) => {
-            console.log("parent from bc", parent);
             if (parent.children_count) {
               return <MegaMenuItem key={index} parent={parent} categories={categories} />;
             } else {
