@@ -127,7 +127,7 @@ const ProductBody = (props) => {
               general={general}
               colorAttributes={colorAttributes}
               ConfiguredItems={ConfiguredItems}
-              totalQty={totalQty}
+              totalQtyInCart={totalQty}
               bulkPriceQuantity={bulkPriceQuantity}
             />
             <AirFilter />

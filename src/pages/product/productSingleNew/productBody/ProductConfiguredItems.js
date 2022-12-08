@@ -4,6 +4,7 @@ import {
   GetOriginalPriceFromPrice,
   getProductAttributes,
   getProductPrice,
+  getUpdatedProductPrice,
   is_size,
 } from "../../../../utils/CartHelpers";
 import { getSetting } from "../../../../utils/Helpers";
@@ -12,8 +13,15 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 const ProductConfiguredItems = (props) => {
-  const { product, ConfiguredItems, colorAttributes, cartAttribute, general, totalQty, bulkPriceQuantity } =
-    props;
+  const {
+    product,
+    ConfiguredItems,
+    colorAttributes,
+    cartAttribute,
+    general,
+    totalQtyInCart,
+    bulkPriceQuantity,
+  } = props;
   // console.log("pc", product);
   const Attributes = getProductAttributes(product);
   const rate = getSetting(general, "increase_rate", 15);
@@ -94,11 +102,12 @@ const ProductConfiguredItems = (props) => {
         </thead>
         <tbody>
           {ProductConfiguredItems.map((config, index) => {
+            console.log("config", config);
             return (
               <tr key={index}>
                 <td className='align-middle'>{getConfigAttributes(config.Configurators).Value || "N/A"}</td>
 
-                <td className='align-middle'>
+                {/* <td className='align-middle'>
                   {!totalQty &&
                     `${currency} ${GetOriginalPriceFromPrice(
                       { OriginalPrice: firstMinQuantityPrice },
@@ -123,7 +132,13 @@ const ProductConfiguredItems = (props) => {
                       { OriginalPrice: thirdMinQuantityPrice },
                       rate
                     )}`}
-                </td>
+                </td> */}
+
+                <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
+                  totalQtyInCart,
+                  bulkPriceQuantity,
+                  rate
+                )}`}</td>
 
                 {/* <td className='align-middle'>{`${currency} ${getProductPrice(product, rate, config)}`}</td> */}
                 {Number(config.Quantity) <= 0 ? (
@@ -134,6 +149,8 @@ const ProductConfiguredItems = (props) => {
                       product={product}
                       ConfiguredItem={config}
                       ConfiguredItemAttributes={ConfiguredItemAttributes(config)}
+                      totalQtyInCart={totalQtyInCart}
+                      bulkPriceQuantity={bulkPriceQuantity}
                     />
                     <p className='maxQuantityText'>{config.Quantity}</p>
                   </td>

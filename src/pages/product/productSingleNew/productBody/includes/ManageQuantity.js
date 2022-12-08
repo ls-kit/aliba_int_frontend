@@ -15,11 +15,20 @@ import {
   getProductApproxWeight,
   getProductDeliveryCost,
   getProductPrice,
+  getUpdatedProductPrice,
 } from "../../../../../utils/CartHelpers";
 import { getSetting } from "../../../../../utils/Helpers";
 
 const ManageQuantity = (props) => {
-  const { product, general, ConfiguredItem, ConfiguredItemAttributes, cartConfigured } = props;
+  const {
+    product,
+    general,
+    ConfiguredItem,
+    ConfiguredItemAttributes,
+    cartConfigured,
+    totalQtyInCart,
+    bulkPriceQuantity,
+  } = props;
 
   const rate = getSetting(general, "increase_rate", 15);
   const ShippingCharges = getSetting(general, "air_shipping_charges");
@@ -58,7 +67,12 @@ const ManageQuantity = (props) => {
         ApproxWeight: getProductApproxWeight(product),
         DeliveryCost: getProductDeliveryCost(product, rate),
         Quantity: qty,
-        Price: getProductPrice(product, rate),
+        // new
+        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+        /*
+         ****previous
+         */
+        // Price: getProductPrice(product, rate),
         hasConfigurators: true,
         IsCart: true,
         ConfiguredItems: [],
@@ -76,7 +90,12 @@ const ManageQuantity = (props) => {
         Quantity: qty,
         MaxQuantity: ConfiguredItem.Quantity,
         SalesCount: ConfiguredItem.SalesCount,
-        Price: getProductPrice(product, rate, ConfiguredItem),
+        // new
+        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+        /*
+         ****previous
+         */
+        // Price: getProductPrice(product, rate, ConfiguredItem),
         Attributes: ConfiguredItemAttributes,
       };
       activeConfiguredItems = [...activeConfiguredItems, makeConfig];
@@ -114,7 +133,12 @@ const ManageQuantity = (props) => {
       ApproxWeight: getProductApproxWeight(product),
       DeliveryCost: getProductDeliveryCost(product, rate),
       Quantity: qty,
-      Price: getProductPrice(product, rate),
+      // new
+      Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+      /*
+       ****previous
+       */
+      // Price: getProductPrice(product, rate),
       hasConfigurators: false,
       IsCart: true,
       ConfiguredItems: [],
