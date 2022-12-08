@@ -114,16 +114,27 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate =
   let firstMinQuantityPrice = bulkPriceQuantity[0]?.Price.Base;
   let secondMinQuantityPrice = bulkPriceQuantity[1]?.Price.Base;
   let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
-  if (!totalQtyInCart) {
+
+  // if (!totalQtyInCart) {
+  //   return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+  // } else {
+  //   if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
+  //     return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+  //   } else if (totalQtyInCart < second?.MaxQuantity && totalQtyInCart > second?.MinQuantity) {
+  //     return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
+  //   } else if (totalQtyInCart < third?.MaxQuantity && totalQtyInCart > third?.MinQuantity) {
+  //     return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
+  //   }
+  // }
+
+  if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
     return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+  } else if (totalQtyInCart >= second?.MinQuantity && totalQtyInCart <= second?.MaxQuantity) {
+    return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
+  } else if (totalQtyInCart >= third?.MinQuantity) {
+    return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
   } else {
-    if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
-      return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
-    } else if (totalQtyInCart < second?.MaxQuantity && totalQtyInCart > second?.MinQuantity) {
-      return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
-    } else if (totalQtyInCart < third?.MaxQuantity && totalQtyInCart > third?.MinQuantity) {
-      return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
-    }
+    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
   }
 
   return sellPrice;
