@@ -942,7 +942,14 @@ a:focus {
 .page-wrapper {
   padding-top: 6rem;
 }
-
+.subChildCat {
+  max-height: 150px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+.subChildCat::-webkit-scrollbar {
+  width: 1rem;
+}
 @media (max-width: 991px) {
   .main-area {
     margin-left: 0;

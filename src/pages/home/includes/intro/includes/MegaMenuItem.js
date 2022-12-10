@@ -10,7 +10,7 @@ export const SubChildrenItem = (props) => {
 
   if (!_.isEmpty(subChildren) && _.isArray(subChildren)) {
     return (
-      <ul>
+      <ul className='subChildCat'>
         {subChildren.map((subChild, index) => (
           <li key={index}>
             <Link to={`/shop/${subChild.slug}`}>{subChild.name}</Link>
