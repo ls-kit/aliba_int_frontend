@@ -67,20 +67,20 @@ const ProductBody = (props) => {
   };
 
   // decide what is render for bulk product
-  let bulkProductContent = null;
-  if (loading) {
-    bulkProductContent = <CardSkelton />;
-  }
-  if (!loading && bulkPriceQuantity.length > 1) {
-    bulkProductContent = (
-      <PriceRange
-        product={product}
-        general={general}
-        totalQty={totalQty}
-        bulkPriceQuantity={bulkPriceQuantity}
-      />
-    );
-  }
+  // let bulkProductContent = null;
+  // if (loading) {
+  //   bulkProductContent = <CardSkelton />;
+  // }
+  // if (!loading && bulkPriceQuantity.length > 1) {
+  //   bulkProductContent = (
+  //     <PriceRange
+  //       product={product}
+  //       general={general}
+  //       totalQty={totalQty}
+  //       bulkPriceQuantity={bulkPriceQuantity}
+  //     />
+  //   );
+  // }
 
   return (
     <div className='product-details-top'>
@@ -105,7 +105,7 @@ const ProductBody = (props) => {
         <div className='col-md-6'>
           <div className='product-details' id='hello'>
             <AppOffer />
-            {bulkProductContent}
+            {/* {bulkProductContent} */}
             {_.isArray(firstConfigurators) &&
               firstConfigurators.map((singleConfig, index) => (
                 <SingleAttributeGroup

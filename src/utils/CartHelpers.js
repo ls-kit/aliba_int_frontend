@@ -93,7 +93,6 @@ export const getProductGroupedAttributes = (Attributes) => {
 
 export const GetOriginalPriceFromPrice = (Price, rate) => {
   let sellPrice = 0;
-
   if (!_.isEmpty(Price)) {
     if (_.isObject(Price)) {
       sellPrice = Number(Price.OriginalPrice) * Number(rate);
@@ -103,41 +102,6 @@ export const GetOriginalPriceFromPrice = (Price, rate) => {
     }
   }
   return _.round(sellPrice);
-};
-
-export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate = 15) => {
-  let sellPrice = 0;
-  let first = bulkPriceQuantity[0];
-  let second = bulkPriceQuantity[1];
-  let third = bulkPriceQuantity[2];
-
-  let firstMinQuantityPrice = bulkPriceQuantity[0]?.Price.Base;
-  let secondMinQuantityPrice = bulkPriceQuantity[1]?.Price.Base;
-  let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
-
-  // if (!totalQtyInCart) {
-  //   return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
-  // } else {
-  //   if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
-  //     return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
-  //   } else if (totalQtyInCart < second?.MaxQuantity && totalQtyInCart > second?.MinQuantity) {
-  //     return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
-  //   } else if (totalQtyInCart < third?.MaxQuantity && totalQtyInCart > third?.MinQuantity) {
-  //     return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
-  //   }
-  // }
-
-  if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
-    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
-  } else if (totalQtyInCart >= second?.MinQuantity && totalQtyInCart <= second?.MaxQuantity) {
-    return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
-  } else if (totalQtyInCart >= third?.MinQuantity) {
-    return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
-  } else {
-    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
-  }
-
-  return sellPrice;
 };
 
 /**
@@ -559,8 +523,7 @@ export const cartProductQuantityUpdate = (
   cartConfigured,
   product_id,
   existsConfigId,
-  ShippingCharges,
-  newPrice
+  ShippingCharges
 ) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
@@ -570,7 +533,7 @@ export const cartProductQuantityUpdate = (
       } else {
         ConfiguredItems = mapItem.ConfiguredItems.map((config) => {
           if (config.Id === existsConfigId) {
-            return { ...config, Price: newPrice, Quantity: qty };
+            return { ...config, Quantity: qty };
           }
           return config;
         });

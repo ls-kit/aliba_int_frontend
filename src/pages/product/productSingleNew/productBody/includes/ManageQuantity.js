@@ -15,20 +15,11 @@ import {
   getProductApproxWeight,
   getProductDeliveryCost,
   getProductPrice,
-  getUpdatedProductPrice,
 } from "../../../../../utils/CartHelpers";
 import { getSetting } from "../../../../../utils/Helpers";
 
 const ManageQuantity = (props) => {
-  const {
-    product,
-    general,
-    ConfiguredItem,
-    ConfiguredItemAttributes,
-    cartConfigured,
-    totalQtyInCart,
-    bulkPriceQuantity,
-  } = props;
+  const { product, general, ConfiguredItem, ConfiguredItemAttributes, cartConfigured } = props;
 
   const rate = getSetting(general, "increase_rate", 15);
   const ShippingCharges = getSetting(general, "air_shipping_charges");
@@ -40,23 +31,14 @@ const ManageQuantity = (props) => {
 
   const existsConfig = checkExistConfiguredItem(activeCartProduct, product_id, selectConfigId);
 
-  const newPrice = getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate);
   const activeConfiguredQtyChanges = (type = "increment") => {
     let newQty = parseInt(existsConfig.Quantity) + 1;
     if (type === "decrement") {
       newQty = parseInt(existsConfig.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(
-        newQty,
-        cartConfigured,
-        product_id,
-        existsConfig.Id,
-        ShippingCharges,
-        newPrice
-      );
+      cartProductQuantityUpdate(newQty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
     }
-    console.log("Qty change", newQty);
   };
 
   const inputQtyChanges = (qty) => {
@@ -76,12 +58,7 @@ const ManageQuantity = (props) => {
         ApproxWeight: getProductApproxWeight(product),
         DeliveryCost: getProductDeliveryCost(product, rate),
         Quantity: qty,
-        // new
-        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
-        /*
-         ****previous
-         */
-        // Price: getProductPrice(product, rate),
+        Price: getProductPrice(product, rate),
         hasConfigurators: true,
         IsCart: true,
         ConfiguredItems: [],
@@ -99,12 +76,7 @@ const ManageQuantity = (props) => {
         Quantity: qty,
         MaxQuantity: ConfiguredItem.Quantity,
         SalesCount: ConfiguredItem.SalesCount,
-        // new
-        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate, ConfiguredItem),
-        /*
-         ****previous
-         */
-        // Price: getProductPrice(product, rate, ConfiguredItem),
+        Price: getProductPrice(product, rate, ConfiguredItem),
         Attributes: ConfiguredItemAttributes,
       };
       activeConfiguredItems = [...activeConfiguredItems, makeConfig];
@@ -142,12 +114,7 @@ const ManageQuantity = (props) => {
       ApproxWeight: getProductApproxWeight(product),
       DeliveryCost: getProductDeliveryCost(product, rate),
       Quantity: qty,
-      // new
-      Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
-      /*
-       ****previous
-       */
-      // Price: getProductPrice(product, rate),
+      Price: getProductPrice(product, rate),
       hasConfigurators: false,
       IsCart: true,
       ConfiguredItems: [],
@@ -201,7 +168,7 @@ const ManageQuantity = (props) => {
               </div>
               <input
                 type='text'
-                className='form-control text-center quantify-bdr'
+                className='form-control text-center'
                 value={activeCartProduct.Quantity}
                 onChange={(e) => plainItemQtyChanges(e.target.value)}
                 required=''
@@ -244,7 +211,7 @@ const ManageQuantity = (props) => {
             </div>
             <input
               type='text'
-              className='form-control text-center quantify-bdr'
+              className='form-control text-center'
               value={existsConfig.Quantity}
               onChange={(e) => inputQtyChanges(e.target.value)}
               required=''
