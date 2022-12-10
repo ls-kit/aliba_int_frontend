@@ -950,6 +950,14 @@ a:focus {
 .subChildCat::-webkit-scrollbar {
   width: 1rem;
 }
+
+@media only screen and (min-width: 768px) {
+  .intro-slide,
+  .intro-section .col-lg-5cols > .banner.banner-overlay {
+    min-height: 348px !important;
+  }
+}
+
 @media (max-width: 991px) {
   .main-area {
     margin-left: 0;
