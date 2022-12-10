@@ -168,7 +168,7 @@ const ManageQuantity = (props) => {
               </div>
               <input
                 type='text'
-                className='form-control text-center'
+                className='form-control text-center addQ'
                 value={activeCartProduct.Quantity}
                 onChange={(e) => plainItemQtyChanges(e.target.value)}
                 required=''
@@ -211,7 +211,7 @@ const ManageQuantity = (props) => {
             </div>
             <input
               type='text'
-              className='form-control text-center'
+              className='form-control text-center addQ'
               value={existsConfig.Quantity}
               onChange={(e) => inputQtyChanges(e.target.value)}
               required=''
