@@ -435,6 +435,10 @@ a:focus {
   display: flex;
   justify-content: center;
 }
+.flexMiddle {
+  display: flex;
+  align-items: center;
+}
 .bold {
   font-weight: 700;
 }
@@ -799,6 +803,23 @@ a:focus {
 .rangeActive {
   background-image: linear-gradient(to right, #f7b733, #fc4a1a);
   color: $white;
+}
+
+.product-details-tab .tab-content {
+  margin-top: 1rem !important;
+}
+.t-white {
+  color: $white !important;
+}
+.offer-btn-image {
+  width: 20px;
+  margin: 0.5rem;
+}
+.country-im {
+  height: 24px;
+  width: 40px;
+  margin-left: 1rem;
+  display: inline-block;
 }
 
 // responsiveness

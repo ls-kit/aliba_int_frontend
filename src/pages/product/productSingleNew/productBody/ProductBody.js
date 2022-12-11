@@ -130,7 +130,7 @@ const ProductBody = (props) => {
               totalQtyInCart={totalQty}
               bulkPriceQuantity={bulkPriceQuantity}
             />
-            <AirFilter />
+            {/* <AirFilter /> */}
             <div className='details-filter-row'>
               <ProductSummary product={product} general={general} />
             </div>

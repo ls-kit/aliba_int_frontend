@@ -10,48 +10,62 @@ const ProductSummary = (props) => {
   const { product, general, cartConfigured } = props;
   const product_id = !_.isEmpty(product) ? product.Id : "";
   const activeCartProduct = findProductCartFromState(cartConfigured, product_id);
-
+  console.log("product----------", product);
   const currency = getSetting(general, "currency_icon");
   const china_to_bd_bottom_message = getSetting(general, "china_to_bd_bottom_message");
 
   const totalWeight = activeCartProduct.totalWeight;
+  const approxWeight = activeCartProduct.ApproxWeight;
   const totalPrice = activeCartProduct.totalPrice;
   const totalQty = activeCartProduct.totalQty;
   const DeliveryCost = activeCartProduct.DeliveryCost;
   const ShippingRate = activeCartProduct.ShippingRate;
   const totalShippingCost = () => {
+    // console.log("product-------", Number(totalWeight));
     let weightCharge = Number(totalWeight) * Number(ShippingRate);
     weightCharge = weightCharge < 100 ? 100 : weightCharge;
     return Number(DeliveryCost) + weightCharge;
   };
 
+  // console.log("product-------", ShippingRate);
   const productTotalCost = () => {
     return Number(totalPrice) + totalShippingCost();
   };
+  // console.log("activeCartProduct", activeCartProduct);
 
   return (
     <table className='table table-sm table-bordered product_summary_table'>
       <tbody>
         <tr>
-          <td className='bg-gray text-center' colSpan={2}>
-            <b>CHINA TO BANGLADESH</b>
+          <td className='bg-gray text-center  '>
+            {" "}
+            <strong>FROM CHINA </strong>
+            <img className='country-im' src='https://wholesalecart.com/static/media/cn.10077f3e.svg' alt='' />
+          </td>
+          <td className='bg-gray text-center '>
+            <strong> TO BANGLADESH</strong>
+            <img className='country-im' src='https://wholesalecart.com/static/media/bd.7b147c00.svg' alt='' />
           </td>
         </tr>
         <tr>
-          <td style={{ width: "65%" }}>Total Quantity:</td>
+          <td>Total Quantity:</td>
           <td>{`${totalQty || 0}`}</td>
         </tr>
         <tr>
           <td>Product Price:</td>
           <td>{`${currency} ${numberWithCommas(totalPrice)}`}</td>
         </tr>
-        {/*<tr>*/}
-        {/*   <td>Approx. Weight:</td>*/}
-        {/*   <td>{totalWeight || '0.000'} kg</td>*/}
-        {/*</tr>*/}
         <tr>
-          <td>China to BD Shipping cost:</td>
+          <td>Approx. Weight:</td>
+          <td>{approxWeight || "0.000"} kg ( আনুমানিক)</td>
+        </tr>
+        <tr>
+          <td>China to BD Shipping charge:</td>
           <td>{`${currency} ${numberWithCommas(totalShippingCost())}`}</td>
+        </tr>
+        <tr>
+          <td>Shipping charge:</td>
+          <td>{`${currency} ${numberWithCommas(ShippingRate)}`} Per Kg</td>
         </tr>
         <tr>
           <td>Total Products Price:</td>
@@ -63,8 +77,8 @@ const ProductSummary = (props) => {
         <tr>
           <td colSpan={2}>
             <span>
-              উপরে উল্লেখিত মুল্য শুধুমাত্র চায়না থেকে বাংলাদেশে আসার ক্রয়মুল্য, পণ্য আসার পর লোকাল শিপিং
-              চার্জ আলাদা যোগ হবে।
+              ** উপরে উল্লেখিত পণ্যের ওজন সম্পূর্ণ সঠিক নয়, আনুমানিক মাত্র। বাংলাদেশে আসার পর পণ্যটির প্রকৃত
+              ওজন মেপে শিপিং চার্জ হিসাব করা হবে।
             </span>
           </td>
         </tr>

@@ -270,6 +270,10 @@ export const getProductApproxWeight = (product, common = 0) => {
       if (ManualWeight) {
         return ManualWeight ? ManualWeight : common;
       }
+      const OWeight = PhysicalParameters.Weight;
+      if (OWeight) {
+        return OWeight ? OWeight : common;
+      }
       const weight = PhysicalParameters.ApproxWeight;
       return weight ? weight : common;
     }

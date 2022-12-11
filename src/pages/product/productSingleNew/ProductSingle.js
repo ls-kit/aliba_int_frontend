@@ -67,8 +67,9 @@ const ProductSingle = (props) => {
             <RelatedProduct item_id={item_id} />
           </div>
         </div>
-        <SameSellerProducts vendorId={product?.VendorId} />
+
         <ProductDetailsTab product={product} />
+        <SameSellerProducts vendorId={product?.VendorId} />
         <div className='col-md-12 d-block d-lg-none'>
           <RelatedProduct item_id={item_id} />
         </div>
