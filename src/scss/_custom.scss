@@ -821,6 +821,27 @@ a:focus {
   margin-left: 1rem;
   display: inline-block;
 }
+.subImages .count {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(
+    to top left,
+    transparent 0,
+    transparent 50%,
+    var(--primary-color-dark) 0,
+    var(--primary-color-light)
+  );
+  color: #fff;
+  padding: 4px 0 4px 4px;
+  font-size: 12px;
+  height: 36px;
+  width: 36px;
+  text-align: left;
+  border-top-left-radius: 8px;
+  color: #000;
+  font-weight: 600;
+}
 
 // responsiveness
 
