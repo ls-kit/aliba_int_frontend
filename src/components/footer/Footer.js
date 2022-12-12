@@ -95,6 +95,21 @@ const Footer = (props) => {
                       <Link to='/dashboard/orders'>Track My Order</Link>
                     </li>
                     <li>
+                      <Link to='/pages/minimum-order-quantity'>Minimum Order Quantity</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/prohibited-items'>Prohibited Items</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/delivery-charges'>Delivery charges</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/delivery-charge-policy'>Delivery charge Policy</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/custom-and-shipping-charge'>Custom and Shipping charge</Link>
+                    </li>
+                    <li>
                       <Link to='/faq'>Faq</Link>
                     </li>
                   </ul>
@@ -125,6 +140,10 @@ const Footer = (props) => {
                     </li>
                     <li>
                       <Link to='/pages/return-and-refund-policy'>Return and Refund Policy</Link>
+                    </li>
+
+                    <li>
+                      <Link to='/pages/shipping-and-delivery'>Shipping and Delivery Policy</Link>
                     </li>
                     <li>
                       <Link to='/pages/secured-payment'>Secured Payment</Link>

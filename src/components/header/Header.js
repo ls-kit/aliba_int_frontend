@@ -26,6 +26,13 @@ const Header = (props) => {
           <div className='header-right'>
             <div className='header-dropdown-link'>
               <div className='wishlist'>
+                <Link to='/pages/blog'>
+                  <div className='icon'>
+                    <span className='ml-2 fw-bold d-md-inline d-none nav-item-text'>Blog</span>
+                  </div>
+                </Link>
+              </div>
+              <div className='wishlist'>
                 <Link to='/checkout'>
                   <div className='icon'>
                     <FaShoppingCart />
