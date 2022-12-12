@@ -821,6 +821,11 @@ a:focus {
   margin-left: 1rem;
   display: inline-block;
 }
+.widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .subImages .count {
   position: absolute;
   top: 0;
@@ -911,6 +916,11 @@ a:focus {
     margin-top: 0.75rem;
     grid-gap: 0.5rem;
     gap: 0.5rem;
+  }
+  .infoPageContentBlock {
+    h2 {
+      font-size: 18px;
+    }
   }
 }
 

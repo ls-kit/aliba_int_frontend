@@ -38,167 +38,179 @@ const Footer = (props) => {
       <div className='footer-middle border-0'>
         <div className='container'>
           <div className='row'>
-            <div className='col-12 col-lg-3'>
+            <div className='col-6 col-md-6 col-lg-3'>
               <div className='widget widget-about mb-4'>
-                <Link to='/'>
-                  <img
-                    src={loadAsset(general.frontend_logo_footer)}
-                    className='footer-logo'
-                    alt={general.site_name}
-                  />
-                </Link>
                 <div>
-                  <ul className='contact-list'>
-                    <li>
-                      <i className='icon-map-marker' />
-                      <span className='bold'>HEAD OFFICE:</span>
-                      <br />
-                      <span>{general.office_address}</span>
-                    </li>
-                    <li>
-                      <i className='icon-envelope' />
-                      <span className='bold'>EMAIL:</span>
-                      <br />
-                      <a href={`mailto:${general.office_email}`}>{general.office_email}</a>
-                    </li>
-                    <li>
-                      <i className='icon-phone' />
-                      <span className='bold'>PHONE:</span>
-                      <br />
-                      <a href={`tel:${general.office_phone}`}>{general.office_phone}</a>
-                    </li>
-                  </ul>
+                  <Link to='/'>
+                    <img
+                      src={loadAsset(general.frontend_logo_footer)}
+                      className='footer-logo'
+                      alt={general.site_name}
+                    />
+                  </Link>
+                  <div>
+                    <ul className='contact-list'>
+                      <li>
+                        <i className='icon-map-marker' />
+                        <span className='bold'>HEAD OFFICE:</span>
+                        <br />
+                        <span>{general.office_address}</span>
+                      </li>
+                      <li>
+                        <i className='icon-envelope' />
+                        <span className='bold'>EMAIL:</span>
+                        <br />
+                        <a href={`mailto:${general.office_email}`}>{general.office_email}</a>
+                      </li>
+                      <li>
+                        <i className='icon-phone' />
+                        <span className='bold'>PHONE:</span>
+                        <br />
+                        <a href={`tel:${general.office_phone}`}>{general.office_phone}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  {/* End .widget-about-info */}
                 </div>
-                {/* End .widget-about-info */}
               </div>
               {/* End .widget about-widget */}
             </div>
             {/* End .col-sm-4 col-lg-3 */}
-            <div className='col-12 col-lg-3'>
+            <div className='col-6 col-md-6 col-lg-3'>
               <div className='widget mb-4'>
-                <h4 className='widget-title uppercase'>Customer</h4>
-                {/* End .widget-title */}
-                <ul className='widget-list'>
-                  <li>
-                    <Link to='/login'>Sign In</Link>
-                  </li>
-                  <li>
-                    <Link to='/special-offer'>Special Offer</Link>
-                  </li>
-                  <li>
-                    <Link to='/checkout'>View Cart</Link>
-                  </li>
-                  <li>
-                    <Link to='/dashboard/orders'>Track My Order</Link>
-                  </li>
-                  <li>
-                    <Link to='/faq'>Faq</Link>
-                  </li>
-                </ul>
-                {/* End .widget-list */}
+                <div>
+                  <h4 className='widget-title uppercase'>Customer</h4>
+                  {/* End .widget-title */}
+                  <ul className='widget-list'>
+                    <li>
+                      <Link to='/login'>Sign In</Link>
+                    </li>
+                    <li>
+                      <Link to='/special-offer'>Special Offer</Link>
+                    </li>
+                    <li>
+                      <Link to='/checkout'>View Cart</Link>
+                    </li>
+                    <li>
+                      <Link to='/dashboard/orders'>Track My Order</Link>
+                    </li>
+                    <li>
+                      <Link to='/faq'>Faq</Link>
+                    </li>
+                  </ul>
+                  {/* End .widget-list */}
+                </div>
               </div>
               {/* End .widget */}
             </div>
             {/* End .col-sm-64 col-lg-3 */}
             {/* End .col-sm-12 col-lg-3 */}
-            <div className='col-12 col-lg-3'>
+            <div className='col-6 col-md-6 col-lg-3'>
               <div className='widget mb-4'>
-                <h4 className='widget-title uppercase'>Information</h4>
-                {/* End .widget-title */}
-                <ul className='widget-list'>
-                  <li>
-                    <Link to='/pages/about-us'>About Us</Link>
-                  </li>
-                  <li>
-                    <Link to='/contact'>Contact us</Link>
-                  </li>
-                  <li>
-                    <Link to='/pages/privacy-policy'>Privacy Policy</Link>
-                  </li>
-                  <li>
-                    <Link to='/pages/terms-and-conditions'>Terms and conditions</Link>
-                  </li>
-                  <li>
-                    <Link to='/pages/return-and-refund-policy'>Return and Refund Policy</Link>
-                  </li>
-                  <li>
-                    <Link to='/pages/secured-payment'>Secured Payment</Link>
-                  </li>
-                  <li>
-                    <Link to='/pages/transparency'>Transparency</Link>
-                  </li>
-                </ul>
-                {/* End .widget-list */}
+                <div>
+                  <h4 className='widget-title uppercase'>Information</h4>
+                  {/* End .widget-title */}
+                  <ul className='widget-list'>
+                    <li>
+                      <Link to='/pages/about-us'>About Us</Link>
+                    </li>
+                    <li>
+                      <Link to='/contact'>Contact us</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/privacy-policy'>Privacy Policy</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/terms-conditions'>Terms and conditions</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/return-and-refund-policy'>Return and Refund Policy</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/secured-payment'>Secured Payment</Link>
+                    </li>
+                    <li>
+                      <Link to='/pages/transparency'>Transparency</Link>
+                    </li>
+                  </ul>
+                  {/* End .widget-list */}
+                </div>
               </div>
               {/* End .widget */}
             </div>
             {/* End .col-sm-4 col-lg-3 */}
-            <div className='col-12 col-lg-3'>
+            <div className='col-6 col-md-6 col-lg-3'>
               <div className='widget mb-4'>
-                <h4 className='widget-title uppercase'>Mobile Apps</h4>
-                <ul className='widget-list'>
-                  <li>
-                    <a href='#' target='_blank'>
-                      <img src={gPlay} alt='Google Play' style={{ width: "126px", marginBottom: "0.5rem" }} />
-                    </a>
-                  </li>
-                  <li>
-                    <a href='#' target='_blank'>
-                      <img src={aStore} alt='App Store' style={{ width: "126px", marginBottom: "2rem" }} />
-                    </a>
-                  </li>
-                </ul>
-                <h4 className='widget-title uppercase'>Social Links</h4>
-                <div className='social-icons'>
-                  {general.facebook && (
-                    <a
-                      href={general.facebook}
-                      className='f-social-icon '
-                      title='Facebook'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      <img src={Facebook} alt='Facebook' />
-                    </a>
-                  )}
+                <div>
+                  <h4 className='widget-title uppercase'>Mobile Apps</h4>
+                  <ul className='widget-list'>
+                    <li>
+                      <a href='#' target='_blank'>
+                        <img
+                          src={gPlay}
+                          alt='Google Play'
+                          style={{ width: "126px", marginBottom: "0.5rem" }}
+                        />
+                      </a>
+                    </li>
+                    <li>
+                      <a href='#' target='_blank'>
+                        <img src={aStore} alt='App Store' style={{ width: "126px", marginBottom: "2rem" }} />
+                      </a>
+                    </li>
+                  </ul>
+                  <h4 className='widget-title uppercase'>Social Links</h4>
+                  <div className='social-icons'>
+                    {general.facebook && (
+                      <a
+                        href={general.facebook}
+                        className='f-social-icon '
+                        title='Facebook'
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <img src={Facebook} alt='Facebook' />
+                      </a>
+                    )}
 
-                  {general.instagram && (
-                    <a
-                      href={general.instagram}
-                      className='f-social-icon '
-                      title='Instagram'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      <img src={instagram} alt='instagram' />
-                    </a>
-                  )}
-                  {general.youtube && (
-                    <a
-                      href={general.youtube}
-                      className='f-social-icon '
-                      title='Youtube'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      <img src={youtube} alt='youtube' />
-                    </a>
-                  )}
+                    {general.instagram && (
+                      <a
+                        href={general.instagram}
+                        className='f-social-icon '
+                        title='Instagram'
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <img src={instagram} alt='instagram' />
+                      </a>
+                    )}
+                    {general.youtube && (
+                      <a
+                        href={general.youtube}
+                        className='f-social-icon '
+                        title='Youtube'
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <img src={youtube} alt='youtube' />
+                      </a>
+                    )}
 
-                  {general.twitter && (
-                    <a
-                      href={general.twitter}
-                      className='f-social-icon '
-                      title='Twitter'
-                      target='_blank'
-                      rel='noreferrer'
-                    >
-                      <img src={likedin} alt='linkedin' />
-                    </a>
-                  )}
+                    {general.twitter && (
+                      <a
+                        href={general.twitter}
+                        className='f-social-icon '
+                        title='Twitter'
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <img src={likedin} alt='linkedin' />
+                      </a>
+                    )}
+                  </div>
+                  {/* <ul className='widget-list'></ul> */}
+                  {/* End .widget-list */}
                 </div>
-                {/* <ul className='widget-list'></ul> */}
-                {/* End .widget-list */}
               </div>
               {/* End .widget */}
             </div>
