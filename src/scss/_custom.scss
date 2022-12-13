@@ -847,6 +847,15 @@ a:focus {
   color: #000;
   font-weight: 600;
 }
+.product-desc-content {
+  .table-responsive-sm {
+    p {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+    }
+  }
+}
 
 // responsiveness
 
@@ -1028,7 +1037,7 @@ a:focus {
 }
 .product-title a,
 .product-title a:hover {
-	color: #000;
+  color: #000;
 }
 
 @media only screen and (min-width: 768px) {
@@ -1049,7 +1058,7 @@ a:focus {
   }
 }
 @media screen and (min-width: 1280px) {
-  .container{
+  .container {
     max-width: 1200px;
   }
 }
