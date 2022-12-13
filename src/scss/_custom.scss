@@ -1002,6 +1002,9 @@ a:focus {
 .subChildCat::-webkit-scrollbar {
   width: 1rem;
 }
+.shadow-0 {
+  box-shadow: none;
+}
 
 @media only screen and (min-width: 768px) {
   .intro-slide,
@@ -1018,5 +1021,10 @@ a:focus {
 @media (max-width: 751px) {
   .main-area {
     margin-top: 124px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container{
+    max-width: 1200px;
   }
 }
