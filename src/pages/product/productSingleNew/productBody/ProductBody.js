@@ -333,6 +333,22 @@ const ProductBody = (props) => {
                   <i className='icon-facebook-f' />
                 </a>
                 <a
+                  href={`https://www.messenger.com/`}
+                  className='social-icon'
+                  title='Messenger'
+                  target='_blank'
+                >
+                  <i className='icon-facebook-messenger' />
+                </a>
+                <a
+                  href={`https://web.whatsapp.com/`}
+                  className='social-icon'
+                  title='Whatsapp'
+                  target='_blank'
+                >
+                  <i className='icon-whatsapp' />
+                </a>
+                <a
                   class='social-icon'
                   href={`https://mail.google.com/mail/u/0/#inbox?compose=new=https://1688cart.com/product/${product.Id}`}
                   data-action='share/messenger/share'
