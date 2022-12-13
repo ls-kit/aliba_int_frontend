@@ -103,9 +103,7 @@ const Footer = (props) => {
                     <li>
                       <Link to='/pages/delivery-charges'>Delivery charges</Link>
                     </li>
-                    <li>
-                      <Link to='/pages/delivery-charge-policy'>Delivery charge Policy</Link>
-                    </li>
+
                     <li>
                       <Link to='/pages/custom-and-shipping-charge'>Custom and Shipping charge</Link>
                     </li>
