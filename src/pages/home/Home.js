@@ -34,7 +34,7 @@ const Home = (props) => {
   const handleTogle = () => {};
 
   return (
-    <main className='main' style={{ backgroundColor: "#fafafa" }}>
+    <main className='main' style={{ backgroundColor: "#F2F2F2" }}>
       <Intro />
       {/*<IconBoxes/>*/}
       {/* <PopularCategory /> */}

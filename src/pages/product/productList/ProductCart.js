@@ -19,10 +19,10 @@ const ProductCart = (props) => {
 
   return (
     <div className={productClass ? productClass : "col-6 col-sm-4 col-lg-4 col-xl-3"}>
-      <div className='product shadow product-7'>
+      <div className='product product-7 mb-10x'>
         <figure className='product-media'>
           <Link to={`/product/${product_code}`}>
-            <img src={product.img} className='product-image' alt={product.name} />
+            <img src={product.img} className='product-image object-cover' alt={product.name} />
           </Link>
           <div className='product-action-vertical'>
             <a

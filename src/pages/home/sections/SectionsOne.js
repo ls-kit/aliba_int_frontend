@@ -37,9 +37,9 @@ const SectionsOne = (props) => {
 
   return (
     <div className='container deal-section'>
-      <div className='row mt-2 mb-0 mb-md-2 mb-md-3'>
+      <div className='row mt-0 mb-0 mb-md-1 mb-md-1'>
         <div className='col-6'>
-          <h3 className='title '>
+          <h3 className='title title-sm'>
             {" "}
             {section_one_visible_title === "image" ? (
               <img src={loadAsset(section_one_title_image)} alt='' />

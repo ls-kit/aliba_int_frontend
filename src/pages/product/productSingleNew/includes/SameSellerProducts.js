@@ -31,9 +31,9 @@ const SameSellerProducts = ({ vendorId }) => {
   // console.log("products", products);
   return (
     <div className='container deal-section'>
-      <div className='row mt-2 mb-0 mb-md-2 mb-md-3'>
+      <div className='row mt-0 mb-0 mb-md-1 mb-md-1'>
         <div className='col-6'>
-          <h3 className='title '>From The Same Seller</h3>
+          <h3 className='title title-sm'>From The Same Seller</h3>
         </div>
         <div className='col-6 text-right'>
           <a href={`/seller/${vendorId}?page=2`} className='btn btn-default px-4 py-2 py-md-3 rounded'>

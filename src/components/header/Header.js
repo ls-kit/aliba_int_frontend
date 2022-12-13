@@ -10,7 +10,7 @@ const Header = (props) => {
   const { auth, total_wishlist, user, site_name, frontend_logo_menu } = props;
 
   return (
-    <header className='header header-intro-clearance header-26'>
+    <header className='header header-intro-clearance header-26 shadow-0'>
       <div className='header-middle'>
         <div className='container'>
           <div className='header-left'>

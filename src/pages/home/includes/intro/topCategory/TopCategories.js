@@ -18,7 +18,7 @@ const TopCategories = (props) => {
   return (
     <div className='container'>
       <div className='m-card mb-1'>
-        <div className='topCatContainer  flex flexRow flexBetween'>
+        <div className='topCatContainer  flex flexRow flexBetween border-0'>
           <h4 className='bold topTitle'>TOP CATEGORIES</h4>
           <div className='flex'>
             <img onClick={() => scroll(-700)} className='topAr1' src={arr1} alt='' />

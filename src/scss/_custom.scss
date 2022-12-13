@@ -1002,6 +1002,34 @@ a:focus {
 .subChildCat::-webkit-scrollbar {
   width: 1rem;
 }
+.shadow-0 {
+  box-shadow: none;
+}
+.icon-none::after {
+  display: none !important;
+}
+.icon-none:hover {
+  font-weight: 600;
+}
+.title-sm {
+  font-size: 18px;
+}
+.gap .gap-item {
+  padding-right: 0;
+}
+.gap .gap-item:nth-child(6n) {
+  padding-right: 10px;
+}
+.mb-10x {
+  margin-bottom: 10px;
+}
+.object-cover {
+  object-fit: cover;
+}
+.product-title a,
+.product-title a:hover {
+	color: #000;
+}
 
 @media only screen and (min-width: 768px) {
   .intro-slide,
@@ -1018,5 +1046,10 @@ a:focus {
 @media (max-width: 751px) {
   .main-area {
     margin-top: 124px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container{
+    max-width: 1200px;
   }
 }

@@ -7,13 +7,13 @@ import ProductCart from "../../../../../product/productList/ProductCart";
 const RecentItems = props => {
    const {products, sectionCart} = props;
    return (
-      <div className="row">
+      <div className="row gap">
          {
             products.map((product, index) => {
                   // if (sectionCart) {
                   //    return <SectionProductCard key={index} product={product}/>
                   // }
-                  return <ProductCart key={index} productClass={`col-6 col-md-4 col-lg-3`} product={product}/>
+                  return <ProductCart key={index} productClass={`col-6 col-md-4 col-lg-2 gap-item`} product={product}/>
                }
             )
          }
