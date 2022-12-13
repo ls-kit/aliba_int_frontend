@@ -10,7 +10,7 @@ const ProductSummary = (props) => {
   const { product, general, cartConfigured } = props;
   const product_id = !_.isEmpty(product) ? product.Id : "";
   const activeCartProduct = findProductCartFromState(cartConfigured, product_id);
-  console.log("product----------", product);
+  // console.log("product----------", product);
   const currency = getSetting(general, "currency_icon");
   const china_to_bd_bottom_message = getSetting(general, "china_to_bd_bottom_message");
 

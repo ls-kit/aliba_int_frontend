@@ -8,8 +8,10 @@ import {
 } from "../../../../../utils/GlobalStateControl";
 import {
   activeProductAllConfigurators,
+  checkExistConfiguredItem,
   colorAttributes,
   ConfiguratorAttributes,
+  findProductCartFromState,
   getCartConfiguredItems,
   getCartSelectedConfig,
   getProductAttributes,
@@ -22,6 +24,13 @@ import { withRouter } from "react-router-dom";
 
 const LoadAttributes = (props) => {
   const { product, ConfiguredItems, colorAttributes, cartAttribute, cartConfigured } = props;
+
+  const product_id = !_.isEmpty(product) ? product.Id : 0;
+  const activeCartProduct = findProductCartFromState(cartConfigured, product_id);
+  const selectConfigId = !_.isEmpty(ConfiguredItems) ? ConfiguredItems.Id : 0;
+  // console.log("activeCartProduct", selectConfigId);
+
+  const existsConfig = checkExistConfiguredItem(activeCartProduct, product_id, selectConfigId);
 
   if (_.isEmpty(colorAttributes)) {
     return false;
@@ -89,7 +98,7 @@ const LoadAttributes = (props) => {
                 ) : (
                   Attribute.Value
                 )}
-                {/* <span class='count'>4</span> */}
+                {/* {!_.isEmpty(activeCartProduct) && <span class='count'>{activeCartProduct.Quantity}</span>} */}
               </a>
             ))}
           </div>
