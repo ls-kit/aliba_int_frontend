@@ -60,9 +60,9 @@ const Intro = (props) => {
 
   return (
     <div className='intro-section'>
-      <div className='container mt-0 mt-md-2'>
+      <div className='container mt-0 mt-md-1'>
         <div className='row'>
-          <div className='col-lg-3 cols d-none d-lg-block '>
+          <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0'>
             <BrowseCategories />
           </div>
           <div className='col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2'>

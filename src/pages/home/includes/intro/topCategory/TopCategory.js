@@ -12,7 +12,7 @@ export const CateGory = (props) => {
         return (
           <Link
             key={index}
-            className='category'
+            className='category border-0'
             to={child.children_count ? `/${parent.slug}/${child.slug}` : `/shop/${child.slug}`}
           >
             <figure>

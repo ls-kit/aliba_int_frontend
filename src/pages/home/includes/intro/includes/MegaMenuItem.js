@@ -29,7 +29,7 @@ const MegaMenuItem = (props) => {
 
   return (
     <li className='megamenu-container'>
-      <Link className='sf-with-ul text-dark border-0 px-3' to={`/${parent.slug}`}>
+      <Link className='sf-with-ul text-dark border-0 px-3 py-3 icon-none' to={`/${parent.slug}`}>
         {parent.icon ? (
           <img
             src={loadAsset(parent.icon)}

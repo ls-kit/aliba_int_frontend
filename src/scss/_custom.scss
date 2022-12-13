@@ -1005,6 +1005,27 @@ a:focus {
 .shadow-0 {
   box-shadow: none;
 }
+.icon-none::after {
+  display: none !important;
+}
+.icon-none:hover {
+  font-weight: 600;
+}
+.title-sm {
+  font-size: 18px;
+}
+.gap .gap-item {
+  padding-right: 0;
+}
+.gap .gap-item:nth-child(4n) {
+  padding-right: 10px;
+}
+.mb-10x {
+  margin-bottom: 10px;
+}
+.object-cover {
+  object-fit: cover;
+}
 
 @media only screen and (min-width: 768px) {
   .intro-slide,
