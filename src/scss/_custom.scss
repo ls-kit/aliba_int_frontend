@@ -1017,7 +1017,7 @@ a:focus {
 .gap .gap-item {
   padding-right: 0;
 }
-.gap .gap-item:nth-child(4n) {
+.gap .gap-item:nth-child(6n) {
   padding-right: 10px;
 }
 .mb-10x {
@@ -1025,6 +1025,10 @@ a:focus {
 }
 .object-cover {
   object-fit: cover;
+}
+.product-title a,
+.product-title a:hover {
+	color: #000;
 }
 
 @media only screen and (min-width: 768px) {

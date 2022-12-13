@@ -13,7 +13,7 @@ const RecentItems = props => {
                   // if (sectionCart) {
                   //    return <SectionProductCard key={index} product={product}/>
                   // }
-                  return <ProductCart key={index} productClass={`col-6 col-md-4 col-lg-3 gap-item`} product={product}/>
+                  return <ProductCart key={index} productClass={`col-6 col-md-4 col-lg-2 gap-item`} product={product}/>
                }
             )
          }
