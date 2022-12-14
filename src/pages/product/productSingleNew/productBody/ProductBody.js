@@ -26,9 +26,12 @@ import { FaRegCopy } from "react-icons/fa";
 import PriceRange from "./includes/PriceRange";
 import { loadBulkProductsPrice } from "../../../../utils/Services";
 import CardSkelton from "../../../../skeleton/productSkeleton/CardSkelton";
+import CopyToClipboard from "react-copy-to-clipboard";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems } = props;
+  const copyText = product.Title;
+  console.log("product", product);
   const product_id = !_.isEmpty(product) ? product.Id : 0;
   const firstConfigurators = findFirstConfigurators(ConfiguredItems);
   const ConfigAttributes = ConfiguratorAttributes(product);
@@ -356,6 +359,25 @@ const ProductBody = (props) => {
                 >
                   <i class='icon-envelope' />
                 </a>
+                <div>
+                  <CopyToClipboard text={copyText}>
+                    <div
+                      class='bt'
+                      style={{
+                        borderRadius: "64px",
+                        width: "80px",
+                        height: "31px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                      }}
+                    >
+                      <FaRegCopy />
+                      <span style={{ fontSize: "14px", marginLeft: "0.5rem" }}>Copy</span>
+                    </div>
+                  </CopyToClipboard>
+                </div>
               </div>
             </div>
 
