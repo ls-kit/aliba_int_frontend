@@ -9,7 +9,7 @@ import { productAddToWishlist } from "../../../store/actions/AuthAction";
 const ProductCart = (props) => {
   const { product, general, productClass } = props;
   const currency_icon = getSetting(general, "currency_icon");
-  console.log("product form product cart", product);
+  // console.log("product form product cart", product);
 
   const addToWishlist = (e, product) => {
     e.preventDefault();

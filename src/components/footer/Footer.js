@@ -16,7 +16,7 @@ import { getFooterBrand } from "../../utils/Services";
 const Footer = (props) => {
   const { general } = props;
   const [loading, setLoading] = useState(true);
-  const [footerBrandImage, setFooterBrandImage] = useState({});
+  const [footerBrandInfo, setFooterBrandInfo] = useState({});
 
   useEffect(() => {
     foterBrand();
@@ -24,8 +24,9 @@ const Footer = (props) => {
 
   const foterBrand = async () => {
     const response = await getFooterBrand("card_two");
+    console.log("response", response);
     if (!_.isEmpty(response)) {
-      setFooterBrandImage(response);
+      setFooterBrandInfo(response);
     }
     setLoading(false);
   };
@@ -238,18 +239,18 @@ const Footer = (props) => {
           </div> */}
           <div className='d-flex justify-content-center'>
             <div className='d-flex align-items-center'>
-              <a href='/'>
-                <img src={loadAsset(footerBrandImage.brand_two)} alt='' />
+              <a href={footerBrandInfo?.brand_two?.url} target='blank'>
+                <img src={loadAsset(footerBrandInfo?.brand_two?.image)} alt='' />
               </a>
-              <a href='/'>
-                <img src={loadAsset(footerBrandImage.brand_three)} alt='' />
+              <a href={footerBrandInfo?.brand_three?.url} target='blank'>
+                <img src={loadAsset(footerBrandInfo?.brand_three?.image)} alt='' />
               </a>
-              <a href='/'>
-                <img src={loadAsset(footerBrandImage.brand_four)} alt='' />
+              <a href={footerBrandInfo?.brand_four?.url} target='blank'>
+                <img src={loadAsset(footerBrandInfo?.brand_four?.image)} alt='' />
               </a>
 
-              <a href='/'>
-                <img src={loadAsset(footerBrandImage.brand_five)} alt='' />
+              <a href={footerBrandInfo?.brand_five?.url} target='blank'>
+                <img src={loadAsset(footerBrandInfo?.brand_five?.image)} alt='' />
               </a>
             </div>
           </div>

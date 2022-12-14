@@ -71,7 +71,7 @@ const SinglePage = (props) => {
           <div className='row'>
             <div className='col-md-12 mb-2 mb-lg-0'>
               <h2 className='title'>{page.post_title && parser(page.post_title)}</h2>
-              <div className='mb-3'>{page.post_content && parser(page.post_content)}</div>
+              <div className='mb-3 page-desc'>{page.post_content && parser(page.post_content)}</div>
             </div>
           </div>
           <hr className='mt-4 mb-5' />
