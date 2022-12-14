@@ -30,20 +30,19 @@ import CopyToClipboard from "react-copy-to-clipboard";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems } = props;
-  const copyText = product.Title;
-  console.log("product", product);
+
   const product_id = !_.isEmpty(product) ? product.Id : 0;
   const firstConfigurators = findFirstConfigurators(ConfiguredItems);
   const ConfigAttributes = ConfiguratorAttributes(product);
   const colorAttributes = getColorAttributes(ConfigAttributes);
-
+  const copyText = window.location.href;
   let activeProduct = findProductCartFromState(cartConfigured, product_id);
   // const totalQty = cartConfigured[0] ? cartConfigured[0]?.totalQty : 0;
   const totalQty = activeProduct.totalQty;
   const [activeImg, setActiveImg] = useState("");
   const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
   const [loading, setLoading] = useState(true);
-  // console.log("product from single product", product);
+  const [copy, setCopy] = useState(false);
 
   useEffect(() => {
     bulkPriceQuantityRange(product_id);
@@ -84,6 +83,10 @@ const ProductBody = (props) => {
   //     />
   //   );
   // }
+
+  const onCopy = () => {
+    setCopy(true);
+  };
 
   return (
     <div className='product-details-top'>
@@ -360,9 +363,9 @@ const ProductBody = (props) => {
                   <i class='icon-envelope' />
                 </a>
                 <div>
-                  <CopyToClipboard text={copyText}>
-                    <div
-                      class='bt'
+                  <CopyToClipboard onCopy={onCopy} text={copyText}>
+                    <button
+                      class='bt copyLink'
                       style={{
                         borderRadius: "64px",
                         width: "80px",
@@ -374,8 +377,10 @@ const ProductBody = (props) => {
                       }}
                     >
                       <FaRegCopy />
-                      <span style={{ fontSize: "14px", marginLeft: "0.5rem" }}>Copy</span>
-                    </div>
+                      <span style={{ fontSize: "14px", marginLeft: "0.5rem" }}>
+                        {copy ? "Copied " : "Copy"}
+                      </span>
+                    </button>
                   </CopyToClipboard>
                 </div>
               </div>
