@@ -7,7 +7,7 @@ import { loadBanners } from "../../../../store/actions/InitAction";
 import OwlCarousel from "react-owl-carousel";
 import { loadAsset } from "../../../../utils/Helpers";
 import BannerSkeleton from "../../../../skeleton/BannerSkeleton";
-
+import parser from "html-react-parser";
 import { getHomePageCards } from "../../../../utils/Services";
 import _ from "lodash";
 import LargeCardSkelton from "../../../../skeleton/productSkeleton/LargeCardSkelton";
@@ -85,16 +85,22 @@ const Intro = (props) => {
                     1200: { items: 1 },
                   }}
                 >
-                  {banners.map((banner) => (
-                    <div
-                      key={banner.id}
-                      className='intro-slide bg-image d-flex align-items-center'
-                      style={{
-                        backgroundColor: "#e9e9e9",
-                        backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
-                      }}
-                    ></div>
-                  ))}
+                  {banners.map((banner) => {
+                    const content = `${banner?.post_content}`;
+                    console.log("banner", banner);
+                    return (
+                      <div
+                        key={banner.id}
+                        className='intro-slide bg-image d-flex align-items-center'
+                        style={{
+                          backgroundColor: "#e9e9e9",
+                          backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
+                        }}
+                      >
+                        {parser(content)}
+                      </div>
+                    );
+                  })}
                 </OwlCarousel>
               ) : (
                 <BannerSkeleton />

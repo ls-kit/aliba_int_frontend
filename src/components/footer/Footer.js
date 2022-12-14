@@ -24,7 +24,6 @@ const Footer = (props) => {
 
   const foterBrand = async () => {
     const response = await getFooterBrand("card_two");
-    console.log("response", response);
     if (!_.isEmpty(response)) {
       setFooterBrandInfo(response);
     }
