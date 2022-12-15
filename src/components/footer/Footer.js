@@ -159,7 +159,7 @@ const Footer = (props) => {
             <div className='col-6 col-md-6 col-lg-3'>
               <div className='widget mb-4'>
                 <div>
-                  <h4 className='widget-title uppercase'>Mobile Apps</h4>
+                  {/* <h4 className='widget-title uppercase'>Mobile Apps</h4>
                   <ul className='widget-list'>
                     <li>
                       <a href='#' target='_blank'>
@@ -175,7 +175,7 @@ const Footer = (props) => {
                         <img src={aStore} alt='App Store' style={{ width: "126px", marginBottom: "2rem" }} />
                       </a>
                     </li>
-                  </ul>
+                  </ul> */}
                   <h4 className='widget-title uppercase'>Social Links</h4>
                   <div className='social-icons'>
                     {general.facebook && (
@@ -236,7 +236,7 @@ const Footer = (props) => {
           {/* <div className='d-flex justify-content-center'>
             <img src={loadAsset(footerBrandImage.brand_one)} alt='' />
           </div> */}
-          <div className='d-flex justify-content-center'>
+          {/* <div className='d-flex justify-content-center'>
             <div className='d-flex align-items-center'>
               <a href={footerBrandInfo?.brand_two?.url} target='blank'>
                 <img src={loadAsset(footerBrandInfo?.brand_two?.image)} alt='' />
@@ -252,7 +252,7 @@ const Footer = (props) => {
                 <img src={loadAsset(footerBrandInfo?.brand_five?.image)} alt='' />
               </a>
             </div>
-          </div>
+          </div> */}
         </div>
         {/* End .container */}
       </div>
