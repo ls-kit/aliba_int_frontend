@@ -5,6 +5,7 @@ import HeaderManage from "./header/HeaderManage";
 import Footer from "./footer/Footer";
 import ErrorHandling from "../errorHandler/ErrorHandling";
 import GlobalLoading from "../loader/GlobalLoading";
+import MessengerChat from "./chat/MessengerChat";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <div className='page-wrapper'>
         <Routing />
       </div>
+      <MessengerChat />
       <Footer />
     </BrowserRouter>
   );
