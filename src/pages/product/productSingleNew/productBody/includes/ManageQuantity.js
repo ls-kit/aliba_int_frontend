@@ -49,6 +49,7 @@ const ManageQuantity = (props) => {
     if (Number(newQty) <= Number(maxQuantity)) {
       cartProductQuantityUpdate(
         newQty,
+        newPrice,
         cartConfigured,
         product_id,
         existsConfig.Id,
@@ -61,7 +62,7 @@ const ManageQuantity = (props) => {
 
   const inputQtyChanges = (qty) => {
     if (Number(qty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(qty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(qty, newPrice, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
     }
   };
 
@@ -174,13 +175,13 @@ const ManageQuantity = (props) => {
       newQty = parseInt(activeCartProduct.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(newQty, cartConfigured, product_id, ShippingCharges);
+      cartPlainProductQuantityUpdate(newQty, newPrice, cartConfigured, product_id, ShippingCharges);
     }
   };
 
   const plainItemQtyChanges = (qty) => {
     if (Number(qty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(qty, cartConfigured, product_id, ShippingCharges);
+      cartPlainProductQuantityUpdate(qty, newPrice, cartConfigured, product_id, ShippingCharges);
     }
   };
 

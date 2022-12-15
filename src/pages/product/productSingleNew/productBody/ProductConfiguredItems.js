@@ -27,13 +27,13 @@ const ProductConfiguredItems = (props) => {
   const rate = getSetting(general, "increase_rate", 15);
   const currency = getSetting(general, "currency_icon");
   // const bulkPriceQuantity = product.BulkPrices.Configuration.QuantityRanges;
-  let first = bulkPriceQuantity[0];
-  let second = bulkPriceQuantity[1];
-  let third = bulkPriceQuantity[2];
+  // let first = bulkPriceQuantity[0];
+  // let second = bulkPriceQuantity[1];
+  // let third = bulkPriceQuantity[2];
 
-  let firstMinQuantityPrice = bulkPriceQuantity[0]?.Price.Base;
-  let secondMinQuantityPrice = bulkPriceQuantity[1]?.Price.Base;
-  let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
+  // let firstMinQuantityPrice = bulkPriceQuantity[0]?.Price.Base;
+  // let secondMinQuantityPrice = bulkPriceQuantity[1]?.Price.Base;
+  // let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
 
   const notColoured = (configAttr) => {
     return colorAttributes.find((colorAttr) => {

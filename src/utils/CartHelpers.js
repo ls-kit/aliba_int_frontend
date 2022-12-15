@@ -556,11 +556,11 @@ export const cartCalculateNeedToPay = (totalPrice, percent = 50) => {
 
 export const cartProductQuantityUpdate = (
   qty,
+  newPrice,
   cartConfigured,
   product_id,
   existsConfigId,
-  ShippingCharges,
-  newPrice
+  ShippingCharges
 ) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
@@ -602,11 +602,17 @@ export const cartProductQuantityUpdate = (
   configAttrToConfigured(reConfig);
 };
 
-export const cartPlainProductQuantityUpdate = (newQty, cartConfigured, product_id, ShippingCharges) => {
+export const cartPlainProductQuantityUpdate = (
+  newQty,
+  newPrice,
+  cartConfigured,
+  product_id,
+  ShippingCharges
+) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
       if (newQty > 0) {
-        let activeProduct = { ...mapItem, Quantity: newQty };
+        let activeProduct = { ...mapItem, Quantity: newQty, Price: newPrice };
         let ProductSummary = cartProductTotalExceptConfiguredItems(activeProduct, ShippingCharges);
         if (!_.isEmpty(ProductSummary)) {
           activeProduct = {
