@@ -45,8 +45,15 @@ const StickyFooter = (props) => {
             </a>
           </div>
           <div className='col text-center'>
-            <a className='nav-link' href='https://m.me/306375176046078' rel='noreferrer' target='_blank'>
-              {/* <span className=''>Ask us</span> */}
+            <a
+              className='nav-link'
+              href={`https://m.me/${process.env.REACT_APP_FACEBOOK_PAGE_KEY}`}
+              rel='noreferrer'
+              target='_blank'
+            >
+              <span className=' sticky_nav_icon'>
+                <i className='icon-facebook-messenger' />
+              </span>
             </a>
           </div>
         </div>

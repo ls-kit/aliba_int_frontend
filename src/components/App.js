@@ -16,7 +16,9 @@ const App = () => {
       <div className='page-wrapper'>
         <Routing />
       </div>
-      <MessengerChat />
+      <div className='messenger-chat'>
+        <MessengerChat />
+      </div>
       <Footer />
     </BrowserRouter>
   );
