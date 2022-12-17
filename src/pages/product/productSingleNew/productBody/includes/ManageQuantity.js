@@ -49,7 +49,7 @@ const ManageQuantity = (props) => {
     if (Number(newQty) <= Number(maxQuantity)) {
       cartProductQuantityUpdate(
         newQty,
-        newPrice,
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
         cartConfigured,
         product_id,
         existsConfig.Id,
@@ -57,7 +57,6 @@ const ManageQuantity = (props) => {
         newPrice
       );
     }
-    console.log("Qty change", newQty);
   };
 
   const inputQtyChanges = (qty) => {
@@ -101,7 +100,7 @@ const ManageQuantity = (props) => {
         MaxQuantity: ConfiguredItem.Quantity,
         SalesCount: ConfiguredItem.SalesCount,
         // new
-        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate, ConfiguredItem),
+        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
         /*
          ****previous
          */

@@ -127,7 +127,7 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate =
   //   }
   // }
 
-  if (totalQtyInCart > 0 && totalQtyInCart <= first?.MaxQuantity) {
+  if (totalQtyInCart >= first?.MinQuantity && totalQtyInCart <= first?.MaxQuantity) {
     return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
   } else if (totalQtyInCart >= second?.MinQuantity && totalQtyInCart <= second?.MaxQuantity) {
     return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
