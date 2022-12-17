@@ -3,8 +3,6 @@ import LoadAttributes from "./includes/LoadAttributes";
 import ProductSummary from "./includes/ProductSummary";
 import MediaPart from "./includes/MediaPart";
 import { AiOutlineShopping } from "react-icons/ai";
-import { RiGroupLine } from "react-icons/ri";
-import { BsImage, BsCart3, BsFillCartDashFill, BsHeart } from "react-icons/bs";
 
 import {
   ConfiguratorAttributes,
@@ -22,7 +20,6 @@ import { productAddToWishlist } from "../../../../store/actions/AuthAction";
 import SingleAttributeGroup from "./includes/SingleAttributeGroup";
 import AppOffer from "./includes/AppOffer";
 import AirFilter from "./includes/AirFilter";
-import { FaRegCopy } from "react-icons/fa";
 import PriceRange from "./includes/PriceRange";
 import { loadBulkProductsPrice } from "../../../../utils/Services";
 import CardSkelton from "../../../../skeleton/productSkeleton/CardSkelton";
@@ -33,24 +30,10 @@ const ProductBody = (props) => {
   const firstConfigurators = findFirstConfigurators(ConfiguredItems);
   const ConfigAttributes = ConfiguratorAttributes(product);
   const colorAttributes = getColorAttributes(ConfigAttributes);
-
+  const bulkPriceQuantity = product.BulkPrices.Configuration.QuantityRanges;
   let activeProduct = findProductCartFromState(cartConfigured, product_id);
-  // const totalQty = cartConfigured[0] ? cartConfigured[0]?.totalQty : 0;
   const totalQty = activeProduct.totalQty;
   const [activeImg, setActiveImg] = useState("");
-  const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
-  const [loading, setLoading] = useState(true);
-  // console.log("product from single product", product);
-
-  useEffect(() => {
-    bulkPriceQuantityRange(product_id);
-  }, [product_id]);
-
-  const bulkPriceQuantityRange = async (product_id) => {
-    const response = await loadBulkProductsPrice(product_id);
-    setBulkPriceQuantity(response.bulkPrices.Configuration.QuantityRanges);
-    setLoading(false);
-  };
 
   const alertForQuantity = (e) => {
     e.preventDefault();
@@ -65,22 +48,6 @@ const ProductBody = (props) => {
     e.preventDefault();
     props.productAddToWishlist(product);
   };
-
-  // decide what is render for bulk product
-  let bulkProductContent = null;
-  if (loading) {
-    bulkProductContent = <CardSkelton />;
-  }
-  if (!loading && bulkPriceQuantity.length > 1) {
-    bulkProductContent = (
-      <PriceRange
-        product={product}
-        general={general}
-        totalQty={totalQty}
-        bulkPriceQuantity={bulkPriceQuantity}
-      />
-    );
-  }
 
   return (
     <div className='product-details-top'>
@@ -105,7 +72,12 @@ const ProductBody = (props) => {
         <div className='col-md-6'>
           <div className='product-details' id='hello'>
             <AppOffer />
-            {bulkProductContent}
+            <PriceRange
+              product={product}
+              general={general}
+              totalQty={totalQty}
+              bulkPriceQuantity={bulkPriceQuantity}
+            />
             {_.isArray(firstConfigurators) &&
               firstConfigurators.map((singleConfig, index) => (
                 <SingleAttributeGroup
