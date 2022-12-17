@@ -32,6 +32,12 @@ const ProductSummary = (props) => {
   //   return Number(DeliveryCost) + weightCharge;
   // };
 
+  // const getChinaLocalShippingCost = () => {
+  //   let localShippingCost = chinaLocalShippingCharges;
+  //   localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
+  //   return Number(localShippingCost);
+  // };
+
   // console.log("product-------", ShippingRate);
   const productTotalCost = () => {
     return (
@@ -39,6 +45,7 @@ const ProductSummary = (props) => {
       getChinaLocalShippingCost(totalPrice, chinaLocalShippingCharges, chinaLocalShippingChargeLimit)
     );
   };
+  // console.log("activeCartProduct", activeCartProduct);
 
   return (
     <table className='table table-sm table-bordered product_summary_table'>
@@ -68,7 +75,9 @@ const ProductSummary = (props) => {
         </tr>
         <tr>
           <td>China Local Shipping charge:</td>
-          <td>{`${currency} ${numberWithCommas(getChinaLocalShippingCost())}`}</td>
+          <td>{`${currency} ${numberWithCommas(
+            getChinaLocalShippingCost(totalPrice, chinaLocalShippingCharges, chinaLocalShippingChargeLimit)
+          )}`}</td>
         </tr>
         <tr>
           <td>Shipping charge:</td>
