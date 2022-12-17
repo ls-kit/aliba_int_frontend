@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import { getSetting } from "../../../../../utils/Helpers";
-import { findProductCartFromState, numberWithCommas } from "../../../../../utils/CartHelpers";
+import {
+  findProductCartFromState,
+  getChinaLocalShippingCost,
+  numberWithCommas,
+} from "../../../../../utils/CartHelpers";
 
 const ProductSummary = (props) => {
   const { product, general, cartConfigured } = props;
@@ -13,25 +17,28 @@ const ProductSummary = (props) => {
   // console.log("product----------", product);
   const currency = getSetting(general, "currency_icon");
   const china_to_bd_bottom_message = getSetting(general, "china_to_bd_bottom_message");
-
+  const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
+  const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   const totalWeight = activeCartProduct.totalWeight;
   const approxWeight = activeCartProduct.ApproxWeight;
   const totalPrice = activeCartProduct.totalPrice;
   const totalQty = activeCartProduct.totalQty;
   const DeliveryCost = activeCartProduct.DeliveryCost;
   const ShippingRate = activeCartProduct.ShippingRate;
-  const totalShippingCost = () => {
-    // console.log("product-------", Number(totalWeight));
-    let weightCharge = Number(totalWeight) * Number(ShippingRate);
-    weightCharge = weightCharge < 100 ? 100 : weightCharge;
-    return Number(DeliveryCost) + weightCharge;
-  };
+
+  // const totalShippingCost = () => {
+  //   let weightCharge = Number(totalWeight) * Number(ShippingRate);
+  //   weightCharge = weightCharge < 100 ? 100 : weightCharge;
+  //   return Number(DeliveryCost) + weightCharge;
+  // };
 
   // console.log("product-------", ShippingRate);
   const productTotalCost = () => {
-    return Number(totalPrice) + totalShippingCost();
+    return (
+      Number(totalPrice) +
+      getChinaLocalShippingCost(totalPrice, chinaLocalShippingCharges, chinaLocalShippingChargeLimit)
+    );
   };
-  // console.log("activeCartProduct", activeCartProduct);
 
   return (
     <table className='table table-sm table-bordered product_summary_table'>
@@ -57,11 +64,11 @@ const ProductSummary = (props) => {
         </tr>
         <tr>
           <td>Approx. Weight:</td>
-          <td>{approxWeight || "0.000"} kg ( আনুমানিক)</td>
+          <td>{totalWeight || "0.000"} kg ( আনুমানিক)</td>
         </tr>
         <tr>
-          <td>China to BD Shipping charge:</td>
-          <td>{`${currency} ${numberWithCommas(totalShippingCost())}`}</td>
+          <td>China Local Shipping charge:</td>
+          <td>{`${currency} ${numberWithCommas(getChinaLocalShippingCost())}`}</td>
         </tr>
         <tr>
           <td>Shipping charge:</td>

@@ -20,16 +20,21 @@ import { getSetting } from "../../../../../utils/Helpers";
 
 const ManageQuantity = (props) => {
   const { product, general, ConfiguredItem, ConfiguredItemAttributes, cartConfigured } = props;
-
-  const rate = getSetting(general, "increase_rate", 15);
-  const ShippingCharges = getSetting(general, "air_shipping_charges");
-
   const product_id = !_.isEmpty(product) ? product.Id : 0;
+  const rate = getSetting(general, "increase_rate", 15);
+  // const ShippingCharges = getSetting(general, "air_shipping_charges");
   const selectConfigId = !_.isEmpty(ConfiguredItem) ? ConfiguredItem.Id : 0;
   const maxQuantity = !_.isEmpty(ConfiguredItem) ? ConfiguredItem.Quantity : product.MasterQuantity;
   const activeCartProduct = findProductCartFromState(cartConfigured, product_id);
-
   const existsConfig = checkExistConfiguredItem(activeCartProduct, product_id, selectConfigId);
+  const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
+  const totalPrice = activeCartProduct.totalPrice;
+  const getChinaLocalShippingCost = () => {
+    let localShippingCost = chinaLocalShippingCharges;
+    localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
+    return Number(localShippingCost);
+  };
+  const ShippingCharges = getChinaLocalShippingCost();
 
   const activeConfiguredQtyChanges = (type = "increment") => {
     let newQty = parseInt(existsConfig.Quantity) + 1;

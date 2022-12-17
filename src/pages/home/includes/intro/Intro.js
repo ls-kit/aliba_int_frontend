@@ -87,7 +87,7 @@ const Intro = (props) => {
                 >
                   {banners.map((banner) => {
                     const content = `${banner?.post_content}`;
-                    console.log("banner", banner);
+
                     return (
                       <div
                         key={banner.id}

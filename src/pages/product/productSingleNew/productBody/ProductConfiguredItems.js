@@ -14,7 +14,7 @@ import { withRouter } from "react-router-dom";
 
 const ProductConfiguredItems = (props) => {
   const { product, ConfiguredItems, colorAttributes, cartAttribute, general } = props;
-  // console.log("pc", product);
+  console.log("general", general);
   const Attributes = getProductAttributes(product);
   const rate = getSetting(general, "increase_rate", 15);
   const currency = getSetting(general, "currency_icon");

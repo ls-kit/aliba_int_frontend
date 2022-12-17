@@ -518,6 +518,26 @@ export const CartProductSummary = (cartConfigured, ShippingCharges) => {
   return { totalQty: totalQty, totalPrice: grossTotalPrice };
 };
 
+export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShippingChargeLimit) => {
+  let totalQty = 0;
+  let grossTotalPrice = 0;
+  if (_.isArray(cartConfigured)) {
+    cartConfigured.map((Product) => {
+      const checkItemSubTotal = cartCheckedProductTotal(Product);
+      const totalPrice = checkItemSubTotal.totalPrice;
+      const totalItemShipping = getChinaLocalShippingCost(
+        totalPrice,
+        ShippingCharges,
+        chinaLocalShippingChargeLimit
+      );
+
+      grossTotalPrice += Number(totalPrice) + Number(totalItemShipping);
+      return false;
+    });
+  }
+  return { totalQty: totalQty, totalPrice: grossTotalPrice };
+};
+
 export const cartCalculateNeedToPay = (totalPrice, percent = 50) => {
   return (Number(totalPrice) * percent) / 100;
 };
@@ -595,4 +615,14 @@ export const cartPlainProductQuantityUpdate = (newQty, cartConfigured, product_i
   reConfig = reConfig.filter((filter) => !filter.notItem);
 
   configAttrToConfigured(reConfig);
+};
+
+export const getChinaLocalShippingCost = (
+  totalPrice,
+  chinaLocalShippingCharges,
+  chinaLocalShippingChargeLimit
+) => {
+  let localShippingCost = chinaLocalShippingCharges;
+  localShippingCost = Number(totalPrice) >= Number(chinaLocalShippingChargeLimit) ? 0 : localShippingCost;
+  return Number(localShippingCost);
 };
