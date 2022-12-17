@@ -35,6 +35,10 @@ const Checkout = (props) => {
   };
 
   useEffect(() => {
+    checkedAllItem();
+  }, []);
+
+  useEffect(() => {
     goPageTop();
   }, []);
 
@@ -74,17 +78,22 @@ const Checkout = (props) => {
   //     weightCost = weightCost < 100 ? 100 : weightCost;
   //     return Number(DeliveryCost) + Number(weightCost);
   //   };
-  const totalShippingCost = (product) => {
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    const returnValue = getChinaLocalShippingCost(totalPrice);
+  const totalShippingCost = (product, isChecked = false) => {
+    let returnValue = 0;
+
+    if (isChecked) {
+      const checkItemSubTotal = cartCheckedProductTotal(product);
+      const totalPrice = checkItemSubTotal.totalPrice;
+      returnValue = getChinaLocalShippingCost(totalPrice);
+      console.log("isChecked", returnValue);
+    }
     return returnValue;
   };
 
-  const productTotalCost = (product) => {
+  const productTotalCost = (product, isChecked) => {
     const checkItemSubTotal = cartCheckedProductTotal(product);
     const totalPrice = checkItemSubTotal.totalPrice;
-    const ShippingCost = totalShippingCost(product);
+    const ShippingCost = totalShippingCost(product, isChecked);
     return Number(totalPrice) + Number(ShippingCost);
   };
 
@@ -140,45 +149,68 @@ const Checkout = (props) => {
                       </thead>
                       <tbody>
                         {cartConfigured.length > 0 ? (
-                          cartConfigured.map((product, index) => (
-                            <>
-                              {product.hasConfigurators ? (
-                                product.ConfiguredItems.map((config, index2) => (
-                                  <TableConfigItems
-                                    key={index2}
-                                    currency={currency}
-                                    product={product}
-                                    config={config}
-                                    cartConfigured={cartConfigured}
-                                    ShippingCharges={ShippingCharges}
-                                  />
-                                ))
-                              ) : (
-                                <TablePlainItem
-                                  currency={currency}
-                                  product={product}
-                                  cartConfigured={cartConfigured}
-                                  ShippingCharges={ShippingCharges}
-                                />
-                              )}
-                              <tr key={index}>
-                                <td colSpan={3} className='text-right'>
-                                  China Local Shipping cost:
-                                </td>
-                                <td className='text-center'>{`${currency} ${numberWithCommas(
-                                  totalShippingCost(product)
-                                )}`}</td>
-                              </tr>
-                              <tr key={index + 1}>
-                                <td colSpan={3} className='text-right'>
-                                  Sub Total:
-                                </td>
-                                <td className='text-center'>{`${currency} ${numberWithCommas(
-                                  productTotalCost(product)
-                                )}`}</td>
-                              </tr>
-                            </>
-                          ))
+                          cartConfigured.map((product, index) => {
+                            console.log("con pppp", product);
+                            return (
+                              <>
+                                {product.hasConfigurators ? (
+                                  product.ConfiguredItems.map((config, index2) => (
+                                    <>
+                                      <TableConfigItems
+                                        key={index2}
+                                        currency={currency}
+                                        product={product}
+                                        config={config}
+                                        cartConfigured={cartConfigured}
+                                        ShippingCharges={ShippingCharges}
+                                      />
+                                      <tr key={index}>
+                                        <td colSpan={3} className='text-right'>
+                                          China Local Shipping cost:
+                                        </td>
+                                        <td className='text-center'>{`${currency} ${numberWithCommas(
+                                          totalShippingCost(product, config.isChecked)
+                                        )}`}</td>
+                                      </tr>
+                                      <tr key={index + 1}>
+                                        <td colSpan={3} className='text-right'>
+                                          Sub Total:
+                                        </td>
+                                        <td className='text-center'>{`${currency} ${numberWithCommas(
+                                          productTotalCost(product, config.isChecked)
+                                        )}`}</td>
+                                      </tr>
+                                    </>
+                                  ))
+                                ) : (
+                                  <>
+                                    <TablePlainItem
+                                      currency={currency}
+                                      product={product}
+                                      cartConfigured={cartConfigured}
+                                      ShippingCharges={ShippingCharges}
+                                    />
+                                    <tr key={index}>
+                                      <td colSpan={3} className='text-right'>
+                                        China Local Shipping cost:
+                                      </td>
+                                      <td className='text-center'>{`${currency} ${numberWithCommas(
+                                        totalShippingCost(product)
+                                      )}`}</td>
+                                    </tr>
+                                    <tr key={index + 1}>
+                                      <td colSpan={3} className='text-right'>
+                                        Sub Total:
+                                      </td>
+                                      <td className='text-center'>{`${currency} ${numberWithCommas(
+                                        productTotalCost(product)
+                                      )}`}</td>
+                                    </tr>
+                                  </>
+                                )}
+                              </>
+                            );
+                          })
                         ) : (
                           <tr>
                             <td colSpan={4} className='text-center bg-lighter'>

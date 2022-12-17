@@ -525,10 +525,13 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
     cartConfigured.map((Product) => {
       const checkItemSubTotal = cartCheckedProductTotal(Product);
       const totalPrice = checkItemSubTotal.totalPrice;
-      const totalItemShipping = getChinaLocalShippingCost(
-        totalPrice,
-        ShippingCharges,
-        chinaLocalShippingChargeLimit
+      const totalItemShipping = Product.ConfiguredItems.map((config) =>
+        getChinaLocalShippingCost(
+          totalPrice,
+          ShippingCharges,
+          chinaLocalShippingChargeLimit,
+          config.isChecked
+        )
       );
 
       grossTotalPrice += Number(totalPrice) + Number(totalItemShipping);
@@ -620,9 +623,14 @@ export const cartPlainProductQuantityUpdate = (newQty, cartConfigured, product_i
 export const getChinaLocalShippingCost = (
   totalPrice,
   chinaLocalShippingCharges,
-  chinaLocalShippingChargeLimit
+  chinaLocalShippingChargeLimit,
+  isChecked = false
 ) => {
   let localShippingCost = chinaLocalShippingCharges;
-  localShippingCost = Number(totalPrice) >= Number(chinaLocalShippingChargeLimit) ? 0 : localShippingCost;
+  if (isChecked) {
+    localShippingCost = Number(totalPrice) >= Number(chinaLocalShippingChargeLimit) ? 0 : localShippingCost;
+  } else {
+    localShippingCost = 0;
+  }
   return Number(localShippingCost);
 };
