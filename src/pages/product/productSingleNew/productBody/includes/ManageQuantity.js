@@ -54,14 +54,21 @@ const ManageQuantity = (props) => {
         product_id,
         existsConfig.Id,
         ShippingCharges,
-        newPrice
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate)
       );
     }
   };
 
   const inputQtyChanges = (qty) => {
     if (Number(qty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(qty, newPrice, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(
+        qty,
+        getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        existsConfig.Id,
+        ShippingCharges
+      );
     }
   };
 
@@ -77,7 +84,7 @@ const ManageQuantity = (props) => {
         DeliveryCost: getProductDeliveryCost(product, rate),
         Quantity: qty,
         // new
-        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+        Price: getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
         /*
          ****previous
          */
@@ -100,7 +107,7 @@ const ManageQuantity = (props) => {
         MaxQuantity: ConfiguredItem.Quantity,
         SalesCount: ConfiguredItem.SalesCount,
         // new
-        Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+        Price: getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
         /*
          ****previous
          */
@@ -143,7 +150,7 @@ const ManageQuantity = (props) => {
       DeliveryCost: getProductDeliveryCost(product, rate),
       Quantity: qty,
       // new
-      Price: getUpdatedProductPrice(totalQtyInCart, bulkPriceQuantity, rate),
+      Price: getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
       /*
        ****previous
        */
@@ -174,13 +181,25 @@ const ManageQuantity = (props) => {
       newQty = parseInt(activeCartProduct.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(newQty, newPrice, cartConfigured, product_id, ShippingCharges);
+      cartPlainProductQuantityUpdate(
+        newQty,
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        ShippingCharges
+      );
     }
   };
 
   const plainItemQtyChanges = (qty) => {
     if (Number(qty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(qty, newPrice, cartConfigured, product_id, ShippingCharges);
+      cartPlainProductQuantityUpdate(
+        qty,
+        getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        ShippingCharges
+      );
     }
   };
 
