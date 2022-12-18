@@ -655,7 +655,7 @@ export const getChinaLocalShippingCost = (
 ) => {
   let localShippingCost = chinaLocalShippingCharges;
   if (isChecked) {
-    localShippingCost = Number(totalPrice) >= Number(chinaLocalShippingChargeLimit) ? 0 : localShippingCost;
+    localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
   } else {
     localShippingCost = 0;
   }

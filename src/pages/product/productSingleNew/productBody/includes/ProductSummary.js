@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import { getSetting } from "../../../../../utils/Helpers";
-import {
-  findProductCartFromState,
-  getChinaLocalShippingCost,
-  numberWithCommas,
-} from "../../../../../utils/CartHelpers";
+import { findProductCartFromState, numberWithCommas } from "../../../../../utils/CartHelpers";
 
 const ProductSummary = (props) => {
   const { product, general, cartConfigured } = props;
@@ -25,18 +21,23 @@ const ProductSummary = (props) => {
   const totalQty = activeCartProduct.totalQty;
   const DeliveryCost = activeCartProduct.DeliveryCost;
   const ShippingRate = activeCartProduct.ShippingRate;
-
   // const totalShippingCost = () => {
   //   let weightCharge = Number(totalWeight) * Number(ShippingRate);
   //   weightCharge = weightCharge < 100 ? 100 : weightCharge;
   //   return Number(DeliveryCost) + weightCharge;
   // };
 
-  // const getChinaLocalShippingCost = () => {
-  //   let localShippingCost = chinaLocalShippingCharges;
-  //   localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
-  //   return Number(localShippingCost);
-  // };
+  const getChinaLocalShippingCost = (
+    totalPrice,
+    chinaLocalShippingCharges,
+    chinaLocalShippingChargeLimit
+  ) => {
+    let localShippingCost = chinaLocalShippingCharges;
+
+    localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
+
+    return Number(localShippingCost);
+  };
 
   // console.log("product-------", ShippingRate);
   const productTotalCost = () => {
