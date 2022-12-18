@@ -40,7 +40,8 @@ const ProductBody = (props) => {
   const totalQty = activeProduct.totalQty;
   const [activeImg, setActiveImg] = useState("");
   const [copy, setCopy] = useState(false);
-  const bulkPriceQuantity = product.BulkPrices.Configuration.QuantityRanges;
+  const bulkPriceQuantity = product.BulkPrices;
+  console.log("bulkPriceQuantity", bulkPriceQuantity);
 
   const alertForQuantity = (e) => {
     e.preventDefault();
@@ -83,12 +84,15 @@ const ProductBody = (props) => {
         <div className='col-md-6'>
           <div className='product-details' id='hello'>
             <AppOffer />
-            <PriceRange
-              product={product}
-              general={general}
-              totalQty={totalQty}
-              bulkPriceQuantity={bulkPriceQuantity}
-            />
+            {bulkPriceQuantity.length > 1 && (
+              <PriceRange
+                product={product}
+                general={general}
+                totalQty={totalQty}
+                bulkPriceQuantity={bulkPriceQuantity}
+              />
+            )}
+
             {_.isArray(firstConfigurators) &&
               firstConfigurators.map((singleConfig, index) => (
                 <SingleAttributeGroup

@@ -22,7 +22,7 @@ const ProductConfiguredItems = (props) => {
     totalQtyInCart,
     bulkPriceQuantity,
   } = props;
-  console.log("general", general);
+
   const Attributes = getProductAttributes(product);
   const rate = getSetting(general, "increase_rate", 15);
   const currency = getSetting(general, "currency_icon");
@@ -128,8 +128,7 @@ const ProductConfiguredItems = (props) => {
 
                 <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
                   totalQtyInCart,
-                  bulkPriceQuantity,
-                  rate
+                  bulkPriceQuantity
                 )}`}</td>
 
                 {/* <td className='align-middle'>{`${currency} ${getProductPrice(product, rate, config)}`}</td> */}

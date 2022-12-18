@@ -104,7 +104,7 @@ export const GetOriginalPriceFromPrice = (Price, rate) => {
   return _.round(sellPrice);
 };
 
-export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate = 15) => {
+export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity) => {
   let first = bulkPriceQuantity[0];
   let second = bulkPriceQuantity[1];
   let third = bulkPriceQuantity[2];
@@ -114,13 +114,13 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate =
   let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
 
   if (totalQtyInCart >= first?.MinQuantity && totalQtyInCart <= first?.MaxQuantity) {
-    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+    return firstMinQuantityPrice;
   } else if (totalQtyInCart >= second?.MinQuantity && totalQtyInCart <= second?.MaxQuantity) {
-    return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
+    return secondMinQuantityPrice;
   } else if (totalQtyInCart >= third?.MinQuantity) {
-    return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
+    return thirdMinQuantityPrice;
   } else {
-    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+    return firstMinQuantityPrice;
   }
 };
 

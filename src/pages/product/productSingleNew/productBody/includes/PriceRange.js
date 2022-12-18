@@ -1,17 +1,17 @@
 import React, { useEffect } from "react";
 import { GetOriginalPriceFromPrice } from "../../../../../utils/CartHelpers";
-import { getSetting } from "../../../../../utils/Helpers";
+import { getSetting, goPageTop } from "../../../../../utils/Helpers";
 const PriceRange = (props) => {
   const { totalQty, bulkPriceQuantity, general } = props;
   const rate = getSetting(general, "increase_rate", 15);
   const currency = getSetting(general, "currency_icon");
 
-  let first = bulkPriceQuantity[0]?.MinQuantity;
-  let second = bulkPriceQuantity[1]?.MinQuantity;
-  let third = bulkPriceQuantity[2]?.MinQuantity;
-
   // quantity box active deactive
-  const addActiveClass = (MinQuantity, MaxQuantity) => {
+  const addActiveClassThree = () => {
+    let first = bulkPriceQuantity[0]?.MinQuantity;
+    let second = bulkPriceQuantity[1]?.MinQuantity;
+    let third = bulkPriceQuantity[2]?.MinQuantity;
+
     let a = totalQty;
     let b = document.querySelectorAll(".range");
     let i;
@@ -32,29 +32,39 @@ const PriceRange = (props) => {
       }
     }
   };
+  const addActiveClassTow = () => {
+    let firstMax = bulkPriceQuantity[0]?.MaxQuantity;
+    let second = bulkPriceQuantity[1]?.MaxQuantity;
+    let secondMin = bulkPriceQuantity[1]?.MinQuantity;
+    let a = totalQty;
+    let b = document.querySelectorAll(".range");
+    let i;
+    for (i = 0; i < b.length; i++) {
+      if (a <= firstMax || a < secondMin) {
+        b[0].classList.add("rangeActive");
+        b[1].classList.remove("rangeActive");
+      } else if (a > firstMax || a > secondMin) {
+        b[0].classList.remove("rangeActive");
+        b[1].classList.add("rangeActive");
+      }
+    }
+  };
   console.log("bulkPriceQuantity", bulkPriceQuantity);
-  // console.log("first", first);
-  // console.log("first", second);
-  // console.log("first", third);
-  // console.log("quantity", totalQty);
+
   return (
     <div className='ranges'>
       {bulkPriceQuantity.map((pqR, index) => {
-        // console.log("pqR", pqR);
         const {
           MaxQuantity,
           MinQuantity,
           Price: { Base },
         } = pqR;
-        // console.log("MinQuantity", MinQuantity);
-        if (bulkPriceQuantity.length > 0) addActiveClass(MinQuantity, MaxQuantity);
-
+        if (bulkPriceQuantity.length == 2) addActiveClassTow(MinQuantity, MaxQuantity);
+        if (bulkPriceQuantity.length == 3) addActiveClassThree(MinQuantity, MaxQuantity);
+        console.log("pqR", pqR);
         return (
           <div className='range' key={index}>
-            <span className='amount'>
-              {" "}
-              {`${currency} ${GetOriginalPriceFromPrice({ OriginalPrice: Base }, rate)}`}
-            </span>
+            <span className='amount'> {`${currency} ${Base}`}</span>
             {/* <span className='amount'> {`${currency} ${Base}`}</span> */}
             <div className='piece'>{MinQuantity} or more</div>
           </div>
