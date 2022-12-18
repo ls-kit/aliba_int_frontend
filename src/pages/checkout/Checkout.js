@@ -163,6 +163,7 @@ const Checkout = (props) => {
                                         config={config}
                                         cartConfigured={cartConfigured}
                                         ShippingCharges={ShippingCharges}
+                                        general={general}
                                       />
                                       <tr key={index}>
                                         <td colSpan={3} className='text-right'>
@@ -189,6 +190,7 @@ const Checkout = (props) => {
                                       product={product}
                                       cartConfigured={cartConfigured}
                                       ShippingCharges={ShippingCharges}
+                                      general={general}
                                     />
                                     <tr key={index}>
                                       <td colSpan={3} className='text-right'>

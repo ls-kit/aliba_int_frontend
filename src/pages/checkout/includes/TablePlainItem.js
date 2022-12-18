@@ -1,11 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { cartPlainProductQuantityUpdate, numberWithCommas } from "../../../utils/CartHelpers";
+import {
+  cartPlainProductQuantityUpdate,
+  getUpdatedProductPrice,
+  numberWithCommas,
+} from "../../../utils/CartHelpers";
 import { configAttrToConfigured } from "../../../utils/GlobalStateControl";
+import { getSetting } from "../../../utils/Helpers";
 
 const TablePlainItem = (props) => {
-  const { currency, product, cartConfigured, ShippingCharges } = props;
+  const { currency, product, cartConfigured, ShippingCharges, general } = props;
+  const bulkPriceQuantity = product.bulkPriceQuantity;
+  const rate = getSetting(general, "increase_rate", 15);
 
   const unitTotalPrice = (Price, Qty) => {
     return numberWithCommas(Number(Price) * Number(Qty));
@@ -18,13 +25,25 @@ const TablePlainItem = (props) => {
       newQty = parseInt(product.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(newQty, cartConfigured, product.Id, ShippingCharges);
+      cartPlainProductQuantityUpdate(
+        newQty,
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product.Id,
+        ShippingCharges
+      );
     }
   };
 
   const plainItemQtyChanges = (product, qty) => {
     if (Number(qty) <= Number(product.MasterQuantity)) {
-      cartPlainProductQuantityUpdate(qty, cartConfigured, product.Id, ShippingCharges);
+      cartPlainProductQuantityUpdate(
+        qty,
+        getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product.Id,
+        ShippingCharges
+      );
     }
   };
 

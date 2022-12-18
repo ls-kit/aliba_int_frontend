@@ -1,11 +1,19 @@
 import React from "react";
-import { cartColorAttributes, cartProductQuantityUpdate, numberWithCommas } from "../../../utils/CartHelpers";
+import {
+  cartColorAttributes,
+  cartProductQuantityUpdate,
+  getUpdatedProductPrice,
+  numberWithCommas,
+} from "../../../utils/CartHelpers";
 import { Link } from "react-router-dom";
 import { configAttrToConfigured } from "../../../utils/GlobalStateControl";
 import _ from "lodash";
+import { getSetting } from "../../../utils/Helpers";
 
 const TableConfigItems = (props) => {
-  const { currency, product, config, cartConfigured, ShippingCharges } = props;
+  const { currency, product, config, cartConfigured, ShippingCharges, general } = props;
+  const bulkPriceQuantity = product.bulkPriceQuantity;
+  const rate = getSetting(general, "increase_rate", 15);
 
   const activeConfiguredQtyChanges = (existsConfig, product_id, type = "increment") => {
     let newQty = parseInt(existsConfig.Quantity) + 1;
@@ -14,14 +22,28 @@ const TableConfigItems = (props) => {
       newQty = parseInt(existsConfig.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(newQty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(
+        newQty,
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        existsConfig.Id,
+        ShippingCharges
+      );
     }
   };
 
   const inputQtyChanges = (existsConfig, product_id, qty) => {
     const maxQuantity = !_.isEmpty(existsConfig) ? existsConfig.MaxQuantity : 0;
     if (Number(qty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(qty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(
+        qty,
+        getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        existsConfig.Id,
+        ShippingCharges
+      );
     }
   };
 
