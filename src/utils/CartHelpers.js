@@ -114,13 +114,13 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity) => {
   let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
 
   if (totalQtyInCart >= first?.MinQuantity && totalQtyInCart <= first?.MaxQuantity) {
-    return firstMinQuantityPrice;
+    return Math.ceil(firstMinQuantityPrice);
   } else if (totalQtyInCart >= second?.MinQuantity && totalQtyInCart <= second?.MaxQuantity) {
-    return secondMinQuantityPrice;
+    return Math.ceil(secondMinQuantityPrice);
   } else if (totalQtyInCart >= third?.MinQuantity) {
-    return thirdMinQuantityPrice;
+    return Math.ceil(thirdMinQuantityPrice);
   } else {
-    return firstMinQuantityPrice;
+    return Math.ceil(firstMinQuantityPrice);
   }
 };
 
