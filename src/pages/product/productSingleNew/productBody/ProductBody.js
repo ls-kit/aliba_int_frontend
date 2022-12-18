@@ -37,22 +37,10 @@ const ProductBody = (props) => {
   const colorAttributes = getColorAttributes(ConfigAttributes);
   const copyText = window.location.href;
   let activeProduct = findProductCartFromState(cartConfigured, product_id);
-  // const totalQty = cartConfigured[0] ? cartConfigured[0]?.totalQty : 0;
   const totalQty = activeProduct.totalQty;
   const [activeImg, setActiveImg] = useState("");
-  const [bulkPriceQuantity, setBulkPriceQuantity] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [copy, setCopy] = useState(false);
-
-  useEffect(() => {
-    bulkPriceQuantityRange(product_id);
-  }, [product_id]);
-
-  const bulkPriceQuantityRange = async (product_id) => {
-    const response = await loadBulkProductsPrice(product_id);
-    setBulkPriceQuantity(response.bulkPrices.Configuration.QuantityRanges);
-    setLoading(false);
-  };
+  const bulkPriceQuantity = product.BulkPrices.Configuration.QuantityRanges;
 
   const alertForQuantity = (e) => {
     e.preventDefault();
@@ -67,22 +55,6 @@ const ProductBody = (props) => {
     e.preventDefault();
     props.productAddToWishlist(product);
   };
-
-  // decide what is render for bulk product
-  // let bulkProductContent = null;
-  // if (loading) {
-  //   bulkProductContent = <CardSkelton />;
-  // }
-  // if (!loading && bulkPriceQuantity.length > 1) {
-  //   bulkProductContent = (
-  //     <PriceRange
-  //       product={product}
-  //       general={general}
-  //       totalQty={totalQty}
-  //       bulkPriceQuantity={bulkPriceQuantity}
-  //     />
-  //   );
-  // }
 
   const onCopy = () => {
     setCopy(true);
@@ -111,7 +83,12 @@ const ProductBody = (props) => {
         <div className='col-md-6'>
           <div className='product-details' id='hello'>
             <AppOffer />
-            {/* {bulkProductContent} */}
+            <PriceRange
+              product={product}
+              general={general}
+              totalQty={totalQty}
+              bulkPriceQuantity={bulkPriceQuantity}
+            />
             {_.isArray(firstConfigurators) &&
               firstConfigurators.map((singleConfig, index) => (
                 <SingleAttributeGroup

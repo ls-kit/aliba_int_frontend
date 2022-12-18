@@ -104,6 +104,26 @@ export const GetOriginalPriceFromPrice = (Price, rate) => {
   return _.round(sellPrice);
 };
 
+export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity, rate = 15) => {
+  let first = bulkPriceQuantity[0];
+  let second = bulkPriceQuantity[1];
+  let third = bulkPriceQuantity[2];
+
+  let firstMinQuantityPrice = bulkPriceQuantity[0]?.Price.Base;
+  let secondMinQuantityPrice = bulkPriceQuantity[1]?.Price.Base;
+  let thirdMinQuantityPrice = bulkPriceQuantity[2]?.Price.Base;
+
+  if (totalQtyInCart >= first?.MinQuantity && totalQtyInCart <= first?.MaxQuantity) {
+    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+  } else if (totalQtyInCart >= second?.MinQuantity && totalQtyInCart <= second?.MaxQuantity) {
+    return GetOriginalPriceFromPrice({ OriginalPrice: secondMinQuantityPrice }, rate);
+  } else if (totalQtyInCart >= third?.MinQuantity) {
+    return GetOriginalPriceFromPrice({ OriginalPrice: thirdMinQuantityPrice }, rate);
+  } else {
+    return GetOriginalPriceFromPrice({ OriginalPrice: firstMinQuantityPrice }, rate);
+  }
+};
+
 /**
  *
  * @param product
@@ -547,6 +567,7 @@ export const cartCalculateNeedToPay = (totalPrice, percent = 50) => {
 
 export const cartProductQuantityUpdate = (
   qty,
+  newPrice,
   cartConfigured,
   product_id,
   existsConfigId,
@@ -560,7 +581,7 @@ export const cartProductQuantityUpdate = (
       } else {
         ConfiguredItems = mapItem.ConfiguredItems.map((config) => {
           if (config.Id === existsConfigId) {
-            return { ...config, Quantity: qty };
+            return { ...config, Quantity: qty, Price: newPrice };
           }
           return config;
         });
@@ -592,11 +613,17 @@ export const cartProductQuantityUpdate = (
   configAttrToConfigured(reConfig);
 };
 
-export const cartPlainProductQuantityUpdate = (newQty, cartConfigured, product_id, ShippingCharges) => {
+export const cartPlainProductQuantityUpdate = (
+  newQty,
+  newPrice,
+  cartConfigured,
+  product_id,
+  ShippingCharges
+) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
       if (newQty > 0) {
-        let activeProduct = { ...mapItem, Quantity: newQty };
+        let activeProduct = { ...mapItem, Price: newPrice, Quantity: newQty };
         let ProductSummary = cartProductTotalExceptConfiguredItems(activeProduct, ShippingCharges);
         if (!_.isEmpty(ProductSummary)) {
           activeProduct = {

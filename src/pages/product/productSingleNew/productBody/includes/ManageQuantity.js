@@ -15,11 +15,20 @@ import {
   getProductApproxWeight,
   getProductDeliveryCost,
   getProductPrice,
+  getUpdatedProductPrice,
 } from "../../../../../utils/CartHelpers";
 import { getSetting } from "../../../../../utils/Helpers";
 
 const ManageQuantity = (props) => {
-  const { product, general, ConfiguredItem, ConfiguredItemAttributes, cartConfigured } = props;
+  const {
+    product,
+    general,
+    ConfiguredItem,
+    ConfiguredItemAttributes,
+    cartConfigured,
+    bulkPriceQuantity,
+    totalQtyInCart,
+  } = props;
   const product_id = !_.isEmpty(product) ? product.Id : 0;
   const rate = getSetting(general, "increase_rate", 15);
   // const ShippingCharges = getSetting(general, "air_shipping_charges");
@@ -42,13 +51,27 @@ const ManageQuantity = (props) => {
       newQty = parseInt(existsConfig.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(newQty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(
+        newQty,
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        existsConfig.Id,
+        ShippingCharges
+      );
     }
   };
 
   const inputQtyChanges = (qty) => {
     if (Number(qty) <= Number(maxQuantity)) {
-      cartProductQuantityUpdate(qty, cartConfigured, product_id, existsConfig.Id, ShippingCharges);
+      cartProductQuantityUpdate(
+        qty,
+        getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        existsConfig.Id,
+        ShippingCharges
+      );
     }
   };
 
@@ -63,7 +86,7 @@ const ManageQuantity = (props) => {
         ApproxWeight: getProductApproxWeight(product),
         DeliveryCost: getProductDeliveryCost(product, rate),
         Quantity: qty,
-        Price: getProductPrice(product, rate),
+        Price: getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
         hasConfigurators: true,
         IsCart: true,
         ConfiguredItems: [],
@@ -81,7 +104,7 @@ const ManageQuantity = (props) => {
         Quantity: qty,
         MaxQuantity: ConfiguredItem.Quantity,
         SalesCount: ConfiguredItem.SalesCount,
-        Price: getProductPrice(product, rate, ConfiguredItem),
+        Price: getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
         Attributes: ConfiguredItemAttributes,
       };
       activeConfiguredItems = [...activeConfiguredItems, makeConfig];
@@ -119,7 +142,7 @@ const ManageQuantity = (props) => {
       ApproxWeight: getProductApproxWeight(product),
       DeliveryCost: getProductDeliveryCost(product, rate),
       Quantity: qty,
-      Price: getProductPrice(product, rate),
+      Price: getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
       hasConfigurators: false,
       IsCart: true,
       ConfiguredItems: [],
@@ -146,13 +169,25 @@ const ManageQuantity = (props) => {
       newQty = parseInt(activeCartProduct.Quantity) - 1;
     }
     if (Number(newQty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(newQty, cartConfigured, product_id, ShippingCharges);
+      cartPlainProductQuantityUpdate(
+        newQty,
+        getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        ShippingCharges
+      );
     }
   };
 
   const plainItemQtyChanges = (qty) => {
     if (Number(qty) <= Number(maxQuantity)) {
-      cartPlainProductQuantityUpdate(qty, cartConfigured, product_id, ShippingCharges);
+      cartPlainProductQuantityUpdate(
+        qty,
+        getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
+        cartConfigured,
+        product_id,
+        ShippingCharges
+      );
     }
   };
 

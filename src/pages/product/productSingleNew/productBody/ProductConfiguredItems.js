@@ -13,7 +13,15 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 const ProductConfiguredItems = (props) => {
-  const { product, ConfiguredItems, colorAttributes, cartAttribute, general } = props;
+  const {
+    product,
+    ConfiguredItems,
+    colorAttributes,
+    cartAttribute,
+    general,
+    totalQtyInCart,
+    bulkPriceQuantity,
+  } = props;
   console.log("general", general);
   const Attributes = getProductAttributes(product);
   const rate = getSetting(general, "increase_rate", 15);
@@ -118,13 +126,13 @@ const ProductConfiguredItems = (props) => {
                     )}`}
                 </td> */}
 
-                {/* <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
+                <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
                   totalQtyInCart,
                   bulkPriceQuantity,
                   rate
-                )}`}</td> */}
+                )}`}</td>
 
-                <td className='align-middle'>{`${currency} ${getProductPrice(product, rate, config)}`}</td>
+                {/* <td className='align-middle'>{`${currency} ${getProductPrice(product, rate, config)}`}</td> */}
                 {Number(config.Quantity) <= 0 ? (
                   <td className='text-center align-middle pb-0'>Out of Stock</td>
                 ) : (
@@ -133,8 +141,8 @@ const ProductConfiguredItems = (props) => {
                       product={product}
                       ConfiguredItem={config}
                       ConfiguredItemAttributes={ConfiguredItemAttributes(config)}
-                      // totalQtyInCart={totalQtyInCart}
-                      // bulkPriceQuantity={bulkPriceQuantity}
+                      totalQtyInCart={totalQtyInCart}
+                      bulkPriceQuantity={bulkPriceQuantity}
                     />
                     <p className='maxQuantityText'>{config.Quantity}</p>
                   </td>
