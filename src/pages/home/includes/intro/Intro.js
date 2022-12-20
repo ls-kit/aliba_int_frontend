@@ -11,6 +11,7 @@ import parser from "html-react-parser";
 import { getHomePageCards } from "../../../../utils/Services";
 import _ from "lodash";
 import LargeCardSkelton from "../../../../skeleton/productSkeleton/LargeCardSkelton";
+import BannerRight from "./includes/BannerRight";
 
 const Intro = (props) => {
   const { banners } = props;
@@ -51,7 +52,7 @@ const Intro = (props) => {
   if (!cardLoading) {
     homePageContent = homePageCards.map((cart, index) => (
       <Link className='homeComp' to={`/${cart.btn_url}`} key={index}>
-        <img className='mb-2' src={loadAsset(cart.image)} alt='' />
+        <img className='' src={loadAsset(cart.image)} alt='' />
         <h3>{cart.titleText}</h3>
         <button className='bt'>{cart.btn_name}</button>
       </Link>
@@ -65,7 +66,7 @@ const Intro = (props) => {
           <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0'>
             <BrowseCategories />
           </div>
-          <div className='col-lg-9 cols col-md-12 col-12 mb-md-0 mb-2'>
+          <div className='col-lg-6 cols col-md-12 col-12 mb-md-0 mb-2'>
             <div className='intro-slider-container mb-1'>
               {banners.length > 0 && !loading ? (
                 <OwlCarousel
@@ -106,7 +107,22 @@ const Intro = (props) => {
                 <BannerSkeleton />
               )}
             </div>
-            <div className='homeBoxContainer mb-1'>{homePageContent}</div>
+            <div className='row'>
+              <div className='col-lg-3 fCenter'>
+                <div className=''>
+                  <h3 className='bold'>Your fave shopping guide</h3>
+                  <p className='bold' style={{ lineHeight: "normal", fontSize: "12px" }}>
+                    Checkout the latest new Deals
+                  </p>
+                </div>
+              </div>
+              <div className='col-lg-9'>
+                <div className='homeBoxContainer mb-1'>{homePageContent}</div>
+              </div>
+            </div>
+          </div>
+          <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0'>
+            <BannerRight />
           </div>
         </div>
       </div>

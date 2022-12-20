@@ -435,6 +435,11 @@ a:focus {
   display: flex;
   justify-content: center;
 }
+.fCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .flexMiddle {
   display: flex;
   align-items: center;
@@ -442,12 +447,19 @@ a:focus {
 .bold {
   font-weight: 700;
 }
+.fs-18 {
+  font-size: 18px;
+}
 .darkBtn {
   background-image: none !important;
   background-color: #1d262d !important;
 }
 .fs14 {
   font-size: 14px;
+}
+.profile {
+  font-size: 22px;
+  margin-bottom: 7px;
 }
 .app-in {
   display: flex;
@@ -471,6 +483,24 @@ a:focus {
   background-image: linear-gradient(to right, #f7b733, #fc4a1a);
 }
 
+.homeLogin-btn {
+  display: block;
+  float: left;
+  width: 100%;
+  color: #fff;
+  border-radius: 18px;
+  background-image: linear-gradient(270deg, #ff4441, #ff3914 45%, #ff6d2a);
+  padding: 3px 15px;
+}
+.homeReg-btn {
+  display: block;
+  float: left;
+  width: 100%;
+  color: #222;
+  border-radius: 18px;
+  background: #f9f9f9;
+  padding: 3px 15px;
+}
 .mb05 {
   margin-bottom: 0.5rem;
 }
@@ -618,7 +648,7 @@ a:focus {
   align-items: center;
   img {
     flex: 1 1;
-    width: 128px;
+    width: 50px;
     margin-bottom: 0.5rem;
   }
   h3 {
@@ -879,10 +909,15 @@ a:focus {
   .btn {
     font-size: 14px;
     font-weight: 500;
-    width: 140px;
+    width: 90px;
     height: 32px;
     padding: 1rem 0.5rem;
   }
+}
+.bRightBox {
+  padding: 20px 18px;
+  background-color: $white;
+  border-radius: 7px;
 }
 
 // responsiveness
@@ -922,10 +957,9 @@ a:focus {
     text-align: center;
   }
   .homeBoxContainer button {
-    font-size: 12px;
-    width: 140px;
-    height: 32px;
-    padding: 0 0.5rem;
+    font-size: 10px;
+    padding: 2px 5px;
+    height: auto !important;
   }
   .saleChinaOff {
     flex-direction: column;
@@ -1071,7 +1105,7 @@ a:focus {
 @media only screen and (min-width: 768px) {
   .intro-slide,
   .intro-section .col-lg-5cols > .banner.banner-overlay {
-    min-height: 348px !important;
+    min-height: 250px !important;
   }
 }
 
