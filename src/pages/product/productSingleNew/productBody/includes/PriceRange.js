@@ -64,7 +64,7 @@ const PriceRange = (props) => {
         console.log("pqR", pqR);
         return (
           <div className='range' key={index}>
-            <span className='amount'> {`${currency} ${Base}`}</span>
+            <span className='amount'> {`${currency} ${Math.ceil(Base)}`}</span>
             {/* <span className='amount'> {`${currency} ${Base}`}</span> */}
             <div className='piece'>{MinQuantity} or more</div>
           </div>
