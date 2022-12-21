@@ -11,6 +11,7 @@ const SameSellerProducts = ({ vendorId }) => {
   useEffect(() => {
     getSameSellerProduct();
   }, [vendorId]);
+  console.log("vendorId", vendorId);
 
   const limit = 16;
   const offset = 1;
