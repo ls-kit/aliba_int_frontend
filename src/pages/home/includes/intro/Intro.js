@@ -112,18 +112,13 @@ const Intro = (props) => {
                 className='row h-50 banner-bottom-part'
                 style={{
                   alignItems: "center",
-                  backgroundImage: `url("https://ae01.alicdn.com/kf/He0cfef9ee60544b79b5950d1a254f22dU.png_.webp")`,
-                  height: "100%",
-                  backgroundSize: "contain",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
                 }}
               >
                 <div className='col-12'>
                   <div className='h-100'>
                     <div className='row'>
                       <div className='col-md-3 fCenter'>
-                        <div className='' style={{ visibility: "hidden" }}>
+                        <div className=''>
                           <h3 className='bold'>Your fave shopping guide</h3>
                           <p className='bold' style={{ lineHeight: "normal", fontSize: "12px" }}>
                             Checkout the latest new Deals
