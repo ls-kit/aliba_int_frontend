@@ -562,7 +562,12 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
 };
 
 export const cartCalculateNeedToPay = (totalPrice, percent = 50) => {
-  return (Number(totalPrice) * percent) / 100;
+  return (Number(totalPrice) * Number(percent)) / 100;
+};
+export const cartCalculateDueToPay = (totalPrice, percent = 50) => {
+  const payableAmount = (Number(totalPrice) * Number(percent)) / 100;
+  const due = totalPrice - payableAmount;
+  return due;
 };
 
 export const cartProductQuantityUpdate = (

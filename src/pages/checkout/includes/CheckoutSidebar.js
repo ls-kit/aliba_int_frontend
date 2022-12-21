@@ -4,6 +4,7 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
+  cartCalculateDueToPay,
   cartCalculateNeedToPay,
   CartProductSummary,
   CheckoutSummary,
@@ -21,6 +22,7 @@ const CheckoutSidebar = (props) => {
   //   const summary = CartProductSummary(cartConfigured, ShippingCharges);
 
   const [manageShipping, setManageShipping] = useState(false);
+  const [paymentOption, setPaymentOption] = useState(50);
 
   const manageShippingAddress = (e) => {
     e.preventDefault();
@@ -51,10 +53,19 @@ const CheckoutSidebar = (props) => {
   };
 
   const needToPay = () => {
-    const price = cartCalculateNeedToPay(summary.totalPrice);
+    const price = cartCalculateNeedToPay(summary.totalPrice, paymentOption);
     return numberWithCommas(price);
   };
 
+  const handlePaymentChange = (e) => {
+    setPaymentOption(e.target.value);
+  };
+  console.log("payment option", paymentOption);
+
+  const dueAmount = () => {
+    const price = cartCalculateDueToPay(summary.totalPrice, paymentOption);
+    return numberWithCommas(price);
+  };
   return (
     <aside className='col-lg-3'>
       {manageShipping && (
@@ -81,7 +92,17 @@ const CheckoutSidebar = (props) => {
 
             <tr className='summary-total'>
               <td>Due Amount:</td>
-              <td>{`${currency} ${needToPay()}`}</td>
+              <td>{`${currency} ${dueAmount()}`}</td>
+            </tr>
+            <tr className='summary-total'>
+              <td>Select Payment Amount(%):</td>
+              <div className='ml-2'>
+                <select onChange={handlePaymentChange} className='form-control' name='' id='payment'>
+                  <option value='50'>50%</option>
+                  <option value='70'>70%</option>
+                  <option value='90'>90%</option>
+                </select>
+              </div>
             </tr>
 
             <tr className='summary-shipping-estimate'>
