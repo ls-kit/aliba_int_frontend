@@ -273,3 +273,12 @@ export const getHomePageCards = async () => {
     return {};
   });
 };
+export const getFeaturedCategories = async () => {
+  return await axiosInstance.get(`/get-featured-categories`).then((res) => {
+    const resData = res.data;
+    if (!_.isEmpty(resData)) {
+      return resData.data;
+    }
+    return {};
+  });
+};

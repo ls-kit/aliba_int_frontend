@@ -20,6 +20,7 @@ import SectionsFour from "./sections/SectionsFour";
 import SectionsFive from "./sections/SectionsFive";
 import { useState } from "react";
 import TopCategories from "./includes/intro/topCategory/TopCategories";
+import FeaturedCategories from "./includes/featuredCategory/FeaturedCategories";
 
 const Home = (props) => {
   const { general } = props;
@@ -36,6 +37,7 @@ const Home = (props) => {
   return (
     <main className='main' style={{ backgroundColor: "#F2F2F2" }}>
       <Intro />
+      <FeaturedCategories />
       {/*<IconBoxes/>*/}
       {/* <PopularCategory /> */}
       <TopCategories />
