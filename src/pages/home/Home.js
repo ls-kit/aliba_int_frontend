@@ -22,9 +22,12 @@ import { useState } from "react";
 import TopCategories from "./includes/intro/topCategory/TopCategories";
 import FeaturedCategories from "./includes/featuredCategory/FeaturedCategories";
 import SuperDeals from "./includes/superDeals/SuperDeals";
+import SectionSuperDeals from "./sections/SectionSuperDeals";
 
 const Home = (props) => {
   const { general } = props;
+
+  const section_super_deals_active = getSetting(general, "section_super_deals_active");
   const section_one_active = getSetting(general, "section_one_active");
   const section_two_active = getSetting(general, "section_two_active");
   const section_three_active = getSetting(general, "section_three_active");
@@ -38,7 +41,7 @@ const Home = (props) => {
   return (
     <main className='main' style={{ backgroundColor: "#F2F2F2" }}>
       <Intro />
-      <SuperDeals />
+      {section_super_deals_active === "enable" && <SectionSuperDeals general={general} />}
       <FeaturedCategories />
       {/*<IconBoxes/>*/}
       {/* <PopularCategory /> */}

@@ -282,3 +282,12 @@ export const getFeaturedCategories = async () => {
     return {};
   });
 };
+export const getExclusiveOffer = async () => {
+  return await axiosInstance.get(`/get-homepage-featured-items-card`).then((res) => {
+    const resData = res.data;
+    if (!_.isEmpty(resData)) {
+      return resData.data;
+    }
+    return {};
+  });
+};

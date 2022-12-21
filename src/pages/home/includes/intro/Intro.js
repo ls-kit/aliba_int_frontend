@@ -67,61 +67,79 @@ const Intro = (props) => {
             <BrowseCategories />
           </div>
           <div className='col-lg-6 cols col-md-12 col-12 mb-md-0 mb-2'>
-            <div className='intro-slider-container mb-1'>
-              {banners.length > 0 && !loading ? (
-                <OwlCarousel
-                  className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
-                  loop={false}
-                  margin={0}
-                  dots={false}
-                  nav={false}
-                  autoplay={true}
-                  autoplayTimeout={10000}
-                  responsive={{
-                    0: { items: 1 },
-                    480: { items: 1 },
-                    576: { items: 1 },
-                    768: { items: 1 },
-                    992: { items: 1 },
-                    1200: { items: 1 },
-                  }}
-                >
-                  {banners.map((banner) => {
-                    const content = `${banner?.post_content}`;
+            <div className='h-100'>
+              <div className='intro-slider-container mb-1'>
+                {banners.length > 0 && !loading ? (
+                  <OwlCarousel
+                    className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
+                    loop={false}
+                    margin={0}
+                    dots={false}
+                    nav={false}
+                    autoplay={true}
+                    autoplayTimeout={10000}
+                    responsive={{
+                      0: { items: 1 },
+                      480: { items: 1 },
+                      576: { items: 1 },
+                      768: { items: 1 },
+                      992: { items: 1 },
+                      1200: { items: 1 },
+                    }}
+                  >
+                    {banners.map((banner) => {
+                      const content = `${banner?.post_content}`;
 
-                    return (
-                      <div
-                        key={banner.id}
-                        className='intro-slide bg-image d-flex align-items-center'
-                        style={{
-                          backgroundColor: "#e9e9e9",
-                          backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
-                        }}
-                      >
-                        {parser(content)}
-                      </div>
-                    );
-                  })}
-                </OwlCarousel>
-              ) : (
-                <BannerSkeleton />
-              )}
-            </div>
-            <div className='row'>
-              <div className='col-lg-3 fCenter'>
-                <div className=''>
-                  <h3 className='bold'>Your fave shopping guide</h3>
-                  <p className='bold' style={{ lineHeight: "normal", fontSize: "12px" }}>
-                    Checkout the latest new Deals
-                  </p>
-                </div>
+                      return (
+                        <div
+                          key={banner.id}
+                          className='intro-slide bg-image d-flex align-items-center'
+                          style={{
+                            backgroundColor: "#e9e9e9",
+                            backgroundImage: `url(${loadAsset(banner.post_thumb)})`,
+                          }}
+                        >
+                          {parser(content)}
+                        </div>
+                      );
+                    })}
+                  </OwlCarousel>
+                ) : (
+                  <BannerSkeleton />
+                )}
               </div>
-              <div className='col-lg-9'>
-                <div className='homeBoxContainer mb-1'>{homePageContent}</div>
+              <div
+                className='row h-50 banner-bottom-part'
+                style={{
+                  alignItems: "center",
+                  backgroundImage: `url("https://ae01.alicdn.com/kf/He0cfef9ee60544b79b5950d1a254f22dU.png_.webp")`,
+                  height: "100%",
+                  backgroundSize: "contain",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }}
+              >
+                <div className='col-12'>
+                  <div className='h-100'>
+                    <div className='row'>
+                      <div className='col-md-3 fCenter'>
+                        <div className='' style={{ visibility: "hidden" }}>
+                          <h3 className='bold'>Your fave shopping guide</h3>
+                          <p className='bold' style={{ lineHeight: "normal", fontSize: "12px" }}>
+                            Checkout the latest new Deals
+                          </p>
+                        </div>
+                      </div>
+                      <div className='col-md-9'>
+                        <div className='homeBoxContainer mb-1'>{homePageContent}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0'>
+          <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0 '>
             <BannerRight />
           </div>
         </div>
