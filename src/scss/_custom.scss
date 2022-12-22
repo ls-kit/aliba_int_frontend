@@ -3,6 +3,9 @@ a:hover,
 a:focus {
   color: $baseColor;
 }
+.baseColor {
+  color: $baseColor;
+}
 
 .hi-color {
   color: var(--theme-color);
@@ -254,6 +257,13 @@ a:focus {
   }
 }
 
+.bankDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
 .product_list_container {
   background-color: #fff;
   padding: 1rem;
@@ -1052,6 +1062,10 @@ a:focus {
   min-width: 200px;
   margin: 0 auto !important;
 }
+.bankImg {
+  width: 40%;
+}
+
 @media only screen and (min-width: 767px) {
   .nagadPay {
     text-align: end !important;

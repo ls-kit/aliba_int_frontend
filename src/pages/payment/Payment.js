@@ -19,30 +19,25 @@ import {
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
 import PlainItem from "./includes/PlainItem";
+import bankImg from "../../assets/images/bank.png";
+import CopyToClipboard from "react-copy-to-clipboard";
+import { FaRegCopy } from "react-icons/fa";
 
 const Payment = (props) => {
   const { cartConfigured, shipping_address, general, advance_percent } = props;
-  console.log("general", general);
 
   const [accept, setAccept] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
+
+  const [trxId, setTrxId] = useState("");
+  const [copy, setCopy] = useState(false);
 
   const currency = getSetting(general, "currency_icon");
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   // const summary = CartProductSummary(cartConfigured, ShippingCharges);
-
+  const bankId = getSetting(general, "payment_bank_details");
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
-  // const needToPay = () => {
-  //   const price = cartCalculateNeedToPay(summary.totalPrice, paymentOption);
-  //   return numberWithCommas(price);
-  // };
-
-  // const dueAmount = () => {
-  //   const price = cartCalculateDueToPay(summary.totalPrice, paymentOption);
-  //   return numberWithCommas(price);
-  // };
-
   const advanced = cartCalculateNeedToPay(summary.totalPrice, Number(advance_percent));
   const dueAmount = cartCalculateDueToPay(summary.totalPrice, Number(advance_percent));
 
@@ -66,8 +61,16 @@ const Payment = (props) => {
       });
       process = false;
     }
+    if (!trxId) {
+      swal({
+        text: "Please Enter Your TRX or Account Number",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      process = false;
+    }
 
-    if (!accept && paymentMethod) {
+    if (!accept) {
       swal({
         text: "Please accept terms and conditions!",
         icon: "warning",
@@ -83,7 +86,12 @@ const Payment = (props) => {
           paymentMethod: paymentMethod,
           cart: JSON.stringify(cartConfigured),
           address: JSON.stringify(shipping_address),
-          summary: JSON.stringify({ cartTotal: cartTotal, advanced: advanced, dueAmount: dueAmount }),
+          summary: JSON.stringify({
+            cartTotal: cartTotal,
+            advanced: advanced,
+            dueAmount: dueAmount,
+            trxId: trxId,
+          }),
         });
       } else {
         props.history.push("/checkout");
@@ -128,6 +136,10 @@ const Payment = (props) => {
     const totalPrice = checkItemSubTotal.totalPrice;
     const ShippingCost = totalShippingCost(product);
     return Number(totalPrice) + Number(ShippingCost);
+  };
+
+  const onCopy = () => {
+    setCopy(true);
   };
 
   return (
@@ -232,6 +244,34 @@ const Payment = (props) => {
                               {paymentMethod == "nagad_payment" && (
                                 <img className='qr-code' src={loadAsset(general.qr_code_nagad)} alt='' />
                               )}
+                              {paymentMethod == "bank_payment" && (
+                                <div className='bankDetails'>
+                                  <h3 className='bold'>
+                                    Bank Details: <span className='baseColor'>{bankId}</span>
+                                  </h3>
+                                  <div>
+                                    <CopyToClipboard onCopy={onCopy} text={bankId}>
+                                      <button
+                                        class='bt copyLink'
+                                        style={{
+                                          borderRadius: "64px",
+                                          width: "80px",
+                                          height: "31px",
+                                          display: "flex",
+                                          alignItems: "center",
+                                          justifyContent: "center",
+                                          cursor: "pointer",
+                                        }}
+                                      >
+                                        <FaRegCopy />
+                                        <span style={{ fontSize: "14px", marginLeft: "0.5rem" }}>
+                                          {copy ? "Copied " : "Copy"}
+                                        </span>
+                                      </button>
+                                    </CopyToClipboard>
+                                  </div>
+                                </div>
+                              )}
                             </td>
                           </tr>
                         )}
@@ -281,10 +321,37 @@ const Payment = (props) => {
                                       value='bank_payment'
                                     />
                                     <label className='form-check-label' htmlFor='bank_payment'>
-                                      <img src={`/assets/img/payment/nagod.png`} alt='Nagad' />
+                                      <img className='bankImg' src={bankImg} alt='Bank' />
                                       {/* Bank   */}
                                     </label>
                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td colSpan={3}>
+                            <div>
+                              <div className='row'>
+                                <div className='col-md-4'>
+                                  <label className='bold' htmlFor='TrxId'>
+                                    {" "}
+                                    TRX id or Account No
+                                    <span className='text-danger pt-1 ml-2'>*</span>
+                                  </label>
+                                </div>
+                                <div className='col-md-8'>
+                                  <input
+                                    className='form-control'
+                                    type='text'
+                                    name=''
+                                    id='TrxId'
+                                    placeholder='TRX id or Account No'
+                                    required
+                                    onChange={(e) => setTrxId(e.target.value)}
+                                  />
                                 </div>
                               </div>
                             </div>
