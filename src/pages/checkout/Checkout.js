@@ -117,7 +117,7 @@ const Checkout = (props) => {
             <div className='row'>
               <div className='col-lg-9'>
                 <div className='card py-3'>
-                  <div className='card-body table-responsive-sm'>
+                  <div className='checkTable table-responsive-sm '>
                     <table className='table table table-cart'>
                       <thead>
                         <tr>

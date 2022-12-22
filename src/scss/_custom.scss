@@ -264,6 +264,9 @@ a:focus {
   align-items: center;
   padding: 2rem;
 }
+.bankLabel {
+  margin-left: 2.5rem;
+}
 .product_list_container {
   background-color: #fff;
   padding: 1rem;
@@ -1063,12 +1066,25 @@ a:focus {
   margin: 0 auto !important;
 }
 .bankImg {
-  width: 40%;
 }
 
+.pay-img {
+  width: 85%;
+}
+.pay-box {
+  text-align: start;
+}
+.checkTable .card-body {
+  padding: 0.4rem 0;
+}
 @media only screen and (min-width: 767px) {
   .nagadPay {
     text-align: end !important;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .bankImg {
+    width: 100px;
   }
 }
 @media only screen and (max-width: 900px) {

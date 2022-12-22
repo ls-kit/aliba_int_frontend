@@ -280,7 +280,7 @@ const Payment = (props) => {
                           <td colSpan={3} className='border-0 p-0'>
                             <div className='card payment_card text-center'>
                               <div className='row'>
-                                <div className='col-md-4'>
+                                <div className='col-md-5 pay-box'>
                                   <div className='form-check form-check-inline'>
                                     <input
                                       className='form-check-input mr-2'
@@ -291,11 +291,15 @@ const Payment = (props) => {
                                       value='bkash_payment'
                                     />
                                     <label className='form-check-label' htmlFor='bkash_payment'>
-                                      <img src={`/assets/img/payment/bkash.png`} alt='bkash' />
+                                      <img
+                                        className='pay-img'
+                                        src={`/assets/img/payment/bkash.png`}
+                                        alt='bkash'
+                                      />
                                     </label>
                                   </div>
                                 </div>
-                                <div className='col-md-4 '>
+                                <div className='col-md-5 pay-box'>
                                   <div className='form-check form-check-inline'>
                                     <input
                                       className='form-check-input mr-2 '
@@ -306,11 +310,15 @@ const Payment = (props) => {
                                       value='nagad_payment'
                                     />
                                     <label className='form-check-label' htmlFor='nagad_payment'>
-                                      <img src={`/assets/img/payment/nagod.png`} alt='Nagad' />
+                                      <img
+                                        className='pay-img'
+                                        src={`/assets/img/payment/nagod.png`}
+                                        alt='Nagad'
+                                      />
                                     </label>
                                   </div>
                                 </div>
-                                <div className='col-md-4 nagadPay'>
+                                <div className='col-md-2 flex pay-box pb-4 pb-md-0'>
                                   <div className='form-check form-check-inline'>
                                     <input
                                       className='form-check-input mr-2 '
@@ -320,18 +328,34 @@ const Payment = (props) => {
                                       id='bank_payment'
                                       value='bank_payment'
                                     />
-                                    <label className='form-check-label' htmlFor='bank_payment'>
-                                      <img className='bankImg' src={bankImg} alt='Bank' />
-                                      {/* Bank   */}
+                                    <label className='form-check-label bankLabel' htmlFor='bank_payment'>
+                                      <img className='bankImg' src={bankImg} alt='Nagad' />
                                     </label>
                                   </div>
                                 </div>
+
+                                {/* <div className='col-md-2 flex nagadPay'>
+                                  <div className='form-check form-check-inline'>
+                                    <input
+                                      className='form-check-input mr-2 '
+                                      type='radio'
+                                      name='payment_method'
+                                      onClick={(e) => setPaymentMethod(e.target.value)}
+                                      id='bank_payment'
+                                      value='bank_payment'
+                                    />
+                                    <label className='form-check-label bankLabel' htmlFor='bank_payment'>
+                                      <img className='bankImg' src={bankImg} alt='Bank' />
+                                    
+                                    </label>
+                                  </div>
+                                </div> */}
                               </div>
                             </div>
                           </td>
                         </tr>
 
-                        <tr>
+                        <tr className='mt-5 mt-md-0'>
                           <td colSpan={3}>
                             <div>
                               <div className='row'>
