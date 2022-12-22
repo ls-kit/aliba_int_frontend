@@ -5,29 +5,46 @@ import { confirmCustomerOrder } from "../../store/actions/CartAction";
 import { Link, withRouter } from "react-router-dom";
 import _ from "lodash";
 import Breadcrumb from "../breadcrumb/Breadcrumb";
-import { getSetting, goPageTop } from "../../utils/Helpers";
+import { getSetting, goPageTop, loadAsset } from "../../utils/Helpers";
 import {
   CartProductSummary,
   cartCalculateNeedToPay,
   numberWithCommas,
   cartCheckedProductTotal,
   calculateAirShippingCharge,
+  getChinaLocalShippingCost,
+  CheckoutSummary,
+  cartCalculateDueToPay,
 } from "../../utils/CartHelpers";
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
 import PlainItem from "./includes/PlainItem";
 
 const Payment = (props) => {
-  const { cartConfigured, shipping_address, general } = props;
+  const { cartConfigured, shipping_address, general, advance_percent } = props;
+  console.log("general", general);
 
   const [accept, setAccept] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
 
   const currency = getSetting(general, "currency_icon");
-  const ShippingCharges = getSetting(general, "air_shipping_charges");
-  const summary = CartProductSummary(cartConfigured, ShippingCharges);
-  const advanced = cartCalculateNeedToPay(summary.totalPrice);
-  const dueAmount = advanced;
+  const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
+  const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
+  // const summary = CartProductSummary(cartConfigured, ShippingCharges);
+
+  const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
+  // const needToPay = () => {
+  //   const price = cartCalculateNeedToPay(summary.totalPrice, paymentOption);
+  //   return numberWithCommas(price);
+  // };
+
+  // const dueAmount = () => {
+  //   const price = cartCalculateDueToPay(summary.totalPrice, paymentOption);
+  //   return numberWithCommas(price);
+  // };
+
+  const advanced = cartCalculateNeedToPay(summary.totalPrice, Number(advance_percent));
+  const dueAmount = cartCalculateDueToPay(summary.totalPrice, Number(advance_percent));
 
   useEffect(() => {
     goPageTop();
@@ -86,17 +103,24 @@ const Payment = (props) => {
     return product.isChecked;
   };
 
-  const totalShippingCost = (product) => {
+  // const totalShippingCost = (product) => {
+  //   const checkItemSubTotal = cartCheckedProductTotal(product);
+  //   const totalPrice = checkItemSubTotal.totalPrice;
+  //   const totalWeight = checkItemSubTotal.totalWeight;
+  //   const DeliveryCost = product.DeliveryCost;
+  //   const ShippingRate = calculateAirShippingCharge(totalPrice, ShippingCharges);
+
+  //   let weightCost = Number(totalWeight) * Number(ShippingRate);
+  //   weightCost = weightCost < 100 ? 100 : weightCost;
+
+  //   return Number(DeliveryCost) + Number(weightCost);
+  // };
+  const totalShippingCost = (product, isChecked = false) => {
+    let returnValue = 0;
     const checkItemSubTotal = cartCheckedProductTotal(product);
     const totalPrice = checkItemSubTotal.totalPrice;
-    const totalWeight = checkItemSubTotal.totalWeight;
-    const DeliveryCost = product.DeliveryCost;
-    const ShippingRate = calculateAirShippingCharge(totalPrice, ShippingCharges);
-
-    let weightCost = Number(totalWeight) * Number(ShippingRate);
-    weightCost = weightCost < 100 ? 100 : weightCost;
-
-    return Number(DeliveryCost) + Number(weightCost);
+    returnValue = getChinaLocalShippingCost(totalPrice);
+    return returnValue;
   };
 
   const productTotalCost = (product) => {
@@ -189,7 +213,7 @@ const Payment = (props) => {
                         </tr>
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
-                            Need To Pay:
+                            Need To Pay {advance_percent}%:
                           </td>
                           <td className='text-right'>{`${currency} ${numberWithCommas(advanced)}`}</td>
                         </tr>
@@ -199,12 +223,24 @@ const Payment = (props) => {
                           </td>
                           <td className='text-right'>{`${currency} ${numberWithCommas(dueAmount)}`}</td>
                         </tr>
+                        {paymentMethod && (
+                          <tr>
+                            <td colSpan={3} className='p-2'>
+                              {paymentMethod == "bkash_payment" && (
+                                <img className='qr-code' src={loadAsset(general.qr_code_bkash)} alt='' />
+                              )}
+                              {paymentMethod == "nagad_payment" && (
+                                <img className='qr-code' src={loadAsset(general.qr_code_nagad)} alt='' />
+                              )}
+                            </td>
+                          </tr>
+                        )}
 
                         <tr>
                           <td colSpan={3} className='border-0 p-0'>
                             <div className='card payment_card text-center'>
                               <div className='row'>
-                                <div className='col-md-6'>
+                                <div className='col-md-4'>
                                   <div className='form-check form-check-inline'>
                                     <input
                                       className='form-check-input mr-2'
@@ -219,7 +255,7 @@ const Payment = (props) => {
                                     </label>
                                   </div>
                                 </div>
-                                <div className='col-md-6' style={{ textAlign: "end" }}>
+                                <div className='col-md-4 '>
                                   <div className='form-check form-check-inline'>
                                     <input
                                       className='form-check-input mr-2 '
@@ -231,6 +267,22 @@ const Payment = (props) => {
                                     />
                                     <label className='form-check-label' htmlFor='nagad_payment'>
                                       <img src={`/assets/img/payment/nagod.png`} alt='Nagad' />
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className='col-md-4 nagadPay'>
+                                  <div className='form-check form-check-inline'>
+                                    <input
+                                      className='form-check-input mr-2 '
+                                      type='radio'
+                                      name='payment_method'
+                                      onClick={(e) => setPaymentMethod(e.target.value)}
+                                      id='bank_payment'
+                                      value='bank_payment'
+                                    />
+                                    <label className='form-check-label' htmlFor='bank_payment'>
+                                      <img src={`/assets/img/payment/nagod.png`} alt='Nagad' />
+                                      {/* Bank   */}
                                     </label>
                                   </div>
                                 </div>
@@ -311,6 +363,7 @@ const mapStateToProps = (state) => ({
   user: state.AUTH.user,
   cartConfigured: state.CART.configured,
   shipping_address: state.CART.shipping_address,
+  advance_percent: state.CART.advance_percent.advance_percent,
 });
 
 export default connect(mapStateToProps, { confirmCustomerOrder })(withRouter(Payment));

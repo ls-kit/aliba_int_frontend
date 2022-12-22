@@ -80,12 +80,10 @@ const Checkout = (props) => {
   //   };
   const totalShippingCost = (product, isChecked = false) => {
     let returnValue = 0;
-
     if (isChecked) {
       const checkItemSubTotal = cartCheckedProductTotal(product);
       const totalPrice = checkItemSubTotal.totalPrice;
       returnValue = getChinaLocalShippingCost(totalPrice);
-      console.log("isChecked", returnValue);
     }
     return returnValue;
   };

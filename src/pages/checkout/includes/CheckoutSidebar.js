@@ -13,6 +13,7 @@ import {
 import ShippingAddress from "./ShippingAddress";
 import swal from "sweetalert";
 import { getSetting } from "../../../utils/Helpers";
+import { addAdvancePaymentPercent } from "../../../utils/GlobalStateControl";
 
 const CheckoutSidebar = (props) => {
   const { general, currency, ShippingCharges, shipping_address, cartConfigured } = props;
@@ -58,9 +59,10 @@ const CheckoutSidebar = (props) => {
   };
 
   const handlePaymentChange = (e) => {
-    setPaymentOption(e.target.value);
+    let percent = e.target.value;
+    setPaymentOption(percent);
+    addAdvancePaymentPercent(percent);
   };
-  console.log("payment option", paymentOption);
 
   const dueAmount = () => {
     const price = cartCalculateDueToPay(summary.totalPrice, paymentOption);

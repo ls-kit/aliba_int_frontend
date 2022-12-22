@@ -1046,6 +1046,17 @@ a:focus {
 }
 .banner-bottom-part {
 }
+
+.qr-code {
+  max-width: 250px;
+  min-width: 200px;
+  margin: 0 auto !important;
+}
+@media only screen and (min-width: 767px) {
+  .nagadPay {
+    text-align: end !important;
+  }
+}
 @media only screen and (max-width: 900px) {
   .c-card {
     border-radius: 0 !important;
