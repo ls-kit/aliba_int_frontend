@@ -1,3 +1,4 @@
+import _ from "lodash";
 import React, { useEffect } from "react";
 import { GetOriginalPriceFromPrice } from "../../../../../utils/CartHelpers";
 import { getSetting, goPageTop } from "../../../../../utils/Helpers";
@@ -66,7 +67,7 @@ const PriceRange = (props) => {
         console.log("pqR", pqR);
         return (
           <div className='range' key={index}>
-            <span className='amount'> {`${currency} ${Math.ceil(Base)}`}</span>
+            <span className='amount'> {`${currency} ${_.round(Base)}`}</span>
             <div className='piece'>{MinQuantity} or more</div>
           </div>
         );

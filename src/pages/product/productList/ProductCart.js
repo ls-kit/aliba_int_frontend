@@ -5,6 +5,7 @@ import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { loadProductDetails } from "../../../store/actions/ProductAction";
 import { productAddToWishlist } from "../../../store/actions/AuthAction";
+import _ from "lodash";
 
 const ProductCart = (props) => {
   const { product, general, productClass } = props;
@@ -58,7 +59,7 @@ const ProductCart = (props) => {
           {/* End .product-title */}
           <div className='clearfix d-block product-price'>
             <span className='float-left'>
-              {`${currency_icon}`} <span className='price_span'>{product.sale_price}</span>
+              {`${currency_icon}`} <span className='price_span'>{_.round(product.sale_price)}</span>
             </span>
             <span className='sold_item_text'>SOLD: {product.total_sold}</span>
           </div>

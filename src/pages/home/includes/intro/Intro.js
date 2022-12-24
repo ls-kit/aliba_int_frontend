@@ -14,7 +14,7 @@ import LargeCardSkelton from "../../../../skeleton/productSkeleton/LargeCardSkel
 import BannerRight from "./includes/BannerRight";
 
 const Intro = (props) => {
-  const { banners } = props;
+  const { banners, general } = props;
 
   const [loading, setLoading] = useState(false);
 
@@ -135,7 +135,7 @@ const Intro = (props) => {
             </div>
           </div>
           <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0 '>
-            <BannerRight />
+            <BannerRight general={general} />
           </div>
         </div>
       </div>

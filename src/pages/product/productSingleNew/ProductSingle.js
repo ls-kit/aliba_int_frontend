@@ -51,7 +51,7 @@ const ProductSingle = (props) => {
 
   return (
     <div className='bg-gray main'>
-      <div>
+      <div className='container'>
         <Breadcrumb current={characterLimiter(product.Title, 20)} collections={[{ name: "Product" }]} />
 
         <div className='row'>

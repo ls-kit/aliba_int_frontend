@@ -40,7 +40,7 @@ const Home = (props) => {
 
   return (
     <main className='main' style={{ backgroundColor: "#F2F2F2" }}>
-      <Intro />
+      <Intro general={general} />
       {section_super_deals_active === "enable" && <SectionSuperDeals general={general} />}
       <FeaturedCategories />
       {/*<IconBoxes/>*/}

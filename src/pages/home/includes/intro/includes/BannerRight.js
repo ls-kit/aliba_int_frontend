@@ -5,9 +5,10 @@ import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import CardSkelton from "../../../../../skeleton/productSkeleton/CardSkelton";
-import { loadAsset } from "../../../../../utils/Helpers";
+import { getSetting, loadAsset } from "../../../../../utils/Helpers";
 import { getExclusiveOffer } from "../../../../../utils/Services";
-const BannerRight = () => {
+const BannerRight = ({ general }) => {
+  const currency_icon = getSetting(general, "currency_icon");
   const [loading, setLoading] = useState(true);
   const [offerData, setOfferData] = useState([]);
 
@@ -52,7 +53,9 @@ const BannerRight = () => {
                 <div className='position-relative'>
                   <img src={product.image} alt='' />
                   <div className='flexCenter exPriceBox'>
-                    <span className='bt'>{product.price}</span>
+                    <span className='bt'>
+                      {`${currency_icon}`} {_.round(product.price)}
+                    </span>
                   </div>
                 </div>
               </Link>

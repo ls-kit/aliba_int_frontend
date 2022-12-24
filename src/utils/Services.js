@@ -291,3 +291,13 @@ export const getExclusiveOffer = async () => {
     return {};
   });
 };
+export const getSuperDeals = async () => {
+  return await axiosInstance.get(`/get-super-deals`).then((res) => {
+    const resData = res.data;
+    console.log("super data", resData);
+    if (!_.isEmpty(resData)) {
+      return resData.data;
+    }
+    return {};
+  });
+};

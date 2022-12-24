@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getSetting, loadAsset } from "../../../utils/Helpers";
 import _ from "lodash";
-import { loadSectionsProducts } from "../../../utils/Services";
+import { getSuperDeals, loadSectionsProducts } from "../../../utils/Services";
 import ProductSectionSkeleton from "../../../skeleton/productSkeleton/ProductSectionSkeleton";
 import RecentItems from "../includes/Products/recentProduct/includes/RecentItems";
 
@@ -34,6 +34,9 @@ const SectionSuperDeals = (props) => {
         setLoading(false);
       });
     }
+  }, []);
+  useEffect(() => {
+    getSuperDeals();
   }, []);
 
   return (
