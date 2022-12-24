@@ -3,7 +3,6 @@ import { GetOriginalPriceFromPrice } from "../../../../../utils/CartHelpers";
 import { getSetting, goPageTop } from "../../../../../utils/Helpers";
 const PriceRange = (props) => {
   const { totalQty, bulkPriceQuantity, general } = props;
-  const rate = getSetting(general, "increase_rate", 15);
   const currency = getSetting(general, "currency_icon");
 
   // quantity box active deactive
@@ -17,7 +16,9 @@ const PriceRange = (props) => {
     let i;
     for (i = 0; i < b.length; i++) {
       if (a < first) {
-        b[i].classList.remove("rangeActive");
+        b[1].classList.remove("rangeActive");
+        b[2].classList.remove("rangeActive");
+        b[0].classList.add("rangeActive");
       } else if (a == first || a < second) {
         b[1].classList.remove("rangeActive");
         b[2].classList.remove("rangeActive");
@@ -26,7 +27,8 @@ const PriceRange = (props) => {
         b[0].classList.remove("rangeActive");
         b[2].classList.remove("rangeActive");
         b[1].classList.add("rangeActive");
-      } else if (a == third) {
+      } else if (a >= third) {
+        b[0].classList.remove("rangeActive");
         b[1].classList.remove("rangeActive");
         b[2].classList.add("rangeActive");
       }
@@ -36,14 +38,14 @@ const PriceRange = (props) => {
     let firstMax = bulkPriceQuantity[0]?.MaxQuantity;
     let second = bulkPriceQuantity[1]?.MaxQuantity;
     let secondMin = bulkPriceQuantity[1]?.MinQuantity;
-    let a = totalQty;
+    let totalQTYCart = totalQty;
     let b = document.querySelectorAll(".range");
     let i;
     for (i = 0; i < b.length; i++) {
-      if (a <= firstMax || a < secondMin) {
+      if (totalQTYCart <= firstMax || totalQTYCart < secondMin) {
         b[0].classList.add("rangeActive");
         b[1].classList.remove("rangeActive");
-      } else if (a > firstMax || a > secondMin) {
+      } else if (totalQTYCart > firstMax || totalQTYCart > secondMin) {
         b[0].classList.remove("rangeActive");
         b[1].classList.add("rangeActive");
       }
@@ -65,7 +67,6 @@ const PriceRange = (props) => {
         return (
           <div className='range' key={index}>
             <span className='amount'> {`${currency} ${Math.ceil(Base)}`}</span>
-            {/* <span className='amount'> {`${currency} ${Base}`}</span> */}
             <div className='piece'>{MinQuantity} or more</div>
           </div>
         );

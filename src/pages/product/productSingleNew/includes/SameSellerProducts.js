@@ -11,7 +11,6 @@ const SameSellerProducts = ({ vendorId }) => {
   useEffect(() => {
     getSameSellerProduct();
   }, [vendorId]);
-  console.log("vendorId", vendorId);
 
   const limit = 16;
   const offset = 1;
@@ -29,7 +28,6 @@ const SameSellerProducts = ({ vendorId }) => {
     setLoading(false);
   };
 
-  // console.log("products", products);
   return (
     <div className='container deal-section'>
       <div className='row mt-0 mb-0 mb-md-1 mb-md-1'>

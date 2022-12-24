@@ -5,7 +5,6 @@ import { useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 import CardSkelton from "../../../../../skeleton/productSkeleton/CardSkelton";
-import ProductCartSkeleton from "../../../../../skeleton/productSkeleton/ProductCartSkeleton";
 import { loadAsset } from "../../../../../utils/Helpers";
 import { getExclusiveOffer } from "../../../../../utils/Services";
 const BannerRight = () => {
@@ -13,10 +12,10 @@ const BannerRight = () => {
   const [offerData, setOfferData] = useState([]);
 
   useEffect(() => {
-    getSameSellerProduct();
+    loadExclusiveOffer();
   }, []);
 
-  const getSameSellerProduct = async () => {
+  const loadExclusiveOffer = async () => {
     const response = await getExclusiveOffer();
     const data = response[0];
     if (!_.isEmpty(data)) {
@@ -25,7 +24,6 @@ const BannerRight = () => {
     setLoading(false);
   };
 
-  console.log("offer data", offerData[0]);
   let content;
   if (loading)
     content = (
