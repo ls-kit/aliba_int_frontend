@@ -21,9 +21,15 @@ const CheckoutSidebar = (props) => {
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
   //   const summary = CartProductSummary(cartConfigured, ShippingCharges);
+  const checkout_payment_first = getSetting(general, "checkout_payment_first");
+  const checkout_payment_second = getSetting(general, "checkout_payment_second");
+  const checkout_payment_third = getSetting(general, "checkout_payment_third");
+  const checkout_discount_first = getSetting(general, "checkout_discount_first");
+  const checkout_discount_second = getSetting(general, "checkout_discount_second");
+  const checkout_discount_third = getSetting(general, "checkout_discount_third");
 
   const [manageShipping, setManageShipping] = useState(false);
-  const [paymentOption, setPaymentOption] = useState(50);
+  const [paymentOption, setPaymentOption] = useState(Number(checkout_payment_first));
 
   const manageShippingAddress = (e) => {
     e.preventDefault();
@@ -100,9 +106,9 @@ const CheckoutSidebar = (props) => {
               <td>Select Payment Amount(%):</td>
               <div className='ml-2'>
                 <select onChange={handlePaymentChange} className='form-control' name='' id='payment'>
-                  <option value='50'>50%</option>
-                  <option value='70'>70%</option>
-                  <option value='90'>90%</option>
+                  <option value={checkout_payment_first}>{checkout_payment_first}%</option>
+                  <option value={checkout_payment_second}>{checkout_payment_second}%</option>
+                  <option value={checkout_payment_third}>{checkout_payment_third}%</option>
                 </select>
               </div>
             </tr>

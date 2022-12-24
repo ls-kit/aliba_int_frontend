@@ -22,6 +22,7 @@ import TablePlainItem from "./includes/TablePlainItem";
 const Checkout = (props) => {
   const { cartConfigured, general } = props;
   const [allCheck, setAllCheck] = useState(false);
+  console.log("general", general);
 
   const currency = getSetting(general, "currency_icon");
   //   const ShippingCharges = getSetting(general, "air_shipping_charges");
