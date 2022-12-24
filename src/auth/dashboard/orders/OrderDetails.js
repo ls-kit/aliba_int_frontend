@@ -21,6 +21,7 @@ const OrderDetails = (props) => {
   const { cartConfigured, match, general } = props;
   const order_id = match.params.id;
   const [order, setOrder] = useState("");
+  const bankId = getSetting(general, "payment_bank_details");
 
   const currency = getSetting(general, "currency_icon");
   const ShippingCharges = getSetting(general, "air_shipping_charges");
@@ -91,11 +92,13 @@ const OrderDetails = (props) => {
                             <span className='mr-2'>Method:</span>
                             {order.pay_method === "bkash_payment" && `Bkash`}
                             {order.pay_method === "nagad_payment" && `Nagod`}
+                            {order.pay_method === "bank_payment" && `Bank`}
                           </p>
                           <p className='m-0'>
                             <span className='mr-2'>Wallet:</span>
                             {order.pay_method === "bkash_payment" && `01811355678`}
                             {order.pay_method === "nagad_payment" && `01911712769`}
+                            {order.pay_method === "bank_payment" && `${bankId}`}
                           </p>
                           <p className='m-0'>Ref. : {order.id}</p>
                         </td>
