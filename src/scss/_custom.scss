@@ -507,6 +507,29 @@ a:focus {
 .fs14 {
   font-size: 14px;
 }
+.dealsSold {
+  color: #999;
+}
+.dealsBtn {
+  height: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background-image: linear-gradient(270deg, #ff5f3b, #ff1f00);
+  border-radius: 6px;
+  margin: 0 5px;
+  padding: 0 6px;
+
+  background: #fc4a1a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a);
+}
+.dealsPrice {
+  font-size: 18px;
+  color: #222;
+  font-weight: 800;
+  line-height: 20px;
+}
 .profile {
   font-size: 22px;
   margin-bottom: 7px;
