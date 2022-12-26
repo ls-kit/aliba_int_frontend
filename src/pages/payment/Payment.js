@@ -83,7 +83,7 @@ const Payment = (props) => {
     }
 
     if (process) {
-      let cartTotal = summary.totalPrice;
+      let cartTotal = payableTotal;
       if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
         props.confirmCustomerOrder({
           paymentMethod: paymentMethod,
