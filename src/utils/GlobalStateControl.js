@@ -88,3 +88,11 @@ export const addAdvancePaymentPercent = (percent) => {
     },
   });
 };
+export const selectDiscountPercent = (percent) => {
+  store.dispatch({
+    type: Types.SELECT_DISCOUNT_PERCENT,
+    payload: {
+      discount_percent: { discount_percent: Number(percent) },
+    },
+  });
+};

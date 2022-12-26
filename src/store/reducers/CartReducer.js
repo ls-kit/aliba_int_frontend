@@ -8,6 +8,7 @@ const CartReducer = (
     shipping_address: {},
     billing_address: {},
     advance_percent: { advance_percent: 50 },
+    discount_percent: { discount_percent: 2 },
   },
   action
 ) => {
@@ -29,6 +30,9 @@ const CartReducer = (
     }
     case Types.SELECT_ADVANCE_PERCENT: {
       return { ...state, advance_percent: action.payload.advance_percent };
+    }
+    case Types.SELECT_DISCOUNT_PERCENT: {
+      return { ...state, discount_percent: action.payload.discount_percent };
     }
     default:
       return state;

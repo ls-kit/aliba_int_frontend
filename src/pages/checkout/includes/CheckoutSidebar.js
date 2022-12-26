@@ -4,16 +4,18 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
+  cartCalculateDiscount,
   cartCalculateDueToPay,
   cartCalculateNeedToPay,
   CartProductSummary,
   CheckoutSummary,
   numberWithCommas,
+  payableSubTotal,
 } from "../../../utils/CartHelpers";
 import ShippingAddress from "./ShippingAddress";
 import swal from "sweetalert";
 import { getSetting } from "../../../utils/Helpers";
-import { addAdvancePaymentPercent } from "../../../utils/GlobalStateControl";
+import { addAdvancePaymentPercent, selectDiscountPercent } from "../../../utils/GlobalStateControl";
 
 const CheckoutSidebar = (props) => {
   const { general, currency, ShippingCharges, shipping_address, cartConfigured } = props;
@@ -30,7 +32,9 @@ const CheckoutSidebar = (props) => {
 
   const [manageShipping, setManageShipping] = useState(false);
   const [paymentOption, setPaymentOption] = useState(Number(checkout_payment_first));
+  const [discountPercent, setDiscountPercent] = useState(Number(checkout_discount_first));
 
+  const payableTotal = payableSubTotal(summary.totalPrice, discountPercent);
   const manageShippingAddress = (e) => {
     e.preventDefault();
     setManageShipping(true);
@@ -60,20 +64,35 @@ const CheckoutSidebar = (props) => {
   };
 
   const needToPay = () => {
-    const price = cartCalculateNeedToPay(summary.totalPrice, paymentOption);
+    const price = cartCalculateNeedToPay(payableTotal, paymentOption);
     return numberWithCommas(price);
+  };
+
+  const calculateDiscountPercent = (payPercent) => {
+    if (payPercent == checkout_payment_first) {
+      setDiscountPercent(checkout_discount_first);
+      selectDiscountPercent(checkout_discount_first);
+    } else if (payPercent == checkout_payment_second) {
+      setDiscountPercent(checkout_discount_second);
+      selectDiscountPercent(checkout_discount_second);
+    } else if (payPercent == checkout_payment_third) {
+      setDiscountPercent(checkout_discount_third);
+      selectDiscountPercent(checkout_discount_third);
+    }
   };
 
   const handlePaymentChange = (e) => {
-    let percent = e.target.value;
-    setPaymentOption(percent);
-    addAdvancePaymentPercent(percent);
+    let payPercent = e.target.value;
+    setPaymentOption(payPercent);
+    addAdvancePaymentPercent(payPercent);
+    calculateDiscountPercent(payPercent);
   };
 
   const dueAmount = () => {
-    const price = cartCalculateDueToPay(summary.totalPrice, paymentOption);
+    const price = cartCalculateDueToPay(payableTotal, paymentOption);
     return numberWithCommas(price);
   };
+
   return (
     <aside className='col-lg-3'>
       {manageShipping && (
@@ -91,6 +110,18 @@ const CheckoutSidebar = (props) => {
             <tr className='summary-total'>
               <td>Subtotal:</td>
               <td>{`${currency} ${numberWithCommas(summary.totalPrice)}`}</td>
+            </tr>
+            <tr className='summary-total'>
+              <td>Discount ({discountPercent}%) : </td>
+              <td>{`${currency} ${numberWithCommas(
+                cartCalculateDiscount(summary.totalPrice, discountPercent)
+              )}`}</td>
+            </tr>
+            <tr className='summary-total'>
+              <td>Payable Subtotal : </td>
+              <td>{`${currency} ${numberWithCommas(
+                payableSubTotal(summary.totalPrice, discountPercent)
+              )}`}</td>
             </tr>
 
             <tr className='summary-total'>
