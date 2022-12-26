@@ -572,15 +572,6 @@ export const cartCalculateDueToPay = (totalPrice, percent = 50) => {
   const due = totalPrice - payableAmount;
   return due;
 };
-export const cartCalculateDiscount = (totalPrice, percent = 2) => {
-  const discount = (Number(totalPrice) * Number(percent)) / 100;
-  return discount;
-};
-
-export const payableSubTotal = (totalPrice, percent) => {
-  const subTotal = totalPrice - cartCalculateDiscount(totalPrice, percent);
-  return subTotal;
-};
 
 export const cartProductQuantityUpdate = (
   qty,

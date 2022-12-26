@@ -15,8 +15,6 @@ import {
   getChinaLocalShippingCost,
   CheckoutSummary,
   cartCalculateDueToPay,
-  cartCalculateDiscount,
-  payableSubTotal,
 } from "../../utils/CartHelpers";
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
@@ -26,7 +24,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { FaRegCopy } from "react-icons/fa";
 
 const Payment = (props) => {
-  const { cartConfigured, shipping_address, general, advance_percent, discount_percent } = props;
+  const { cartConfigured, shipping_address, general, advance_percent } = props;
 
   const [accept, setAccept] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -40,9 +38,8 @@ const Payment = (props) => {
   // const summary = CartProductSummary(cartConfigured, ShippingCharges);
   const bankId = getSetting(general, "payment_bank_details");
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
-  const payableTotal = payableSubTotal(summary.totalPrice, discount_percent);
-  const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
-  const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
+  const advanced = cartCalculateNeedToPay(summary.totalPrice, Number(advance_percent));
+  const dueAmount = cartCalculateDueToPay(summary.totalPrice, Number(advance_percent));
 
   useEffect(() => {
     goPageTop();
@@ -83,7 +80,7 @@ const Payment = (props) => {
     }
 
     if (process) {
-      let cartTotal = payableTotal;
+      let cartTotal = summary.totalPrice;
       if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
         props.confirmCustomerOrder({
           paymentMethod: paymentMethod,
@@ -228,24 +225,7 @@ const Payment = (props) => {
                         </tr>
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
-                            Discount ({discount_percent}%):
-                          </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            cartCalculateDiscount(summary.totalPrice, discount_percent)
-                          )}`}</td>
-                        </tr>
-
-                        <tr className='summary-total'>
-                          <td colSpan={2} className='text-right'>
-                            Payable Subtotal :{" "}
-                          </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            payableSubTotal(summary.totalPrice, discount_percent)
-                          )}`}</td>
-                        </tr>
-                        <tr className='summary-total'>
-                          <td colSpan={2} className='text-right'>
-                            Need To Pay ({advance_percent}%):
+                            Need To Pay {advance_percent}%:
                           </td>
                           <td className='text-right'>{`${currency} ${numberWithCommas(advanced)}`}</td>
                         </tr>
@@ -475,7 +455,6 @@ const mapStateToProps = (state) => ({
   cartConfigured: state.CART.configured,
   shipping_address: state.CART.shipping_address,
   advance_percent: state.CART.advance_percent.advance_percent,
-  discount_percent: state.CART.discount_percent.discount_percent,
 });
 
 export default connect(mapStateToProps, { confirmCustomerOrder })(withRouter(Payment));
