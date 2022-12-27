@@ -77,28 +77,35 @@ const SectionSuperDeals = (props) => {
     );
 
   return (
-    <div className='container deal-section'>
-      <div className='row mt-0  pb-md-1 '>
-        <div className='col-9 d-flex'>
-          <h4 className='bold topTitle'>
-            SUPER <span className='hi-color'>DEALS</span>
-          </h4>
-          <div className='pl-4 flex'>
-            <h4 className='bold topTitle text-muted'>Top Products, Incredible Price !</h4>
-            <div className='pl-2'>
-              {!loading && expiredDate ? <Countdown date={acceptedDate} renderer={renderer} /> : ""}
+    <div className='container '>
+      <div className='m-card hov-shadow'>
+        <div className='topCatContainer'>
+          <div className='row mt-0  pb-1 '>
+            <div className='col-6 col-md-9 d-flex'>
+              <h4 className='bold topTitle'>
+                SUPER <span className='hi-color'>DEALS</span>
+              </h4>
+              <div className='pl-4 flex timerBox'>
+                <h4 className='bold topTitle text-muted'>Top Products, Incredible Price !</h4>
+                <div className='pl-2'>
+                  {!loading && expiredDate ? <Countdown date={acceptedDate} renderer={renderer} /> : ""}
+                </div>
+              </div>
+            </div>
+            <div className='col-6 col-md-3 text-right'>
+              {" "}
+              <a
+                href={`/search/${query_string}?page=2`}
+                className='btn btn-default px-4 py-2 py-md-3 rounded'
+              >
+                View All
+              </a>
             </div>
           </div>
-        </div>
-        <div className='col-3 text-right'>
-          {" "}
-          <a href={`/search/${query_string}?page=2`} className='btn btn-default px-4 py-2 py-md-3 rounded'>
-            View All
-          </a>
+
+          {content}
         </div>
       </div>
-
-      {content}
     </div>
   );
 };

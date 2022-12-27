@@ -50,25 +50,62 @@ const Intro = (props) => {
     homePageContent = <LargeCardSkelton />;
   }
   if (!cardLoading) {
-    homePageContent = homePageCards.map((cart, index) => (
-      <Link className='homeComp' to={`/${cart.btn_url}`} key={index}>
-        <img className='' src={loadAsset(cart.image)} alt='' />
-        <h3>{cart.titleText}</h3>
-        <button className='bt'>{cart.btn_name}</button>
-      </Link>
-    ));
+    homePageContent = (
+      <OwlCarousel
+        className='owl-carousel owl-theme owl-nav-inside row cols-3'
+        loop={true}
+        margin={10}
+        responsiveClass={true}
+        responsive={{
+          0: {
+            items: 1,
+            nav: true,
+          },
+          600: {
+            items: 4,
+            nav: false,
+          },
+          1000: {
+            items: 4,
+            nav: true,
+            loop: false,
+          },
+        }}
+      >
+        {homePageCards.map((cart, index) => {
+          return (
+            <div key={index}>
+              <Link className='homeComp' to={`/${cart.btn_url}`}>
+                <img className='' src={loadAsset(cart.image)} alt='' />
+                <h3>{cart.titleText}</h3>
+                <button className='homeLogin-btn'>{cart.btn_name}</button>{" "}
+              </Link>
+            </div>
+          );
+        })}
+      </OwlCarousel>
+    );
   }
+  // if (!cardLoading) {
+  //   homePageContent = homePageCards.map((cart, index) => (
+  //     <Link className='homeComp' to={`/${cart.btn_url}`} key={index}>
+  //       <img className='' src={loadAsset(cart.image)} alt='' />
+  //       <h3>{cart.titleText}</h3>
+  //       <button className='bt'>{cart.btn_name}</button>
+  //     </Link>
+  //   ));
+  // }
 
   return (
     <div className='intro-section'>
       <div className='container mt-0 mt-md-1'>
         <div className='row'>
-          <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0'>
+          <div className='col-lg-3 cols d-none d-lg-block mb-1 pr-0 '>
             <BrowseCategories />
           </div>
-          <div className='col-lg-6 cols col-md-12 col-12 mb-md-0 mb-2'>
-            <div className='h-100'>
-              <div className='intro-slider-container mb-1'>
+          <div className='col-lg-6 cols col-md-12 col-12 mb-1 pr-0'>
+            <div className='h-100 intro-center'>
+              <div className='intro-slider-container br-8'>
                 {banners.length > 0 && !loading ? (
                   <OwlCarousel
                     className='intro-slider owl-carousel owl-theme owl-nav-inside row cols-1'
@@ -108,25 +145,27 @@ const Intro = (props) => {
                   <BannerSkeleton />
                 )}
               </div>
-              <div
-                className='row h-50 banner-bottom-part'
-                style={{
-                  alignItems: "center",
-                }}
-              >
-                <div className='col-12'>
-                  <div className='h-100'>
-                    <div className='row'>
-                      <div className='col-md-3 fCenter'>
-                        <div className=''>
-                          <h3 className='bold'>Your fave shopping guide</h3>
-                          <p className='bold' style={{ lineHeight: "normal", fontSize: "12px" }}>
-                            Checkout the latest new Deals
-                          </p>
+              <div className='banner-bottom-part br-8'>
+                <div
+                  className='row'
+                  style={{
+                    alignItems: "center",
+                  }}
+                >
+                  <div className='col-12'>
+                    <div className='h-100'>
+                      <div className='row align-items-center'>
+                        <div className='col-md-3 fCenter'>
+                          <div className=''>
+                            <h3 className='bold fs-18'>Your fave shopping guide</h3>
+                            <p className='bold' style={{ lineHeight: "normal", fontSize: "12px" }}>
+                              Checkout the latest new Deals
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <div className='col-md-9'>
-                        <div className='homeBoxContainer mb-1'>{homePageContent}</div>
+                        <div className='col-md-9'>
+                          <div className=''>{homePageContent}</div>
+                        </div>
                       </div>
                     </div>
                   </div>

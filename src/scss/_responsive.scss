@@ -2,66 +2,56 @@
   (min-width: 1680px)
 ---------------------------------------------------*/
 @media only screen and (min-width: 1680px) {
-
 }
 
 /* -------------------------------------------------
   (max-width: 1250px)
 ---------------------------------------------------*/
 @media only screen and (max-width: 1250px) {
-
 }
 
 /* -------------------------------------------------
   (min-width: 991px) and (max-width: 1199px)
 ---------------------------------------------------*/
 @media only screen and (min-width: 991px) and (max-width: 1199px) {
-
-
 }
 
 /* -------------------------------------------------
   (min-width: 767px) and (max-width: 1199px)
 ---------------------------------------------------*/
 @media only screen and (min-width: 767px) and (max-width: 1199px) {
-
 }
 
 /* -------------------------------------------------
   (min-width: 767px) and (max-width: 991px)
 ---------------------------------------------------*/
 @media only screen and (min-width: 767px) and (max-width: 991px) {
-
 }
 
 /* -------------------------------------------------
   max-width: 1199px
 ---------------------------------------------------*/
 @media only screen and (max-width: 1199px) {
-
 }
 
 /* -------------------------------------------------
   min-width: 992px
 ---------------------------------------------------*/
 @media only screen and (min-width: 992px) {
-
 }
 
 /* -------------------------------------------------
   max-width: 991px
 ---------------------------------------------------*/
 @media only screen and (max-width: 991px) {
-
 }
-
 
 /* -------------------------------------------------
   min-width: 768px
 ---------------------------------------------------*/
 @media only screen and (min-width: 768px) {
-
-  .intro-slide, .intro-section .col-lg-5cols > .banner.banner-overlay {
+  .intro-slide,
+  .intro-section .col-lg-5cols > .banner.banner-overlay {
     min-height: 508px;
   }
   .product-image {
@@ -72,15 +62,14 @@
     margin-bottom: 0px;
     margin-top: 5px;
   }
-
 }
-
 
 /* -------------------------------------------------
   max-width: 767px
 ---------------------------------------------------*/
 @media only screen and (max-width: 991px) {
-  .intro-slide, .intro-section .col-lg-5cols > .banner.banner-overlay {
+  .intro-slide,
+  .intro-section .col-lg-5cols > .banner.banner-overlay {
     min-height: 350px;
   }
   .product-image {
@@ -92,12 +81,12 @@
   }
 }
 
-
 /* -------------------------------------------------
   max-width: 767px
 ---------------------------------------------------*/
 @media only screen and (max-width: 767px) {
-  .intro-slide, .intro-section .col-lg-5cols > .banner.banner-overlay {
+  .intro-slide,
+  .intro-section .col-lg-5cols > .banner.banner-overlay {
     min-height: 170px;
   }
   .product-image {
@@ -128,8 +117,9 @@
     height: 54px;
   }
 
-  .intro-slide, .intro-section .col-lg-5cols > .banner.banner-overlay {
-    min-height: 200px;
+  .intro-slide,
+  .intro-section .col-lg-5cols > .banner.banner-overlay {
+    min-height: 250px;
   }
   .product-image {
     height: 200px;
@@ -140,7 +130,6 @@
   max-width: 480px
 ---------------------------------------------------*/
 @media only screen and (max-width: 480px) {
-
   .product-image {
     height: 190px;
   }
@@ -153,5 +142,4 @@
   .product-image {
     height: 180px;
   }
-
 }

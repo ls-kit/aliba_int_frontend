@@ -17,7 +17,7 @@ const TopCategories = (props) => {
 
   return (
     <div className='container'>
-      <div className='m-card mb-1'>
+      <div className='m-card mb-1 hov-shadow'>
         <div className='topCatContainer  flex flexRow flexBetween border-0'>
           <h4 className='bold topTitle'>TOP CATEGORIES</h4>
           <div className='flex'>

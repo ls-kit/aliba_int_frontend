@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 import CardSkelton from "../../../../../skeleton/productSkeleton/CardSkelton";
 import { getSetting, loadAsset } from "../../../../../utils/Helpers";
 import { getExclusiveOffer } from "../../../../../utils/Services";
+import profileImg from "../../../../../assets/images/icon/profile.webp";
+import proTop from "../../../../../assets/images/icon/proTop.png_.webp";
+import OwlCarousel from "react-owl-carousel";
 const BannerRight = ({ general }) => {
   const currency_icon = getSetting(general, "currency_icon");
   const [loading, setLoading] = useState(true);
@@ -36,7 +39,7 @@ const BannerRight = ({ general }) => {
   if (!loading && offerData)
     content = (
       <div
-        className='mt-2 exOffBox'
+        className='mt-4 exOffBox'
         style={{
           backgroundImage: `url(${loadAsset(offerData.image)})`,
           height: "100%",
@@ -47,7 +50,46 @@ const BannerRight = ({ general }) => {
           <h6 className='bold t-white'>{offerData.text}</h6>
         </div>
         <div className='row'>
-          {offerData.products.map((product) => (
+          <OwlCarousel
+            className='owl-carousel owl-theme owl-nav-inside row cols-3'
+            loop={true}
+            margin={10}
+            responsiveClass={true}
+            responsive={{
+              0: {
+                items: 1,
+                nav: true,
+              },
+              600: {
+                items: 4,
+                nav: false,
+              },
+              1000: {
+                items: 2,
+                nav: true,
+                loop: false,
+              },
+            }}
+          >
+            {offerData.products.map((product, index) => {
+              return (
+                <div key={index}>
+                  <Link to={`/product/${product.id}`}>
+                    <div className='position-relative'>
+                      <img src={product.image} alt='' />
+                      <div className='flexCenter exPriceBox'>
+                        <span className='bt'>
+                          {`${currency_icon}`} {_.round(product.price)}
+                        </span>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+              );
+            })}
+          </OwlCarousel>
+
+          {/* {offerData.products.map((product) => (
             <div className='col-md-6'>
               <Link to={`/product/${product.id}`}>
                 <div className='position-relative'>
@@ -60,19 +102,20 @@ const BannerRight = ({ general }) => {
                 </div>
               </Link>
             </div>
-          ))}
+          ))} */}
         </div>
       </div>
     );
 
   return (
-    <div className='bRightBox flex flexCol h-100'>
-      <div>
+    <div className='bRightBox flex flexCol h-100 proTop' style={{ backgroundImage: `url(${proTop})` }}>
+      <div className=''>
         <div className='fCenter flexCol'>
-          <CgProfile className='profile' />
+          {/* <CgProfile className='profile' /> */}
+          <img className='proImg' src={profileImg} alt='' />
           <h6 className='bold '>Welcome to Aliba int!</h6>
         </div>
-        <div className='flexBetween'>
+        <div className='flexBetween' style={{ paddingTop: "10px" }}>
           <div>
             <Link to='/login'>
               <span className='homeLogin-btn'>Register</span>

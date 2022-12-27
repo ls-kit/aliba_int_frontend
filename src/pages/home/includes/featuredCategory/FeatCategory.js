@@ -19,7 +19,7 @@ const FeatCategory = ({ cat }) => {
 
   return (
     <div className='col-lg-4 col-md-6 my-2 '>
-      <div className='singleFeatCat'>
+      <div className='singleFeatCat hov-shadow'>
         <Link to={`/shop/${url}`}>
           <h6 className='fcatName'>{name}</h6>
         </Link>

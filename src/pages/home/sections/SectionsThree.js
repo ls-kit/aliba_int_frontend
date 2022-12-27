@@ -37,7 +37,7 @@ const SectionsThree = props => {
 
    return (
       <div className="container deal-section">
-         <div className="row mt-0 mb-0 mb-md-1 mb-md-1">
+         <div className="row mt-0 mb-0 mb-md-1 mb-md-1  pb-md-1">
             <div className="col-6">
                <h3 className="title title-sm">  {section_three_title || '...'}</h3>
             </div>
