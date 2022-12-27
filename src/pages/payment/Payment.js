@@ -15,6 +15,9 @@ import {
   getChinaLocalShippingCost,
   CheckoutSummary,
   cartCalculateDueToPay,
+  calculateDiscountAmount,
+  cartCalculateDiscount,
+  payableSubTotal,
 } from "../../utils/CartHelpers";
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
@@ -26,20 +29,21 @@ import { FaRegCopy } from "react-icons/fa";
 const Payment = (props) => {
   const { cartConfigured, shipping_address, general, advance_percent } = props;
 
-  const [accept, setAccept] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
-
-  const [trxId, setTrxId] = useState("");
-  const [copy, setCopy] = useState(false);
-
+  // console.log("general---------", general);
   const currency = getSetting(general, "currency_icon");
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   // const summary = CartProductSummary(cartConfigured, ShippingCharges);
   const bankId = getSetting(general, "payment_bank_details");
+
+  const [accept, setAccept] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  // const [discountPercent, setDiscountPercent] = useState(0);
+
+  const [trxId, setTrxId] = useState("");
+  const [copy, setCopy] = useState(false);
+
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
-  const advanced = cartCalculateNeedToPay(summary.totalPrice, Number(advance_percent));
-  const dueAmount = cartCalculateDueToPay(summary.totalPrice, Number(advance_percent));
 
   useEffect(() => {
     goPageTop();
@@ -80,7 +84,7 @@ const Payment = (props) => {
     }
 
     if (process) {
-      let cartTotal = summary.totalPrice;
+      let cartTotal = payableTotal;
       if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
         props.confirmCustomerOrder({
           paymentMethod: paymentMethod,
@@ -111,18 +115,6 @@ const Payment = (props) => {
     return product.isChecked;
   };
 
-  // const totalShippingCost = (product) => {
-  //   const checkItemSubTotal = cartCheckedProductTotal(product);
-  //   const totalPrice = checkItemSubTotal.totalPrice;
-  //   const totalWeight = checkItemSubTotal.totalWeight;
-  //   const DeliveryCost = product.DeliveryCost;
-  //   const ShippingRate = calculateAirShippingCharge(totalPrice, ShippingCharges);
-
-  //   let weightCost = Number(totalWeight) * Number(ShippingRate);
-  //   weightCost = weightCost < 100 ? 100 : weightCost;
-
-  //   return Number(DeliveryCost) + Number(weightCost);
-  // };
   const totalShippingCost = (product, isChecked = false) => {
     let returnValue = 0;
     const checkItemSubTotal = cartCheckedProductTotal(product);
@@ -141,6 +133,24 @@ const Payment = (props) => {
   const onCopy = () => {
     setCopy(true);
   };
+
+  const getDiscount = () => {
+    let discount;
+    if (paymentMethod) {
+      if (paymentMethod == "bank_payment")
+        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bank");
+      if (paymentMethod == "bkash_payment")
+        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bkash");
+      if (paymentMethod == "nagad_payment")
+        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "nagad");
+    }
+    return discount;
+  };
+
+  const discount = getDiscount();
+  const payableTotal = payableSubTotal(summary.totalPrice, discount);
+  const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
+  const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
 
   return (
     <main className='main'>
@@ -225,6 +235,22 @@ const Payment = (props) => {
                         </tr>
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
+                            Discount ({discount}%):
+                          </td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(
+                            cartCalculateDiscount(summary.totalPrice, discount)
+                          )}`}</td>
+                        </tr>
+                        <tr className='summary-total'>
+                          <td colSpan={2} className='text-right'>
+                            Payable Subtotal :{" "}
+                          </td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(
+                            payableSubTotal(summary.totalPrice, discount)
+                          )}`}</td>
+                        </tr>
+                        <tr className='summary-total'>
+                          <td colSpan={2} className='text-right'>
                             Need To Pay {advance_percent}%:
                           </td>
                           <td className='text-right'>{`${currency} ${numberWithCommas(advanced)}`}</td>
@@ -252,7 +278,7 @@ const Payment = (props) => {
                                   <div>
                                     <CopyToClipboard onCopy={onCopy} text={bankId}>
                                       <button
-                                        class='bt copyLink'
+                                        className='bt copyLink'
                                         style={{
                                           borderRadius: "64px",
                                           width: "80px",
@@ -329,27 +355,10 @@ const Payment = (props) => {
                                       value='bank_payment'
                                     />
                                     <label className='form-check-label bankLabel' htmlFor='bank_payment'>
-                                      <img className='bankImg' src={bankImg} alt='Nagad' />
+                                      <img className='bankImg' src={bankImg} alt='Bank' />
                                     </label>
                                   </div>
                                 </div>
-
-                                {/* <div className='col-md-2 flex nagadPay'>
-                                  <div className='form-check form-check-inline'>
-                                    <input
-                                      className='form-check-input mr-2 '
-                                      type='radio'
-                                      name='payment_method'
-                                      onClick={(e) => setPaymentMethod(e.target.value)}
-                                      id='bank_payment'
-                                      value='bank_payment'
-                                    />
-                                    <label className='form-check-label bankLabel' htmlFor='bank_payment'>
-                                      <img className='bankImg' src={bankImg} alt='Bank' />
-                                    
-                                    </label>
-                                  </div>
-                                </div> */}
                               </div>
                             </div>
                           </td>

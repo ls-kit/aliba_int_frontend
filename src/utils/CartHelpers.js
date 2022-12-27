@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { configAttrToConfigured } from "./GlobalStateControl";
+import { getSetting } from "./Helpers";
 
 export const getLocalCart = () => {
   const data = window.localStorage.getItem("_configured");
@@ -573,6 +574,16 @@ export const cartCalculateDueToPay = (totalPrice, percent = 50) => {
   return due;
 };
 
+export const cartCalculateDiscount = (totalPrice, percent = 0) => {
+  const discount = (Number(totalPrice) * Number(percent)) / 100;
+  return discount;
+};
+
+export const payableSubTotal = (totalPrice, percent) => {
+  const subTotal = totalPrice - cartCalculateDiscount(totalPrice, percent);
+  return subTotal;
+};
+
 export const cartProductQuantityUpdate = (
   qty,
   newPrice,
@@ -668,4 +679,25 @@ export const getChinaLocalShippingCost = (
     localShippingCost = 0;
   }
   return Number(localShippingCost);
+};
+
+export const calculateDiscountAmount = (method, advance, general, methodString) => {
+  console.log("props", method, advance, methodString);
+  let discount = 0;
+  const checkout_discount_first = getSetting(general, `checkout_${methodString}_discount_first`);
+  const checkout_discount_second = getSetting(general, `checkout_${methodString}_discount_second`);
+  const checkout_discount_third = getSetting(general, `checkout_${methodString}_discount_third`);
+
+  const checkout_payment_first = getSetting(general, `checkout_${methodString}_payment_first`);
+  const checkout_payment_second = getSetting(general, `checkout_${methodString}_payment_second`);
+  const checkout_payment_third = getSetting(general, `checkout_${methodString}_payment_third`);
+
+  if (advance == checkout_payment_first) {
+    discount = checkout_discount_first;
+  } else if (advance == checkout_payment_second) {
+    discount = checkout_discount_second;
+  } else if (advance == checkout_payment_third) {
+    discount = checkout_discount_third;
+  }
+  return discount;
 };
