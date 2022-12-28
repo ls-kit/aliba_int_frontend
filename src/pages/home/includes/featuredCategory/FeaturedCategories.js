@@ -79,7 +79,9 @@ const FeaturedCategories = () => {
     <div className='container'>
       <div>
         <div>
-          <h2 className='bold topTitle text-center'>Featured Categories</h2>
+          <h2 className='bold topTitle text-center' style={{ fontSize: "17px" }}>
+            Featured Categories
+          </h2>
         </div>
         {content}
       </div>

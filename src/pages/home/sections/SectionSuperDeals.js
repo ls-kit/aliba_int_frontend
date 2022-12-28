@@ -78,7 +78,7 @@ const SectionSuperDeals = (props) => {
 
   return (
     <div className='container '>
-      <div className='m-card hov-shadow'>
+      <div className='m-card '>
         <div className='topCatContainer'>
           <div className='row mt-0  pb-1 '>
             <div className='col-6 col-md-9 d-flex'>
