@@ -52,7 +52,6 @@ const PriceRange = (props) => {
       }
     }
   };
-  console.log("bulkPriceQuantity", bulkPriceQuantity);
 
   return (
     <div className='ranges'>
@@ -64,7 +63,7 @@ const PriceRange = (props) => {
         } = pqR;
         if (bulkPriceQuantity.length == 2) addActiveClassTow(MinQuantity, MaxQuantity);
         if (bulkPriceQuantity.length == 3) addActiveClassThree(MinQuantity, MaxQuantity);
-        console.log("pqR", pqR);
+
         return (
           <div className='range' key={index}>
             <span className='amount'> {`${currency} ${_.round(Base)}`}</span>

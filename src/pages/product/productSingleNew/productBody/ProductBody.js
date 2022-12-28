@@ -41,7 +41,6 @@ const ProductBody = (props) => {
   const [activeImg, setActiveImg] = useState("");
   const [copy, setCopy] = useState(false);
   const bulkPriceQuantity = product.BulkPrices;
-  console.log("bulkPriceQuantity", bulkPriceQuantity);
 
   const alertForQuantity = (e) => {
     e.preventDefault();

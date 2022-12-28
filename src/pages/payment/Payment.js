@@ -29,7 +29,6 @@ import { FaRegCopy } from "react-icons/fa";
 const Payment = (props) => {
   const { cartConfigured, shipping_address, general, advance_percent } = props;
 
-  // console.log("general---------", general);
   const currency = getSetting(general, "currency_icon");
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
@@ -52,6 +51,19 @@ const Payment = (props) => {
     }
   }, []);
 
+  const checkedProductItem = (product) => {
+    const hasConfigurators = product.hasConfigurators;
+    if (hasConfigurators) {
+      const ConfiguredItems = product.ConfiguredItems;
+      if (_.isArray(ConfiguredItems)) {
+        const filterConfig = ConfiguredItems.filter((filter) => filter.isChecked === true);
+        return filterConfig.length > 0;
+      }
+    }
+    return product.isChecked;
+  };
+
+  const finalCart = cartConfigured.filter((product) => checkedProductItem(product));
   const paymentConfirm = (e) => {
     e.preventDefault();
 
@@ -88,7 +100,7 @@ const Payment = (props) => {
       if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
         props.confirmCustomerOrder({
           paymentMethod: paymentMethod,
-          cart: JSON.stringify(cartConfigured),
+          cart: JSON.stringify(finalCart),
           address: JSON.stringify(shipping_address),
           summary: JSON.stringify({
             cartTotal: cartTotal,
@@ -101,18 +113,6 @@ const Payment = (props) => {
         props.history.push("/checkout");
       }
     }
-  };
-
-  const checkedProductItem = (product) => {
-    const hasConfigurators = product.hasConfigurators;
-    if (hasConfigurators) {
-      const ConfiguredItems = product.ConfiguredItems;
-      if (_.isArray(ConfiguredItems)) {
-        const filterConfig = ConfiguredItems.filter((filter) => filter.isChecked === true);
-        return filterConfig.length > 0;
-      }
-    }
-    return product.isChecked;
   };
 
   const totalShippingCost = (product, isChecked = false) => {

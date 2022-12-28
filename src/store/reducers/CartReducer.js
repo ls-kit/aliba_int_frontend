@@ -8,7 +8,7 @@ const CartReducer = (
     shipping_address: {},
     billing_address: {},
     advance_percent: { advance_percent: 50 },
-    discount_percent: { discount_percent: 2 },
+    discount_percent: {},
   },
   action
 ) => {

@@ -109,7 +109,6 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity) => {
   let first = bulkPriceQuantity[0];
   let second = bulkPriceQuantity[1];
   let third = bulkPriceQuantity[2];
-  console.log("bulkPriceQuantity", bulkPriceQuantity);
 
   let firstMinQuantityPrice = bulkPriceQuantity[0]?.Price.Base;
   let secondMinQuantityPrice = bulkPriceQuantity[1]?.Price.Base;
@@ -682,7 +681,6 @@ export const getChinaLocalShippingCost = (
 };
 
 export const calculateDiscountAmount = (method, advance, general, methodString) => {
-  console.log("props", method, advance, methodString);
   let discount = 0;
   const checkout_discount_first = getSetting(general, `checkout_${methodString}_discount_first`);
   const checkout_discount_second = getSetting(general, `checkout_${methodString}_discount_second`);

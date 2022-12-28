@@ -24,9 +24,6 @@ const CheckoutSidebar = (props) => {
   const checkout_payment_first = getSetting(general, "checkout_payment_first");
   const checkout_payment_second = getSetting(general, "checkout_payment_second");
   const checkout_payment_third = getSetting(general, "checkout_payment_third");
-  const checkout_discount_first = getSetting(general, "checkout_discount_first");
-  const checkout_discount_second = getSetting(general, "checkout_discount_second");
-  const checkout_discount_third = getSetting(general, "checkout_discount_third");
 
   const [manageShipping, setManageShipping] = useState(false);
   const [paymentOption, setPaymentOption] = useState(Number(checkout_payment_first));
