@@ -152,14 +152,6 @@ const Payment = (props) => {
   const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
   const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
 
-  if (discount) {
-    swal({
-      text: `Congratulations! You have got ${discount} % discount`,
-      icon: "success",
-      buttons: "Ok, Understood",
-    });
-  }
-
   return (
     <main className='main'>
       <Breadcrumb current='Payment' collections={[{ name: "Checkout", url: "checkout" }]} />
