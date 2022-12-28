@@ -23,6 +23,8 @@ const OrderDetails = (props) => {
   const [order, setOrder] = useState("");
   const bankId = getSetting(general, "payment_bank_details");
 
+  console.log("order details", order);
+
   const currency = getSetting(general, "currency_icon");
   const ShippingCharges = getSetting(general, "air_shipping_charges");
   const summary = CartProductSummary(cartConfigured, ShippingCharges);
@@ -38,8 +40,6 @@ const OrderDetails = (props) => {
       setOrder(response.order);
     });
   }, [order_id]);
-
-  console.log("order", order);
 
   const totalShippingCost = (product) => {
     const checkItemSubTotal = cartCheckedProductTotal(product);
@@ -113,9 +113,9 @@ const OrderDetails = (props) => {
                         <th> Image</th>
                         <th>Title</th>
                         <th>Quantity</th>
-                        <th>Total</th>
-                        <th>FirstPayment</th>
-                        <th>DuePayment</th>
+                        <th>TotalAmount</th>
+                        {/* <th>FirstPayment</th> */}
+                        {/* <th>DuePayment</th> */}
                       </tr>
                     </thead>
                     <tbody>
@@ -128,15 +128,17 @@ const OrderDetails = (props) => {
                               </td>
                               <td> {item.name} </td>
                               <td> {item.quantity}</td>
-                              <td> {item.product_value}</td>
-                              <td> {item.first_payment}</td>
-                              <td> {item.due_payment}</td>
+                              <td>
+                                {currency} {item.product_value}
+                              </td>
+                              {/* <td> {item.first_payment}</td>
+                              <td> {item.due_payment}</td> */}
                             </tr>
                           </>
                         ))
                       ) : (
                         <tr>
-                          <td colSpan={6} className='text-center bg-lighter'>
+                          <td colSpan={4} className='text-center bg-lighter'>
                             You have no cart!
                           </td>
                         </tr>
@@ -144,24 +146,24 @@ const OrderDetails = (props) => {
                     </tbody>
                     <tfoot>
                       <tr>
-                        <td colSpan={6}>
+                        <td colSpan={4}>
                           <h3 className='border-0 m-0 py-3 summary-title'>Cart Total Summary</h3>
                         </td>
                       </tr>
                       <tr className='summary-total'>
-                        <td colSpan={5} className='text-right'>
+                        <td colSpan={3} className='text-right'>
                           Subtotal:
                         </td>
                         <td className='text-right'>{`${currency} ${order.amount}`}</td>
                       </tr>
                       <tr className='summary-total'>
-                        <td colSpan={5} className='text-right'>
+                        <td colSpan={3} className='text-right'>
                           Need To Pay:
                         </td>
                         <td className='text-right'>{`${currency} ${order.needToPay}`}</td>
                       </tr>
                       <tr className='summary-total'>
-                        <td colSpan={5} className='text-right'>
+                        <td colSpan={3} className='text-right'>
                           Due Amount:
                         </td>
                         <td className='text-right'>{`${currency} ${order.dueForProducts}`}</td>
