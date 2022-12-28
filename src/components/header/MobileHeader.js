@@ -39,7 +39,7 @@ const MobileHeader = (props) => {
                 </Link>
               </div>
               <div className='wishlist'>
-                <Link to='/checkout'>
+                <Link to='/wishlist'>
                   <div className='icon'>
                     <FiHeart />
                     <span className='wishlist-count badge'>{total_wishlist}</span>
