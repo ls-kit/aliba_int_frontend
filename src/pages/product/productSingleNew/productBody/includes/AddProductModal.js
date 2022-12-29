@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 const AddProductModal = (props) => {
   const { addSuccess, setAddSuccess } = props;
-  const closeModal = () => {
+  const closeModal = (e) => {
+    e.preventDefault();
     setAddSuccess(false);
   };
   return (
@@ -25,9 +26,15 @@ const AddProductModal = (props) => {
               </h5>
               <p>Product added to cart successfully</p>
               <div className='flex flexEnd'>
-                <Link className='mx-1' onClick={() => closeModal()} data-dismiss='modal' aria-label='Close'>
+                <span
+                  style={{ cursor: "pointer" }}
+                  className='mx-1'
+                  onClick={(e) => closeModal(e)}
+                  data-dismiss='modal'
+                  aria-label='Close'
+                >
                   <span className='homeLogin-btn success-m-btn'>Continue to shopping</span>
-                </Link>
+                </span>
 
                 <Link to='/checkout' className='mx-1'>
                   <span className='homeLogin-btn success-m-btn'>Go to cart</span>
