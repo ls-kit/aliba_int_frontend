@@ -33,7 +33,7 @@ const Header = (props) => {
                 </Link>
               </div>
               <div className='wishlist'>
-                <Link to='/checkout'>
+                <Link to='/checkout' title='Cart'>
                   <div className='icon'>
                     <FaShoppingCart />
                     <span className='wishlist-count badge'>{props.cartCount()}</span>

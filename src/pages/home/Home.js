@@ -21,12 +21,10 @@ import SectionsFive from "./sections/SectionsFive";
 import { useState } from "react";
 import TopCategories from "./includes/intro/topCategory/TopCategories";
 import FeaturedCategories from "./includes/featuredCategory/FeaturedCategories";
-import SuperDeals from "./includes/superDeals/SuperDeals";
 import SectionSuperDeals from "./sections/SectionSuperDeals";
 
 const Home = (props) => {
   const { general } = props;
-
   const section_super_deals_active = getSetting(general, "section_super_deals_active");
   const section_one_active = getSetting(general, "section_one_active");
   const section_two_active = getSetting(general, "section_two_active");
@@ -34,9 +32,6 @@ const Home = (props) => {
   const section_four_active = getSetting(general, "section_four_active");
   const section_five_active = getSetting(general, "section_five_active");
   const [style, setStyle] = useState("none");
-  const [btnstyle, setBtnStyle] = useState("block");
-
-  const handleTogle = () => {};
 
   return (
     <main className='main' style={{ backgroundColor: "#F2F2F2" }}>

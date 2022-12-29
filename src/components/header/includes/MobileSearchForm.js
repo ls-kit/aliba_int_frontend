@@ -44,10 +44,14 @@ const MobileSearchForm = (props) => {
         id='lg_picture_search'
       />
 
-      <form onSubmit={(e) => submitTextSearch(e)} method='get'>
+      <form className='search-border' onSubmit={(e) => submitTextSearch(e)} method='get'>
         <div className='input-group'>
           <div className='input-group-append'>
-            <label className='btn btn-camera label_btn' htmlFor='lg_picture_search'>
+            <label
+              className='btn btn-camera label_btn'
+              style={{ marginLeft: ".1rem" }}
+              htmlFor='lg_picture_search'
+            >
               <BsCamera />
             </label>
           </div>
