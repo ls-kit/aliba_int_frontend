@@ -94,37 +94,9 @@ const ProductConfiguredItems = (props) => {
         </thead>
         <tbody>
           {ProductConfiguredItems.map((config, index) => {
-            // console.log("config", config);
             return (
               <tr key={index}>
                 <td className='align-middle'>{getConfigAttributes(config.Configurators).Value || "N/A"}</td>
-
-                {/* <td className='align-middle'>
-                  {!totalQty &&
-                    `${currency} ${GetOriginalPriceFromPrice(
-                      { OriginalPrice: firstMinQuantityPrice },
-                      rate
-                    )}`}
-                  {totalQty > 0 &&
-                    totalQty <= first?.MaxQuantity &&
-                    `${currency} ${GetOriginalPriceFromPrice(
-                      { OriginalPrice: firstMinQuantityPrice },
-                      rate
-                    )}`}
-                  {totalQty <= second?.MaxQuantity &&
-                    totalQty > first?.MaxQuantity &&
-                    `${currency} ${GetOriginalPriceFromPrice(
-                      { OriginalPrice: secondMinQuantityPrice },
-                      rate
-                    )}`}
-                  {totalQty > first?.MaxQuantity &&
-                    totalQty > second?.MaxQuantity &&
-                    totalQty >= third?.MinQuantity &&
-                    `${currency} ${GetOriginalPriceFromPrice(
-                      { OriginalPrice: thirdMinQuantityPrice },
-                      rate
-                    )}`}
-                </td> */}
 
                 <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
                   totalQtyInCart,
