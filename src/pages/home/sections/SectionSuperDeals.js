@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { getSetting, loadAsset } from "../../../utils/Helpers";
+import { getSetting } from "../../../utils/Helpers";
 import _ from "lodash";
-import { getSuperDeals, loadSectionsProducts } from "../../../utils/Services";
+import { getSuperDeals } from "../../../utils/Services";
 import ProductSectionSkeleton from "../../../skeleton/productSkeleton/ProductSectionSkeleton";
-import RecentItems from "../includes/Products/recentProduct/includes/RecentItems";
 import Countdown from "react-countdown";
-import ProductCart from "../../product/productList/ProductCart";
 import DealsProduct from "../includes/superDeals/includes/DealsProduct";
 
 // Random component
-const Completionist = () => <span>Deals closed !</span>;
+const Completionist = () => (
+  <span className='pt-3 text-danger bold'>
+    {" "}
+    Deals closed <i className='icon-close'></i>
+  </span>
+);
 
 // Renderer callback with condition
 const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -37,8 +40,6 @@ const SectionSuperDeals = (props) => {
   const [expiredDate, setExpiredDate] = useState("");
   const acceptedDate = `${expiredDate + ":00"}`;
 
-  // console.log("acceptedDate", ` ${expiredDate.slice(0, 10).reverse + "T" + expiredDate.slice(11)}`);
-  console.log("acceptedDate", `${expiredDate + ":00"}`);
   useEffect(() => {
     if (_.isEmpty(products)) {
       getSuperDeals().then((response) => {

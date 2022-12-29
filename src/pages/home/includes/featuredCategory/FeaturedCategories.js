@@ -25,6 +25,7 @@ const FeaturedCategories = () => {
     setFeatCatLoading(false);
   };
 
+  console.log("firstCats", firstCats);
   // decide what is render
   let content;
   if (catLoading) content = "";
@@ -32,7 +33,7 @@ const FeaturedCategories = () => {
     content = (
       <div className='row fCenter'>
         <div className='col-md-3'>
-          <div className='firstFeatCatBox'>
+          <div className='firstFeatCatBox' style={{ backgroundImage: `url(${loadAsset(firstCats.banner)})` }}>
             <Link to={`/shop/${firstCats?.url}`}>
               <h6 className='bold firstFeatCat'>{firstCats?.name}</h6>
             </Link>

@@ -910,8 +910,9 @@ a:focus {
 }
 // feat cat
 .firstFeatCatBox {
-  background-image: url("https://ae01.alicdn.com/kf/S7567992a8e7c4075a5e50a06fa08326fi.jpg_350x350.jpg_480x480Q90.webp");
-  height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .firstFeatCat {
   margin-left: 10px;
@@ -1237,7 +1238,7 @@ a:focus {
   padding: 17px 0 !important;
 }
 .page-wrapper {
-  padding-top: 6rem;
+  padding-top: 11rem;
 }
 .subChildCat {
   max-height: 150px;
@@ -1279,16 +1280,46 @@ a:focus {
 .br-8 {
   border-radius: 8px;
 }
+.search-border {
+  border: 1px solid var(--theme-color);
+  border-radius: 11px;
+}
+
 .intro-center {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
+.header-intro-clearance .wishlist a {
+  &:hover {
+    color: $baseColor;
+  }
+
+  &:focus {
+    color: $baseColor;
+  }
+}
+#cd1 {
+  &:hover {
+    color: $baseColor;
+  }
+
+  &:focus {
+    color: $baseColor;
+  }
+}
+
 @media only screen and (min-width: 768px) {
   .intro-slide,
   .intro-section .col-lg-5cols > .banner.banner-overlay {
     min-height: 290px !important;
     border-radius: 8px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .page-wrapper {
+    padding-top: 6rem !important;
   }
 }
 

@@ -31,7 +31,7 @@ const MobileHeader = (props) => {
               </div>
               {/* End .compare-dropdown */}
               <div className='wishlist'>
-                <Link to='/checkout'>
+                <Link to='/checkout' title='Cart'>
                   <div className='icon'>
                     <FaShoppingCart />
                     <span className='wishlist-count badge'>{props.cartCount()}</span>
@@ -39,7 +39,7 @@ const MobileHeader = (props) => {
                 </Link>
               </div>
               <div className='wishlist'>
-                <Link to='/wishlist'>
+                <Link to='/wishlist' title='Wishlist'>
                   <div className='icon'>
                     <FiHeart />
                     <span className='wishlist-count badge'>{total_wishlist}</span>
@@ -47,7 +47,7 @@ const MobileHeader = (props) => {
                 </Link>
               </div>
               <div className='wishlist'>
-                <Link to='/dashboard'>
+                <Link to='/dashboard' id='cd1'>
                   <div className='icon'>
                     <FaRegUserCircle />
                   </div>

@@ -599,7 +599,7 @@
 
   &:hover,
   &:focus {
-    color: #000;
+    color: $baseColor;
   }
 }
 
@@ -1106,7 +1106,7 @@
     font-weight: 600;
     font-size: 1.2rem;
     line-height: 1;
-    color: #000;
+    // color: #000;
     position: absolute;
     top: -1.2rem;
     right: -1.5rem;
@@ -1473,19 +1473,19 @@
   }
 }
 
-.wishlist-link {
-  .wishlist-count {
-    background-color: #000;
-  }
+// .wishlist-link {
+//   .wishlist-count {
+//     background-color: #000;
+//   }
 
-  &:hover {
-    color: #000;
-  }
+//   &:hover {
+//     color: #000;
+//   }
 
-  &:focus {
-    color: #000;
-  }
-}
+//   &:focus {
+//     color: #000;
+//   }
+// }
 
 .search-toggle {
   &:hover {
@@ -1523,11 +1523,11 @@
 .header-menu {
   a {
     &:hover {
-      color: #000;
+      color: $baseColor;
     }
 
     &:focus {
-      color: #000;
+      color: $baseColor;
     }
   }
 }
@@ -1535,11 +1535,11 @@
 .account {
   a {
     &:hover {
-      color: #000;
+      color: $baseColor;
     }
 
     &:focus {
-      color: #000;
+      color: $baseColor;
     }
   }
 }
@@ -1628,19 +1628,19 @@
   }
 }
 
-.wishlist-link {
-  .wishlist-count {
-    background-color: #000;
-  }
+// .wishlist-link {
+//   .wishlist-count {
+//     background-color: #000;
+//   }
 
-  &:hover {
-    color: #000;
-  }
+//   &:hover {
+//     color: #000;
+//   }
 
-  &:focus {
-    color: #000;
-  }
-}
+//   &:focus {
+//     color: #000;
+//   }
+// }
 
 .search-toggle {
   &:hover {
