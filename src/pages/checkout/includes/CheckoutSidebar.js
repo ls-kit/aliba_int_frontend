@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 import {
   cartCalculateDueToPay,
   cartCalculateNeedToPay,
-  CartProductSummary,
   CheckoutSummary,
   numberWithCommas,
 } from "../../../utils/CartHelpers";
@@ -16,11 +15,10 @@ import { getSetting } from "../../../utils/Helpers";
 import { addAdvancePaymentPercent } from "../../../utils/GlobalStateControl";
 
 const CheckoutSidebar = (props) => {
-  const { general, currency, ShippingCharges, shipping_address, cartConfigured } = props;
+  const { general, currency, shipping_address, cartConfigured } = props;
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
-  //   const summary = CartProductSummary(cartConfigured, ShippingCharges);
   const checkout_payment_first = getSetting(general, "checkout_payment_first");
   const checkout_payment_second = getSetting(general, "checkout_payment_second");
   const checkout_payment_third = getSetting(general, "checkout_payment_third");

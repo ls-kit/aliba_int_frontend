@@ -109,7 +109,7 @@ ProductSummary.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  cartConfigured: state.CART.configured,
+  cartConfigured: state.CART.virtualCart,
 });
 
 export default connect(mapStateToProps, {})(withRouter(ProductSummary));

@@ -1,5 +1,5 @@
 import _ from "lodash";
-import { configAttrToConfigured } from "./GlobalStateControl";
+import { addProductIntoVirtualCart, configAttrToConfigured } from "./GlobalStateControl";
 import { getSetting } from "./Helpers";
 
 export const getLocalCart = () => {
@@ -589,7 +589,8 @@ export const cartProductQuantityUpdate = (
   cartConfigured,
   product_id,
   existsConfigId,
-  ShippingCharges
+  ShippingCharges,
+  addToVirtualCart = false
 ) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
@@ -628,7 +629,11 @@ export const cartProductQuantityUpdate = (
     }
     return mapItem;
   });
-  configAttrToConfigured(reConfig);
+  if (addToVirtualCart === true) {
+    addProductIntoVirtualCart(reConfig);
+  } else {
+    configAttrToConfigured(reConfig);
+  }
 };
 
 export const cartPlainProductQuantityUpdate = (
@@ -636,7 +641,8 @@ export const cartPlainProductQuantityUpdate = (
   newPrice,
   cartConfigured,
   product_id,
-  ShippingCharges
+  ShippingCharges,
+  addToVirtualCart = false
 ) => {
   let reConfig = cartConfigured.map((mapItem) => {
     if (mapItem.Id === product_id) {
@@ -662,7 +668,11 @@ export const cartPlainProductQuantityUpdate = (
   });
   reConfig = reConfig.filter((filter) => !filter.notItem);
 
-  configAttrToConfigured(reConfig);
+  if (addToVirtualCart === true) {
+    addProductIntoVirtualCart(reConfig);
+  } else {
+    configAttrToConfigured(reConfig);
+  }
 };
 
 export const getChinaLocalShippingCost = (

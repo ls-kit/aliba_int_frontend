@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { configAttrToConfigured } from "../../../../../utils/GlobalStateControl";
+import { addProductIntoVirtualCart } from "../../../../../utils/GlobalStateControl";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import {
@@ -14,21 +14,13 @@ import {
   findProductCartFromState,
   getProductApproxWeight,
   getProductDeliveryCost,
-  getProductPrice,
   getUpdatedProductPrice,
 } from "../../../../../utils/CartHelpers";
 import { getSetting } from "../../../../../utils/Helpers";
 
 const ManageQuantity = (props) => {
-  const {
-    product,
-    general,
-    ConfiguredItem,
-    ConfiguredItemAttributes,
-    cartConfigured,
-    bulkPriceQuantity,
-    totalQtyInCart,
-  } = props;
+  const { product, general, ConfiguredItem, ConfiguredItemAttributes, cartConfigured, bulkPriceQuantity } =
+    props;
   const product_id = !_.isEmpty(product) ? product.Id : 0;
   const rate = getSetting(general, "increase_rate", 15);
   // const ShippingCharges = getSetting(general, "air_shipping_charges");
@@ -45,6 +37,8 @@ const ManageQuantity = (props) => {
   };
   const ShippingCharges = getChinaLocalShippingCost();
 
+  const addToVirtualCart = true;
+
   const activeConfiguredQtyChanges = (type = "increment") => {
     let newQty = parseInt(existsConfig.Quantity) + 1;
     if (type === "decrement") {
@@ -57,7 +51,8 @@ const ManageQuantity = (props) => {
         cartConfigured,
         product_id,
         existsConfig.Id,
-        ShippingCharges
+        ShippingCharges,
+        addToVirtualCart
       );
     }
   };
@@ -70,7 +65,8 @@ const ManageQuantity = (props) => {
         cartConfigured,
         product_id,
         existsConfig.Id,
-        ShippingCharges
+        ShippingCharges,
+        addToVirtualCart
       );
     }
   };
@@ -131,7 +127,7 @@ const ManageQuantity = (props) => {
         totalWeight: ProductSummary.totalWeight,
       };
     }
-    configAttrToConfigured([...cartFullConfigure, activeProduct]);
+    addProductIntoVirtualCart([...cartFullConfigure, activeProduct]);
   };
 
   const addPlainProductToCart = (qty = 1) => {
@@ -161,7 +157,7 @@ const ManageQuantity = (props) => {
         totalWeight: ProductSummary.totalWeight,
       };
     }
-    configAttrToConfigured([...cartFullConfigure, activeProduct]);
+    addProductIntoVirtualCart([...cartFullConfigure, activeProduct]);
   };
 
   const addPlainProductQtyChanges = (type = "increment") => {
@@ -176,7 +172,8 @@ const ManageQuantity = (props) => {
         getUpdatedProductPrice(newQty, bulkPriceQuantity, rate),
         cartConfigured,
         product_id,
-        ShippingCharges
+        ShippingCharges,
+        addToVirtualCart
       );
     }
   };
@@ -188,7 +185,8 @@ const ManageQuantity = (props) => {
         getUpdatedProductPrice(qty, bulkPriceQuantity, rate),
         cartConfigured,
         product_id,
-        ShippingCharges
+        ShippingCharges,
+        addToVirtualCart
       );
     }
   };
@@ -293,7 +291,7 @@ ManageQuantity.propTypes = {
 
 const mapStateToProps = (state) => ({
   general: JSON.parse(state.INIT.general),
-  cartConfigured: state.CART.configured,
+  cartConfigured: state.CART.virtualCart,
 });
 
 export default connect(mapStateToProps, {})(withRouter(ManageQuantity));

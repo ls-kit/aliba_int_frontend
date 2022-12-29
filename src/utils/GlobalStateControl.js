@@ -96,3 +96,16 @@ export const selectDiscountPercent = (percent) => {
     },
   });
 };
+export const addProductIntoVirtualCart = (payload) => {
+  store.dispatch({
+    type: Types.ADD_PRODUCT_VIRTUAL,
+    payload: {
+      virtualCart: payload,
+    },
+  });
+};
+export const removeProductIntoVirtualCart = () => {
+  store.dispatch({
+    type: Types.REMOVE_PRODUCT_VIRTUAL,
+  });
+};

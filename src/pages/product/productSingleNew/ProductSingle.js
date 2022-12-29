@@ -13,6 +13,7 @@ import { characterLimiter, goPageTop } from "../../../utils/Helpers";
 import ProductDetailsSkeleton from "../../../skeleton/productSkeleton/ProductDetailsSkeleton";
 import { ConfiguredItems, find_product_from_state } from "../../../utils/CartHelpers";
 import SameSellerProducts from "./includes/SameSellerProducts";
+import { removeProductIntoVirtualCart } from "../../../utils/GlobalStateControl";
 
 const ProductSingle = (props) => {
   const { match, general, details_loading, details, cartConfigured } = props;
@@ -37,6 +38,10 @@ const ProductSingle = (props) => {
         props.loadProductDetails(item_id, details);
       }
     }
+  }, [item_id]);
+
+  useEffect(() => {
+    removeProductIntoVirtualCart();
   }, [item_id]);
 
   if (details_loading) {

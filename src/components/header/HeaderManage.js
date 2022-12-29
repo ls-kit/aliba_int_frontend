@@ -59,7 +59,7 @@ const HeaderManage = (props) => {
     props.authLogout(props.history);
   };
 
-  if (width <= 991) {
+  if (width <= 751) {
     return (
       <MobileHeader
         auth={auth}

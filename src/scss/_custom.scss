@@ -1310,6 +1310,15 @@ a:focus {
   }
 }
 
+.flexEnd {
+  display: flex;
+  justify-content: flex-end;
+}
+.success-m-btn {
+  display: inline-block;
+  border-radius: 6px !important;
+}
+
 @media only screen and (min-width: 768px) {
   .intro-slide,
   .intro-section .col-lg-5cols > .banner.banner-overlay {
