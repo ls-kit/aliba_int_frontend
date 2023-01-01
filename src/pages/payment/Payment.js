@@ -269,7 +269,7 @@ const Payment = (props) => {
                               )}
                               {paymentMethod == "bank_payment" && (
                                 <div className='bankDetails'>
-                                  <h3 className='bold'>
+                                  <h3 className='bold text-center bankDetailsText'>
                                     Bank Details: <span className='baseColor'>{bankId}</span>
                                   </h3>
                                   <div>

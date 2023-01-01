@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { GrLinkPrevious } from "react-icons/gr";
+import { BsFillCartDashFill } from "react-icons/bs";
 
 const AddProductModal = (props) => {
   const { addSuccess, setAddSuccess } = props;
@@ -33,11 +35,17 @@ const AddProductModal = (props) => {
                   data-dismiss='modal'
                   aria-label='Close'
                 >
-                  <span className='homeLogin-btn success-m-btn'>Continue to shopping</span>
+                  <span className='homeLogin-btn success-m-btn'>
+                    <i className='icon-arrow-left mr-1'></i>
+                    Continue Shopping
+                  </span>
                 </span>
 
                 <Link to='/checkout' className='mx-1'>
-                  <span className='homeLogin-btn success-m-btn'>Go to cart</span>
+                  <span className='homeLogin-btn success-m-btn'>
+                    <i className='icon-shopping-cart mr-1'></i>
+                    Go to cart
+                  </span>
                 </Link>
               </div>
             </div>

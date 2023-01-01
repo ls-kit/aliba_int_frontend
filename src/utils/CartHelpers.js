@@ -552,20 +552,26 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
   if (_.isArray(cartConfigured)) {
     cartConfigured.map((Product) => {
       const checkItemSubTotal = cartCheckedProductTotal(Product);
+
       const totalPrice = checkItemSubTotal.totalPrice;
-      const totalItemShipping = Product.ConfiguredItems.map((config) =>
-        getChinaLocalShippingCost(
-          totalPrice,
-          ShippingCharges,
-          chinaLocalShippingChargeLimit,
-          config.isChecked
-        )
+      let totalItemShipping = 0;
+      Product.ConfiguredItems.map(
+        (config) =>
+          (totalItemShipping = getChinaLocalShippingCost(
+            totalPrice,
+            ShippingCharges,
+            chinaLocalShippingChargeLimit,
+            config.isChecked
+          ))
       );
+      console.log("checkItemSubTotal", totalItemShipping);
 
       grossTotalPrice += Number(totalPrice) + Number(totalItemShipping);
+
       return false;
     });
   }
+
   return { totalQty: totalQty, totalPrice: grossTotalPrice };
 };
 
@@ -692,7 +698,8 @@ export const getChinaLocalShippingCost = (
   } else {
     localShippingCost = 0;
   }
-  return Number(localShippingCost);
+  console.log("localShippingCost", localShippingCost);
+  return localShippingCost;
 };
 
 export const calculateDiscountAmount = (method, advance, general, methodString) => {

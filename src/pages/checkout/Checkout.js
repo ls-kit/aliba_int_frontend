@@ -94,6 +94,11 @@ const Checkout = (props) => {
     const ShippingCost = totalShippingCost(product, isChecked);
     return Number(totalPrice) + Number(ShippingCost);
   };
+  const configuredProductTotalCost = (product, config, isChecked) => {
+    const totalPrice = config.Price * config.Quantity;
+    const ShippingCost = totalShippingCost(product, isChecked);
+    return Number(totalPrice) + Number(ShippingCost);
+  };
 
   const checkedAllItem = () => {
     const checking = !allCheck;
@@ -175,7 +180,7 @@ const Checkout = (props) => {
                                           Sub Total:
                                         </td>
                                         <td className='text-center'>{`${currency} ${numberWithCommas(
-                                          productTotalCost(product, config.isChecked)
+                                          configuredProductTotalCost(product, config, config.isChecked)
                                         )}`}</td>
                                       </tr>
                                     </>

@@ -18,9 +18,9 @@ const StickyFooter = (props) => {
           <div className='col text-center'>
             <a href='/category' className='nav-link toggleMobileMenu'>
               <span className=' sticky_nav_icon'>
-                <i className='icon-shopping-bag' />
+                <i className='icon-bars' />
               </span>
-              <p className='mb-0'>Category</p>
+              {/* <span className='mb-0'>Category</span> */}
             </a>
           </div>
           <div className='col text-center'>
@@ -28,7 +28,7 @@ const StickyFooter = (props) => {
               <span className=' sticky_nav_icon'>
                 <i className='icon-user' />
               </span>
-              <p className='mb-0'>Account</p>
+              {/* <p className='mb-0'>Account</p> */}
             </Link>
           </div>
           <div className='col text-center'>
@@ -36,7 +36,7 @@ const StickyFooter = (props) => {
               <span className='sticky_nav_icon'>
                 <i className='icon-home' />
               </span>
-              <p className='mb-0'>Home</p>
+              {/* <p className='mb-0'>Home</p> */}
             </Link>
           </div>
 
@@ -45,7 +45,7 @@ const StickyFooter = (props) => {
               <span className=' sticky_nav_icon'>
                 <i className='icon-phone' />
               </span>
-              <p className='mb-0'>Call</p>
+              {/* <p className='mb-0'>Call</p> */}
             </a>
           </div>
           <div className='col text-center'>
@@ -58,7 +58,7 @@ const StickyFooter = (props) => {
               <span className=' sticky_nav_icon'>
                 <i className='icon-facebook-messenger' />
               </span>
-              <p className='mb-0'>Chat</p>
+              {/* <p className='mb-0'>Chat</p> */}
             </a>
           </div>
         </div>

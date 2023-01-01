@@ -1124,7 +1124,11 @@ a:focus {
   width: 80px;
   height: 80px;
 }
-
+.bankDetails {
+  h3 {
+    font-size: 16px;
+  }
+}
 .mb-0 {
   margin-bottom: 0 !important;
 }
@@ -1150,6 +1154,9 @@ a:focus {
   .timerBox,
   .banner-bottom-part {
     display: none;
+  }
+  .bankDetailsText {
+    font-size: 16px !important;
   }
 }
 @media only screen and (max-width: 900px) {
