@@ -4,18 +4,23 @@ import _ from "lodash";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
+  calculateDiscountAmount,
+  cartCalculateDiscount,
   cartCalculateDueToPay,
   cartCalculateNeedToPay,
   CheckoutSummary,
   numberWithCommas,
+  payableSubTotal,
 } from "../../../utils/CartHelpers";
 import ShippingAddress from "./ShippingAddress";
 import swal from "sweetalert";
 import { getSetting } from "../../../utils/Helpers";
-import { addAdvancePaymentPercent } from "../../../utils/GlobalStateControl";
+import { addAdvancePaymentPercent, selectPaymentMethod } from "../../../utils/GlobalStateControl";
+import bankImg from "../../../assets/images/bank.png";
+import { useEffect } from "react";
 
 const CheckoutSidebar = (props) => {
-  const { general, currency, shipping_address, cartConfigured } = props;
+  const { general, currency, shipping_address, cartConfigured, advance_percent } = props;
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
@@ -25,6 +30,7 @@ const CheckoutSidebar = (props) => {
 
   const [manageShipping, setManageShipping] = useState(false);
   const [paymentOption, setPaymentOption] = useState(Number(checkout_payment_first));
+  const [paymentMethod, setPaymentMethod] = useState("");
 
   const manageShippingAddress = (e) => {
     e.preventDefault();
@@ -33,6 +39,14 @@ const CheckoutSidebar = (props) => {
 
   const ProcessToPaymentPage = () => {
     let proceed = true;
+    if (!paymentMethod) {
+      proceed = false;
+      swal({
+        title: "Please Select Your Payment Method",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+    }
     if (_.isEmpty(shipping_address)) {
       proceed = false;
       swal({
@@ -64,11 +78,29 @@ const CheckoutSidebar = (props) => {
     setPaymentOption(percent);
     addAdvancePaymentPercent(percent);
   };
-
-  const dueAmount = () => {
-    const price = cartCalculateDueToPay(summary.totalPrice, paymentOption);
-    return numberWithCommas(price);
+  const handlePaymentMethodChange = (method) => {
+    setPaymentMethod(method);
+    selectPaymentMethod(method);
   };
+
+  const getDiscount = () => {
+    let discount = 0;
+    if (paymentMethod && paymentOption) {
+      if (paymentMethod == "bank_payment")
+        discount = calculateDiscountAmount(paymentMethod, paymentOption, general, "bank");
+      if (paymentMethod == "bkash_payment")
+        discount = calculateDiscountAmount(paymentMethod, paymentOption, general, "bkash");
+      if (paymentMethod == "nagad_payment")
+        discount = calculateDiscountAmount(paymentMethod, paymentOption, general, "nagad");
+    }
+    return discount;
+  };
+
+  const discount = getDiscount();
+  const payableTotal = payableSubTotal(summary.totalPrice, discount);
+  const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
+  const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
+
   return (
     <aside className='col-lg-3'>
       {manageShipping && (
@@ -87,16 +119,6 @@ const CheckoutSidebar = (props) => {
               <td>Subtotal:</td>
               <td>{`${currency} ${numberWithCommas(summary.totalPrice)}`}</td>
             </tr>
-
-            <tr className='summary-total'>
-              <td>Need To Pay:</td>
-              <td>{`${currency} ${needToPay()}`}</td>
-            </tr>
-
-            <tr className='summary-total'>
-              <td>Due Amount:</td>
-              <td>{`${currency} ${dueAmount()}`}</td>
-            </tr>
             <tr className='summary-total'>
               <td>Select Payment Amount(%):</td>
               <div className='ml-2'>
@@ -107,7 +129,75 @@ const CheckoutSidebar = (props) => {
                 </select>
               </div>
             </tr>
+            <tr className='summary-total'>
+              <td>Discount ({discount}%):</td>
+              <td>{`${currency} ${numberWithCommas(
+                cartCalculateDiscount(summary.totalPrice, discount)
+              )}`}</td>
+            </tr>
+            <tr className='summary-total'>
+              <td>Need To Pay:</td>
+              <td>{`${currency} ${numberWithCommas(advanced)}`}</td>
+            </tr>
 
+            <tr className='summary-total'>
+              <td>Due Amount:</td>
+              <td>{`${currency} ${numberWithCommas(dueAmount)}`}</td>
+            </tr>
+
+            <tr className='summary-total '>
+              <td colSpan={3} className='border-0 p-0'>
+                <div className='card payment_card text-center'>
+                  <div className='row'>
+                    <div className='col-md-12 pay-box'>
+                      <div className='form-check form-check-inline'>
+                        <input
+                          className='form-check-input mr-2'
+                          type='radio'
+                          name='payment_method'
+                          onClick={(e) => handlePaymentMethodChange(e.target.value)}
+                          id='bkash_payment'
+                          value='bkash_payment'
+                        />
+                        <label className='form-check-label' htmlFor='bkash_payment'>
+                          <img className='pay-img' src={`/assets/img/payment/bkash.png`} alt='bkash' />
+                        </label>
+                      </div>
+                    </div>
+                    <div className='col-md-12 pay-box'>
+                      <div className='form-check form-check-inline'>
+                        <input
+                          className='form-check-input mr-2 '
+                          type='radio'
+                          name='payment_method'
+                          onClick={(e) => handlePaymentMethodChange(e.target.value)}
+                          id='nagad_payment'
+                          value='nagad_payment'
+                        />
+                        <label className='form-check-label' htmlFor='nagad_payment'>
+                          <img className='pay-img' src={`/assets/img/payment/nagod.png`} alt='Nagad' />
+                        </label>
+                      </div>
+                    </div>
+                    <div className='col-md-12 flex pay-box pb-3 '>
+                      <div className='form-check form-check-inline'>
+                        <input
+                          className='form-check-input mr-2 '
+                          type='radio'
+                          name='payment_method'
+                          onClick={(e) => handlePaymentMethodChange(e.target.value)}
+                          id='bank_payment'
+                          value='bank_payment'
+                        />
+                        <label className='form-check-label bankLabel' htmlFor='bank_payment'>
+                          <img className='bankImg' src={bankImg} alt='Bank' />
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
             <tr className='summary-shipping-estimate'>
               <td>
                 Shipping Address{" "}
@@ -127,10 +217,13 @@ const CheckoutSidebar = (props) => {
             </tr>
           </tbody>
         </table>
+
         {/* End .table table-summary */}
-        <button type='button' onClick={(e) => ProcessToPaymentPage()} className='btn btn-block btn-default'>
-          PROCEED TO CHECKOUT
-        </button>
+        <div className='pt-2'>
+          <button type='button' onClick={(e) => ProcessToPaymentPage()} className='btn btn-block btn-default'>
+            PROCEED TO CHECKOUT
+          </button>
+        </div>
       </div>
     </aside>
   );
@@ -147,6 +240,7 @@ const mapStateToProps = (state) => ({
   general: JSON.parse(state.INIT.general),
   cartConfigured: state.CART.configured,
   shipping_address: state.CART.shipping_address,
+  advance_percent: state.CART.advance_percent.advance_percent,
 });
 
 export default connect(mapStateToProps, {})(withRouter(CheckoutSidebar));

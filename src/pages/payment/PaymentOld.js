@@ -27,7 +27,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { FaRegCopy } from "react-icons/fa";
 
 const Payment = (props) => {
-  const { cartConfigured, shipping_address, general, advance_percent, paymentMethod } = props;
+  const { cartConfigured, shipping_address, general, advance_percent } = props;
 
   const currency = getSetting(general, "currency_icon");
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
@@ -36,6 +36,9 @@ const Payment = (props) => {
   const bankId = getSetting(general, "payment_bank_details");
 
   const [accept, setAccept] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  // const [discountPercent, setDiscountPercent] = useState(0);
+
   const [trxId, setTrxId] = useState("");
   const [copy, setCopy] = useState(false);
 
@@ -299,6 +302,68 @@ const Payment = (props) => {
                           </tr>
                         )}
 
+                        <tr>
+                          <td colSpan={3} className='border-0 p-0'>
+                            <div className='card payment_card text-center'>
+                              <div className='row'>
+                                <div className='col-md-5 pay-box'>
+                                  <div className='form-check form-check-inline'>
+                                    <input
+                                      className='form-check-input mr-2'
+                                      type='radio'
+                                      name='payment_method'
+                                      onClick={(e) => setPaymentMethod(e.target.value)}
+                                      id='bkash_payment'
+                                      value='bkash_payment'
+                                    />
+                                    <label className='form-check-label' htmlFor='bkash_payment'>
+                                      <img
+                                        className='pay-img'
+                                        src={`/assets/img/payment/bkash.png`}
+                                        alt='bkash'
+                                      />
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className='col-md-5 pay-box'>
+                                  <div className='form-check form-check-inline'>
+                                    <input
+                                      className='form-check-input mr-2 '
+                                      type='radio'
+                                      name='payment_method'
+                                      onClick={(e) => setPaymentMethod(e.target.value)}
+                                      id='nagad_payment'
+                                      value='nagad_payment'
+                                    />
+                                    <label className='form-check-label' htmlFor='nagad_payment'>
+                                      <img
+                                        className='pay-img'
+                                        src={`/assets/img/payment/nagod.png`}
+                                        alt='Nagad'
+                                      />
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className='col-md-2 flex pay-box pb-4 pb-md-0'>
+                                  <div className='form-check form-check-inline'>
+                                    <input
+                                      className='form-check-input mr-2 '
+                                      type='radio'
+                                      name='payment_method'
+                                      onClick={(e) => setPaymentMethod(e.target.value)}
+                                      id='bank_payment'
+                                      value='bank_payment'
+                                    />
+                                    <label className='form-check-label bankLabel' htmlFor='bank_payment'>
+                                      <img className='bankImg' src={bankImg} alt='Bank' />
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+
                         <tr className='mt-5 mt-md-0'>
                           <td colSpan={3}>
                             <div>
@@ -399,7 +464,6 @@ const mapStateToProps = (state) => ({
   cartConfigured: state.CART.configured,
   shipping_address: state.CART.shipping_address,
   advance_percent: state.CART.advance_percent.advance_percent,
-  paymentMethod: state.CART.payment_method.payment_method,
 });
 
 export default connect(mapStateToProps, { confirmCustomerOrder })(withRouter(Payment));

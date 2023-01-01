@@ -96,6 +96,14 @@ export const selectDiscountPercent = (percent) => {
     },
   });
 };
+export const selectPaymentMethod = (method) => {
+  store.dispatch({
+    type: Types.SELECT_PAYMENT_METHOD,
+    payload: {
+      payment_method: { payment_method: method },
+    },
+  });
+};
 export const addProductIntoVirtualCart = (payload) => {
   store.dispatch({
     type: Types.ADD_PRODUCT_VIRTUAL,

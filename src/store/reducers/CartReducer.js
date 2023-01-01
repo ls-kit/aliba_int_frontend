@@ -8,7 +8,8 @@ const CartReducer = (
     shipping_address: {},
     billing_address: {},
     advance_percent: { advance_percent: 50 },
-    discount_percent: {},
+    discount_percent: { discount_percent: 0 },
+    payment_method: {},
     virtualCart: [],
   },
   action
@@ -34,6 +35,9 @@ const CartReducer = (
     }
     case Types.SELECT_DISCOUNT_PERCENT: {
       return { ...state, discount_percent: action.payload.discount_percent };
+    }
+    case Types.SELECT_PAYMENT_METHOD: {
+      return { ...state, payment_method: action.payload.payment_method };
     }
     case Types.ADD_PRODUCT_VIRTUAL: {
       return { ...state, virtualCart: action.payload.virtualCart };

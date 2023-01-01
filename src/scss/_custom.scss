@@ -375,8 +375,7 @@ a:focus {
 
 .payment_card {
   background: #fff;
-  //border: 1px dashed #ddd;
-  //padding: 3rem 0;
+  padding: 0 3rem;
 }
 
 .categories_box {
@@ -1122,6 +1121,8 @@ a:focus {
   margin: 0 auto !important;
 }
 .bankImg {
+  width: 80px;
+  height: 80px;
 }
 
 .mb-0 {
@@ -1144,6 +1145,7 @@ a:focus {
 @media only screen and (max-width: 767px) {
   .bankImg {
     width: 100px;
+    height: 90px;
   }
   .timerBox,
   .banner-bottom-part {

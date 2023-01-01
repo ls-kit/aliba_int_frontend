@@ -1,5 +1,10 @@
 import _ from "lodash";
-import { addProductIntoVirtualCart, configAttrToConfigured } from "./GlobalStateControl";
+import {
+  addProductIntoVirtualCart,
+  configAttrToConfigured,
+  selectDiscountPercent,
+  selectPaymentMethod,
+} from "./GlobalStateControl";
 import { getSetting } from "./Helpers";
 
 export const getLocalCart = () => {
@@ -707,5 +712,6 @@ export const calculateDiscountAmount = (method, advance, general, methodString) 
   } else if (advance == checkout_payment_third) {
     discount = checkout_discount_third;
   }
+
   return discount;
 };
