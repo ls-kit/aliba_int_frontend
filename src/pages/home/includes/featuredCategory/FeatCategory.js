@@ -7,7 +7,7 @@ export const SubFeatCat = ({ section }) => {
 
   return (
     <div className='col-4'>
-      <Link to={`/shop/${url}`}>
+      <Link to={`${url}`}>
         <img className='fcatIm' src={loadAsset(banner)} alt='' />
       </Link>
     </div>
@@ -20,7 +20,7 @@ const FeatCategory = ({ cat }) => {
   return (
     <div className='col-lg-4 col-md-6 my-2 '>
       <div className='singleFeatCat hov-shadow'>
-        <Link to={`/shop/${url}`}>
+        <Link to={`${url}`}>
           <h6 className='fcatName'>{name}</h6>
         </Link>
 
