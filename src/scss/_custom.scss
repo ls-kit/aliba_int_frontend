@@ -1166,6 +1166,13 @@ a:focus {
     right: 10%;
     left: 10%;
   }
+  .dotText {
+    width: 100px;
+    overflow: hidden;
+    display: inline-block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 @media only screen and (max-width: 900px) {
   .c-card {
