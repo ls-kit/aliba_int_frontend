@@ -66,12 +66,28 @@ const ProductBody = (props) => {
 
   const addToCart = (e) => {
     e.preventDefault();
+    if (activeProduct.totalPrice < 2000 || activeProduct.totalQty < 3) {
+      swal({
+        text: "Dear customer, this product should be ordered for a minimum of 3 pieces and 2000 taka!",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      return;
+    }
     configAttrToConfigured([...existCart, ...cartConfigured]);
     removeProductIntoVirtualCart();
     setAddSuccess(true);
   };
   const buyNow = (e) => {
     e.preventDefault();
+    if (activeProduct.totalPrice < 2000 || activeProduct.totalQty < 3) {
+      swal({
+        text: "Dear customer, this product should be ordered for a minimum of 3 pieces and 2000 taka!",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      return;
+    }
     configAttrToConfigured([...existCart, ...cartConfigured]);
     removeProductIntoVirtualCart();
     history.push("/checkout");
@@ -141,9 +157,9 @@ const ProductBody = (props) => {
 
               {/* End .details-filter-row */}
 
-              <div className='product-details-action'>
-                <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
-                  <div className='pd-btn'>
+              <div>
+                <div className='row'>
+                  <div className='col-md-3 pd-btn'>
                     <a href={"/add-to-wishlist"} onClick={(e) => addToWishlist(e, product)}>
                       <div
                         className='imageBt bt ripple disabled mobilefont'
@@ -163,7 +179,7 @@ const ProductBody = (props) => {
                   </div>
 
                   {Number(activeProduct.totalQty) > 0 ? (
-                    <div className='pd-btn' style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
+                    <div className='col-md-5 pd-btn'>
                       <a href={"/add-to-wishlist"} onClick={(e) => addToCart(e)}>
                         <div
                           className='imageBt bt ripple disabled mobilefont'
@@ -182,7 +198,7 @@ const ProductBody = (props) => {
                       </a>
                     </div>
                   ) : (
-                    <div className='pd-btn' style={{ marginLeft: "0.75rem", marginRight: "0.75rem" }}>
+                    <div className='col-md-5 pd-btn'>
                       <a href={"/buy-now"} onClick={(e) => alertForQuantity(e)}>
                         <div
                           className='imageBt bt ripple disabled mobilefont'
@@ -203,7 +219,7 @@ const ProductBody = (props) => {
                   )}
 
                   {Number(activeProduct.totalQty) > 0 ? (
-                    <div className='pd-btn'>
+                    <div className='col-md-4 pd-btn'>
                       <a href={"/buy-now"} onClick={(e) => buyNow(e)}>
                         <div
                           className='imageBt bt ripple disabled mobilefont'
@@ -221,7 +237,7 @@ const ProductBody = (props) => {
                       </a>
                     </div>
                   ) : (
-                    <div className='pd-btn'>
+                    <div className='col-md-4 pd-btn'>
                       <a href={"/buy-now"} onClick={(e) => alertForQuantity(e)}>
                         <div
                           className='imageBt bt ripple disabled mobilefont'
@@ -281,25 +297,14 @@ const ProductBody = (props) => {
               {/* End .product-details-action */}
 
               {/* group data */}
-              <div className='mt2 groupData'>
+              <div className='groupData'>
                 <div>
                   <b>Product Code: </b>
                   <span>{product_id}</span>
                 </div>
-                {/* <div>
-                <b>Category: </b>
-                <span>Printed circuit boards</span>
-              </div> */}
-                {/* <div>
-                <b>Total Sold: </b>
-                <span>{product.total_sold}</span>
-              </div>
-              <div>
-                <b>Seller Score: </b>
-                <span>10/10</span>
-              </div> */}
-                <div class='flexRow' style={{ marginTop: "20px", flexWrap: "wrap" }}>
-                  <div>
+
+                <div class='row' style={{ marginTop: "20px", flexWrap: "wrap" }}>
+                  <div className='col-md-6'>
                     <Link to={`/seller/${product.VendorId}?page=1`}>
                       <div
                         className='imageBt bt ripple disabled mobilefont'

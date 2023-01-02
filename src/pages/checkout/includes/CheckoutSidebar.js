@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -129,21 +129,6 @@ const CheckoutSidebar = (props) => {
                 </select>
               </div>
             </tr>
-            <tr className='summary-total'>
-              <td>Discount ({discount}%):</td>
-              <td>{`${currency} ${numberWithCommas(
-                cartCalculateDiscount(summary.totalPrice, discount)
-              )}`}</td>
-            </tr>
-            <tr className='summary-total'>
-              <td>Need To Pay:</td>
-              <td>{`${currency} ${numberWithCommas(advanced)}`}</td>
-            </tr>
-
-            <tr className='summary-total'>
-              <td>Due Amount:</td>
-              <td>{`${currency} ${numberWithCommas(dueAmount)}`}</td>
-            </tr>
 
             <tr className='summary-total '>
               <td colSpan={3} className='border-0 p-0'>
@@ -198,6 +183,24 @@ const CheckoutSidebar = (props) => {
                 </div>
               </td>
             </tr>
+
+            <tr className='summary-total'>
+              <td>Discount ({discount}%):</td>
+              <td>{`${currency} ${numberWithCommas(
+                cartCalculateDiscount(summary.totalPrice, discount)
+              )}`}</td>
+            </tr>
+
+            <tr className='summary-total'>
+              <td>Need To Pay:</td>
+              <td>{`${currency} ${numberWithCommas(advanced)}`}</td>
+            </tr>
+
+            <tr className='summary-total'>
+              <td>Due Amount:</td>
+              <td>{`${currency} ${numberWithCommas(dueAmount)}`}</td>
+            </tr>
+
             <tr className='summary-shipping-estimate'>
               <td>
                 Shipping Address{" "}
@@ -219,10 +222,16 @@ const CheckoutSidebar = (props) => {
         </table>
 
         {/* End .table table-summary */}
-        <div className='pt-2'>
-          <button type='button' onClick={(e) => ProcessToPaymentPage()} className='btn btn-block btn-default'>
-            PROCEED TO CHECKOUT
-          </button>
+        <div>
+          <div className='pt-2'>
+            <button
+              type='button'
+              onClick={(e) => ProcessToPaymentPage()}
+              className='btn btn-block btn-default checkout-btn'
+            >
+              PROCEED TO CHECKOUT
+            </button>
+          </div>
         </div>
       </div>
     </aside>

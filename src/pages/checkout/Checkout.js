@@ -18,6 +18,21 @@ import CheckoutSidebar from "./includes/CheckoutSidebar";
 import swal from "sweetalert";
 import TableConfigItems from "./includes/TableConfigItems";
 import TablePlainItem from "./includes/TablePlainItem";
+import { useLayoutEffect } from "react";
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+};
 
 const Checkout = (props) => {
   const { cartConfigured, general } = props;
@@ -112,6 +127,11 @@ const Checkout = (props) => {
     configAttrToConfigured(modified);
   };
 
+  let [width, height] = useWindowSize();
+
+  width = width ? width : window.innerWidth;
+  height = height ? height : window.innerHeight;
+
   return (
     <main className='main'>
       <Breadcrumb current='Checkout' />
@@ -166,6 +186,7 @@ const Checkout = (props) => {
                                         cartConfigured={cartConfigured}
                                         ShippingCharges={ShippingCharges}
                                         general={general}
+                                        width={width}
                                       />
                                       <tr key={index}>
                                         <td colSpan={3} className='text-right'>
@@ -193,6 +214,7 @@ const Checkout = (props) => {
                                       cartConfigured={cartConfigured}
                                       ShippingCharges={ShippingCharges}
                                       general={general}
+                                      width={width}
                                     />
                                     <tr key={index}>
                                       <td colSpan={3} className='text-right'>

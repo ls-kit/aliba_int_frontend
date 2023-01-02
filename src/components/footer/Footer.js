@@ -70,6 +70,17 @@ const Footer = (props) => {
                       </li>
                     </ul>
                   </div>
+
+                  {general.frontend_logo_footer_two && (
+                    <Link to='/'>
+                      <img
+                        src={loadAsset(general.frontend_logo_footer_two)}
+                        className='footer-logo'
+                        alt={general.site_name}
+                      />
+                    </Link>
+                  )}
+
                   {/* End .widget-about-info */}
                 </div>
               </div>

@@ -10,9 +10,10 @@ import { configAttrToConfigured } from "../../../utils/GlobalStateControl";
 import { getSetting } from "../../../utils/Helpers";
 
 const TablePlainItem = (props) => {
-  const { currency, product, cartConfigured, ShippingCharges, general } = props;
+  const { currency, product, cartConfigured, ShippingCharges, general, width } = props;
   const bulkPriceQuantity = product.bulkPriceQuantity;
   const rate = getSetting(general, "increase_rate", 15);
+  console.log("widht", width);
 
   const unitTotalPrice = (Price, Qty) => {
     return numberWithCommas(Number(Price) * Number(Qty));
@@ -78,7 +79,8 @@ const TablePlainItem = (props) => {
       <td className='align-middle'>
         <div className='product-title mb-0'>
           <Link to={`/product/${product.Id}`} title={product.Title}>
-            {product.Title}
+            {width > 767 ? product.Title : product.Title.slice(0, 25)}
+            {/* {product.Title.slice(0, 5)} */}
           </Link>
         </div>
         <div className='price'>
