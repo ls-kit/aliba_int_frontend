@@ -78,8 +78,9 @@ const CheckoutSidebar = (props) => {
     setPaymentOption(percent);
     addAdvancePaymentPercent(percent);
   };
-  const handlePaymentMethodChange = (method) => {
-    setPaymentMethod(method);
+  const handlePaymentMethodChange = (e) => {
+    let method = e.target.value;
+    if (method) setPaymentMethod(method);
     selectPaymentMethod(method);
   };
 
@@ -120,7 +121,7 @@ const CheckoutSidebar = (props) => {
               <td>{`${currency} ${numberWithCommas(summary.totalPrice)}`}</td>
             </tr>
             <tr className='summary-total'>
-              <td>Select Payment Amount(%):</td>
+              <td>Payment Amount(%):</td>
               <div className='ml-2'>
                 <select onChange={handlePaymentChange} className='form-control' name='' id='payment'>
                   <option value={checkout_payment_first}>{checkout_payment_first}%</option>
@@ -130,7 +131,21 @@ const CheckoutSidebar = (props) => {
               </div>
             </tr>
 
-            <tr className='summary-total '>
+            <tr className='summary-total'>
+              <td>Payment Method:</td>
+              <div className='ml-2'>
+                <select onChange={handlePaymentMethodChange} className='form-control' name='' id='payment'>
+                  <option value='0' defaultChecked>
+                    Select
+                  </option>
+                  <option value='bkash_payment'>bKash</option>
+                  <option value='nagad_payment'>Nagad</option>
+                  <option value='bank_payment'>Bank</option>
+                </select>
+              </div>
+            </tr>
+
+            {/* <tr className='summary-total '>
               <td colSpan={3} className='border-0 p-0'>
                 <div className='card payment_card text-center'>
                   <div className='row'>
@@ -182,7 +197,7 @@ const CheckoutSidebar = (props) => {
                   </div>
                 </div>
               </td>
-            </tr>
+            </tr> */}
 
             <tr className='summary-total'>
               <td>Discount ({discount}%):</td>
