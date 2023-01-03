@@ -72,7 +72,7 @@ const TableConfigItems = (props) => {
 
   if (width < 768)
     return (
-      <tr>
+      <tr className='sm-td'>
         <td className='text-center'>
           <input
             type='checkbox'
@@ -91,8 +91,8 @@ const TableConfigItems = (props) => {
             </figure>
           ))}
         </td>
-        <td className='align-middle'>
-          <div className='product-title mb-0'>
+        <td className=''>
+          <div className='product-title mb-0 bb-0'>
             <Link className='dotText bold' to={`/product/${product.Id}`} title={product.Title}>
               {/*{characterLimiter(product.Title)}*/}
               {product.Title}
@@ -111,8 +111,11 @@ const TableConfigItems = (props) => {
             <span>{` ${currency} ${numberWithCommas(config.Price)}`}</span>
           </div>
         </td>
-        <td className='align-middle text-center'>
-          <div>{`${currency} ${unitTotalPrice(config.Price, config.Quantity)}`}</div>
+        <td className='text-center'>
+          <div className='product-title bb-0'>{`${currency} ${unitTotalPrice(
+            config.Price,
+            config.Quantity
+          )}`}</div>
           <div>
             <div className='d-inline-block manage-quantity mr-3 my-2' style={{ maxWidth: "115px" }}>
               <div className='input-group input-group input-group-sm'>
@@ -120,7 +123,7 @@ const TableConfigItems = (props) => {
                   <button
                     type='button'
                     onClick={(e) => activeConfiguredQtyChanges(config, product.Id, "decrement")}
-                    className='btn btn-default'
+                    className='btn btn-default sh'
                     style={{ padding: "0" }}
                   >
                     <i className='icon-minus' />
@@ -128,7 +131,7 @@ const TableConfigItems = (props) => {
                 </div>
                 <input
                   type='text'
-                  className='form-control p-2 text-center addQ'
+                  className='form-control p-2 text-center '
                   defaultValue={1}
                   value={config.Quantity}
                   onChange={(e) => inputQtyChanges(config, product.Id, e.target.value)}
@@ -142,7 +145,7 @@ const TableConfigItems = (props) => {
                   <button
                     type='button'
                     onClick={(e) => activeConfiguredQtyChanges(config, product.Id)}
-                    className='btn btn-default'
+                    className='btn btn-default sh'
                     style={{ padding: "0" }}
                   >
                     <i className='icon-plus' />

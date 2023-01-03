@@ -210,6 +210,25 @@ const CheckoutSidebar = (props) => {
               <td>Need To Pay:</td>
               <td>{`${currency} ${numberWithCommas(advanced)}`}</td>
             </tr>
+            {/* <tr className='summary-total'>
+              <td>Apply Coupon:</td>
+              <td>
+                <div className='d-inline-block manage-quantity'>
+                  <div className='input-group input-group input-group-sm'>
+                    <input
+                      placeholder='Enter Coupon'
+                      type='text'
+                      className='form-control p-2 text-center addQ'
+                    />
+                    <div className='input-group-append'>
+                      <button type='button' className='btn btn-default' style={{ fontSize: "13.5px" }}>
+                        Apply
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr> */}
 
             <tr className='summary-total'>
               <td>Due Amount:</td>
@@ -242,7 +261,7 @@ const CheckoutSidebar = (props) => {
             <button
               type='button'
               onClick={(e) => ProcessToPaymentPage()}
-              className='btn btn-block btn-default checkout-btn'
+              className='btn btn-block btn-check checkout-btn'
             >
               PROCEED TO CHECKOUT
             </button>

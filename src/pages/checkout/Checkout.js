@@ -141,7 +141,7 @@ const Checkout = (props) => {
           <div className='container'>
             <div className='row'>
               <div className='col-lg-9'>
-                <div className='card py-3'>
+                <div className='card'>
                   <div className='checkTable table-responsive-sm '>
                     <table className='table table table-cart'>
                       <thead>
@@ -197,7 +197,7 @@ const Checkout = (props) => {
                                         )}`}</td>
                                       </tr>
                                       <tr key={index + 1}>
-                                        <td colSpan={3} className='text-right'>
+                                        <td cl colSpan={3} className='text-right bold'>
                                           Sub Total:
                                         </td>
                                         <td className='text-center'>{`${currency} ${numberWithCommas(
@@ -225,7 +225,7 @@ const Checkout = (props) => {
                                       )}`}</td>
                                     </tr>
                                     <tr key={index + 1}>
-                                      <td colSpan={3} className='text-right'>
+                                      <td colSpan={3} className='text-right bold'>
                                         Sub Total:
                                       </td>
                                       <td className='text-center'>{`${currency} ${numberWithCommas(
