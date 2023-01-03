@@ -294,7 +294,15 @@ export const getExclusiveOffer = async () => {
 export const getSuperDeals = async () => {
   return await axiosInstance.get(`/get-super-deals`).then((res) => {
     const resData = res.data;
-    console.log("super data", resData);
+    if (!_.isEmpty(resData)) {
+      return resData.data;
+    }
+    return {};
+  });
+};
+export const getCouponDetails = async (coupon) => {
+  return await axiosInstance.get(`/validate-coupon/${coupon}`).then((res) => {
+    const resData = res;
     if (!_.isEmpty(resData)) {
       return resData.data;
     }

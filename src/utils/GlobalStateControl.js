@@ -117,3 +117,12 @@ export const removeProductIntoVirtualCart = () => {
     type: Types.REMOVE_PRODUCT_VIRTUAL,
   });
 };
+
+export const addCouponDetails = (payload) => {
+  store.dispatch({
+    type: Types.ADD_COUPON_DETAILS,
+    payload: {
+      couponDetails: payload,
+    },
+  });
+};

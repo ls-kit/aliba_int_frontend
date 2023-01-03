@@ -77,6 +77,8 @@ const SectionSuperDeals = (props) => {
       </div>
     );
 
+  if (!expiredDate) return "";
+
   return (
     <div className='container '>
       <div className='m-card '>

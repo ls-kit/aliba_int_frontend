@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import {
   calculateDiscountAmount,
+  cartCalculateCouponDiscount,
   cartCalculateDiscount,
   cartCalculateDueToPay,
   cartCalculateNeedToPay,
@@ -15,9 +16,14 @@ import {
 import ShippingAddress from "./ShippingAddress";
 import swal from "sweetalert";
 import { getSetting } from "../../../utils/Helpers";
-import { addAdvancePaymentPercent, selectPaymentMethod } from "../../../utils/GlobalStateControl";
+import {
+  addAdvancePaymentPercent,
+  addCouponDetails,
+  selectPaymentMethod,
+} from "../../../utils/GlobalStateControl";
 import bankImg from "../../../assets/images/bank.png";
 import { useEffect } from "react";
+import { getCouponDetails } from "../../../utils/Services";
 
 const CheckoutSidebar = (props) => {
   const { general, currency, shipping_address, cartConfigured, advance_percent } = props;
@@ -31,6 +37,8 @@ const CheckoutSidebar = (props) => {
   const [manageShipping, setManageShipping] = useState(false);
   const [paymentOption, setPaymentOption] = useState(Number(checkout_payment_first));
   const [paymentMethod, setPaymentMethod] = useState("");
+  const [coupon, setCoupon] = useState("");
+  const [couponDetails, setCouponDetails] = useState({});
 
   const manageShippingAddress = (e) => {
     e.preventDefault();
@@ -97,8 +105,40 @@ const CheckoutSidebar = (props) => {
     return discount;
   };
 
+  const handleCouponApply = () => {
+    if (!coupon) {
+      swal({
+        title: "Please Enter Your Coupon",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      return;
+    }
+    getCouponDetails(coupon).then((response) => {
+      if (!_.isEmpty(response)) {
+        const resData = response.data;
+        if (!_.isEmpty(resData)) {
+          const coupon = resData.coupon;
+          if (!_.isEmpty(coupon)) {
+            setCouponDetails(coupon);
+            addCouponDetails(coupon);
+          }
+        } else {
+          const errorMessage = response.message ? response.message : "Invalid Coupon!";
+          swal({
+            title: `${errorMessage}`,
+            icon: "warning",
+            buttons: "Ok, Understood",
+          });
+        }
+      }
+    });
+  };
+
+  // console.log("coupon data", couponDetails);
+  const couponDiscount = cartCalculateCouponDiscount(couponDetails);
   const discount = getDiscount();
-  const payableTotal = payableSubTotal(summary.totalPrice, discount);
+  const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
   const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
   const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
 
@@ -145,60 +185,6 @@ const CheckoutSidebar = (props) => {
               </div>
             </tr>
 
-            {/* <tr className='summary-total '>
-              <td colSpan={3} className='border-0 p-0'>
-                <div className='card payment_card text-center'>
-                  <div className='row'>
-                    <div className='col-md-12 pay-box'>
-                      <div className='form-check form-check-inline'>
-                        <input
-                          className='form-check-input mr-2'
-                          type='radio'
-                          name='payment_method'
-                          onClick={(e) => handlePaymentMethodChange(e.target.value)}
-                          id='bkash_payment'
-                          value='bkash_payment'
-                        />
-                        <label className='form-check-label' htmlFor='bkash_payment'>
-                          <img className='pay-img' src={`/assets/img/payment/bkash.png`} alt='bkash' />
-                        </label>
-                      </div>
-                    </div>
-                    <div className='col-md-12 pay-box'>
-                      <div className='form-check form-check-inline'>
-                        <input
-                          className='form-check-input mr-2 '
-                          type='radio'
-                          name='payment_method'
-                          onClick={(e) => handlePaymentMethodChange(e.target.value)}
-                          id='nagad_payment'
-                          value='nagad_payment'
-                        />
-                        <label className='form-check-label' htmlFor='nagad_payment'>
-                          <img className='pay-img' src={`/assets/img/payment/nagod.png`} alt='Nagad' />
-                        </label>
-                      </div>
-                    </div>
-                    <div className='col-md-12 flex pay-box pb-3 '>
-                      <div className='form-check form-check-inline'>
-                        <input
-                          className='form-check-input mr-2 '
-                          type='radio'
-                          name='payment_method'
-                          onClick={(e) => handlePaymentMethodChange(e.target.value)}
-                          id='bank_payment'
-                          value='bank_payment'
-                        />
-                        <label className='form-check-label bankLabel' htmlFor='bank_payment'>
-                          <img className='bankImg' src={bankImg} alt='Bank' />
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-            </tr> */}
-
             <tr className='summary-total'>
               <td>Discount ({discount}%):</td>
               <td>{`${currency} ${numberWithCommas(
@@ -210,8 +196,8 @@ const CheckoutSidebar = (props) => {
               <td>Need To Pay:</td>
               <td>{`${currency} ${numberWithCommas(advanced)}`}</td>
             </tr>
-            {/* <tr className='summary-total'>
-              <td>Apply Coupon:</td>
+            <tr className='summary-total'>
+              <td>Apply Coupon : </td>
               <td>
                 <div className='d-inline-block manage-quantity'>
                   <div className='input-group input-group input-group-sm'>
@@ -219,16 +205,28 @@ const CheckoutSidebar = (props) => {
                       placeholder='Enter Coupon'
                       type='text'
                       className='form-control p-2 text-center addQ'
+                      onChange={(e) => setCoupon(e.target.value)}
                     />
                     <div className='input-group-append'>
-                      <button type='button' className='btn btn-default' style={{ fontSize: "13.5px" }}>
-                        Apply
+                      <button
+                        onClick={() => handleCouponApply()}
+                        type='button'
+                        className='btn btn-default'
+                        style={{ fontSize: "13.5px" }}
+                        disabled={couponDiscount}
+                      >
+                        {couponDiscount ? "Applied" : "Apply"}
                       </button>
                     </div>
                   </div>
                 </div>
               </td>
-            </tr> */}
+            </tr>
+
+            <tr className='summary-total'>
+              <td>Coupon Reword:</td>
+              <td>{`${currency} ${numberWithCommas(couponDiscount)}`}</td>
+            </tr>
 
             <tr className='summary-total'>
               <td>Due Amount:</td>

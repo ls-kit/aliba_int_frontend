@@ -11,6 +11,7 @@ const CartReducer = (
     discount_percent: { discount_percent: 0 },
     payment_method: {},
     virtualCart: [],
+    couponDetails: {},
   },
   action
 ) => {
@@ -44,6 +45,9 @@ const CartReducer = (
     }
     case Types.REMOVE_PRODUCT_VIRTUAL: {
       return { ...state, virtualCart: [] };
+    }
+    case Types.ADD_COUPON_DETAILS: {
+      return { ...state, couponDetails: action.payload.couponDetails };
     }
     default:
       return state;

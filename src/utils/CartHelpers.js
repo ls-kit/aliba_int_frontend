@@ -564,7 +564,6 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
             config.isChecked
           ))
       );
-      console.log("checkItemSubTotal", totalItemShipping);
 
       grossTotalPrice += Number(totalPrice) + Number(totalItemShipping);
 
@@ -588,9 +587,21 @@ export const cartCalculateDiscount = (totalPrice, percent = 0) => {
   const discount = (Number(totalPrice) * Number(percent)) / 100;
   return discount;
 };
+export const cartCalculateCouponDiscount = (couponDetails) => {
+  let discount = 0;
 
-export const payableSubTotal = (totalPrice, percent) => {
-  const subTotal = totalPrice - cartCalculateDiscount(totalPrice, percent);
+  const active = couponDetails?.active;
+  const coupon_amount = couponDetails?.coupon_amount;
+  if (coupon_amount && active) {
+    discount = coupon_amount;
+  }
+
+  return discount;
+};
+
+export const payableSubTotal = (totalPrice, percent, couponDetails) => {
+  const subTotal =
+    totalPrice - cartCalculateDiscount(totalPrice, percent) - cartCalculateCouponDiscount(couponDetails);
   return subTotal;
 };
 
@@ -698,7 +709,6 @@ export const getChinaLocalShippingCost = (
   } else {
     localShippingCost = 0;
   }
-  console.log("localShippingCost", localShippingCost);
   return localShippingCost;
 };
 
