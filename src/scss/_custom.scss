@@ -1131,6 +1131,9 @@ a:focus {
   padding: 1.5rem 1rem;
 }
 
+.mainImg {
+  width: 7rem;
+}
 .qr-code {
   max-width: 250px;
   min-width: 200px;
@@ -1163,6 +1166,9 @@ a:focus {
 }
 .coupon-btn {
   font-size: 14px;
+}
+.totalWi {
+  width: 10rem;
 }
 
 .btn-check {
@@ -1253,6 +1259,12 @@ a:focus {
   .table td,
   .table th {
     padding: 0.25rem 0.75rem;
+  }
+  .mainImg {
+    width: 5rem;
+  }
+  .vImg {
+    width: 3rem;
   }
 }
 @media only screen and (max-width: 900px) {

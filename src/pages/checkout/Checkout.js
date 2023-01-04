@@ -122,7 +122,15 @@ const Checkout = (props) => {
   let [width, height] = useWindowSize();
 
   width = width ? width : window.innerWidth;
-  height = height ? height : window.innerHeight;
+
+  const checkboxToggle = (product) => {
+    let updatedProduct = { ...product, isChecked: !product.isChecked };
+
+    let modified = cartConfigured.map((mapItem) =>
+      mapItem.Id === updatedProduct.Id ? updatedProduct : mapItem
+    );
+    configAttrToConfigured(modified);
+  };
 
   return (
     <main className='main'>
@@ -157,9 +165,7 @@ const Checkout = (props) => {
                               Remove
                             </a>
                           </th>
-                          <th className='text-center' style={{ width: "10rem" }}>
-                            Total
-                          </th>
+                          <th className='text-center totalWi'>Total</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -171,9 +177,15 @@ const Checkout = (props) => {
                                   {product.hasConfigurators ? (
                                     <tr>
                                       <td className='text-start'>
-                                        <input type='checkbox' name='checked_all' id='checked_item' />
+                                        <input
+                                          type='checkbox'
+                                          name='checked_all'
+                                          id='checked_item'
+                                          checked={product.isChecked}
+                                          onChange={(event) => checkboxToggle(product)}
+                                        />
                                       </td>
-                                      <td className='text-center' style={{ width: "7rem" }}>
+                                      <td className='text-center mainImg'>
                                         {
                                           <figure className='m-0'>
                                             <Link to={`/product/${product.Id}`}>
@@ -234,22 +246,6 @@ const Checkout = (props) => {
                                       </tr>
                                     </>
                                   )}
-                                  {/* <tr key={index}>
-                                    <td colSpan={3} className='text-right'>
-                                      China Local Shipping cost:
-                                    </td>
-                                    <td className='text-center'>{`${currency} ${numberWithCommas(
-                                      totalShippingCost(product)
-                                    )}`}</td>
-                                  </tr> */}
-                                  {/* <tr key={index + 1}>
-                                    <td colSpan={3} className='text-right bold'>
-                                      Sub Total:
-                                    </td>
-                                    <td className='text-center'>{`${currency} ${numberWithCommas(
-                                      productTotalCost(product)
-                                    )}`}</td>
-                                  </tr> */}
                                 </>
                               );
                             })}

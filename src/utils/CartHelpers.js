@@ -446,22 +446,24 @@ export const cartCheckedProductTotal = (Product) => {
   let ApproxWeight = Product.ApproxWeight;
   let totalPrice = 0;
   let totalQty = 0;
-  if (Product.hasConfigurators) {
-    let ConfiguredItems = Product.ConfiguredItems;
-    ConfiguredItems = ConfiguredItems.filter((fitler) => fitler.isChecked === true);
-    ConfiguredItems.map((summary) => {
-      let Quantity = Number(summary.Quantity);
-      let Price = Number(summary.Price);
-      totalPrice += Price * Quantity;
-      totalQty += Quantity;
-      return summary;
-    });
-  } else {
-    if (Product.isChecked === true) {
-      let Quantity = Number(Product.Quantity);
-      let Price = Number(Product.Price);
-      totalPrice += Price * Quantity;
-      totalQty += Quantity;
+  if (Product.isChecked === true) {
+    if (Product.hasConfigurators) {
+      let ConfiguredItems = Product.ConfiguredItems;
+      ConfiguredItems = ConfiguredItems.filter((fitler) => fitler.isChecked === true);
+      ConfiguredItems.map((summary) => {
+        let Quantity = Number(summary.Quantity);
+        let Price = Number(summary.Price);
+        totalPrice += Price * Quantity;
+        totalQty += Quantity;
+        return summary;
+      });
+    } else {
+      if (Product.isChecked === true) {
+        let Quantity = Number(Product.Quantity);
+        let Price = Number(Product.Price);
+        totalPrice += Price * Quantity;
+        totalQty += Quantity;
+      }
     }
   }
   let totalWeight = Number(ApproxWeight) * Number(totalQty);
@@ -554,21 +556,20 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
       const checkItemSubTotal = cartCheckedProductTotal(Product);
 
       const totalPrice = checkItemSubTotal.totalPrice;
-      let totalItemShipping = 0;
-      Product.ConfiguredItems.map(
-        (config) =>
-          (totalItemShipping = getChinaLocalShippingCost(
-            totalPrice,
-            ShippingCharges,
-            chinaLocalShippingChargeLimit,
-            config.isChecked
-          ))
-      );
-
-      grossTotalPrice += Number(totalPrice) + Number(totalItemShipping);
+      grossTotalPrice += Number(totalPrice);
 
       return false;
     });
+    let totalItemShipping = 0;
+
+    totalItemShipping = getChinaLocalShippingCost(
+      grossTotalPrice,
+      ShippingCharges,
+      chinaLocalShippingChargeLimit,
+      true
+    );
+
+    grossTotalPrice += Number(totalItemShipping);
   }
 
   return { totalQty: totalQty, totalPrice: grossTotalPrice };
@@ -721,7 +722,7 @@ export const getChinaLocalShippingCost = (
 ) => {
   let localShippingCost = chinaLocalShippingCharges;
   if (isChecked) {
-    localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
+    localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
   } else {
     localShippingCost = 0;
   }

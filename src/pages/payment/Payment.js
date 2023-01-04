@@ -243,7 +243,7 @@ const Payment = (props) => {
                             cartCalculateDiscount(summary.totalPrice, discount)
                           )}`}</td>
                         </tr>
-                        {couponDiscount && (
+                        {couponDiscount ? (
                           <tr className='summary-total'>
                             <td colSpan={2} className='text-right'>
                               Coupon Reword:
@@ -252,6 +252,8 @@ const Payment = (props) => {
                               couponDiscount
                             )}`}</td>
                           </tr>
+                        ) : (
+                          ""
                         )}
 
                         {/* <tr className='summary-total'>

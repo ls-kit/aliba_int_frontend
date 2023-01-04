@@ -46,6 +46,11 @@ const ProductBody = (props) => {
   const [addSuccess, setAddSuccess] = useState(false);
   const bulkPriceQuantity = product.BulkPrices;
 
+  const reExistCart = existCart.filter((filterItem) => filterItem.Id != product_id);
+  console.log("existCart", reExistCart);
+  console.log("cartConfigured", cartConfigured);
+  console.log("product_id", product_id);
+
   const alertForQuantity = (e) => {
     e.preventDefault();
     swal({
@@ -74,7 +79,7 @@ const ProductBody = (props) => {
       });
       return;
     }
-    configAttrToConfigured([...existCart, ...cartConfigured]);
+    configAttrToConfigured([...reExistCart, ...cartConfigured]);
     removeProductIntoVirtualCart();
     setAddSuccess(true);
   };
@@ -88,7 +93,7 @@ const ProductBody = (props) => {
       });
       return;
     }
-    configAttrToConfigured([...existCart, ...cartConfigured]);
+    configAttrToConfigured([...reExistCart, ...cartConfigured]);
     removeProductIntoVirtualCart();
     history.push("/checkout");
   };
