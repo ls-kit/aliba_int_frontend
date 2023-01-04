@@ -29,10 +29,11 @@ const ManageQuantity = (props) => {
   const activeCartProduct = findProductCartFromState(cartConfigured, product_id);
   const existsConfig = checkExistConfiguredItem(activeCartProduct, product_id, selectConfigId);
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
+  const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   const totalPrice = activeCartProduct.totalPrice;
   const getChinaLocalShippingCost = () => {
     let localShippingCost = chinaLocalShippingCharges;
-    localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
+    localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
     return Number(localShippingCost);
   };
   const ShippingCharges = getChinaLocalShippingCost();

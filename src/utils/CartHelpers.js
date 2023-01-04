@@ -573,6 +573,22 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
 
   return { totalQty: totalQty, totalPrice: grossTotalPrice };
 };
+export const totalPriceWithoutShippingCharge = (cartConfigured) => {
+  let grossTotalPrice = 0;
+  if (_.isArray(cartConfigured)) {
+    cartConfigured.map((Product) => {
+      const checkItemSubTotal = cartCheckedProductTotal(Product);
+
+      const totalPrice = checkItemSubTotal.totalPrice;
+
+      grossTotalPrice += Number(totalPrice);
+
+      return false;
+    });
+  }
+
+  return grossTotalPrice;
+};
 
 export const cartCalculateNeedToPay = (totalPrice, percent = 50) => {
   return (Number(totalPrice) * Number(percent)) / 100;

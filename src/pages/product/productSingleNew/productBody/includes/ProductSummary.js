@@ -34,7 +34,7 @@ const ProductSummary = (props) => {
   ) => {
     let localShippingCost = chinaLocalShippingCharges;
 
-    localShippingCost = Number(totalPrice) >= 4000 ? 0 : localShippingCost;
+    localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
 
     return Number(localShippingCost);
   };

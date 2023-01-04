@@ -160,51 +160,45 @@ const TableConfigItems = (props) => {
     );
 
   return (
-    <div className='row'>
-      <div className='col-md-1'>
-        <div className='text-center'>
-          <input
-            type='checkbox'
-            name='checked_all'
-            checked={config.isChecked}
-            onChange={(event) => checkboxToggle(product, config)}
-            id='checked_item'
-          />
+    <tr>
+      <td className='text-center'>
+        <input
+          type='checkbox'
+          name='checked_all'
+          checked={config.isChecked}
+          onChange={(event) => checkboxToggle(product, config)}
+          id='checked_item'
+        />
+      </td>
+      <td className='text-center' style={{ width: "7rem" }}>
+        {cartColorAttributes(config.Attributes, product).map((color, index4) => (
+          <figure key={index4} className='m-0'>
+            <Link to={`/product/${product.Id}`}>
+              <img src={color.MiniImageUrl} alt={color.Value} />
+            </Link>
+          </figure>
+        ))}
+      </td>
+      <td className='align-middle'>
+        <div className='product-title mb-0'>
+          <Link className='dotText' to={`/product/${product.Id}`} title={product.Title}>
+            {/*{characterLimiter(product.Title)}*/}
+            {product.Title}
+          </Link>
         </div>
-      </div>
-      <div className='col-md-1'>
-        <div className='text-center' style={{ width: "4rem" }}>
-          {cartColorAttributes(config.Attributes, product).map((color, index4) => (
-            <figure key={index4} className='m-0'>
-              <Link to={`/product/${product.Id}`}>
-                <img src={color.MiniImageUrl} alt={color.Value} />
-              </Link>
-            </figure>
+        <div className='Attributes'>
+          {config.Attributes.map((Attribute, index3) => (
+            <div key={index3 + 1} className='plain-attribute'>
+              <b>{Attribute.PropertyName} :</b>
+              <span>{` ${Attribute.Value}`}</span>
+            </div>
           ))}
         </div>
-      </div>
-      <div className='col-md-3'>
-        <div className='align-middle'>
-          <div className='Attributes fs-13'>
-            {config.Attributes.map((Attribute, index3) => (
-              <div key={index3 + 1} className='plain-attribute'>
-                <b>{Attribute.PropertyName} :</b>
-                <span>{` ${Attribute.Value}`}</span>
-              </div>
-            ))}
-          </div>
+        <div className='price'>
+          <b>Price :</b>
+          <span>{` ${currency} ${numberWithCommas(config.Price)}`}</span>
         </div>
-      </div>
-      <div className='col-md-2'>
-        <div className='align-middle'>
-          <div className='price fs-13'>
-            <b>Price :</b>
-            <span>{` ${currency} ${numberWithCommas(config.Price)}`}</span>
-          </div>
-        </div>
-      </div>
-      <div className='col-md-3 text-center'>
-        <div className='d-inline-block manage-quantity' style={{ maxWidth: "115px" }}>
+        <div className='d-inline-block manage-quantity mr-3 my-2' style={{ maxWidth: "115px" }}>
           <div className='input-group input-group input-group-sm'>
             <div className='input-group-prepend'>
               <button
@@ -238,15 +232,13 @@ const TableConfigItems = (props) => {
             </div>
           </div>
         </div>
-        <p className='maxQuantityText'>Max Quantity: {config.MaxQuantity}</p>
-      </div>
-      <div className='col-md-2'>
-        <div className='align-middle text-center'>{`${currency} ${unitTotalPrice(
-          config.Price,
-          config.Quantity
-        )}`}</div>
-      </div>
-    </div>
+        <span className='maxQuantityText'>Max Quantity: {config.MaxQuantity}</span>
+      </td>
+      <td className='align-middle text-center'>{`${currency} ${unitTotalPrice(
+        config.Price,
+        config.Quantity
+      )}`}</td>
+    </tr>
   );
 };
 

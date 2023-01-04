@@ -947,6 +947,11 @@ a:focus {
   border-radius: 6px;
 }
 
+.singleVariant {
+  border-bottom: 1px solid #eee;
+  padding: 0.5rem 0;
+}
+
 // product price range
 .ranges {
   display: grid;
@@ -1116,6 +1121,9 @@ a:focus {
   }
   .shippingBoxContainer {
     flex-direction: column;
+  }
+  .fs-13 {
+    font-size: 13px;
   }
 }
 .banner-bottom-part {

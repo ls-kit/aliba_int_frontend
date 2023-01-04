@@ -11,7 +11,6 @@ import {
   cartCheckedProductTotal,
   calculateAirShippingCharge,
   findProductCartFromState,
-  totalPriceWithoutShippingCharge,
 } from "../../utils/CartHelpers";
 import { configAttrToConfigured } from "../../utils/GlobalStateControl";
 import CheckoutSidebar from "./includes/CheckoutSidebar";
@@ -43,12 +42,10 @@ const Checkout = (props) => {
   //   const ShippingCharges = getSetting(general, "air_shipping_charges");
   const ShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
-  const totalPriceWithoutShipping = totalPriceWithoutShippingCharge(cartConfigured);
-  console.log("totalPriceWithoutShipping", totalPriceWithoutShipping);
 
   const getChinaLocalShippingCost = (totalPrice) => {
     let localShippingCost = ShippingCharges;
-    localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
+    localShippingCost = Number(totalPrice) >= Number(chinaLocalShippingChargeLimit) ? 0 : localShippingCost;
     return Number(localShippingCost);
   };
 
@@ -85,6 +82,17 @@ const Checkout = (props) => {
     });
   };
 
+  // previous calculation
+  //   const oldTotalShippingCost = (product) => {
+  //     const checkItemSubTotal = cartCheckedProductTotal(product);
+  //     const totalPrice = checkItemSubTotal.totalPrice;
+  //     const totalWeight = checkItemSubTotal.totalWeight;
+  //     const DeliveryCost = product.DeliveryCost;
+  //     const ShippingRate = calculateAirShippingCharge(totalPrice, ShippingCharges);
+  //     let weightCost = Number(totalWeight) * Number(ShippingRate);
+  //     weightCost = weightCost < 100 ? 100 : weightCost;
+  //     return Number(DeliveryCost) + Number(weightCost);
+  //   };
   const totalShippingCost = (product, isChecked = false) => {
     let returnValue = 0;
     if (isChecked) {
@@ -138,7 +146,7 @@ const Checkout = (props) => {
                     <table className='table table table-cart'>
                       <thead>
                         <tr>
-                          <th className='text-start'>
+                          <th className='text-center'>
                             <input
                               type='checkbox'
                               checked={allCheck}
@@ -164,104 +172,71 @@ const Checkout = (props) => {
                       </thead>
                       <tbody>
                         {cartConfigured.length > 0 ? (
-                          <>
-                            {cartConfigured.map((product, index) => {
-                              return (
-                                <>
-                                  {product.hasConfigurators ? (
-                                    <tr>
-                                      <td className='text-start'>
-                                        <input type='checkbox' name='checked_all' id='checked_item' />
-                                      </td>
-                                      <td className='text-center' style={{ width: "7rem" }}>
-                                        {
-                                          <figure className='m-0'>
-                                            <Link to={`/product/${product.Id}`}>
-                                              <img src={product.MainPictureUrl} alt={product.Title} />
-                                            </Link>
-                                          </figure>
-                                        }
-                                      </td>
-                                      <td>
-                                        <div className='product-title mb-0 bb-0'>
-                                          <Link
-                                            className='dotText bold'
-                                            to={`/product/${product.Id}`}
-                                            title={product.Title}
-                                          >
-                                            {product.Title}
-                                          </Link>
-                                        </div>
-                                        <div>
-                                          {product.ConfiguredItems.map((config, index2) => (
-                                            <div className='singleVariant'>
-                                              <TableConfigItems
-                                                key={index2}
-                                                currency={currency}
-                                                product={product}
-                                                config={config}
-                                                cartConfigured={cartConfigured}
-                                                ShippingCharges={ShippingCharges}
-                                                general={general}
-                                                width={width}
-                                              />
-                                            </div>
-                                          ))}
-                                        </div>
-                                      </td>
-                                      <td className='align-middle text-center bold'>{`${currency} ${numberWithCommas(
-                                        productTotalCost(product)
-                                      )}`}</td>
-                                    </tr>
-                                  ) : (
+                          cartConfigured.map((product, index) => {
+                            return (
+                              <>
+                                {product.hasConfigurators ? (
+                                  product.ConfiguredItems.map((config, index2) => (
                                     <>
-                                      <TablePlainItem
+                                      <TableConfigItems
+                                        key={index2}
                                         currency={currency}
                                         product={product}
+                                        config={config}
                                         cartConfigured={cartConfigured}
                                         ShippingCharges={ShippingCharges}
                                         general={general}
                                         width={width}
                                       />
-
+                                      <tr key={index}>
+                                        <td colSpan={3} className='text-right'>
+                                          China Local Shipping cost:
+                                        </td>
+                                        <td className='text-center'>{`${currency} ${numberWithCommas(
+                                          totalShippingCost(product, config.isChecked)
+                                        )}`}</td>
+                                      </tr>
                                       <tr key={index + 1}>
-                                        <td colSpan={3} className='text-right bold'>
+                                        <td cl colSpan={3} className='text-right bold'>
                                           Sub Total:
                                         </td>
                                         <td className='text-center'>{`${currency} ${numberWithCommas(
-                                          productTotalCost(product)
+                                          configuredProductTotalCost(product, config, config.isChecked)
                                         )}`}</td>
                                       </tr>
                                     </>
-                                  )}
-                                  {/* <tr key={index}>
-                                    <td colSpan={3} className='text-right'>
-                                      China Local Shipping cost:
-                                    </td>
-                                    <td className='text-center'>{`${currency} ${numberWithCommas(
-                                      totalShippingCost(product)
-                                    )}`}</td>
-                                  </tr> */}
-                                  {/* <tr key={index + 1}>
-                                    <td colSpan={3} className='text-right bold'>
-                                      Sub Total:
-                                    </td>
-                                    <td className='text-center'>{`${currency} ${numberWithCommas(
-                                      productTotalCost(product)
-                                    )}`}</td>
-                                  </tr> */}
-                                </>
-                              );
-                            })}
-                            <tr>
-                              <td colSpan={3} className='text-right bold'>
-                                China Local Shipping cost:
-                              </td>
-                              <td className='text-center bold'>{`${currency} ${numberWithCommas(
-                                getChinaLocalShippingCost(totalPriceWithoutShipping)
-                              )}`}</td>
-                            </tr>
-                          </>
+                                  ))
+                                ) : (
+                                  <>
+                                    <TablePlainItem
+                                      currency={currency}
+                                      product={product}
+                                      cartConfigured={cartConfigured}
+                                      ShippingCharges={ShippingCharges}
+                                      general={general}
+                                      width={width}
+                                    />
+                                    <tr key={index}>
+                                      <td colSpan={3} className='text-right'>
+                                        China Local Shipping cost:
+                                      </td>
+                                      <td className='text-center'>{`${currency} ${numberWithCommas(
+                                        totalShippingCost(product)
+                                      )}`}</td>
+                                    </tr>
+                                    <tr key={index + 1}>
+                                      <td colSpan={3} className='text-right bold'>
+                                        Sub Total:
+                                      </td>
+                                      <td className='text-center'>{`${currency} ${numberWithCommas(
+                                        productTotalCost(product)
+                                      )}`}</td>
+                                    </tr>
+                                  </>
+                                )}
+                              </>
+                            );
+                          })
                         ) : (
                           <tr>
                             <td colSpan={4} className='text-center bg-lighter'>
