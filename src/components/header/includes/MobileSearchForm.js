@@ -37,6 +37,7 @@ const MobileSearchForm = (props) => {
     <div className='container d-block'>
       <input
         type='file'
+        accept='image/*'
         // accept='image/jpg,image/jpeg'
         onChange={(e) => submitPictureSearch(e)}
         name='picture'

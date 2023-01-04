@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import ProductSectionSkeleton from "../../../../skeleton/productSkeleton/ProductSectionSkeleton";
 import { loadAsset } from "../../../../utils/Helpers";
 import { getFeaturedCategories } from "../../../../utils/Services";
 import FeatCategory from "./FeatCategory";
@@ -25,10 +26,9 @@ const FeaturedCategories = () => {
     setFeatCatLoading(false);
   };
 
-  console.log("firstCats", firstCats);
   // decide what is render
   let content;
-  if (catLoading) content = "";
+  if (catLoading) content = <ProductSectionSkeleton />;
   if (!catLoading && firstCats && othersCats) {
     content = (
       <div className='row fCenter'>
