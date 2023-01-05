@@ -41,6 +41,8 @@ const OrderDetails = (props) => {
     });
   }, [order_id]);
 
+  console.log("order", order);
+
   const totalShippingCost = (product) => {
     const checkItemSubTotal = cartCheckedProductTotal(product);
     const totalPrice = checkItemSubTotal.totalPrice;
@@ -100,7 +102,7 @@ const OrderDetails = (props) => {
                             {order.pay_method === "nagad_payment" && `01911712769`}
                             {order.pay_method === "bank_payment" && `${bankId}`}
                           </p>
-                          <p className='m-0'>Ref. : {order.id}</p>
+                          <p className='m-0'>Reference Number : {order.refNumber}</p>
                         </td>
                       </tr>
                     </thead>

@@ -1240,7 +1240,7 @@ a:focus {
     border-radius: 2rem;
   }
   .dotText {
-    width: 100px;
+    width: 68vw;
     overflow: hidden;
     display: inline-block;
     text-overflow: ellipsis;
@@ -1253,15 +1253,15 @@ a:focus {
     height: auto !important;
   }
 
-  .bb-0 {
-    border-bottom: none;
+  .pb-0 {
+    padding-bottom: 0 !important;
   }
   .table td,
   .table th {
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem;
   }
   .mainImg {
-    width: 5rem;
+    width: 4rem;
   }
   .vImg {
     width: 3rem;

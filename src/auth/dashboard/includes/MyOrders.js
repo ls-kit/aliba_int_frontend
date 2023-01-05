@@ -32,6 +32,7 @@ const MyOrders = () => {
                 <th>Due</th>
                 <th>Total</th>
                 <th>Trx ID</th>
+                <th>Ref.</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
@@ -55,6 +56,7 @@ const MyOrders = () => {
                     <td>{Math.round(order.dueForProducts)}</td>
                     <td>{Math.round(order.amount)}</td>
                     <td>{order?.trxId}</td>
+                    <td>{order?.refNumber}</td>
                     <td>{order.status}</td>
                     <td>
                       {order.status === "waiting-for-payment" ? (

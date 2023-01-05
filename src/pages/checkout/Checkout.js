@@ -158,18 +158,23 @@ const Checkout = (props) => {
                               name='checked_all'
                             />
                           </th>
-                          <th colSpan={2}>
-                            <span>Product</span>
-                            <a
-                              href='/remove'
-                              onClick={(e) => removeItemFromCart(e)}
-                              title='Remove'
-                              className='cart-remove'
-                            >
-                              Remove
-                            </a>
+                          <th colSpan={4}>
+                            <div className='flexBetween'>
+                              <div>
+                                <span>Product</span>
+                                <a
+                                  href='/remove'
+                                  onClick={(e) => removeItemFromCart(e)}
+                                  title='Remove'
+                                  className='cart-remove'
+                                >
+                                  Remove
+                                </a>
+                              </div>
+                              <div className='bold'> Total</div>
+                            </div>
                           </th>
-                          <th className='text-center totalWi'>Total</th>
+                          {/* <th className='text-center totalWi'>Total</th> */}
                         </tr>
                       </thead>
                       <tbody>
@@ -198,8 +203,8 @@ const Checkout = (props) => {
                                           </figure>
                                         }
                                       </td>
-                                      <td>
-                                        <div className='product-title mb-0 bb-0'>
+                                      <td colSpan={3}>
+                                        <div className='product-title mb-0 pb-0'>
                                           <Link
                                             className='dotText bold'
                                             to={`/product/${product.Id}`}
@@ -225,9 +230,6 @@ const Checkout = (props) => {
                                           ))}
                                         </div>
                                       </td>
-                                      <td className='align-middle text-center bold'>{`${currency} ${numberWithCommas(
-                                        productTotalCost(product)
-                                      )}`}</td>
                                     </tr>
                                   ) : (
                                     <>
@@ -241,7 +243,7 @@ const Checkout = (props) => {
                                       />
 
                                       <tr key={index + 1}>
-                                        <td colSpan={3} className='text-right bold'>
+                                        <td colSpan={3} className='bold'>
                                           Sub Total:
                                         </td>
                                         <td className='text-center'>{`${currency} ${numberWithCommas(
@@ -250,16 +252,26 @@ const Checkout = (props) => {
                                       </tr>
                                     </>
                                   )}
+                                  <tr>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td colSpan={3} className='text-right bold'>
+                                      SubTotal: {`${currency} ${numberWithCommas(productTotalCost(product))}`}
+                                    </td>
+                                  </tr>
                                 </>
                               );
                             })}
                             <tr>
+                              <td></td>
+                              <td></td>
                               <td colSpan={3} className='text-right bold'>
                                 China Local Shipping cost:
+                                {`${currency} ${numberWithCommas(
+                                  getChinaLocalShippingCost(totalPriceWithoutShipping)
+                                )}`}
                               </td>
-                              <td className='text-center bold'>{`${currency} ${numberWithCommas(
-                                getChinaLocalShippingCost(totalPriceWithoutShipping)
-                              )}`}</td>
                             </tr>
                           </>
                         ) : (

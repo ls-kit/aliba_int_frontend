@@ -21,14 +21,13 @@ import swal from "sweetalert";
 import { productAddToWishlist } from "../../../../store/actions/AuthAction";
 import SingleAttributeGroup from "./includes/SingleAttributeGroup";
 import AppOffer from "./includes/AppOffer";
-import AirFilter from "./includes/AirFilter";
 import { FaRegCopy } from "react-icons/fa";
 import PriceRange from "./includes/PriceRange";
-import { loadBulkProductsPrice } from "../../../../utils/Services";
-import CardSkelton from "../../../../skeleton/productSkeleton/CardSkelton";
+
 import CopyToClipboard from "react-copy-to-clipboard";
 import { configAttrToConfigured, removeProductIntoVirtualCart } from "../../../../utils/GlobalStateControl";
 import AddProductModal from "./includes/AddProductModal";
+import { getSetting } from "../../../../utils/Helpers";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems, existCart } = props;
@@ -47,9 +46,9 @@ const ProductBody = (props) => {
   const bulkPriceQuantity = product.BulkPrices;
 
   const reExistCart = existCart.filter((filterItem) => filterItem.Id != product_id);
-  console.log("existCart", reExistCart);
-  console.log("cartConfigured", cartConfigured);
-  console.log("product_id", product_id);
+
+  const minOrderPrice = getSetting(general, "min_order_amount");
+  const minOrderQuantity = getSetting(general, "min_order_quantity");
 
   const alertForQuantity = (e) => {
     e.preventDefault();
@@ -69,11 +68,13 @@ const ProductBody = (props) => {
     setCopy(true);
   };
 
+  console.log("general", general);
+
   const addToCart = (e) => {
     e.preventDefault();
-    if (activeProduct.totalPrice < 2000 || activeProduct.totalQty < 3) {
+    if (activeProduct.totalPrice < minOrderPrice || activeProduct.totalQty < minOrderQuantity) {
       swal({
-        text: "Dear customer, this product should be ordered for a minimum of 3 pieces and 2000 taka!",
+        text: `Dear customer, this product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
         icon: "warning",
         buttons: "Ok, Understood",
       });
@@ -87,7 +88,7 @@ const ProductBody = (props) => {
     e.preventDefault();
     if (activeProduct.totalPrice < 2000 || activeProduct.totalQty < 3) {
       swal({
-        text: "Dear customer, this product should be ordered for a minimum of 3 pieces and 2000 taka!",
+        text: `Dear customer, this product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
         icon: "warning",
         buttons: "Ok, Understood",
       });

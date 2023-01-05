@@ -21,8 +21,7 @@ import {
   addCouponDetails,
   selectPaymentMethod,
 } from "../../../utils/GlobalStateControl";
-import bankImg from "../../../assets/images/bank.png";
-import { useEffect } from "react";
+
 import { getCouponDetails } from "../../../utils/Services";
 
 const CheckoutSidebar = (props) => {
@@ -33,6 +32,9 @@ const CheckoutSidebar = (props) => {
   const checkout_payment_first = getSetting(general, "checkout_payment_first");
   const checkout_payment_second = getSetting(general, "checkout_payment_second");
   const checkout_payment_third = getSetting(general, "checkout_payment_third");
+
+  const minOrderPrice = getSetting(general, "min_order_amount");
+  const minOrderQuantity = getSetting(general, "min_order_quantity");
 
   const [manageShipping, setManageShipping] = useState(false);
   const [paymentOption, setPaymentOption] = useState(Number(checkout_payment_first));
@@ -45,8 +47,30 @@ const CheckoutSidebar = (props) => {
     setManageShipping(true);
   };
 
+  const checkOrderMinPriceQty = () => {
+    let isAggred = false;
+    cartConfigured.map((item) =>
+      item.totalPrice < minOrderPrice || item.totalQty < minOrderQuantity ? (isAggred = false) : ""
+    );
+    return isAggred;
+  };
+
   const ProcessToPaymentPage = () => {
     let proceed = true;
+
+    cartConfigured.map((item) => {
+      if (item.totalPrice < minOrderPrice || item.totalQty < minOrderQuantity) {
+        proceed = false;
+        swal({
+          title: `Dear customer, Every product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
+          icon: "warning",
+          buttons: "Ok, Understood",
+        });
+      }
+
+      return false;
+    });
+
     if (!paymentMethod) {
       proceed = false;
       swal({
@@ -55,6 +79,14 @@ const CheckoutSidebar = (props) => {
         buttons: "Ok, Understood",
       });
     }
+    // if (!isMaintainPriceQty) {
+    //   proceed = false;
+    //   swal({
+    //     title: `Dear customer, Every product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
+    //     icon: "warning",
+    //     buttons: "Ok, Understood",
+    //   });
+    // }
     if (_.isEmpty(shipping_address)) {
       proceed = false;
       swal({

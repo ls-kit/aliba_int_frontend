@@ -38,6 +38,7 @@ const Payment = (props) => {
 
   const [accept, setAccept] = useState("");
   const [trxId, setTrxId] = useState("");
+  const [refNumber, setRefNumber] = useState("");
   const [copy, setCopy] = useState(false);
 
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
@@ -75,6 +76,14 @@ const Payment = (props) => {
       });
       process = false;
     }
+    if (!refNumber) {
+      swal({
+        text: "Please Reference Number",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      process = false;
+    }
     if (!trxId) {
       swal({
         text: "Please Enter Your TRX or Account Number",
@@ -95,7 +104,6 @@ const Payment = (props) => {
 
     if (process) {
       let cartTotal = payableTotal;
-
       if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
         props.confirmCustomerOrder({
           paymentMethod: paymentMethod,
@@ -108,6 +116,7 @@ const Payment = (props) => {
             trxId: trxId,
             couponCode: couponDetails?.coupon_code,
             couponDiscount: couponDiscount,
+            refNumber: refNumber,
           }),
         });
       } else {
@@ -256,14 +265,6 @@ const Payment = (props) => {
                           ""
                         )}
 
-                        {/* <tr className='summary-total'>
-                          <td colSpan={2} className='text-right'>
-                            Payable Subtotal :{" "}
-                          </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            payableSubTotal(summary.totalPrice, discount)
-                          )}`}</td>
-                        </tr> */}
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
                             Need To Pay {advance_percent}%:
@@ -320,6 +321,26 @@ const Payment = (props) => {
                         <tr className='mt-5 mt-md-0'>
                           <td colSpan={3}>
                             <div>
+                              <div className='row'>
+                                <div className='col-md-4'>
+                                  <label className='bold' htmlFor='TrxId'>
+                                    {" "}
+                                    Reference Number
+                                    <span className='text-danger pt-1 ml-2'>*</span>
+                                  </label>
+                                </div>
+                                <div className='col-md-8'>
+                                  <input
+                                    className='form-control'
+                                    type='text'
+                                    name=''
+                                    id='refId'
+                                    placeholder='Reference Number'
+                                    required
+                                    onChange={(e) => setRefNumber(e.target.value)}
+                                  />
+                                </div>
+                              </div>
                               <div className='row'>
                                 <div className='col-md-4'>
                                   <label className='bold' htmlFor='TrxId'>
