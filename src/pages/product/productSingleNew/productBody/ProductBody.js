@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LoadAttributes from "./includes/LoadAttributes";
 import ProductSummary from "./includes/ProductSummary";
 import MediaPart from "./includes/MediaPart";
 import { AiOutlineShopping } from "react-icons/ai";
-import { RiGroupLine } from "react-icons/ri";
-import { BsImage, BsCart3, BsFillCartDashFill, BsHeart } from "react-icons/bs";
+import { BsCart3, BsFillCartDashFill, BsHeart } from "react-icons/bs";
 
 import {
   ConfiguratorAttributes,
@@ -67,8 +66,6 @@ const ProductBody = (props) => {
   const onCopy = () => {
     setCopy(true);
   };
-
-  console.log("general", general);
 
   const addToCart = (e) => {
     e.preventDefault();

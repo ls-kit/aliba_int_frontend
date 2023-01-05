@@ -72,6 +72,8 @@ const ProductConfiguredItems = (props) => {
   };
 
   const ProductConfiguredItems = activeConfiguredItems();
+  const elseConfig = ProductConfiguredItems[0].Configurators[0].Vid;
+  console.log("ProductConfiguredItems", ProductConfiguredItems[0].Configurators[0].Vid);
 
   if (ProductConfiguredItems.length <= 0) {
     return (
@@ -87,7 +89,7 @@ const ProductConfiguredItems = (props) => {
       <table className='table table-sm text-center table-bordered product_summary_table'>
         <thead>
           <tr>
-            <th>Size</th>
+            <th>Size/Weight(g)</th>
             <th style={{ width: "90px" }}>Price</th>
             <th style={{ width: "130px" }}>Quantity</th>
           </tr>
@@ -96,7 +98,9 @@ const ProductConfiguredItems = (props) => {
           {ProductConfiguredItems.map((config, index) => {
             return (
               <tr key={index}>
-                <td className='align-middle'>{getConfigAttributes(config.Configurators).Value || "N/A"}</td>
+                <td className='align-middle'>
+                  {getConfigAttributes(config.Configurators).Value || elseConfig || "N/A"}
+                </td>
 
                 <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
                   totalQtyInCart,

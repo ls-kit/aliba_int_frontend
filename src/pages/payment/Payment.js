@@ -23,7 +23,6 @@ import {
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
 import PlainItem from "./includes/PlainItem";
-import bankImg from "../../assets/images/bank.png";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { FaRegCopy } from "react-icons/fa";
 
@@ -48,6 +47,11 @@ const Payment = (props) => {
     if (_.isEmpty(shipping_address)) {
       props.history.push("/checkout");
     }
+  }, []);
+
+  useEffect(() => {
+    const uniqueRef = Date.now();
+    setRefNumber(uniqueRef);
   }, []);
 
   const checkedProductItem = (product) => {
@@ -76,14 +80,7 @@ const Payment = (props) => {
       });
       process = false;
     }
-    if (!refNumber) {
-      swal({
-        text: "Please Reference Number",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-      process = false;
-    }
+
     if (!trxId) {
       swal({
         text: "Please Enter Your TRX or Account Number",
@@ -101,6 +98,7 @@ const Payment = (props) => {
       });
       process = false;
     }
+    console.log("ref num", refNumber);
 
     if (process) {
       let cartTotal = payableTotal;
@@ -332,16 +330,16 @@ const Payment = (props) => {
                                 <div className='col-md-8'>
                                   <input
                                     className='form-control'
+                                    style={{ marginBottom: "0" }}
                                     type='text'
-                                    name=''
                                     id='refId'
-                                    placeholder='Reference Number'
-                                    required
+                                    value={refNumber}
                                     onChange={(e) => setRefNumber(e.target.value)}
                                   />
+                                  <span className='text-danger'>Use this number as payment reference</span>
                                 </div>
                               </div>
-                              <div className='row'>
+                              <div className='row mt-1'>
                                 <div className='col-md-4'>
                                   <label className='bold' htmlFor='TrxId'>
                                     {" "}
