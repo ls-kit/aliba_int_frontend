@@ -47,9 +47,13 @@ const Checkout = (props) => {
   console.log("totalPriceWithoutShipping", totalPriceWithoutShipping);
 
   const getChinaLocalShippingCost = (totalPrice) => {
-    let localShippingCost = ShippingCharges;
-    localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
-    return Number(localShippingCost);
+    if (totalPrice) {
+      let localShippingCost = ShippingCharges;
+      localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
+      return Number(localShippingCost);
+    } else {
+      return 0;
+    }
   };
 
   useEffect(() => {

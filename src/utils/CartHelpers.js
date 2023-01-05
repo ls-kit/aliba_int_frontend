@@ -568,8 +568,9 @@ export const CheckoutSummary = (cartConfigured, ShippingCharges, chinaLocalShipp
       chinaLocalShippingChargeLimit,
       true
     );
-
-    grossTotalPrice += Number(totalItemShipping);
+    if (grossTotalPrice) {
+      grossTotalPrice += Number(totalItemShipping);
+    }
   }
 
   return { totalQty: totalQty, totalPrice: grossTotalPrice };
