@@ -114,7 +114,7 @@ const Payment = (props) => {
             trxId: trxId,
             couponCode: couponDetails?.coupon_code,
             couponDiscount: couponDiscount,
-            refNumber: refNumber,
+            refNumber: refNumber.toString(),
           }),
         });
       } else {
@@ -335,6 +335,7 @@ const Payment = (props) => {
                                     id='refId'
                                     value={refNumber}
                                     onChange={(e) => setRefNumber(e.target.value)}
+                                    readOnly
                                   />
                                   <span className='text-danger'>Use this number as payment reference</span>
                                 </div>
