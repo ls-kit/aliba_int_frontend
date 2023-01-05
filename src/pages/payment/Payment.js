@@ -67,6 +67,45 @@ const Payment = (props) => {
   };
 
   const finalCart = cartConfigured.filter((product) => checkedProductItem(product));
+
+  const totalShippingCost = (product, isChecked = false) => {
+    let returnValue = 0;
+    const checkItemSubTotal = cartCheckedProductTotal(product);
+    const totalPrice = checkItemSubTotal.totalPrice;
+    returnValue = getChinaLocalShippingCost(totalPrice);
+    return returnValue;
+  };
+
+  const productTotalCost = (product) => {
+    const checkItemSubTotal = cartCheckedProductTotal(product);
+    const totalPrice = checkItemSubTotal.totalPrice;
+    const ShippingCost = totalShippingCost(product);
+    return Number(totalPrice) + Number(ShippingCost);
+  };
+
+  const onCopy = () => {
+    setCopy(true);
+  };
+
+  const getDiscount = () => {
+    let discount;
+    if (paymentMethod) {
+      if (paymentMethod == "bank_payment")
+        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bank");
+      if (paymentMethod == "bkash_payment")
+        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bkash");
+      if (paymentMethod == "nagad_payment")
+        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "nagad");
+    }
+    return discount;
+  };
+
+  const couponDiscount = cartCalculateCouponDiscount(couponDetails);
+  const discount = getDiscount();
+  const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
+  const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
+  const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
+
   const paymentConfirm = (e) => {
     e.preventDefault();
 
@@ -122,45 +161,6 @@ const Payment = (props) => {
       }
     }
   };
-
-  const totalShippingCost = (product, isChecked = false) => {
-    let returnValue = 0;
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    returnValue = getChinaLocalShippingCost(totalPrice);
-    return returnValue;
-  };
-
-  const productTotalCost = (product) => {
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    const ShippingCost = totalShippingCost(product);
-    return Number(totalPrice) + Number(ShippingCost);
-  };
-
-  const onCopy = () => {
-    setCopy(true);
-  };
-
-  const getDiscount = () => {
-    let discount;
-    if (paymentMethod) {
-      if (paymentMethod == "bank_payment")
-        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bank");
-      if (paymentMethod == "bkash_payment")
-        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bkash");
-      if (paymentMethod == "nagad_payment")
-        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "nagad");
-    }
-    return discount;
-  };
-
-  const couponDiscount = cartCalculateCouponDiscount(couponDetails);
-  const discount = getDiscount();
-  const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
-  const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
-  const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
-
   return (
     <main className='main'>
       <Breadcrumb current='Payment' collections={[{ name: "Checkout", url: "checkout" }]} />
@@ -334,7 +334,6 @@ const Payment = (props) => {
                                     type='text'
                                     id='refId'
                                     value={refNumber}
-                                    onChange={(e) => setRefNumber(e.target.value)}
                                     readOnly
                                   />
                                   <span className='text-danger'>Use this number as payment reference</span>

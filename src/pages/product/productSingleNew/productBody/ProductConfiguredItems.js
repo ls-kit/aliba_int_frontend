@@ -73,7 +73,6 @@ const ProductConfiguredItems = (props) => {
 
   const ProductConfiguredItems = activeConfiguredItems();
   const elseConfig = ProductConfiguredItems[0].Configurators[0].Vid;
-  console.log("ProductConfiguredItems", ProductConfiguredItems[0].Configurators[0].Vid);
 
   if (ProductConfiguredItems.length <= 0) {
     return (

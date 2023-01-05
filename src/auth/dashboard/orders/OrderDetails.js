@@ -102,6 +102,7 @@ const OrderDetails = (props) => {
                             {order.pay_method === "nagad_payment" && `01911712769`}
                             {order.pay_method === "bank_payment" && `${bankId}`}
                           </p>
+                          <p className='m-0'>Transaction Number : {order.trxId}</p>
                           <p className='m-0'>Reference Number : {order.refNumber}</p>
                         </td>
                       </tr>

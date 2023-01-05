@@ -262,6 +262,14 @@ a:focus {
     padding: 0.2rem 1.2rem;
     font-size: 1.9rem;
     border-radius: 10px 0 0 10px !important;
+    &:hover {
+      background-color: $baseColor;
+      color: $white;
+    }
+    &:active {
+      background-color: $baseColor;
+      color: $white;
+    }
   }
 }
 
@@ -669,6 +677,10 @@ a:focus {
   background: #fc4a1a; /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f7b733, #fc4a1a);
+  &:hover {
+    background: -webkit-linear-gradient(to right, #fc4a1a, #f7b733); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fc4a1a, #f7b733);
+  }
 }
 
 .pl-head {

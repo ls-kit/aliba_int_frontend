@@ -25,13 +25,6 @@ import { withRouter } from "react-router-dom";
 const LoadAttributes = (props) => {
   const { product, ConfiguredItems, colorAttributes, cartAttribute, cartConfigured } = props;
 
-  const product_id = !_.isEmpty(product) ? product.Id : 0;
-  const activeCartProduct = findProductCartFromState(cartConfigured, product_id);
-  const selectConfigId = !_.isEmpty(ConfiguredItems) ? ConfiguredItems.Id : 0;
-  // console.log("activeCartProduct", selectConfigId);
-
-  const existsConfig = checkExistConfiguredItem(activeCartProduct, product_id, selectConfigId);
-
   if (_.isEmpty(colorAttributes)) {
     return false;
   }
@@ -71,11 +64,18 @@ const LoadAttributes = (props) => {
     }
   };
 
+  const selectedColor = (PropertyName) => {
+    const color = getGroupAllAttributes(PropertyName).find((Attribute) => isSelect(Attribute));
+    return color;
+  };
+
   return (
     <div>
       {groupItems().map((PropertyName, index) => (
         <div key={index} className='details-filter-row details-row-size'>
-          <label>{PropertyName}</label>
+          <label style={{ fontWeight: "bold" }}>
+            {PropertyName}:{selectedColor(PropertyName)?.Value || ""}
+          </label>
           <div className='product-nav product-nav-thumbs'>
             {getGroupAllAttributes(PropertyName).map((Attribute, index2) => (
               <a
