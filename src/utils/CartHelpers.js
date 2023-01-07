@@ -127,6 +127,8 @@ export const getUpdatedProductPrice = (totalQtyInCart, bulkPriceQuantity) => {
     return _.round(secondMinQuantityPrice);
   } else if (totalQtyInCart >= third?.MinQuantity) {
     return _.round(thirdMinQuantityPrice);
+  } else if ((totalQtyInCart >= first?.MinQuantity) & !first?.MaxQuantity) {
+    return _.round(firstMinQuantityPrice);
   } else {
     return _.round(firstMinQuantityPrice);
   }
@@ -176,10 +178,10 @@ export const getDBProductPrice = (product, rate = 15, selectedConfig = {}) => {
     let Price = JSON.parse(product.Price);
     if (!_.isEmpty(Price)) {
       if (_.isObject(Price)) {
-        sellPrice = Number(Price.OriginalPrice) * Number(rate);
+        sellPrice = Number(Price.MarginPrice) * Number(rate);
       }
       if (_.isArray(Price)) {
-        sellPrice = Number(Price[0].OriginalPrice) * Number(rate);
+        sellPrice = Number(Price[0].MarginPrice) * Number(rate);
       }
       return _.round(sellPrice);
     }

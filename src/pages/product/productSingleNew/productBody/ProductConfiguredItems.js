@@ -68,11 +68,11 @@ const ProductConfiguredItems = (props) => {
         return !_.isEmpty(findConfg);
       });
     }
+    console.log("ConfiguredItemAttributes", configAttr);
     return configAttr;
   };
 
   const ProductConfiguredItems = activeConfiguredItems();
-  const elseConfig = ProductConfiguredItems[0].Configurators[0].Vid;
 
   if (ProductConfiguredItems.length <= 0) {
     return (
@@ -95,10 +95,13 @@ const ProductConfiguredItems = (props) => {
         </thead>
         <tbody>
           {ProductConfiguredItems.map((config, index) => {
+            ConfiguredItemAttributes(config);
             return (
               <tr key={index}>
                 <td className='align-middle'>
-                  {getConfigAttributes(config.Configurators).Value || elseConfig || "N/A"}
+                  {getConfigAttributes(config.Configurators).Value ||
+                    ConfiguredItemAttributes(config)[0].Value ||
+                    "N/A"}
                 </td>
 
                 <td className='align-middle'>{`${currency} ${getUpdatedProductPrice(
