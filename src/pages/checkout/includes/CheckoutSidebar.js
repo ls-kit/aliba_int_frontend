@@ -47,14 +47,6 @@ const CheckoutSidebar = (props) => {
     setManageShipping(true);
   };
 
-  const checkOrderMinPriceQty = () => {
-    let isAggred = false;
-    cartConfigured.map((item) =>
-      item.totalPrice < minOrderPrice || item.totalQty < minOrderQuantity ? (isAggred = false) : ""
-    );
-    return isAggred;
-  };
-
   const ProcessToPaymentPage = () => {
     let proceed = true;
 
@@ -79,14 +71,7 @@ const CheckoutSidebar = (props) => {
         buttons: "Ok, Understood",
       });
     }
-    // if (!isMaintainPriceQty) {
-    //   proceed = false;
-    //   swal({
-    //     title: `Dear customer, Every product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
-    //     icon: "warning",
-    //     buttons: "Ok, Understood",
-    //   });
-    // }
+
     if (_.isEmpty(shipping_address)) {
       proceed = false;
       swal({

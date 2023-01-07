@@ -19,6 +19,7 @@ import {
   cartCalculateDiscount,
   payableSubTotal,
   cartCalculateCouponDiscount,
+  totalPriceWithoutShippingCharge,
 } from "../../utils/CartHelpers";
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
@@ -32,7 +33,7 @@ const Payment = (props) => {
   const currency = getSetting(general, "currency_icon");
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
-  // const summary = CartProductSummary(cartConfigured, ShippingCharges);
+  const ShippingCharges = getSetting(general, "china_local_delivery_charge");
   const bankId = getSetting(general, "payment_bank_details");
 
   const [accept, setAccept] = useState("");
@@ -53,6 +54,18 @@ const Payment = (props) => {
     const uniqueRef = Date.now();
     setRefNumber(uniqueRef);
   }, []);
+
+  const totalPriceWithoutShipping = totalPriceWithoutShippingCharge(cartConfigured);
+
+  const getChinaLocalShippingCost = (totalPrice) => {
+    if (totalPrice) {
+      let localShippingCost = ShippingCharges;
+      localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
+      return Number(localShippingCost);
+    } else {
+      return 0;
+    }
+  };
 
   const checkedProductItem = (product) => {
     const hasConfigurators = product.hasConfigurators;
@@ -79,8 +92,7 @@ const Payment = (props) => {
   const productTotalCost = (product) => {
     const checkItemSubTotal = cartCheckedProductTotal(product);
     const totalPrice = checkItemSubTotal.totalPrice;
-    const ShippingCost = totalShippingCost(product);
-    return Number(totalPrice) + Number(ShippingCost);
+    return Number(totalPrice);
   };
 
   const onCopy = () => {
@@ -198,16 +210,7 @@ const Payment = (props) => {
                               ) : (
                                 <PlainItem currency={currency} product={product} />
                               )}
-                              {checkedProductItem(product) && (
-                                <tr key={index}>
-                                  <td colSpan={2} className='text-right'>
-                                    China to BD Shipping cost
-                                  </td>
-                                  <td className='text-center'>{`${currency} ${numberWithCommas(
-                                    totalShippingCost(product)
-                                  )}`}</td>
-                                </tr>
-                              )}
+
                               {checkedProductItem(product) && (
                                 <tr key={index + 1}>
                                   <td colSpan={2} className='text-right'>
@@ -233,6 +236,14 @@ const Payment = (props) => {
                           <td colSpan={3}>
                             <h3 className='border-0 m-0 py-3 summary-title'>Cart Total Summary</h3>
                           </td>
+                        </tr>
+                        <tr className='summary-total'>
+                          <td colSpan={2} className='text-right'>
+                            China to BD Shipping cost
+                          </td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(
+                            getChinaLocalShippingCost(totalPriceWithoutShipping)
+                          )}`}</td>
                         </tr>
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>

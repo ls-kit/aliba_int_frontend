@@ -12,6 +12,7 @@ import {
   calculateAirShippingCharge,
   findProductCartFromState,
   totalPriceWithoutShippingCharge,
+  CheckoutSummary,
 } from "../../utils/CartHelpers";
 import { configAttrToConfigured } from "../../utils/GlobalStateControl";
 import CheckoutSidebar from "./includes/CheckoutSidebar";
@@ -40,11 +41,10 @@ const Checkout = (props) => {
   const [allCheck, setAllCheck] = useState(false);
 
   const currency = getSetting(general, "currency_icon");
-  //   const ShippingCharges = getSetting(general, "air_shipping_charges");
   const ShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
   const totalPriceWithoutShipping = totalPriceWithoutShippingCharge(cartConfigured);
-  console.log("totalPriceWithoutShipping", totalPriceWithoutShipping);
+  const summary = CheckoutSummary(cartConfigured, ShippingCharges, chinaLocalShippingChargeLimit);
 
   const getChinaLocalShippingCost = (totalPrice) => {
     if (totalPrice) {
@@ -271,6 +271,14 @@ const Checkout = (props) => {
                                 {`${currency} ${numberWithCommas(
                                   getChinaLocalShippingCost(totalPriceWithoutShipping)
                                 )}`}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td></td>
+                              <td></td>
+                              <td colSpan={3} className='text-right bold'>
+                                Total:
+                                {`${currency} ${numberWithCommas(summary.totalPrice)}`}
                               </td>
                             </tr>
                           </>
