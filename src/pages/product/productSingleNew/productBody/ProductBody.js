@@ -27,6 +27,7 @@ import CopyToClipboard from "react-copy-to-clipboard";
 import { configAttrToConfigured, removeProductIntoVirtualCart } from "../../../../utils/GlobalStateControl";
 import AddProductModal from "./includes/AddProductModal";
 import { getSetting } from "../../../../utils/Helpers";
+import AirFilter from "./includes/AirFilter";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems, existCart } = props;
@@ -153,7 +154,7 @@ const ProductBody = (props) => {
                 totalQtyInCart={totalQty}
                 bulkPriceQuantity={bulkPriceQuantity}
               />
-              {/* <AirFilter /> */}
+              <AirFilter />
               <div className='details-filter-row'>
                 <ProductSummary product={product} general={general} />
               </div>

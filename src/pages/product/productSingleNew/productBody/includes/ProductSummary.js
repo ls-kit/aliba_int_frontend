@@ -21,11 +21,6 @@ const ProductSummary = (props) => {
   const totalQty = activeCartProduct.totalQty;
   const DeliveryCost = activeCartProduct.DeliveryCost;
   const ShippingRate = activeCartProduct.ShippingRate;
-  // const totalShippingCost = () => {
-  //   let weightCharge = Number(totalWeight) * Number(ShippingRate);
-  //   weightCharge = weightCharge < 100 ? 100 : weightCharge;
-  //   return Number(DeliveryCost) + weightCharge;
-  // };
 
   const getChinaLocalShippingCost = (
     totalPrice,
@@ -39,14 +34,12 @@ const ProductSummary = (props) => {
     return Number(localShippingCost);
   };
 
-  // console.log("product-------", ShippingRate);
   const productTotalCost = () => {
     return (
       Number(totalPrice) +
       getChinaLocalShippingCost(totalPrice, chinaLocalShippingCharges, chinaLocalShippingChargeLimit)
     );
   };
-  // console.log("activeCartProduct", activeCartProduct);
 
   return (
     <table className='table table-sm table-bordered product_summary_table'>
@@ -80,10 +73,10 @@ const ProductSummary = (props) => {
             getChinaLocalShippingCost(totalPrice, chinaLocalShippingCharges, chinaLocalShippingChargeLimit)
           )}`}</td>
         </tr>
-        <tr>
+        {/* <tr>
           <td>Shipping charge:</td>
           <td>{`${currency} ${numberWithCommas(ShippingRate)}`} Per Kg</td>
-        </tr>
+        </tr> */}
         <tr>
           <td>Total Products Price:</td>
           <td>{`${currency} ${numberWithCommas(productTotalCost())}`}</td>
