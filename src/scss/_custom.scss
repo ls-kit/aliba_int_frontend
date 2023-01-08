@@ -1208,6 +1208,9 @@ a:focus {
   .nagadPay {
     text-align: end !important;
   }
+  .product-image {
+    height: 190px !important;
+  }
 }
 @media only screen and (max-width: 767px) {
   .bankImg {
@@ -1277,6 +1280,18 @@ a:focus {
   }
   .vImg {
     width: 3rem;
+  }
+  .mb-10x {
+    margin-bottom: 0px !important;
+  }
+  .gap .gap-item {
+    padding: 0 !important;
+  }
+  .hov-shadow {
+    box-shadow: none !important;
+  }
+  .dealsSold {
+    margin-bottom: 0.5rem !important;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -1446,6 +1461,12 @@ a:focus {
 .success-m-btn {
   display: inline-block;
   border-radius: 6px !important;
+}
+
+@media only screen and (max-width: 380px) {
+  .product-image {
+    height: 170px !important;
+  }
 }
 
 @media only screen and (min-width: 768px) {

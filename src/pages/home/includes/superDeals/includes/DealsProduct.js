@@ -11,7 +11,7 @@ const DealsProduct = (props) => {
     <div className={productClass ? productClass : "col-6 col-sm-4 col-lg-4 col-xl-3"}>
       <div className=' product product-7 mb-10x hov-shadow br-1'>
         <Link to={`/product/${product_code}`}>
-          <img src={product.img} className='product-image object-cover' alt={product.name} />
+          <img src={product.img} className='product-image object-contain' alt={product.name} />
 
           <div className='px-2'>
             <div className=''>

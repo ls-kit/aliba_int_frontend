@@ -7,7 +7,7 @@ export const SubFeatCat = ({ section }) => {
 
   return (
     <div className='col-4'>
-      <Link to={`${url}`}>
+      <Link to={`${url}`} className='flexCenter'>
         <img className='fcatIm' src={loadAsset(banner)} alt='' />
       </Link>
     </div>

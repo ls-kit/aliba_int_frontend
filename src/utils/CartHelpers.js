@@ -738,9 +738,9 @@ export const calculateDiscountAmount = (method, advance, general, methodString) 
   const checkout_discount_second = getSetting(general, `checkout_${methodString}_discount_second`);
   const checkout_discount_third = getSetting(general, `checkout_${methodString}_discount_third`);
 
-  const checkout_payment_first = getSetting(general, `checkout_${methodString}_payment_first`);
-  const checkout_payment_second = getSetting(general, `checkout_${methodString}_payment_second`);
-  const checkout_payment_third = getSetting(general, `checkout_${methodString}_payment_third`);
+  const checkout_payment_first = getSetting(general, `checkout_payment_first`);
+  const checkout_payment_second = getSetting(general, `checkout_payment_second`);
+  const checkout_payment_third = getSetting(general, `checkout_payment_third`);
 
   if (advance == checkout_payment_first) {
     discount = checkout_discount_first;
