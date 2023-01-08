@@ -61,6 +61,8 @@ const SectionSuperDeals = (props) => {
   // Decide what is render
   let content;
   if (loading) content = <ProductSectionSkeleton />;
+  if (!loading && products.length == 0) content = "";
+
   if (!loading && products)
     content = (
       <div className='row gap'>
@@ -74,6 +76,13 @@ const SectionSuperDeals = (props) => {
             />
           );
         })}
+      </div>
+    );
+
+  if (loading)
+    return (
+      <div className='container'>
+        <ProductSectionSkeleton />
       </div>
     );
 
