@@ -18,28 +18,27 @@ import {
   calculateDiscountAmount,
   cartCalculateDiscount,
   payableSubTotal,
+  cartCalculateCouponDiscount,
+  totalPriceWithoutShippingCharge,
 } from "../../utils/CartHelpers";
 import swal from "sweetalert";
 import ConfigItem from "./includes/ConfigItem";
 import PlainItem from "./includes/PlainItem";
-import bankImg from "../../assets/images/bank.png";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { FaRegCopy } from "react-icons/fa";
 
 const Payment = (props) => {
-  const { cartConfigured, shipping_address, general, advance_percent } = props;
+  const { cartConfigured, shipping_address, general, advance_percent, paymentMethod, couponDetails } = props;
 
   const currency = getSetting(general, "currency_icon");
   const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
   const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
-  // const summary = CartProductSummary(cartConfigured, ShippingCharges);
+  const ShippingCharges = getSetting(general, "china_local_delivery_charge");
   const bankId = getSetting(general, "payment_bank_details");
 
   const [accept, setAccept] = useState("");
-  const [paymentMethod, setPaymentMethod] = useState("");
-  // const [discountPercent, setDiscountPercent] = useState(0);
-
   const [trxId, setTrxId] = useState("");
+  const [refNumber, setRefNumber] = useState("");
   const [copy, setCopy] = useState(false);
 
   const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
@@ -50,6 +49,23 @@ const Payment = (props) => {
       props.history.push("/checkout");
     }
   }, []);
+
+  useEffect(() => {
+    const uniqueRef = Date.now();
+    setRefNumber(uniqueRef);
+  }, []);
+
+  const totalPriceWithoutShipping = totalPriceWithoutShippingCharge(cartConfigured);
+
+  const getChinaLocalShippingCost = (totalPrice) => {
+    if (totalPrice) {
+      let localShippingCost = ShippingCharges;
+      localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
+      return Number(localShippingCost);
+    } else {
+      return 0;
+    }
+  };
 
   const checkedProductItem = (product) => {
     const hasConfigurators = product.hasConfigurators;
@@ -64,56 +80,6 @@ const Payment = (props) => {
   };
 
   const finalCart = cartConfigured.filter((product) => checkedProductItem(product));
-  const paymentConfirm = (e) => {
-    e.preventDefault();
-
-    let process = true;
-
-    if (!paymentMethod) {
-      swal({
-        text: "Select your payment method",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-      process = false;
-    }
-    if (!trxId) {
-      swal({
-        text: "Please Enter Your TRX or Account Number",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-      process = false;
-    }
-
-    if (!accept) {
-      swal({
-        text: "Please accept terms and conditions!",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-      process = false;
-    }
-
-    if (process) {
-      let cartTotal = payableTotal;
-      if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
-        props.confirmCustomerOrder({
-          paymentMethod: paymentMethod,
-          cart: JSON.stringify(finalCart),
-          address: JSON.stringify(shipping_address),
-          summary: JSON.stringify({
-            cartTotal: cartTotal,
-            advanced: advanced,
-            dueAmount: dueAmount,
-            trxId: trxId,
-          }),
-        });
-      } else {
-        props.history.push("/checkout");
-      }
-    }
-  };
 
   const totalShippingCost = (product, isChecked = false) => {
     let returnValue = 0;
@@ -126,8 +92,7 @@ const Payment = (props) => {
   const productTotalCost = (product) => {
     const checkItemSubTotal = cartCheckedProductTotal(product);
     const totalPrice = checkItemSubTotal.totalPrice;
-    const ShippingCost = totalShippingCost(product);
-    return Number(totalPrice) + Number(ShippingCost);
+    return Number(totalPrice);
   };
 
   const onCopy = () => {
@@ -147,11 +112,67 @@ const Payment = (props) => {
     return discount;
   };
 
+  const couponDiscount = cartCalculateCouponDiscount(couponDetails);
   const discount = getDiscount();
-  const payableTotal = payableSubTotal(summary.totalPrice, discount);
+  const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
   const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
   const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
 
+  const paymentConfirm = (e) => {
+    e.preventDefault();
+
+    let process = true;
+
+    if (!paymentMethod) {
+      swal({
+        text: "Select your payment method",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      process = false;
+    }
+
+    if (!trxId) {
+      swal({
+        text: "Please Enter Your TRX or Account Number",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      process = false;
+    }
+
+    if (!accept) {
+      swal({
+        text: "Please accept terms and conditions!",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+      process = false;
+    }
+    console.log("ref num", refNumber);
+
+    if (process) {
+      let cartTotal = payableTotal;
+      if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
+        props.confirmCustomerOrder({
+          paymentMethod: paymentMethod,
+          cart: JSON.stringify(finalCart),
+          address: JSON.stringify(shipping_address),
+          summary: JSON.stringify({
+            cartTotal: cartTotal,
+            advanced: advanced,
+            dueAmount: dueAmount,
+            trxId: trxId,
+            couponCode: couponDetails?.coupon_code,
+            couponDiscount: couponDiscount,
+            refNumber: refNumber.toString(),
+          }),
+        });
+      } else {
+        props.history.push("/checkout");
+      }
+    }
+  };
   return (
     <main className='main'>
       <Breadcrumb current='Payment' collections={[{ name: "Checkout", url: "checkout" }]} />
@@ -189,16 +210,7 @@ const Payment = (props) => {
                               ) : (
                                 <PlainItem currency={currency} product={product} />
                               )}
-                              {checkedProductItem(product) && (
-                                <tr key={index}>
-                                  <td colSpan={2} className='text-right'>
-                                    China to BD Shipping cost
-                                  </td>
-                                  <td className='text-center'>{`${currency} ${numberWithCommas(
-                                    totalShippingCost(product)
-                                  )}`}</td>
-                                </tr>
-                              )}
+
                               {checkedProductItem(product) && (
                                 <tr key={index + 1}>
                                   <td colSpan={2} className='text-right'>
@@ -227,6 +239,14 @@ const Payment = (props) => {
                         </tr>
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
+                            China to BD Shipping cost
+                          </td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(
+                            getChinaLocalShippingCost(totalPriceWithoutShipping)
+                          )}`}</td>
+                        </tr>
+                        <tr className='summary-total'>
+                          <td colSpan={2} className='text-right'>
                             Subtotal:
                           </td>
                           <td className='text-right'>{`${currency} ${numberWithCommas(
@@ -241,14 +261,19 @@ const Payment = (props) => {
                             cartCalculateDiscount(summary.totalPrice, discount)
                           )}`}</td>
                         </tr>
-                        <tr className='summary-total'>
-                          <td colSpan={2} className='text-right'>
-                            Payable Subtotal :{" "}
-                          </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            payableSubTotal(summary.totalPrice, discount)
-                          )}`}</td>
-                        </tr>
+                        {couponDiscount ? (
+                          <tr className='summary-total'>
+                            <td colSpan={2} className='text-right'>
+                              Coupon Reword:
+                            </td>
+                            <td className='text-right'>{`${currency} ${numberWithCommas(
+                              couponDiscount
+                            )}`}</td>
+                          </tr>
+                        ) : (
+                          ""
+                        )}
+
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
                             Need To Pay {advance_percent}%:
@@ -272,7 +297,7 @@ const Payment = (props) => {
                               )}
                               {paymentMethod == "bank_payment" && (
                                 <div className='bankDetails'>
-                                  <h3 className='bold'>
+                                  <h3 className='bold text-center bankDetailsText'>
                                     Bank Details: <span className='baseColor'>{bankId}</span>
                                   </h3>
                                   <div>
@@ -302,72 +327,30 @@ const Payment = (props) => {
                           </tr>
                         )}
 
-                        <tr>
-                          <td colSpan={3} className='border-0 p-0'>
-                            <div className='card payment_card text-center'>
-                              <div className='row'>
-                                <div className='col-md-5 pay-box'>
-                                  <div className='form-check form-check-inline'>
-                                    <input
-                                      className='form-check-input mr-2'
-                                      type='radio'
-                                      name='payment_method'
-                                      onClick={(e) => setPaymentMethod(e.target.value)}
-                                      id='bkash_payment'
-                                      value='bkash_payment'
-                                    />
-                                    <label className='form-check-label' htmlFor='bkash_payment'>
-                                      <img
-                                        className='pay-img'
-                                        src={`/assets/img/payment/bkash.png`}
-                                        alt='bkash'
-                                      />
-                                    </label>
-                                  </div>
-                                </div>
-                                <div className='col-md-5 pay-box'>
-                                  <div className='form-check form-check-inline'>
-                                    <input
-                                      className='form-check-input mr-2 '
-                                      type='radio'
-                                      name='payment_method'
-                                      onClick={(e) => setPaymentMethod(e.target.value)}
-                                      id='nagad_payment'
-                                      value='nagad_payment'
-                                    />
-                                    <label className='form-check-label' htmlFor='nagad_payment'>
-                                      <img
-                                        className='pay-img'
-                                        src={`/assets/img/payment/nagod.png`}
-                                        alt='Nagad'
-                                      />
-                                    </label>
-                                  </div>
-                                </div>
-                                <div className='col-md-2 flex pay-box pb-4 pb-md-0'>
-                                  <div className='form-check form-check-inline'>
-                                    <input
-                                      className='form-check-input mr-2 '
-                                      type='radio'
-                                      name='payment_method'
-                                      onClick={(e) => setPaymentMethod(e.target.value)}
-                                      id='bank_payment'
-                                      value='bank_payment'
-                                    />
-                                    <label className='form-check-label bankLabel' htmlFor='bank_payment'>
-                                      <img className='bankImg' src={bankImg} alt='Bank' />
-                                    </label>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-
                         <tr className='mt-5 mt-md-0'>
                           <td colSpan={3}>
                             <div>
                               <div className='row'>
+                                <div className='col-md-4'>
+                                  <label className='bold' htmlFor='TrxId'>
+                                    {" "}
+                                    Reference Number
+                                    <span className='text-danger pt-1 ml-2'>*</span>
+                                  </label>
+                                </div>
+                                <div className='col-md-8'>
+                                  <input
+                                    className='form-control'
+                                    style={{ marginBottom: "0" }}
+                                    type='text'
+                                    id='refId'
+                                    value={refNumber}
+                                    readOnly
+                                  />
+                                  <span className='text-danger'>Use this number as payment reference</span>
+                                </div>
+                              </div>
+                              <div className='row mt-1'>
                                 <div className='col-md-4'>
                                   <label className='bold' htmlFor='TrxId'>
                                     {" "}
@@ -464,6 +447,8 @@ const mapStateToProps = (state) => ({
   cartConfigured: state.CART.configured,
   shipping_address: state.CART.shipping_address,
   advance_percent: state.CART.advance_percent.advance_percent,
+  paymentMethod: state.CART.payment_method.payment_method,
+  couponDetails: state.CART.couponDetails,
 });
 
 export default connect(mapStateToProps, { confirmCustomerOrder })(withRouter(Payment));

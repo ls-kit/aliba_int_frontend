@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
 import { connect } from "react-redux";
@@ -23,6 +23,7 @@ import {
 } from "../../../utils/GlobalStateControl";
 
 import { getCouponDetails } from "../../../utils/Services";
+import { confirmCustomerOrder } from "../../../store/actions/CartAction";
 
 const CheckoutSidebar = (props) => {
   const { general, currency, shipping_address, cartConfigured, advance_percent } = props;
@@ -41,61 +42,16 @@ const CheckoutSidebar = (props) => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [coupon, setCoupon] = useState("");
   const [couponDetails, setCouponDetails] = useState({});
+  const [refNumber, setRefNumber] = useState("");
+
+  useEffect(() => {
+    const uniqueRef = Date.now();
+    setRefNumber(uniqueRef);
+  }, []);
 
   const manageShippingAddress = (e) => {
     e.preventDefault();
     setManageShipping(true);
-  };
-
-  const ProcessToPaymentPage = () => {
-    let proceed = true;
-
-    cartConfigured.map((item) => {
-      if (item.totalPrice < minOrderPrice || item.totalQty < minOrderQuantity) {
-        proceed = false;
-        swal({
-          title: `Dear customer, Every product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
-          icon: "warning",
-          buttons: "Ok, Understood",
-        });
-      }
-
-      return false;
-    });
-
-    if (!paymentMethod) {
-      proceed = false;
-      swal({
-        title: "Please Select Your Payment Method",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-    }
-
-    if (_.isEmpty(shipping_address)) {
-      proceed = false;
-      swal({
-        title: "Add your shipping  address first",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-    }
-    if (!summary.totalPrice) {
-      proceed = false;
-      swal({
-        title: "Please select your order Item",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-    }
-    if (proceed) {
-      props.history.push("/payment");
-    }
-  };
-
-  const needToPay = () => {
-    const price = cartCalculateNeedToPay(summary.totalPrice, paymentOption);
-    return numberWithCommas(price);
   };
 
   const handlePaymentChange = (e) => {
@@ -158,6 +114,92 @@ const CheckoutSidebar = (props) => {
   const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
   const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
   const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
+
+  const checkedProductItem = (product) => {
+    const hasConfigurators = product.hasConfigurators;
+    if (hasConfigurators) {
+      const ConfiguredItems = product.ConfiguredItems;
+      if (_.isArray(ConfiguredItems)) {
+        const filterConfig = ConfiguredItems.filter((filter) => filter.isChecked === true);
+        return filterConfig.length > 0;
+      }
+    }
+    return product.isChecked;
+  };
+
+  const finalCart = cartConfigured.filter((product) => checkedProductItem(product));
+
+  const handlePlaceOrder = () => {
+    let proceed = true;
+
+    cartConfigured.map((item) => {
+      if (item.totalPrice < minOrderPrice || item.totalQty < minOrderQuantity) {
+        proceed = false;
+        swal({
+          title: `Dear customer, Every product should be ordered for a minimum of ${minOrderQuantity} pieces and ${minOrderPrice} taka!`,
+          icon: "warning",
+          buttons: "Ok, Understood",
+        });
+      }
+
+      return false;
+    });
+
+    if (!paymentMethod) {
+      proceed = false;
+      swal({
+        title: "Please Select Your Payment Method",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+    }
+
+    if (_.isEmpty(shipping_address)) {
+      proceed = false;
+      swal({
+        title: "Add your shipping  address first",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+    }
+    if (!summary.totalPrice) {
+      proceed = false;
+      swal({
+        title: "Please select your order Item",
+        icon: "warning",
+        buttons: "Ok, Understood",
+      });
+    }
+    if (proceed) {
+      if (process) {
+        let cartTotal = payableTotal;
+        if (
+          !_.isEmpty(cartConfigured) &&
+          !_.isEmpty(shipping_address) &&
+          cartTotal &&
+          advanced &&
+          dueAmount
+        ) {
+          props.confirmCustomerOrder({
+            paymentMethod: paymentMethod,
+            cart: JSON.stringify(finalCart),
+            address: JSON.stringify(shipping_address),
+            summary: JSON.stringify({
+              cartTotal: cartTotal,
+              advanced: advanced,
+              dueAmount: dueAmount,
+              trxId: null,
+              couponCode: couponDetails?.coupon_code,
+              couponDiscount: couponDiscount,
+              refNumber: refNumber.toString(),
+            }),
+          });
+        } else {
+          return;
+        }
+      }
+    }
+  };
 
   return (
     <aside className='col-lg-3'>
@@ -275,10 +317,10 @@ const CheckoutSidebar = (props) => {
           <div className='pt-2'>
             <button
               type='button'
-              onClick={(e) => ProcessToPaymentPage()}
+              onClick={(e) => handlePlaceOrder()}
               className='btn btn-block btn-check checkout-btn'
             >
-              PROCEED TO CHECKOUT
+              PLACE ORDER
             </button>
           </div>
         </div>
@@ -301,4 +343,4 @@ const mapStateToProps = (state) => ({
   advance_percent: state.CART.advance_percent.advance_percent,
 });
 
-export default connect(mapStateToProps, {})(withRouter(CheckoutSidebar));
+export default connect(mapStateToProps, { confirmCustomerOrder })(withRouter(CheckoutSidebar));

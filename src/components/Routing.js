@@ -38,7 +38,7 @@ const Routing = () => {
 
       <AuthRoute path='/dashboard/:section?' exact component={Dashboard} />
       <AuthRoute path='/checkout' exact component={Checkout} />
-      <AuthRoute path='/payment' exact component={Payment} />
+      <AuthRoute path='/payment/:id' exact component={Payment} />
       <AuthRoute path='/wishlist' exact component={Wishlist} />
       <AuthRoute path='/details/:id' exact component={OrderDetails} />
 

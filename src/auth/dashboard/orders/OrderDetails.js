@@ -23,8 +23,6 @@ const OrderDetails = (props) => {
   const [order, setOrder] = useState("");
   const bankId = getSetting(general, "payment_bank_details");
 
-  console.log("order details", order);
-
   const currency = getSetting(general, "currency_icon");
   const ShippingCharges = getSetting(general, "air_shipping_charges");
   const summary = CartProductSummary(cartConfigured, ShippingCharges);

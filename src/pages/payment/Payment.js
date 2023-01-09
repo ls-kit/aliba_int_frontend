@@ -26,111 +26,41 @@ import ConfigItem from "./includes/ConfigItem";
 import PlainItem from "./includes/PlainItem";
 import CopyToClipboard from "react-copy-to-clipboard";
 import { FaRegCopy } from "react-icons/fa";
+import { confirmPayment, getOrderDetails } from "../../utils/Services";
 
 const Payment = (props) => {
-  const { cartConfigured, shipping_address, general, advance_percent, paymentMethod, couponDetails } = props;
-
-  const currency = getSetting(general, "currency_icon");
-  const chinaLocalShippingCharges = getSetting(general, "china_local_delivery_charge");
-  const chinaLocalShippingChargeLimit = getSetting(general, "china_local_delivery_charge_limit");
-  const ShippingCharges = getSetting(general, "china_local_delivery_charge");
-  const bankId = getSetting(general, "payment_bank_details");
-
+  const { cartConfigured, match, general } = props;
+  const order_id = match.params.id;
   const [accept, setAccept] = useState("");
   const [trxId, setTrxId] = useState("");
-  const [refNumber, setRefNumber] = useState("");
+  const [order, setOrder] = useState("");
   const [copy, setCopy] = useState(false);
+  const bankId = getSetting(general, "payment_bank_details");
 
-  const summary = CheckoutSummary(cartConfigured, chinaLocalShippingCharges, chinaLocalShippingChargeLimit);
+  const currency = getSetting(general, "currency_icon");
+  const ShippingCharges = getSetting(general, "air_shipping_charges");
+  const summary = CartProductSummary(cartConfigured, ShippingCharges);
+  const advanced = cartCalculateNeedToPay(summary.totalPrice);
+  const dueAmount = advanced;
+
+  const address = !_.isEmpty(order) ? JSON.parse(order.address) : {};
+  const orderItems = !_.isEmpty(order) ? order.order_items : [];
 
   useEffect(() => {
     goPageTop();
-    if (_.isEmpty(shipping_address)) {
-      props.history.push("/checkout");
-    }
-  }, []);
-
-  useEffect(() => {
-    const uniqueRef = Date.now();
-    setRefNumber(uniqueRef);
-  }, []);
-
-  const totalPriceWithoutShipping = totalPriceWithoutShippingCharge(cartConfigured);
-
-  const getChinaLocalShippingCost = (totalPrice) => {
-    if (totalPrice) {
-      let localShippingCost = ShippingCharges;
-      localShippingCost = Number(totalPrice) >= chinaLocalShippingChargeLimit ? 0 : localShippingCost;
-      return Number(localShippingCost);
-    } else {
-      return 0;
-    }
-  };
-
-  const checkedProductItem = (product) => {
-    const hasConfigurators = product.hasConfigurators;
-    if (hasConfigurators) {
-      const ConfiguredItems = product.ConfiguredItems;
-      if (_.isArray(ConfiguredItems)) {
-        const filterConfig = ConfiguredItems.filter((filter) => filter.isChecked === true);
-        return filterConfig.length > 0;
-      }
-    }
-    return product.isChecked;
-  };
-
-  const finalCart = cartConfigured.filter((product) => checkedProductItem(product));
-
-  const totalShippingCost = (product, isChecked = false) => {
-    let returnValue = 0;
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    returnValue = getChinaLocalShippingCost(totalPrice);
-    return returnValue;
-  };
-
-  const productTotalCost = (product) => {
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    return Number(totalPrice);
-  };
+    getOrderDetails(order_id).then((response) => {
+      setOrder(response.order);
+    });
+  }, [order_id]);
 
   const onCopy = () => {
     setCopy(true);
   };
 
-  const getDiscount = () => {
-    let discount;
-    if (paymentMethod) {
-      if (paymentMethod == "bank_payment")
-        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bank");
-      if (paymentMethod == "bkash_payment")
-        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "bkash");
-      if (paymentMethod == "nagad_payment")
-        discount = calculateDiscountAmount(paymentMethod, advance_percent, general, "nagad");
-    }
-    return discount;
-  };
-
-  const couponDiscount = cartCalculateCouponDiscount(couponDetails);
-  const discount = getDiscount();
-  const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
-  const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
-  const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
-
   const paymentConfirm = (e) => {
     e.preventDefault();
 
     let process = true;
-
-    if (!paymentMethod) {
-      swal({
-        text: "Select your payment method",
-        icon: "warning",
-        buttons: "Ok, Understood",
-      });
-      process = false;
-    }
 
     if (!trxId) {
       swal({
@@ -149,31 +79,45 @@ const Payment = (props) => {
       });
       process = false;
     }
-    console.log("ref num", refNumber);
 
     if (process) {
-      let cartTotal = payableTotal;
-      if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
-        props.confirmCustomerOrder({
-          paymentMethod: paymentMethod,
-          cart: JSON.stringify(finalCart),
-          address: JSON.stringify(shipping_address),
+      if (trxId) {
+        console.log("trxId", trxId);
+
+        confirmPayment(order.id, {
           summary: JSON.stringify({
-            cartTotal: cartTotal,
-            advanced: advanced,
-            dueAmount: dueAmount,
             trxId: trxId,
-            couponCode: couponDetails?.coupon_code,
-            couponDiscount: couponDiscount,
-            refNumber: refNumber.toString(),
           }),
+        }).then((response) => {
+          if (!_.isEmpty(response)) {
+            const resData = response.data;
+            if (!_.isEmpty(resData)) {
+              if (resData.status === "success") {
+                swal({
+                  title: `${resData.message}`,
+                  icon: "success",
+                  buttons: "Ok, Understood",
+                });
+                setTimeout(() => {
+                  if (resData.redirect) {
+                    window.location.assign(resData.redirect);
+                  }
+                }, 2000);
+              } else {
+                swal({
+                  title: `${resData.message}`,
+                  icon: "warning",
+                  buttons: "Ok, Understood",
+                });
+              }
+            }
+          }
         });
-      } else {
-        props.history.push("/checkout");
       }
     }
   };
   return (
+    // <div></div>
     <main className='main'>
       <Breadcrumb current='Payment' collections={[{ name: "Checkout", url: "checkout" }]} />
 
@@ -188,114 +132,52 @@ const Payment = (props) => {
                       <thead>
                         <tr>
                           <th colSpan={2}>
-                            <span>Product</span>
+                            <span>Details</span>
                           </th>
                           <th className='text-center' style={{ width: "10rem" }}>
                             Total
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {cartConfigured.length > 0 ? (
-                          cartConfigured.map((product, index) => (
-                            <>
-                              {product.hasConfigurators ? (
-                                product.ConfiguredItems.map((config, index2) => {
-                                  return (
-                                    config.isChecked && (
-                                      <ConfigItem currency={currency} product={product} config={config} />
-                                    )
-                                  );
-                                })
-                              ) : (
-                                <PlainItem currency={currency} product={product} />
-                              )}
 
-                              {checkedProductItem(product) && (
-                                <tr key={index + 1}>
-                                  <td colSpan={2} className='text-right'>
-                                    Sub Total
-                                  </td>
-                                  <td className='text-center'>{`${currency} ${numberWithCommas(
-                                    productTotalCost(product)
-                                  )}`}</td>
-                                </tr>
-                              )}
-                            </>
-                          ))
-                        ) : (
-                          <tr>
-                            <td colSpan={3} className='text-center bg-lighter'>
-                              You have no cart!
-                            </td>
-                          </tr>
-                        )}
-                      </tbody>
                       <tfoot>
                         <tr>
                           <td colSpan={3}>
                             <h3 className='border-0 m-0 py-3 summary-title'>Cart Total Summary</h3>
                           </td>
                         </tr>
-                        <tr className='summary-total'>
-                          <td colSpan={2} className='text-right'>
-                            China to BD Shipping cost
-                          </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            getChinaLocalShippingCost(totalPriceWithoutShipping)
-                          )}`}</td>
-                        </tr>
+
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
                             Subtotal:
                           </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            summary.totalPrice
-                          )}`}</td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(order.amount)}`}</td>
                         </tr>
-                        <tr className='summary-total'>
-                          <td colSpan={2} className='text-right'>
-                            Discount ({discount}%):
-                          </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(
-                            cartCalculateDiscount(summary.totalPrice, discount)
-                          )}`}</td>
-                        </tr>
-                        {couponDiscount ? (
-                          <tr className='summary-total'>
-                            <td colSpan={2} className='text-right'>
-                              Coupon Reword:
-                            </td>
-                            <td className='text-right'>{`${currency} ${numberWithCommas(
-                              couponDiscount
-                            )}`}</td>
-                          </tr>
-                        ) : (
-                          ""
-                        )}
 
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
-                            Need To Pay {advance_percent}%:
+                            Need To Pay %:
                           </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(advanced)}`}</td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(order.needToPay)}`}</td>
                         </tr>
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
                             Due Amount:
                           </td>
-                          <td className='text-right'>{`${currency} ${numberWithCommas(dueAmount)}`}</td>
+                          <td className='text-right'>{`${currency} ${numberWithCommas(
+                            order.dueForProducts
+                          )}`}</td>
                         </tr>
-                        {paymentMethod && (
+                        {order.pay_method && (
                           <tr>
                             <td colSpan={3} className='p-2'>
-                              {paymentMethod == "bkash_payment" && (
+                              {order.pay_method == "bkash_payment" && (
                                 <img className='qr-code' src={loadAsset(general.qr_code_bkash)} alt='' />
                               )}
-                              {paymentMethod == "nagad_payment" && (
+                              {order.pay_method == "nagad_payment" && (
                                 <img className='qr-code' src={loadAsset(general.qr_code_nagad)} alt='' />
                               )}
-                              {paymentMethod == "bank_payment" && (
+                              {order.pay_method == "bank_payment" && (
                                 <div className='bankDetails'>
                                   <h3 className='bold text-center bankDetailsText'>
                                     Bank Details: <span className='baseColor'>{bankId}</span>
@@ -344,7 +226,7 @@ const Payment = (props) => {
                                     style={{ marginBottom: "0" }}
                                     type='text'
                                     id='refId'
-                                    value={refNumber}
+                                    value={order.refNumber}
                                     readOnly
                                   />
                                   <span className='text-danger'>Use this number as payment reference</span>

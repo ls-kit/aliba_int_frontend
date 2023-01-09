@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { getCustomerAllOrders } from "../../../utils/Services";
+import { cancelOrder, getCustomerAllOrders } from "../../../utils/Services";
 import { Link } from "react-router-dom";
+import swal from "sweetalert";
+import _ from "lodash";
 // import PropTypes from 'prop-types';
 
 const MyOrders = () => {
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [cancel, setCancel] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -13,7 +16,41 @@ const MyOrders = () => {
       setLoading(false);
       setOrders(response.orders);
     });
-  }, []);
+  }, [cancel]);
+
+  const handleCancelOrder = (orderId) => {
+    swal({
+      title: "Are you sure to cancel this order?",
+      icon: "warning",
+      buttons: ["No, cancel it!", "Yes, I am sure!"],
+      dangerMode: true,
+    }).then(function (isConfirm) {
+      if (isConfirm) {
+        cancelOrder(orderId).then((response) => {
+          if (!_.isEmpty(response)) {
+            const resData = response.data;
+            if (!_.isEmpty(resData)) {
+              if (resData.status === "success") {
+                setCancel(true);
+                swal({
+                  title: `${resData.message}`,
+                  icon: "success",
+                  buttons: "Ok, Understood",
+                });
+              } else {
+                swal({
+                  title: `${resData.message}`,
+                  icon: "warning",
+                  buttons: "Ok, Understood",
+                });
+              }
+            }
+          }
+        });
+      } else {
+      }
+    });
+  };
 
   return (
     <div className='card'>
@@ -34,7 +71,9 @@ const MyOrders = () => {
                 <th>Trx ID</th>
                 <th>Ref.</th>
                 <th>Status</th>
-                <th>Actions</th>
+                <th>Pay</th>
+                <th>Details</th>
+                <th>Cancel</th>
               </tr>
             </thead>
             <tbody>
@@ -59,15 +98,19 @@ const MyOrders = () => {
                     <td>{order?.refNumber}</td>
                     <td>{order.status}</td>
                     <td>
-                      {order.status === "waiting-for-payment" ? (
-                        <Link to={`/details/${order.id}`} className='btn btn-default px-0'>
-                          PayNow
-                        </Link>
-                      ) : (
-                        <Link to={`/details/${order.id}`} className='btn btn-default px-0'>
-                          Details
-                        </Link>
-                      )}
+                      <Link to={`/payment/${order.id}`} className='btn btn-default px-0'>
+                        Pay now
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/details/${order.id}`} className='btn btn-default px-0'>
+                        Details
+                      </Link>
+                    </td>
+                    <td>
+                      <button onClick={() => handleCancelOrder(order.id)} className='btn btn-default px-0'>
+                        Cancel Order
+                      </button>
                     </td>
                   </tr>
                 ))

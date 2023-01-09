@@ -309,3 +309,23 @@ export const getCouponDetails = async (coupon) => {
     return {};
   });
 };
+
+export const cancelOrder = async (orderId) => {
+  return await axiosInstance.post(`/cancel-order/${orderId}`).then((res) => {
+    const resData = res;
+    if (!_.isEmpty(resData)) {
+      return resData.data;
+    }
+    return {};
+  });
+};
+export const confirmPayment = async (orderId, orderData) => {
+  return await axiosInstance.post(`/update-order/${orderId}`, orderData).then((res) => {
+    const resData = res;
+
+    if (!_.isEmpty(resData)) {
+      return resData.data;
+    }
+    return {};
+  });
+};
