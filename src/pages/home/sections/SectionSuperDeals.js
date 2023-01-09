@@ -92,7 +92,7 @@ const SectionSuperDeals = (props) => {
     <div className='container '>
       <div className='m-card '>
         <div className='topCatContainer'>
-          <div className='row mt-0  pb-1 '>
+          <div className='row mt-1  pb-1 '>
             <div className='col-6 col-md-9 d-flex'>
               <h4 className='bold topTitle'>
                 SUPER <span className='hi-color'>DEALS</span>

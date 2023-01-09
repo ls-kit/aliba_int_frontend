@@ -96,7 +96,7 @@ const Login = (props) => {
                   role='tabpanel'
                   aria-labelledby='otp_login-tab'
                 >
-                  <form onSubmit={(e) => formSubmitForOtpSubmit(e)}>
+                  {/* <form onSubmit={(e) => formSubmitForOtpSubmit(e)}>
                     <div className='form-group'>
                       <label htmlFor='phone'>
                         Phone Number <span className='text-danger'>*</span>
@@ -129,11 +129,11 @@ const Login = (props) => {
                         </label>
                       </div>
                     </div>
-                    {/* End .form-footer */}
-                  </form>
+                   
+                  </form> */}
 
                   <div className='form-choice'>
-                    <p className='text-center'>or sign in with</p>
+                    <p className='text-center'>Sign in with</p>
                     {/* <SocialButton
                       provider='google'
                       appId='661276138407-252qctok1c1it53u0gu3vroojbouhtl7.apps.googleusercontent.com'

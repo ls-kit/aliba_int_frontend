@@ -47,7 +47,7 @@ const Home = (props) => {
       {section_three_active === "enable" && <SectionsThree general={general} />}
       {section_four_active === "enable" && <SectionsFour general={general} />}
       {section_five_active === "enable" && <SectionsFive style={style} general={general} />}
-      <div className='text-center'>
+      <div className='text-center mt-1'>
         <button className='btn btn-default' onClick={() => setStyle("block")}>
           Load More
         </button>
