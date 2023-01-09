@@ -24,6 +24,7 @@ const Routing = () => {
   return (
     <Switch>
       <Route path='/' exact component={Home} />
+      <Route path='/home' exact component={Home} />
       <Route path='/login' exact component={Login} />
       <Route path='/faq' exact component={Faq} />
       <Route path='/contact' exact component={Contact} />
