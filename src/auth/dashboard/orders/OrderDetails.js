@@ -86,7 +86,7 @@ const OrderDetails = (props) => {
                         <td></td>
                         <td>
                           <p className='m-0'>
-                            <b>UNPAID</b>
+                            <b>{order.trxId ? "Initial Paid" : "UNPAID"}</b>
                           </p>
                           <p className='m-0'>
                             <span className='mr-2'>Method:</span>

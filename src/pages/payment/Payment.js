@@ -156,7 +156,7 @@ const Payment = (props) => {
 
                         <tr className='summary-total'>
                           <td colSpan={2} className='text-right'>
-                            Need To Pay %:
+                            Need To Pay:
                           </td>
                           <td className='text-right'>{`${currency} ${numberWithCommas(order.needToPay)}`}</td>
                         </tr>
