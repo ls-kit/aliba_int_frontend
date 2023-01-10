@@ -115,6 +115,18 @@ const CheckoutSidebar = (props) => {
   const advanced = cartCalculateNeedToPay(payableTotal, Number(advance_percent));
   const dueAmount = cartCalculateDueToPay(payableTotal, Number(advance_percent));
 
+  // const checkedProductItem = (product) => {
+  //   const hasConfigurators = product.hasConfigurators;
+  //   if (hasConfigurators) {
+  //     const ConfiguredItems = product.ConfiguredItems;
+  //     if (_.isArray(ConfiguredItems)) {
+  //       const filterConfig = ConfiguredItems.filter((filter) => filter.isChecked === true);
+  //       return filterConfig.length > 0;
+  //     }
+  //   }
+  //   return product.isChecked;
+  // };
+
   const checkedProductItem = (product) => {
     const hasConfigurators = product.hasConfigurators;
     if (hasConfigurators) {
@@ -127,7 +139,8 @@ const CheckoutSidebar = (props) => {
     return product.isChecked;
   };
 
-  const finalCart = cartConfigured.filter((product) => checkedProductItem(product));
+  const reConfigCart = cartConfigured.filter((product) => product.isChecked);
+  const finalCart = reConfigCart;
 
   const handlePlaceOrder = () => {
     let proceed = true;
@@ -171,32 +184,24 @@ const CheckoutSidebar = (props) => {
       });
     }
     if (proceed) {
-      if (process) {
-        let cartTotal = payableTotal;
-        if (
-          !_.isEmpty(cartConfigured) &&
-          !_.isEmpty(shipping_address) &&
-          cartTotal &&
-          advanced &&
-          dueAmount
-        ) {
-          props.confirmCustomerOrder({
-            paymentMethod: paymentMethod,
-            cart: JSON.stringify(finalCart),
-            address: JSON.stringify(shipping_address),
-            summary: JSON.stringify({
-              cartTotal: cartTotal,
-              advanced: advanced,
-              dueAmount: dueAmount,
-              trxId: null,
-              couponCode: couponDetails?.coupon_code,
-              couponDiscount: couponDiscount,
-              refNumber: refNumber.toString(),
-            }),
-          });
-        } else {
-          return;
-        }
+      let cartTotal = payableTotal;
+      if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
+        props.confirmCustomerOrder({
+          paymentMethod: paymentMethod,
+          cart: JSON.stringify(finalCart),
+          address: JSON.stringify(shipping_address),
+          summary: JSON.stringify({
+            cartTotal: cartTotal,
+            advanced: advanced,
+            dueAmount: dueAmount,
+            trxId: null,
+            couponCode: couponDetails?.coupon_code,
+            couponDiscount: couponDiscount,
+            refNumber: refNumber.toString(),
+          }),
+        });
+      } else {
+        return;
       }
     }
   };

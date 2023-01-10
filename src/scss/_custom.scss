@@ -515,6 +515,10 @@ a:focus {
 .fs-18 {
   font-size: 18px;
 }
+.fs-18 {
+  font-size: 18px;
+}
+
 .darkBtn {
   background-image: none !important;
   background-color: #1d262d !important;
@@ -1293,10 +1297,36 @@ a:focus {
   .dealsSold {
     margin-bottom: 0.5rem !important;
   }
+  .d-title {
+    font-size: 14px;
+    margin-bottom: 4px !important;
+  }
+  .cd-img {
+    width: 35px !important;
+    padding: 4px 0 0 0;
+  }
 }
 @media only screen and (max-width: 900px) {
   .c-card {
     border-radius: 0 !important;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .di-1 {
+    padding-left: 5px;
+    padding-right: 2px;
+  }
+  .di-2 {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+  .di-3 {
+    padding-left: 2px;
+    padding-right: 5px;
+  }
+  .cd-img {
+    width: 30px !important;
+    padding: 4px 0 0 0;
   }
 }
 @media only screen and (max-width: 800px) {
@@ -1461,6 +1491,10 @@ a:focus {
 .success-m-btn {
   display: inline-block;
   border-radius: 6px !important;
+}
+
+.cd-img {
+  width: 50px;
 }
 
 @media only screen and (max-width: 380px) {

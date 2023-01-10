@@ -57,6 +57,8 @@ const OrderDetails = (props) => {
     return Number(totalPrice) + Number(ShippingCost);
   };
 
+  console.log("order", order);
+
   return (
     <main className='main bg-gray'>
       <Breadcrumb
