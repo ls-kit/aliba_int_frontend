@@ -20,7 +20,7 @@ import swal from "sweetalert";
 import { productAddToWishlist } from "../../../../store/actions/AuthAction";
 import SingleAttributeGroup from "./includes/SingleAttributeGroup";
 import AppOffer from "./includes/AppOffer";
-import { FaRegCopy } from "react-icons/fa";
+import { FaRegCopy, FaStoreAlt } from "react-icons/fa";
 import PriceRange from "./includes/PriceRange";
 
 import CopyToClipboard from "react-copy-to-clipboard";
@@ -28,6 +28,8 @@ import { configAttrToConfigured, removeProductIntoVirtualCart } from "../../../.
 import AddProductModal from "./includes/AddProductModal";
 import { getSetting } from "../../../../utils/Helpers";
 import AirFilter from "./includes/AirFilter";
+import shop from "../../../../assets/images/shop.png";
+import wishlist from "../../../../assets/images/wishlist.png";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems, existCart } = props;
@@ -161,7 +163,7 @@ const ProductBody = (props) => {
 
               {/* End .details-filter-row */}
 
-              <div>
+              <div className='d-none d-md-block'>
                 <div className='row'>
                   <div className='col-md-3 pd-btn'>
                     <a href={"/add-to-wishlist"} onClick={(e) => addToWishlist(e, product)}>
@@ -307,7 +309,7 @@ const ProductBody = (props) => {
                   <span>{product_id}</span>
                 </div>
 
-                <div class='row' style={{ marginTop: "20px", flexWrap: "wrap" }}>
+                <div class='row d-none d-md-block' style={{ marginTop: "20px", flexWrap: "wrap" }}>
                   <div className='col-md-6'>
                     <Link to={`/seller/${product.VendorId}?page=1`}>
                       <div
@@ -423,6 +425,65 @@ const ProductBody = (props) => {
                   </div>
                 </div>
               </div>
+
+              {/* mobile floating button start */}
+              <div className='sm-productAction d-block d-md-none'>
+                <div className='row'>
+                  <div className='col-3'>
+                    <div className='flexBetween'>
+                      <div className='flexCenter'>
+                        <Link title='Shop' className='flxColCenter' to={`/seller/${product.VendorId}?page=1`}>
+                          {" "}
+                          <img style={{ width: "16px" }} src={shop} alt='' />
+                          <span className='text-center' style={{ fontSize: "10px", color: "#000" }}>
+                            Shop
+                          </span>
+                        </Link>
+                      </div>
+                      <div className='flexCenter'>
+                        <Link
+                          title='Shop'
+                          className='flxColCenter'
+                          onClick={(e) => addToWishlist(e, product)}
+                        >
+                          {" "}
+                          <img style={{ width: "16px" }} src={wishlist} alt='' />
+                          <span className='text-center' style={{ fontSize: "10px", color: "#000" }}>
+                            Save
+                          </span>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='col-9' style={{ paddingLeft: "0" }}>
+                    <div className='flex'>
+                      {Number(activeProduct.totalQty) > 0 ? (
+                        <div className='btn sm-add' onClick={(e) => addToCart(e)}>
+                          {" "}
+                          <i className='icon-cart-plus mr-1'></i> Add to cart
+                        </div>
+                      ) : (
+                        <div className='btn sm-add' onClick={(e) => alertForQuantity(e)}>
+                          {" "}
+                          <i className='icon-cart-plus mr-1'></i> Add to cart
+                        </div>
+                      )}
+                      {Number(activeProduct.totalQty) > 0 ? (
+                        <div className='btn sm-buy' onClick={(e) => buyNow(e)}>
+                          {" "}
+                          <i className='icon-shopping-cart mr-1'></i> Buy now
+                        </div>
+                      ) : (
+                        <div className='btn sm-buy' onClick={(e) => alertForQuantity(e)}>
+                          {" "}
+                          <i className='icon-shopping-cart mr-1'></i> Buy now
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {/* mobile floating button end */}
 
               {/* End .product-details-footer */}
             </div>

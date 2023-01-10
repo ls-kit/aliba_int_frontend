@@ -1208,6 +1208,60 @@ a:focus {
     color: $baseHoverFontColor;
   }
 }
+
+.flxColCenter {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+.sm-productAction {
+  position: fixed;
+  bottom: 38px;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: #fff;
+  padding: 5px 12px 0 12px;
+}
+
+.sm-add {
+  width: 50%;
+  height: 30px;
+  border: none;
+  padding: 0 1rem;
+  color: $baseFontColor;
+  padding: 0.8rem 0.8rem;
+  border: none;
+  background: #fc4a1a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #f7b733, #fc4a1a);
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: $baseHoverFontColor;
+  }
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+}
+.sm-buy {
+  width: 50%;
+  height: 30px;
+  border: none;
+  padding: 0 1rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  color: $baseFontColor;
+  padding: 0.8rem 0.8rem;
+  border: none;
+  background: #ff421c; /* fallback for old browsers */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  cursor: pointer;
+  &:hover,
+  &:focus {
+    color: $baseHoverFontColor;
+  }
+}
 @media only screen and (min-width: 767px) {
   .nagadPay {
     text-align: end !important;
