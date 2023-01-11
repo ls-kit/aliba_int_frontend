@@ -5,18 +5,21 @@ import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
 import { loadBanners } from "../../../../store/actions/InitAction";
 import OwlCarousel from "react-owl-carousel";
-import { loadAsset } from "../../../../utils/Helpers";
+import { getSetting, loadAsset } from "../../../../utils/Helpers";
 import BannerSkeleton from "../../../../skeleton/BannerSkeleton";
 import parser from "html-react-parser";
-import { getHomePageCards } from "../../../../utils/Services";
+import { getDiscountProduct, getHomePageCards, loadSectionsProducts } from "../../../../utils/Services";
 import _ from "lodash";
 import LargeCardSkelton from "../../../../skeleton/productSkeleton/LargeCardSkelton";
 import BannerRight from "./includes/BannerRight";
 
 const Intro = (props) => {
   const { banners, general } = props;
+  const currency_icon = getSetting(general, "currency_icon");
 
   const [loading, setLoading] = useState(false);
+  const [discountLoading, setDiscountLoading] = useState(true);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     if (!loading) {
@@ -28,57 +31,66 @@ const Intro = (props) => {
     setLoading(false);
   }, [loading]);
 
-  const [cardLoading, setHomeCardLoading] = useState(true);
-  const [homePageCards, setHomePageCards] = useState({});
-
   useEffect(() => {
-    homePageCard();
-  }, []);
-
-  const homePageCard = async () => {
-    const response = await getHomePageCards();
-
-    if (!_.isEmpty(response)) {
-      setHomePageCards(response);
+    if (_.isEmpty(products)) {
+      getDiscountProduct().then((response) => {
+        if (!_.isEmpty(response)) {
+          const products = response.SuperDealProducts;
+          if (!_.isEmpty(products)) {
+            setProducts(products);
+          }
+        }
+        setDiscountLoading(false);
+      });
     }
-    setHomeCardLoading(false);
-  };
+  }, []);
 
   // decide what is render for home page card
   let homePageContent = null;
-  if (cardLoading) {
+  if (discountLoading) {
     homePageContent = <LargeCardSkelton />;
   }
-  if (!cardLoading) {
+  if (!discountLoading && products.length > 0) {
     homePageContent = (
       <OwlCarousel
         className='owl-carousel owl-theme owl-nav-inside row cols-3'
         loop={true}
         margin={10}
+        dots={false}
+        nav={false}
+        autoplay={true}
+        autoplayTimeout={3000}
         responsiveClass={true}
         responsive={{
           0: {
             items: 1,
-            nav: true,
+            loop: false,
           },
           600: {
             items: 4,
-            nav: false,
           },
           1000: {
             items: 4,
-            nav: true,
-            loop: false,
+            loop: true,
           },
         }}
       >
-        {homePageCards.map((cart, index) => {
+        {products.map((product, index) => {
+          console.log("product", product);
+          const product_code = product.product_code ? product.product_code : product.ItemId;
           return (
             <div key={index}>
-              <Link className='homeComp' to={`/${cart.btn_url}`}>
-                <img className='' src={loadAsset(cart.image)} alt='' />
-                <h3>{cart.titleText}</h3>
-                <button className='homeLogin-btn'>{cart.btn_name}</button>{" "}
+              <Link className='homeComp' to={`/product/${product_code}`}>
+                <img className='' src={product.img} alt='' />
+                <button className='homeLogin-btn'>
+                  {" "}
+                  {`${currency_icon}`} {` `}
+                  {_.round(product.discount_price)}
+                </button>
+                <h6 className='dOprice'>
+                  {`${currency_icon}`} {` `}
+                  {_.round(product.original_price)}
+                </h6>
               </Link>
             </div>
           );

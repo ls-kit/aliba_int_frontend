@@ -1,18 +1,21 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { getSetting } from "../../../utils/Helpers";
 import { toggleMobileMenu } from "../../../utils/jQueryImplement";
 
 const StickyFooter = (props) => {
   const { general } = props;
   const office_phone = getSetting(general, "office_phone");
+  const location = useLocation();
+
+  let isShow = location.pathname.includes(`/product/abb-`);
 
   useEffect(() => {
     toggleMobileMenu();
   }, []);
 
   return (
-    <nav className='stick_footer_nav'>
+    <nav className={`stick_footer_nav ${isShow ? "d-none" : "d-block"}`}>
       <div className='container'>
         <div className='row'>
           <div className='col text-center'>

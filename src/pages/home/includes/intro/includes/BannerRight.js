@@ -21,6 +21,7 @@ const BannerRight = ({ general }) => {
 
   const loadExclusiveOffer = async () => {
     const response = await getExclusiveOffer();
+
     const data = response[0];
     if (!_.isEmpty(data)) {
       setOfferData(data);
@@ -54,6 +55,10 @@ const BannerRight = ({ general }) => {
             className='owl-carousel owl-theme owl-nav-inside row cols-3'
             loop={true}
             margin={10}
+            dots={false}
+            nav={false}
+            autoplay={true}
+            autoplayTimeout={3000}
             responsiveClass={true}
             responsive={{
               0: {

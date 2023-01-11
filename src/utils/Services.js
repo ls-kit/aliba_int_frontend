@@ -300,6 +300,17 @@ export const getSuperDeals = async () => {
     return {};
   });
 };
+export const getDiscountProduct = async () => {
+  return await axiosInstance
+    .get(`/get-discount-section`, { params: { offset: 2, limit: 18 } })
+    .then((res) => {
+      const resData = res.data;
+      if (!_.isEmpty(resData)) {
+        return resData.data;
+      }
+      return {};
+    });
+};
 export const getCouponDetails = async (coupon) => {
   return await axiosInstance.get(`/validate-coupon/${coupon}`).then((res) => {
     const resData = res;
