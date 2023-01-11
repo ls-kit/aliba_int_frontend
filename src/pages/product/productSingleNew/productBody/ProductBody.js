@@ -29,7 +29,7 @@ import AddProductModal from "./includes/AddProductModal";
 import { getSetting } from "../../../../utils/Helpers";
 import AirFilter from "./includes/AirFilter";
 import shop from "../../../../assets/images/shop.png";
-import wishlist from "../../../../assets/images/wishlist.png";
+import wishlist from "../../../../assets/images/love.png";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems, existCart } = props;
