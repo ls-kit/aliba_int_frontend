@@ -40,6 +40,7 @@ const SectionSuperDeals = (props) => {
   const [expiredDate, setExpiredDate] = useState("");
   const acceptedDate = `${expiredDate + ":00"}`;
 
+  console.log("expiredDate", acceptedDate);
   useEffect(() => {
     if (_.isEmpty(products)) {
       getSuperDeals().then((response) => {

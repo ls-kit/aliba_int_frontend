@@ -1262,6 +1262,14 @@ a:focus {
     color: $baseHoverFontColor;
   }
 }
+.menu-vertical .menu-title {
+  padding-bottom: 3px !important;
+}
+.subChildItem {
+  padding-top: 0.2rem !important;
+  padding-bottom: 0.2rem !important;
+}
+
 @media only screen and (min-width: 767px) {
   .nagadPay {
     text-align: end !important;

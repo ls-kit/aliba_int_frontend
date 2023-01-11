@@ -13,7 +13,9 @@ export const SubChildrenItem = (props) => {
       <ul className='subChildCat'>
         {subChildren.map((subChild, index) => (
           <li key={index}>
-            <Link to={`/shop/${subChild.slug}`}>{subChild.name}</Link>
+            <Link className='subChildItem' to={`/shop/${subChild.slug}`}>
+              {subChild.name}
+            </Link>
           </li>
         ))}
       </ul>
@@ -29,11 +31,11 @@ const MegaMenuItem = (props) => {
 
   return (
     <li className='megamenu-container'>
-      <Link className='sf-with-ul text-dark border-0 px-3 py-3 icon-none' to={`/${parent.slug}`}>
+      <Link className='sf-with-ul text-dark border-0 px-3 py-2 icon-none' to={`/${parent.slug}`}>
         {parent.icon ? (
           <img
             src={loadAsset(parent.icon)}
-            style={{ width: "22px", display: "inline", marginRight: "1rem" }}
+            style={{ width: "20px", display: "inline", marginRight: "1rem" }}
             alt={parent.name}
           />
         ) : (

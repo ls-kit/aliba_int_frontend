@@ -19,9 +19,12 @@ const DashboardDefault = () => {
   }, []);
 
   const pendingOrders = orders.filter((order) => order.status === "waiting-for-payment");
-  const processingOrders = orders.filter((order) => order.status === "partial-paid");
-  const completeOrders = orders.filter((order) => order.status === "delivered");
+  const processingOrders = orders.filter(
+    (order) => order.status === "full-paid" || order.status === "partial-paid"
+  );
+  const completeOrders = orders.filter((order) => order.status === "order-completed");
 
+  console.log("processingOrders", processingOrders);
   return (
     <div className='card'>
       <div className='card-header py-2 px-1 px-md-2'>
@@ -62,7 +65,7 @@ const DashboardDefault = () => {
                 <img className='cd-img' src={conplteOreder} alt='' />
               </div>
               <h3 className='d-title '>Completed Orders</h3>
-              <h1 className='mb-0 d-title '>0</h1>
+              <h1 className='mb-0 d-title'>{completeOrders.length}</h1>
             </div>
           </div>
         </div>
