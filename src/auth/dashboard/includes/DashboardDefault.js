@@ -4,6 +4,7 @@ import conplteOreder from "../../../assets/images/cd/completed-order.png";
 import processing from "../../../assets/images/cd/processing .png";
 import pending from "../../../assets/images/cd/pending.png";
 import allOrder from "../../../assets/images/cd/allOrder.png";
+import { Link } from "react-router-dom";
 // import PropTypes from 'prop-types';
 
 const DashboardDefault = () => {
@@ -34,38 +35,54 @@ const DashboardDefault = () => {
         <div className='row'>
           <div className='col-3 col-md-3 my-2 my-md-0 di-1'>
             <div className=' h-100 card-body p-1 p-md-3 p-lg-5 shadow text-center border flexCenter flex-column'>
-              <div className='flexCenter mb-1 mb-md-2'>
-                <img className='cd-img' src={allOrder} alt='' />
+              <div>
+                <Link to={`/dashboard/orders`}>
+                  <div className='flexCenter mb-1 mb-md-2'>
+                    <img className='cd-img' src={allOrder} alt='' />
+                  </div>
+                  <h3 className='d-title '>Total Orders</h3>
+                  <h1 className='mb-0 d-title '>{orders.length}</h1>
+                </Link>
               </div>
-              <h3 className='d-title '>Total Orders</h3>
-              <h1 className='mb-0 d-title '>{orders.length}</h1>
             </div>
           </div>
           <div className='col-3 col-md-3 my-2 my-md-0 di-2'>
             <div className=' h-100 card-body p-1 p-md-3 p-lg-5 shadow text-center border flexCenter flex-column'>
-              <div className='flexCenter mb-1 mb-md-2'>
-                <img className='cd-img' src={pending} alt='' />
+              <div>
+                <Link to={`/dashboard/pending-orders`}>
+                  <div className='flexCenter mb-1 mb-md-2'>
+                    <img className='cd-img' src={pending} alt='' />
+                  </div>
+                  <h3 className='d-title'>Pending Orders</h3>
+                  <h1 className='mb-0 d-title'>{pendingOrders.length}</h1>
+                </Link>
               </div>
-              <h3 className='d-title'>Pending Orders</h3>
-              <h1 className='mb-0 d-title'>{pendingOrders.length}</h1>
             </div>
           </div>
           <div className='col-3 col-md-3 my-2 my-md-0 di-2'>
             <div className=' h-100 card-body p-1 p-md-3 p-lg-5 shadow text-center border flexCenter flex-column'>
-              <div className='flexCenter mb-1 mb-md-2'>
-                <img className='cd-img' src={processing} alt='' />
+              <div>
+                <Link to={`/dashboard/processing-orders`}>
+                  <div className='flexCenter mb-1 mb-md-2'>
+                    <img className='cd-img' src={processing} alt='' />
+                  </div>
+                  <h3 className=' d-title '>Processing Orders</h3>
+                  <h1 className='mb-0 d-title '>{processingOrders.length}</h1>
+                </Link>
               </div>
-              <h3 className=' d-title '>Processing Orders</h3>
-              <h1 className='mb-0 d-title '>{processingOrders.length}</h1>
             </div>
           </div>
           <div className='col-3 col-md-3 my-2 my-md-0 di-3'>
             <div className=' h-100 card-body p-1 p-md-3 p-lg-5 shadow text-center border flexCenter flex-column'>
-              <div className='flexCenter mb-1 mb-md-2'>
-                <img className='cd-img' src={conplteOreder} alt='' />
+              <div>
+                <Link to={`/dashboard/complete-orders`}>
+                  <div className='flexCenter mb-1 mb-md-2'>
+                    <img className='cd-img' src={conplteOreder} alt='' />
+                  </div>
+                  <h3 className='d-title '>Completed Orders</h3>
+                  <h1 className='mb-0 d-title'>{completeOrders.length}</h1>
+                </Link>
               </div>
-              <h3 className='d-title '>Completed Orders</h3>
-              <h1 className='mb-0 d-title'>{completeOrders.length}</h1>
             </div>
           </div>
         </div>
