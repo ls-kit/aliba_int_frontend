@@ -19,6 +19,7 @@ import { getSetting } from "../../../utils/Helpers";
 import {
   addAdvancePaymentPercent,
   addCouponDetails,
+  configAttrToConfigured,
   selectPaymentMethod,
 } from "../../../utils/GlobalStateControl";
 
@@ -140,7 +141,19 @@ const CheckoutSidebar = (props) => {
   };
 
   const reConfigCart = cartConfigured.filter((product) => product.isChecked);
-  const finalCart = reConfigCart;
+  const finalCart = () => {
+    let modified = reConfigCart.map((mapItem) => {
+      let ConfiguredItems = mapItem.ConfiguredItems.map((mapConfig) =>
+        mapConfig.isChecked ? mapConfig : { notFound: true }
+      );
+      ConfiguredItems = ConfiguredItems.filter((filter) => filter.notFound !== true);
+      if (ConfiguredItems.length > 0) {
+        return { ...mapItem, ConfiguredItems: ConfiguredItems };
+      }
+      return { notFound: true };
+    });
+    return (modified = modified.filter((filter) => filter.notFound !== true));
+  };
 
   const handlePlaceOrder = () => {
     let proceed = true;
@@ -188,7 +201,7 @@ const CheckoutSidebar = (props) => {
       if (!_.isEmpty(cartConfigured) && !_.isEmpty(shipping_address) && cartTotal && advanced && dueAmount) {
         props.confirmCustomerOrder({
           paymentMethod: paymentMethod,
-          cart: JSON.stringify(finalCart),
+          cart: JSON.stringify(finalCart()),
           address: JSON.stringify(shipping_address),
           summary: JSON.stringify({
             cartTotal: cartTotal,
