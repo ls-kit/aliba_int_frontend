@@ -1574,10 +1574,17 @@ a:focus {
   }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1401px) {
   .intro-slide,
   .intro-section .col-lg-5cols > .banner.banner-overlay {
     min-height: 290px !important;
+    border-radius: 8px;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 1400px) {
+  .intro-slide,
+  .intro-section .col-lg-5cols > .banner.banner-overlay {
+    min-height: 270px !important;
     border-radius: 8px;
   }
 }
