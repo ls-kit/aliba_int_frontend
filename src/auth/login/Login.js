@@ -11,8 +11,8 @@ import { withRouter } from "react-router-dom";
 import OTPSubmit from "./include/OTPSubmit";
 import SocialButton from "./SocialButton";
 import axios from "axios";
-import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
-import jwt_decode from "jwt-decode";
+import { useGoogleLogin } from "@react-oauth/google";
+
 import { goPageTop } from "../../utils/Helpers";
 
 const Login = (props) => {

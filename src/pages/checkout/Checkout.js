@@ -9,8 +9,6 @@ import { getSetting, goPageTop } from "../../utils/Helpers";
 import {
   numberWithCommas,
   cartCheckedProductTotal,
-  calculateAirShippingCharge,
-  findProductCartFromState,
   totalPriceWithoutShippingCharge,
   CheckoutSummary,
 } from "../../utils/CartHelpers";
