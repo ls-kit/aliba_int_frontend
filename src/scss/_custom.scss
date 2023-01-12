@@ -1271,6 +1271,37 @@ a:focus {
 .dashboard .btn {
   min-width: 59px !important;
 }
+
+.mobileOAC {
+  margin-top: 0.5rem;
+  padding: 0.8rem;
+  border-top: 1px solid lightgrey;
+}
+.dobt {
+  width: 80% !important;
+  padding: 0 !important;
+  &:focus,
+  &:hover {
+    border: none;
+    background: #ff6427; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #f78133, #ff421c); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #f78133, #ff421c);
+    color: $white;
+  }
+}
+.order-disable {
+  padding: 0 !important;
+  border: 1px solid $baseColor;
+  width: 80% !important;
+  &:focus,
+  &:hover {
+    border: none;
+    background: #ff6427; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f78133, #ff421c); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f78133, #ff421c);
+    color: $white;
+  }
+}
 .menu-vertical .menu-title {
   padding-bottom: 3px !important;
 }

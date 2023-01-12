@@ -16,10 +16,12 @@ const SwitchSection = (props) => {
 
     case "pending-orders":
       return <MyOrders status={"pending-orders"} orderText={"Pending Orders"} />;
+
     case "processing-orders":
       return <MyOrders status={"processing-orders"} orderText={"Processing Orders"} />;
+
     case "complete-orders":
-      return <MyOrders status={"complete-orders"} orderText={"Complete Orders"} />;
+      return <MyOrders status={"complete-orders"} orderText={"Completed Orders"} />;
 
     case "addresses":
       return <AddressBook />;

@@ -30,7 +30,17 @@ const Dashboard = (props) => {
     props.authLogout(props.history);
   };
 
-  const activeRoutes = ["dashboard", "account", "orders", "wishlist", "addresses", "account"];
+  const activeRoutes = [
+    "dashboard",
+    "account",
+    "orders",
+    "wishlist",
+    "addresses",
+    "account",
+    "pending-orders",
+    "processing-orders",
+    "complete-orders",
+  ];
 
   if (!activeRoutes.includes(section)) {
     return <My404Component />;

@@ -3,13 +3,32 @@ import { cancelOrder, getCustomerAllOrders } from "../../../utils/Services";
 import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import _ from "lodash";
-// import PropTypes from 'prop-types';
+import { useLayoutEffect } from "react";
+import { numberWithCommas } from "../../../utils/CartHelpers";
+
+const useWindowSize = () => {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      setSize([window.innerWidth, window.innerHeight]);
+    }
+
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+  return size;
+};
 
 const MyOrders = (props) => {
   const { status, orderText } = props;
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
   const [cancel, setCancel] = useState(false);
+
+  let [width, height] = useWindowSize();
+
+  width = width ? width : window.innerWidth;
 
   useEffect(() => {
     setLoading(true);
@@ -65,6 +84,91 @@ const MyOrders = (props) => {
   } else {
     ordersData = orders;
   }
+
+  if (width < 768)
+    return (
+      <div className='card my-2'>
+        <div className='card-header border  p-4 mb-1'>
+          <h4 className='card-title'>{orderText}</h4>
+        </div>
+        <div className=''>
+          {loading && (
+            <div className='text-center'>
+              <div className='spinner-border text-secondary' role='status'>
+                <span className='sr-only'>Loading...</span>
+              </div>
+            </div>
+          )}
+          {ordersData.length > 0 ? (
+            ordersData.map((order) => (
+              <div className='card-body px-1 py-2 my-3 shadow  border'>
+                <div className='px-4'>
+                  <div className='row '>
+                    <div className='col-7'>
+                      <span className='bold'>Date:</span>
+                      {order.created_at}
+                    </div>
+                    <div className='col-5 text-right'>
+                      <span className='bold'>Order id:</span>
+                      {order.order_number}
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-6'>
+                      <span className='bold'>Amount:</span>
+                      {numberWithCommas(order.amount)}
+                    </div>
+                    <div className='col-6 text-right'>
+                      <span className='bold'>1stPayment:</span>
+                      {numberWithCommas(order.needToPay)}
+                    </div>
+                    <div className='col-6'>
+                      <span className='bold'>Due:</span>
+                      {numberWithCommas(order.dueForProducts)}
+                    </div>
+                    <div className='col-6 text-right'>
+                      <span className='bold'>Total:</span>
+                      {numberWithCommas(order.amount)}
+                    </div>
+                  </div>
+                  <div className='row'>
+                    <div className='col-6'>
+                      <span className='bold'>TRX:</span>
+                      {order?.trxId}
+                    </div>
+                    <div className='col-6 text-right'>
+                      <span className='bold'>REF:</span>
+                      {order.refNumber}
+                    </div>
+                    <div className='col-12 text-right'>
+                      <span className='bold'>Status:</span>
+                      {order.status}
+                    </div>
+                  </div>
+                </div>
+
+                <div className='flexEnd mobileOAC text-center'>
+                  <Link to={`/details/${order.id}`} className='homeReg-btn order-disable mx-4'>
+                    Details
+                  </Link>
+                  <Link
+                    onClick={() => handleCancelOrder(order.id)}
+                    className='homeReg-btn order-disable mx-4'
+                  >
+                    Cancel
+                  </Link>
+                  <Link to={`/payment/${order.id}`} className='homeLogin-btn dobt mx-4'>
+                    Pay now
+                  </Link>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className='card-body px-1 py-2 shadow text-center border'>You have no orders</div>
+          )}
+        </div>
+      </div>
+    );
 
   return (
     <div className='card'>
