@@ -157,9 +157,11 @@ const MyOrders = (props) => {
                   >
                     Cancel
                   </Link>
-                  <Link to={`/payment/${order.id}`} className='homeLogin-btn dobt mx-4'>
-                    Pay now
-                  </Link>
+                  {order.status === "order-completed" ? null : (
+                    <Link to={`/payment/${order.id}`} className='homeLogin-btn dobt mx-4'>
+                      Pay now
+                    </Link>
+                  )}
                 </div>
               </div>
             ))
@@ -215,11 +217,14 @@ const MyOrders = (props) => {
                     <td>{order?.trxId}</td>
                     <td>{order?.refNumber}</td>
                     <td>{order.status}</td>
-                    <td>
-                      <Link to={`/payment/${order.id}`} className='btn btn-default px-0'>
-                        Pay now
-                      </Link>
-                    </td>
+                    {order.status === "order-completed" ? null : (
+                      <td>
+                        <Link to={`/payment/${order.id}`} className='btn btn-default px-0'>
+                          Pay now
+                        </Link>
+                      </td>
+                    )}
+
                     <td>
                       <Link to={`/details/${order.id}`} className='btn btn-default px-0'>
                         Details

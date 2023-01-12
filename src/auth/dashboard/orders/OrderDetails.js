@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import { getSetting, goPageTop } from "../../../utils/Helpers";
 import Breadcrumb from "../../../pages/breadcrumb/Breadcrumb";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { confirmCustomerOrder } from "../../../store/actions/CartAction";
 import { getOrderDetails } from "../../../utils/Services";
@@ -140,6 +140,13 @@ const OrderDetails = (props) => {
                       </tr>
                     </tfoot>
                   </table>
+                  {order.status === "order-completed" ? null : (
+                    <div className='text-right '>
+                      <Link to={`/payment/${order.id}`} className='btn btn-default'>
+                        Pay now
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </div>
             </aside>
