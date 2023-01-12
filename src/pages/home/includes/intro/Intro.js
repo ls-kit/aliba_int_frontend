@@ -97,15 +97,6 @@ const Intro = (props) => {
       </OwlCarousel>
     );
   }
-  // if (!cardLoading) {
-  //   homePageContent = homePageCards.map((cart, index) => (
-  //     <Link className='homeComp' to={`/${cart.btn_url}`} key={index}>
-  //       <img className='' src={loadAsset(cart.image)} alt='' />
-  //       <h3>{cart.titleText}</h3>
-  //       <button className='bt'>{cart.btn_name}</button>
-  //     </Link>
-  //   ));
-  // }
 
   return (
     <div className='intro-section'>

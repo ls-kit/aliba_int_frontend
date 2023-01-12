@@ -30,6 +30,13 @@ import { getSetting } from "../../../../utils/Helpers";
 import AirFilter from "./includes/AirFilter";
 import shop from "../../../../assets/images/shop.png";
 import wishlist from "../../../../assets/images/love.png";
+import {
+  EmailShareButton,
+  FacebookMessengerShareButton,
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+} from "react-share";
 
 const ProductBody = (props) => {
   const { product, general, cartConfigured, ConfiguredItems, existCart } = props;
@@ -370,38 +377,30 @@ const ProductBody = (props) => {
               <div className='product-details-footer'>
                 <div className='social-icons social-icons-sm'>
                   <span className='social-label'>Share:</span>
-                  <a
-                    href={`https://www.facebook.com/share.php?u=https://1688cart.com/product/${product.Id}&title=${product.Title}`}
-                    className='social-icon'
-                    title='Facebook'
-                    target='_blank'
-                  >
-                    <i className='icon-facebook-f' />
-                  </a>
-                  <a
-                    href={`https://www.messenger.com/`}
-                    className='social-icon'
-                    title='Messenger'
-                    target='_blank'
-                  >
-                    <i className='icon-facebook-messenger' />
-                  </a>
-                  <a
-                    href={`https://web.whatsapp.com/`}
-                    className='social-icon'
-                    title='Whatsapp'
-                    target='_blank'
-                  >
-                    <i className='icon-whatsapp' />
-                  </a>
-                  <a
-                    class='social-icon'
-                    href={`https://mail.google.com/mail/u/0/#inbox?compose=new=https://1688cart.com/product/${product.Id}`}
-                    data-action='share/messenger/share'
-                    target='blank'
-                  >
-                    <i class='icon-envelope' />
-                  </a>
+                  <FacebookShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                    <a className='social-icon' title='Facebook'>
+                      <i className='icon-facebook-f' />
+                    </a>
+                  </FacebookShareButton>
+
+                  <FacebookMessengerShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                    <a className='social-icon' title='Messenger'>
+                      <i className='icon-facebook-messenger' />
+                    </a>
+                  </FacebookMessengerShareButton>
+                  <WhatsappShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                    <a className='social-icon' title='Whatsapp'>
+                      <i className='icon-whatsapp' />
+                    </a>
+                  </WhatsappShareButton>
+
+                  <EmailShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                    {" "}
+                    <a className='social-icon'>
+                      <i className='icon-envelope' />
+                    </a>
+                  </EmailShareButton>
+
                   <div>
                     <CopyToClipboard onCopy={onCopy} text={copyText}>
                       <button

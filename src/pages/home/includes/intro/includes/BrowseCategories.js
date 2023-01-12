@@ -8,12 +8,11 @@ import { filter_parent_cats, loadAsset } from "../../../../../utils/Helpers";
 
 const BrowseCategories = (props) => {
   const { categories, category_loading } = props;
+  const parents = filter_parent_cats(categories);
 
-  if (category_loading) {
+  if (categories.length < 1) {
     return <BrowseCategorySkeleton />;
   }
-
-  const parents = filter_parent_cats(categories);
 
   return (
     <nav className='side-nav h-100 bg-white'>

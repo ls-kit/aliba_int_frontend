@@ -65,6 +65,7 @@ const VendorSearchProducts = () => {
                   perPage={perPage}
                   currentPage={currentPage}
                   TotalCount={totalCount}
+                  sellerId={vendorId}
                 />
               )}
             </div>

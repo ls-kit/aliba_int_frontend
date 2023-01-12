@@ -30,6 +30,13 @@ const CategoryProductList = (props) => {
             Total found <span>{TotalCount}</span> Products
           </div>
         </div>
+        {props?.sellerId && (
+          <div className='toolbox-right'>
+            <div className='toolbox-info bold'>
+              SELLER: <span>{props?.sellerId}</span>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className='products mb-3'>
