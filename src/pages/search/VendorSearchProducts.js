@@ -48,7 +48,6 @@ const VendorSearchProducts = () => {
     });
   };
 
-  console.log("response from se all", totalCount);
   return (
     <main className='main'>
       <Breadcrumb current={"searching for"} collections={[{ name: "Search" }]} />

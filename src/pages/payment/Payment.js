@@ -82,8 +82,6 @@ const Payment = (props) => {
 
     if (process) {
       if (trxId) {
-        console.log("trxId", trxId);
-
         confirmPayment(order.id, {
           summary: JSON.stringify({
             trxId: trxId,

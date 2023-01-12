@@ -25,7 +25,6 @@ const DashboardDefault = () => {
   );
   const completeOrders = orders.filter((order) => order.status === "order-completed");
 
-  console.log("processingOrders", processingOrders);
   return (
     <div className='card'>
       <div className='card-header py-2 px-1 px-md-2'>

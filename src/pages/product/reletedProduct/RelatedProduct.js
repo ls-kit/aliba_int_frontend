@@ -16,7 +16,6 @@ const RelatedProduct = (props) => {
       });
     }
   }, []);
-  console.log("relatedProducts", relatedProducts);
 
   return (
     <div className='product-sidebar mb-3'>

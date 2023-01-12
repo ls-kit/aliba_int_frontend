@@ -37,11 +37,9 @@ const Login = (props) => {
             Authorization: `Bearer ${response.access_token}`,
           },
         });
-        // console.log(res.data);
+
         props.customerSocialLogin(res.data, props.history);
-      } catch (err) {
-        console.log(err);
-      }
+      } catch (err) {}
     },
   });
 
@@ -73,13 +71,10 @@ const Login = (props) => {
   }
 
   const handleSocialLogin = (user) => {
-    console.log("user", user);
     props.customerSocialLogin(user, props.history);
   };
 
-  const handleSocialLoginFailure = (err) => {
-    console.error(err);
-  };
+  const handleSocialLoginFailure = (err) => {};
 
   return (
     <main className='main'>

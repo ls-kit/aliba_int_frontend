@@ -13,7 +13,6 @@ const TablePlainItem = (props) => {
   const { currency, product, cartConfigured, ShippingCharges, general, width } = props;
   const bulkPriceQuantity = product.bulkPriceQuantity;
   const rate = getSetting(general, "increase_rate", 15);
-  console.log("widht", width);
 
   const unitTotalPrice = (Price, Qty) => {
     return numberWithCommas(Number(Price) * Number(Qty));

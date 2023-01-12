@@ -28,7 +28,7 @@ const SearchForm = (props) => {
          formData.append("picture", selectedFile);
          loadPictureSearchProducts(formData)
             .then(response => {
-               console.log("res from photo serch",response);
+               
                let picture = response.picture;
                let search_id = response.search_id;
                if (search_id && picture) {

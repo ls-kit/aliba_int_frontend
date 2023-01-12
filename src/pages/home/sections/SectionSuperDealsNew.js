@@ -8,7 +8,6 @@ import RecentItems from "../includes/Products/recentProduct/includes/RecentItems
 
 const SectionSuperDeals = (props) => {
   const { general } = props;
-  console.log("general", general);
 
   const section_super_deals_title = getSetting(general, "section_super_deals_title");
   const section_one_title_image = getSetting(general, "section_one_title_image");

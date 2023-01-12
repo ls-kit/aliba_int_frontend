@@ -14,7 +14,6 @@ const TableConfigItems = (props) => {
   const { currency, product, config, cartConfigured, ShippingCharges, general, width } = props;
   const bulkPriceQuantity = product.bulkPriceQuantity;
   const rate = getSetting(general, "increase_rate", 15);
-  console.log("widht", width);
 
   const activeConfiguredQtyChanges = (existsConfig, product_id, type = "increment") => {
     let newQty = parseInt(existsConfig.Quantity) + 1;

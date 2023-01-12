@@ -40,7 +40,8 @@ const SectionSuperDeals = (props) => {
   const [expiredDate, setExpiredDate] = useState("");
   const acceptedDate = `${expiredDate + ":00"}`;
 
-  console.log("expiredDate", acceptedDate);
+  let isShow = new Date(acceptedDate) < new Date();
+
   useEffect(() => {
     if (_.isEmpty(products)) {
       getSuperDeals().then((response) => {
@@ -87,7 +88,7 @@ const SectionSuperDeals = (props) => {
       </div>
     );
 
-  if (!expiredDate) return "";
+  if (!expiredDate || isShow) return "";
 
   return (
     <div className='container '>

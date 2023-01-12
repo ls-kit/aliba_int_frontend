@@ -3,31 +3,18 @@ import PropTypes from "prop-types";
 import _ from "lodash";
 import { getSetting, goPageTop } from "../../../utils/Helpers";
 import Breadcrumb from "../../../pages/breadcrumb/Breadcrumb";
-import ConfigItem from "../../../pages/payment/includes/ConfigItem";
-import PlainItem from "../../../pages/payment/includes/PlainItem";
-import {
-  calculateAirShippingCharge,
-  cartCalculateNeedToPay,
-  cartCheckedProductTotal,
-  CartProductSummary,
-  numberWithCommas,
-} from "../../../utils/CartHelpers";
-import { Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { confirmCustomerOrder } from "../../../store/actions/CartAction";
 import { getOrderDetails } from "../../../utils/Services";
 
 const OrderDetails = (props) => {
-  const { cartConfigured, match, general } = props;
+  const { match, general } = props;
   const order_id = match.params.id;
   const [order, setOrder] = useState("");
   const bankId = getSetting(general, "payment_bank_details");
 
   const currency = getSetting(general, "currency_icon");
-  const ShippingCharges = getSetting(general, "air_shipping_charges");
-  const summary = CartProductSummary(cartConfigured, ShippingCharges);
-  const advanced = cartCalculateNeedToPay(summary.totalPrice);
-  const dueAmount = advanced;
 
   const address = !_.isEmpty(order) ? JSON.parse(order.address) : {};
   const orderItems = !_.isEmpty(order) ? order.order_items : [];
@@ -38,24 +25,6 @@ const OrderDetails = (props) => {
       setOrder(response.order);
     });
   }, [order_id]);
-
-  console.log("order", order);
-
-  const totalShippingCost = (product) => {
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    const totalWeight = checkItemSubTotal.totalWeight;
-    const DeliveryCost = product.DeliveryCost;
-    const ShippingRate = calculateAirShippingCharge(totalPrice, ShippingCharges);
-    return Number(DeliveryCost) + Number(totalWeight) * Number(ShippingRate);
-  };
-
-  const productTotalCost = (product) => {
-    const checkItemSubTotal = cartCheckedProductTotal(product);
-    const totalPrice = checkItemSubTotal.totalPrice;
-    const ShippingCost = totalShippingCost(product);
-    return Number(totalPrice) + Number(ShippingCost);
-  };
 
   return (
     <main className='main bg-gray'>

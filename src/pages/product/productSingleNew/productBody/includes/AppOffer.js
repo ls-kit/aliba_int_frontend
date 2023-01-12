@@ -19,7 +19,6 @@ const AppOffer = () => {
     }
     setLoading(false);
   };
-  // console.log("cardRespose", cardRespose);
 
   const content = `${cardRespose?.content}`;
 

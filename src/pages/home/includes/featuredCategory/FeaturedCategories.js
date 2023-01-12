@@ -18,7 +18,7 @@ const FeaturedCategories = () => {
 
   const loadFeaTCategories = async () => {
     const response = await getFeaturedCategories();
-    // console.log("cat loading", response);
+
     if (!_.isEmpty(response)) {
       setOthersCats(response.non_featured);
       setFirstCats(response.featured);

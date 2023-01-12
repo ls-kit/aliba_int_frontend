@@ -76,7 +76,6 @@ const Intro = (props) => {
         }}
       >
         {products.map((product, index) => {
-          console.log("product", product);
           const product_code = product.product_code ? product.product_code : product.ItemId;
           return (
             <div key={index}>

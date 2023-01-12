@@ -68,7 +68,7 @@ const ProductConfiguredItems = (props) => {
         return !_.isEmpty(findConfg);
       });
     }
-    console.log("ConfiguredItemAttributes", configAttr);
+
     return configAttr;
   };
 

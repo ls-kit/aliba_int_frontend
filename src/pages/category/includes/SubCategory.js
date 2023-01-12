@@ -5,7 +5,7 @@ import { loadCatImg } from "../../../utils/Helpers";
 
 const SubCategory = (props) => {
   const { parent, child } = props;
-  console.log("props from sub-cat", child.children_count);
+
   return (
     <div key={child.id} className='col-6 col-md-4 col-lg-3'>
       <Link

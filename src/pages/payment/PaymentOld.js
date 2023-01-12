@@ -149,7 +149,6 @@ const Payment = (props) => {
       });
       process = false;
     }
-    console.log("ref num", refNumber);
 
     if (process) {
       let cartTotal = payableTotal;

@@ -109,7 +109,6 @@ const CheckoutSidebar = (props) => {
     });
   };
 
-  // console.log("coupon data", couponDetails);
   const couponDiscount = cartCalculateCouponDiscount(couponDetails);
   const discount = getDiscount();
   const payableTotal = payableSubTotal(summary.totalPrice, discount, couponDetails);
