@@ -5,9 +5,6 @@ import MyOrders from "./MyOrders";
 import AddressBook from "./AddressBook";
 import DashboardDefault from "./DashboardDefault";
 import Profile from "./Profile";
-import PendingOrders from "./PendingOrders";
-import ProcessingOrders from "./ProcessingOrders";
-import CompleteOrders from "./CompleteOrders";
 
 const SwitchSection = (props) => {
   switch (props.section) {
@@ -15,14 +12,14 @@ const SwitchSection = (props) => {
       return <DashboardDefault />;
 
     case "orders":
-      return <MyOrders />;
+      return <MyOrders status={"orders"} orderText={"My Orders"} />;
 
     case "pending-orders":
-      return <PendingOrders />;
+      return <MyOrders status={"pending-orders"} orderText={"Pending Orders"} />;
     case "processing-orders":
-      return <ProcessingOrders />;
+      return <MyOrders status={"processing-orders"} orderText={"Processing Orders"} />;
     case "complete-orders":
-      return <CompleteOrders />;
+      return <MyOrders status={"complete-orders"} orderText={"Complete Orders"} />;
 
     case "addresses":
       return <AddressBook />;

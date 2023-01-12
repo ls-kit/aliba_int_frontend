@@ -5,7 +5,8 @@ import swal from "sweetalert";
 import _ from "lodash";
 // import PropTypes from 'prop-types';
 
-const MyOrders = () => {
+const MyOrders = (props) => {
+  const { status, orderText } = props;
   const [loading, setLoading] = useState(false);
   const [orders, setOrders] = useState([]);
   const [cancel, setCancel] = useState(false);
@@ -52,10 +53,23 @@ const MyOrders = () => {
     });
   };
 
+  let ordersData;
+  if (status === "orders") {
+    ordersData = orders;
+  } else if (status === "pending-orders") {
+    ordersData = orders.filter((order) => order.status === "waiting-for-payment");
+  } else if (status === "processing-orders") {
+    ordersData = orders.filter((order) => order.status === "full-paid" || order.status === "partial-paid");
+  } else if (status === "complete-orders") {
+    ordersData = orders.filter((order) => order.status === "order-completed");
+  } else {
+    ordersData = orders;
+  }
+
   return (
     <div className='card'>
       <div className='card-header border border-bottom-0 p-4'>
-        <h4 className='card-title'>My Orders</h4>
+        <h4 className='card-title'>{orderText}</h4>
       </div>
       <div className='card-body border p-4'>
         <div className='table-responsive'>
@@ -85,8 +99,8 @@ const MyOrders = () => {
                     </div>
                   </td>
                 </tr>
-              ) : orders.length > 0 ? (
-                orders.map((order) => (
+              ) : ordersData.length > 0 ? (
+                ordersData.map((order) => (
                   <tr>
                     <td>{order.created_at}</td>
                     <td>{order.order_number}</td>
