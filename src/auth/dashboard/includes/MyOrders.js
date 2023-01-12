@@ -109,7 +109,7 @@ const MyOrders = () => {
                     </td>
                     <td>
                       <button onClick={() => handleCancelOrder(order.id)} className='btn btn-default px-0'>
-                        Cancel Order
+                        Cancel
                       </button>
                     </td>
                   </tr>

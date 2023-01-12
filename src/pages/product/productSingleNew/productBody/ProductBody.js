@@ -377,26 +377,27 @@ const ProductBody = (props) => {
               <div className='product-details-footer'>
                 <div className='social-icons social-icons-sm'>
                   <span className='social-label'>Share:</span>
-                  <FacebookShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                  <FacebookShareButton url={`${copyText}`} className='mx-2'>
                     <a className='social-icon' title='Facebook'>
                       <i className='icon-facebook-f' />
                     </a>
                   </FacebookShareButton>
 
-                  <FacebookMessengerShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                  {/* <FacebookMessengerShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
                     <a className='social-icon' title='Messenger'>
                       <i className='icon-facebook-messenger' />
                     </a>
-                  </FacebookMessengerShareButton>
-                  <WhatsappShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                  </FacebookMessengerShareButton> */}
+
+                  <WhatsappShareButton url={`${copyText}`} className='mx-2'>
                     <a className='social-icon' title='Whatsapp'>
                       <i className='icon-whatsapp' />
                     </a>
                   </WhatsappShareButton>
 
-                  <EmailShareButton url={`${copyText}`} className='mx-1 mx-md-2'>
+                  <EmailShareButton url={`${copyText}`} className='mx-2'>
                     {" "}
-                    <a className='social-icon'>
+                    <a className='social-icon' title='Email'>
                       <i className='icon-envelope' />
                     </a>
                   </EmailShareButton>
